@@ -4,6 +4,7 @@ import { MyMarkersPage } from './pages/MyMarkersPage';
 import { RecommendedPage } from './pages/RecommendedPage';
 import { useOwnership } from './hooks/useOwnership';
 import { useSettings } from './hooks/useSettings';
+import { useWindowWidth } from './hooks/useWindowWidth';
 import { SettingsModal } from './components/SettingsModal';
 
 const NAV = [
@@ -40,6 +41,7 @@ const NAV = [
 const PAGE_COUNT = NAV.length;
 const ANIM_DURATION = 320;
 const MIN_SWIPE_PX = 50;
+const SIDEBAR_BREAKPOINT = 768;
 
 function Logo() {
   return (
@@ -47,6 +49,7 @@ function Logo() {
       width: 36, height: 36, borderRadius: '50%',
       background: '#1ab5b5',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
+      flexShrink: 0,
     }}>
       <span style={{
         fontFamily: "'Nunito', 'Segoe UI', sans-serif",
@@ -66,6 +69,8 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { ownership, setStatus } = useOwnership();
   const { settings, setSetting } = useSettings();
+  const windowWidth = useWindowWidth();
+  const wide = windowWidth >= SIDEBAR_BREAKPOINT;
 
   const pageIdxRef = useRef(0);
   pageIdxRef.current = pageIdx;
@@ -128,33 +133,6 @@ export default function App() {
   }, [goTo]);
 
   function handlePointerDown(e) {
-    if (e.pointerType !== 'mouse') return;
-    if (e.button !== 0) return;
-    swipeConsumed = false;
-    drag.current = { startX: e.clientX, startY: e.clientY, axis: null };
-  }
-
-  function handlePointerMove(e) {
-    if (e.pointerType !== 'mouse' || !drag.current) return;
-    const dx = e.clientX - drag.current.startX;
-    const dy = e.clientY - drag.current.startY;
-    if (!drag.current.axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
-      drag.current.axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
-    }
-  }
-
-  function handlePointerUp(e) {
-    if (e.pointerType !== 'mouse' || !drag.current) return;
-    const { startX, axis } = drag.current;
-    drag.current = null;
-    if (axis !== 'h') return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) < MIN_SWIPE_PX) return;
-    swipeConsumed = true;
-    goTo(pageIdxRef.current + (dx < 0 ? 1 : -1));
-  }
-
-  function handlePointerDown(e) {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     swipeConsumed = false;
     drag.current = { startX: e.clientX, startY: e.clientY, axis: null };
@@ -173,23 +151,118 @@ export default function App() {
     if (!drag.current) return;
     const { startX, axis } = drag.current;
     drag.current = null;
-
     if (axis !== 'h') return;
     const dx = e.clientX - startX;
     if (Math.abs(dx) < MIN_SWIPE_PX) return;
-
     swipeConsumed = true;
     goTo(pageIdxRef.current + (dx < 0 ? 1 : -1));
   }
 
   const baseTranslate = -(pageIdx / PAGE_COUNT) * 100;
 
+  const pages = [
+    <MyColorsPage key="colors" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
+    <MyMarkersPage key="markers" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
+    <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
+  ];
+
+  if (wide) {
+    // Sidebar layout
+    return (
+      <>
+        <div style={{
+          display: 'flex', height: '100vh',
+          background: '#f7fafa', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
+        }}>
+          {/* Sidebar */}
+          <aside style={{
+            width: 220, flexShrink: 0,
+            background: '#fff', borderRight: '1px solid #eef2f2',
+            display: 'flex', flexDirection: 'column',
+            boxShadow: '1px 0 4px rgba(0,0,0,0.04)',
+          }}>
+            {/* Logo */}
+            <div style={{
+              padding: '20px 20px 16px',
+              borderBottom: '1px solid #eef2f2',
+              display: 'flex', alignItems: 'center', gap: 10,
+            }}>
+              <Logo />
+              <div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: '#1a2a2a', letterSpacing: -0.3, fontFamily: "'Nunito', 'Segoe UI', sans-serif" }}>kala-kala</div>
+                <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: 1.5, color: '#8aabab', textTransform: 'uppercase', marginTop: -1, fontFamily: "'Nunito', 'Segoe UI', sans-serif" }}>Ohuhu Marker Tracker</div>
+              </div>
+            </div>
+
+            {/* Nav items */}
+            <nav style={{ padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
+              {NAV.map((n, i) => {
+                const active = pageIdx === i;
+                return (
+                  <button
+                    key={n.id}
+                    onClick={() => goTo(i)}
+                    style={{
+                      padding: '10px 14px', borderRadius: 10,
+                      border: 'none',
+                      background: active ? '#1ab5b5' : 'transparent',
+                      color: active ? '#fff' : '#5a7a7a',
+                      fontSize: 13, fontWeight: 700, cursor: 'pointer',
+                      transition: 'all 0.15s',
+                      display: 'flex', alignItems: 'center', gap: 10,
+                      textAlign: 'left',
+                      letterSpacing: 0.3, fontFamily: "'Nunito', 'Segoe UI', sans-serif",
+                    }}
+                    onMouseEnter={e => { if (!active) e.currentTarget.style.background = '#f0fafa'; }}
+                    onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; }}
+                  >
+                    {n.icon(active)}
+                    {n.label}
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Settings at bottom */}
+            <div style={{ padding: '12px 12px 16px', borderTop: '1px solid #eef2f2' }}>
+              <button
+                onClick={() => setSettingsOpen(true)}
+                style={{
+                  width: '100%', padding: '10px 14px', borderRadius: 10,
+                  border: 'none', background: 'transparent',
+                  color: '#8aabab', fontSize: 13, fontWeight: 600,
+                  cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10,
+                  fontFamily: "'Nunito', 'Segoe UI', sans-serif",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#f0fafa'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                Settings
+              </button>
+            </div>
+          </aside>
+
+          {/* Main content — show only active page, no slide carousel */}
+          <main style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            {pages[pageIdx]}
+          </main>
+        </div>
+        {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} />}
+      </>
+    );
+  }
+
+  // Mobile layout (original)
   return (
     <>
     <div style={{
       display: 'flex', flexDirection: 'column', height: '100vh',
       background: '#f7fafa', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-      maxWidth: 480, margin: '0 auto', overflow: 'hidden',
+      overflow: 'hidden',
     }}>
       <header style={{
         background: '#fff', borderBottom: '1px solid #eef2f2',
@@ -263,11 +336,7 @@ export default function App() {
             willChange: 'transform',
           }}
         >
-          {[
-            <MyColorsPage key="colors" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
-            <MyMarkersPage key="markers" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
-            <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
-          ].map((page, i) => (
+          {pages.map((page, i) => (
             <div key={i} style={{ width: `${100 / PAGE_COUNT}%`, height: '100%', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
               {page}
             </div>
