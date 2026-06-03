@@ -5,7 +5,9 @@ import { RecommendedPage } from './pages/RecommendedPage';
 import { useOwnership } from './hooks/useOwnership';
 import { useSettings } from './hooks/useSettings';
 import { useWindowWidth } from './hooks/useWindowWidth';
+import { useAuth } from './hooks/useAuth';
 import { SettingsModal } from './components/SettingsModal';
+import { AuthModal } from './components/AuthModal';
 
 const NAV = [
   {
@@ -60,6 +62,44 @@ function Logo() {
   );
 }
 
+function UserButton({ user, onSignIn, onSignOut }) {
+  if (user) {
+    const initials = (user.email || '?')[0].toUpperCase();
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{
+          width: 28, height: 28, borderRadius: '50%',
+          background: '#1ab5b5', color: '#fff',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 12, fontWeight: 800, flexShrink: 0,
+          fontFamily: "'Nunito', 'Segoe UI', sans-serif",
+        }}>{initials}</div>
+        <button
+          onClick={onSignOut}
+          style={{
+            background: 'none', border: '1.5px solid #eef2f2',
+            borderRadius: 8, padding: '4px 10px',
+            color: '#8aabab', fontSize: 11, fontWeight: 700,
+            cursor: 'pointer', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
+          }}
+        >Sign out</button>
+      </div>
+    );
+  }
+  return (
+    <button
+      onClick={onSignIn}
+      style={{
+        background: '#1ab5b5', border: 'none',
+        borderRadius: 8, padding: '7px 14px',
+        color: '#fff', fontSize: 11, fontWeight: 800,
+        cursor: 'pointer', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
+        letterSpacing: 0.3,
+      }}
+    >Sign in</button>
+  );
+}
+
 // Expose a global flag so child click handlers can bail out if a swipe just finished
 export let swipeConsumed = false;
 
@@ -67,7 +107,9 @@ export default function App() {
   const [pageIdx, setPageIdx] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const { ownership, setStatus } = useOwnership();
+  const [authOpen, setAuthOpen] = useState(false);
+  const { user, signIn, signUp, signOut, resetPassword } = useAuth();
+  const { ownership, setStatus } = useOwnership(user);
   const { settings, setSetting } = useSettings();
   const windowWidth = useWindowWidth();
   const wide = windowWidth >= SIDEBAR_BREAKPOINT;
@@ -166,6 +208,15 @@ export default function App() {
     <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
   ];
 
+  const authModal = authOpen && (
+    <AuthModal
+      onSignIn={signIn}
+      onSignUp={signUp}
+      onResetPassword={resetPassword}
+      onClose={() => setAuthOpen(false)}
+    />
+  );
+
   if (wide) {
     // Sidebar layout
     return (
@@ -223,8 +274,11 @@ export default function App() {
               })}
             </nav>
 
-            {/* Settings at bottom */}
-            <div style={{ padding: '12px 12px 16px', borderTop: '1px solid #eef2f2' }}>
+            {/* Bottom: auth + settings */}
+            <div style={{ padding: '12px 12px 16px', borderTop: '1px solid #eef2f2', display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <div style={{ padding: '4px 2px' }}>
+                <UserButton user={user} onSignIn={() => setAuthOpen(true)} onSignOut={signOut} />
+              </div>
               <button
                 onClick={() => setSettingsOpen(true)}
                 style={{
@@ -252,11 +306,12 @@ export default function App() {
           </main>
         </div>
         {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} />}
+        {authModal}
       </>
     );
   }
 
-  // Mobile layout (original)
+  // Mobile layout
   return (
     <>
     <div style={{
@@ -266,7 +321,7 @@ export default function App() {
     }}>
       <header style={{
         background: '#fff', borderBottom: '1px solid #eef2f2',
-        padding: '12px 16px',
+        padding: '10px 16px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         flexShrink: 0, zIndex: 100,
         boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
@@ -278,12 +333,15 @@ export default function App() {
             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1.5, color: '#8aabab', textTransform: 'uppercase', marginTop: -1, fontFamily: "'Nunito', 'Segoe UI', sans-serif" }}>Ohuhu Marker Tracker</div>
           </div>
         </div>
-        <button onClick={() => setSettingsOpen(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: '#8aabab' }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <UserButton user={user} onSignIn={() => setAuthOpen(true)} onSignOut={signOut} />
+          <button onClick={() => setSettingsOpen(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: '#8aabab' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </button>
+        </div>
       </header>
 
       <nav style={{
@@ -345,6 +403,7 @@ export default function App() {
       </div>
     </div>
     {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} />}
+    {authModal}
     </>
   );
 }
