@@ -5,7 +5,6 @@ import { ColorDetailModal } from '../components/ColorDetailModal';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
-import { useWindowWidth } from '../hooks/useWindowWidth';
 
 const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 
@@ -242,7 +241,6 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   const [tab, setTab] = useState('All');
   const [search, setSearch] = useState('');
   const seriesGroups = useMemo(() => getSeriesGroups(), []);
-  const windowWidth = useWindowWidth();
 
   const filteredGroups = useMemo(() => {
     let groups = seriesGroups;
@@ -303,13 +301,7 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
       </div>
 
       {/* Series cards */}
-      <div style={{
-        padding: '0 16px 100px',
-        display: 'grid',
-        gridTemplateColumns: windowWidth >= 1100 ? 'repeat(2, 1fr)' : '1fr',
-        gap: windowWidth >= 1100 ? 0 : 0,
-        alignItems: 'start',
-      }}>
+      <div style={{ padding: '0 16px 100px' }}>
         {filteredGroups.map(({ series, tipType1, tipType2 }) => (
           <SeriesCard
             key={series}

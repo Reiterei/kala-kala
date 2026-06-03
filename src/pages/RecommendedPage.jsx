@@ -10,7 +10,6 @@ import michaelsLogo from '../assets/michaels-logo.png';
 import walmartLogo from '../assets/walmart-logo.png';
 import amazonLogo from '../assets/amazon-logo.png';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, isUnavailableSet } from '../hooks/useSettings';
-import { useWindowWidth } from '../hooks/useWindowWidth';
 
 const colorMap = Object.fromEntries(allColors.map(c => [c.code, c]));
 
@@ -279,7 +278,6 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const seriesDropdownRef = useRef(null);
   const sortDropdownRef = useRef(null);
-  const windowWidth = useWindowWidth();
 
   useEffect(() => { localStorage.setItem('kk-rec-colorMode', colorMode); }, [colorMode]);
   useEffect(() => { localStorage.setItem('kk-rec-series', JSON.stringify([...seriesFilter])); }, [seriesFilter]);
@@ -498,13 +496,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
       </div>
 
       {/* Cards */}
-      <div style={{
-        padding: '12px 16px 100px',
-        display: 'grid',
-        gridTemplateColumns: windowWidth >= 1100 ? 'repeat(2, 1fr)' : '1fr',
-        gap: 0,
-        alignItems: 'start',
-      }}>
+      <div style={{ padding: '12px 16px 100px' }}>
         {filtered.map(set => (
           <SetCard key={set.id} set={set} ownership={ownership} colorMode={colorMode} onSetStatus={onSetStatus} settings={settings} />
         ))}
