@@ -49,7 +49,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
     >
       <div
         style={{
-          background: '#fff', borderRadius: 16, width: '100%', maxWidth: 560,
+          background: '#fff', borderRadius: 16, width: '100%', maxWidth: 480,
           maxHeight: '85vh', display: 'flex', flexDirection: 'column',
           overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
           fontFamily: "'Nunito', 'Segoe UI', sans-serif",
