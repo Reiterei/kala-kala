@@ -4,11 +4,36 @@ import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { getLegacyDisplay } from '../utils/colorUtils';
 import { swipeConsumed } from '../App';
+<<<<<<< HEAD
 
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
 
 const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 
+=======
+import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
+import { C, RADIUS, scrollPage, pillActive, pillInactive } from '../styles/theme';
+
+const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
+
+const BADGE = {
+  owned:    { color: C.teal,    border: `1.5px solid ${C.teal}`,    label: 'OWNED'    },
+  wishlist: { color: C.wish,    border: `1.5px solid ${C.wish}`,    label: 'WISHLIST' },
+  unowned:  { color: '#aababa', border: '1.5px solid #dde8e8',      label: 'UNOWNED'  },
+};
+
+function Badge({ type }) {
+  const s = BADGE[type];
+  return (
+    <span style={{
+      fontSize: 10, fontWeight: 700, letterSpacing: 0.5,
+      color: s.color, border: s.border,
+      borderRadius: 6, padding: '2px 7px', flexShrink: 0,
+    }}>{s.label}</span>
+  );
+}
+
+>>>>>>> 4799ebb (Add centralized theme/style system)
 export function MyColorsPage({ ownership, onSetStatus, settings }) {
   const [search, setSearch] = useState('');
   const [tab, setTab] = useState('All');
@@ -17,13 +42,18 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
   const filtered = useMemo(() => {
     const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
     return colors.filter(c => {
+<<<<<<< HEAD
       // Japanese filter
       if (settings?.hideJapanese && JAPANESE_EXCLUSIVE_CODES.has(c.code)) return false;
       // Discontinued filter
+=======
+      if (settings?.hideJapanese && JAPANESE_EXCLUSIVE_CODES.has(c.code)) return false;
+>>>>>>> 4799ebb (Add centralized theme/style system)
       if (settings?.hideDiscontinued && DISCONTINUED_CODES.has(c.code)) return false;
       if (tokens.length) {
         const legacy = getLegacyDisplay(c);
         const haystack = [
+<<<<<<< HEAD
           c.name,
           c.code,
           legacy?.name,
@@ -38,6 +68,15 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
         if (!tokens.every(t => haystack.includes(t))) return false;
       }
       // Tab filter
+=======
+          c.name, c.code, legacy?.name, legacy?.code,
+          c.legacy?.honolulu?.name, c.legacy?.honolulu?.code,
+          c.legacy?.oahu?.name, c.legacy?.oahu?.code,
+          c.legacy?.kaala?.name, c.legacy?.kaala?.code,
+        ].filter(Boolean).join(' ').toLowerCase();
+        if (!tokens.every(t => haystack.includes(t))) return false;
+      }
+>>>>>>> 4799ebb (Add centralized theme/style system)
       const entries = Object.values(ownership[c.code] || {});
       const owned = entries.includes('owned');
       const wish = entries.includes('wishlist');
@@ -46,6 +85,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       if (tab === 'Unowned') return !owned;
       return true;
     });
+<<<<<<< HEAD
   }, [search, tab, ownership]);
 
   return (
@@ -57,6 +97,19 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           borderRadius: 12, padding: '0 14px', gap: 8,
         }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8aabab" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+=======
+  }, [search, tab, ownership, settings]);
+
+  return (
+    <div style={scrollPage}>
+      {/* Search */}
+      <div style={{ padding: '16px 16px 0' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', background: C.white,
+          borderRadius: RADIUS.lg, padding: '0 14px', gap: 8,
+        }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.tealDim} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+>>>>>>> 4799ebb (Add centralized theme/style system)
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
           <input
@@ -65,11 +118,19 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
             placeholder="Search colors, codes..."
             style={{
               flex: 1, border: 'none', background: 'transparent', padding: '12px 0',
+<<<<<<< HEAD
               fontSize: 14, color: '#2a3a3a', outline: 'none',
             }}
           />
           {search && (
             <button onClick={() => setSearch('')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#8aabab', fontSize: 16, padding: 0 }}>×</button>
+=======
+              fontSize: 14, color: C.textSub, outline: 'none',
+            }}
+          />
+          {search && (
+            <button onClick={() => setSearch('')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.tealDim, fontSize: 16, padding: 0 }}>×</button>
+>>>>>>> 4799ebb (Add centralized theme/style system)
           )}
         </div>
       </div>
@@ -77,6 +138,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       {/* Tabs */}
       <div style={{ display: 'flex', gap: 8, padding: '12px 16px', justifyContent: 'center' }}>
         {TABS.map(t => (
+<<<<<<< HEAD
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -91,6 +153,9 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           >
             {t}
           </button>
+=======
+          <button key={t} onClick={() => setTab(t)} style={tab === t ? pillActive : pillInactive}>{t}</button>
+>>>>>>> 4799ebb (Add centralized theme/style system)
         ))}
       </div>
 
@@ -101,22 +166,32 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           const owned = entries.includes('owned');
           const wish = entries.includes('wishlist');
           const legacy = getLegacyDisplay(color);
+<<<<<<< HEAD
 
           const badge = owned
             ? <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 0.5, color: '#1ab5b5', border: '1.5px solid #1ab5b5', borderRadius: 6, padding: '2px 7px', flexShrink: 0 }}>OWNED</span>
             : wish
             ? <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 0.5, color: '#f48fb1', border: '1.5px solid #f48fb1', borderRadius: 6, padding: '2px 7px', flexShrink: 0 }}>WISHLIST</span>
             : <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 0.5, color: '#aababa', border: '1.5px solid #dde8e8', borderRadius: 6, padding: '2px 7px', flexShrink: 0 }}>UNOWNED</span>;
+=======
+          const badgeType = owned ? 'owned' : wish ? 'wishlist' : 'unowned';
+>>>>>>> 4799ebb (Add centralized theme/style system)
 
           return (
             <div
               key={color.code}
               onClick={() => { if (swipeConsumed) return; setSelected(color); }}
               style={{
+<<<<<<< HEAD
                 background: '#fff', borderRadius: 12,
                 padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 12,
                 cursor: 'pointer', 
                 border: '1.5px solid',
+=======
+                background: C.white, borderRadius: RADIUS.lg,
+                padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 12,
+                cursor: 'pointer', border: '1.5px solid',
+>>>>>>> 4799ebb (Add centralized theme/style system)
                 borderColor: owned ? '#d4f0f0' : wish ? '#ffccdd' : '#f0f4f4',
               }}
             >
@@ -124,6 +199,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
               <div style={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                 <div style={{ minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'nowrap' }}>
+<<<<<<< HEAD
                     <span style={{ fontSize: 15, fontWeight: 800, color: '#1a2a2a', whiteSpace: 'nowrap' }}>{color.name}</span>
                     {legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
                       <span style={{ fontSize: 11, color: '#8aabab', whiteSpace: 'nowrap' }}>({legacy.name})</span>
@@ -131,6 +207,15 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
                   </div>
                 </div>
                 {badge}
+=======
+                    <span style={{ fontSize: 15, fontWeight: 800, color: C.text, whiteSpace: 'nowrap' }}>{color.name}</span>
+                    {legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
+                      <span style={{ fontSize: 11, color: C.tealDim, whiteSpace: 'nowrap' }}>({legacy.name})</span>
+                    )}
+                  </div>
+                </div>
+                <Badge type={badgeType} />
+>>>>>>> 4799ebb (Add centralized theme/style system)
               </div>
             </div>
           );
