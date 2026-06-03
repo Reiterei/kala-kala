@@ -7,10 +7,8 @@ import { useSettings } from './hooks/useSettings';
 import { useAuth } from './hooks/useAuth';
 import { SettingsModal } from './components/SettingsModal';
 import { AuthModal } from './components/AuthModal';
-<<<<<<< HEAD
-=======
+
 import { C, FONT, SHADOW, navPillActive, navPillInactive, iconBtn } from './styles/theme';
->>>>>>> 4799ebb (Add centralized theme/style system)
 
 const NAV = [
   {
