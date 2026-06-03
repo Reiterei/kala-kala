@@ -49,21 +49,12 @@ function Logo() {
   return (
     <div style={{
       width: 36, height: 36, borderRadius: '50%',
-<<<<<<< HEAD
-      background: '#1ab5b5',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-    }}>
-      <span style={{
-        fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-        fontSize: 18, fontWeight: 800, color: '#fff', lineHeight: 1,
-=======
       background: C.teal,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
     }}>
       <span style={{
         fontFamily: FONT,
         fontSize: 18, fontWeight: 800, color: C.white, lineHeight: 1,
->>>>>>> 4799ebb (Add centralized theme/style system)
         userSelect: 'none',
       }}>K</span>
     </div>
@@ -77,31 +68,17 @@ function UserButton({ user, onSignIn, onSignOut }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <div style={{
           width: 28, height: 28, borderRadius: '50%',
-<<<<<<< HEAD
-          background: '#1ab5b5', color: '#fff',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 12, fontWeight: 800, flexShrink: 0,
-          fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-=======
           background: C.teal, color: C.white,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 12, fontWeight: 800, flexShrink: 0, fontFamily: FONT,
->>>>>>> 4799ebb (Add centralized theme/style system)
         }}>{initials}</div>
         <button
           onClick={onSignOut}
           style={{
-<<<<<<< HEAD
-            background: 'none', border: '1.5px solid #eef2f2',
-            borderRadius: 8, padding: '4px 10px',
-            color: '#8aabab', fontSize: 11, fontWeight: 700,
-            cursor: 'pointer', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-=======
             background: 'none', border: `1.5px solid ${C.border}`,
             borderRadius: 8, padding: '4px 10px',
             color: C.tealDim, fontSize: 11, fontWeight: 700,
             cursor: 'pointer', fontFamily: FONT,
->>>>>>> 4799ebb (Add centralized theme/style system)
           }}
         >Sign out</button>
       </div>
@@ -111,27 +88,15 @@ function UserButton({ user, onSignIn, onSignOut }) {
     <button
       onClick={onSignIn}
       style={{
-<<<<<<< HEAD
-        background: '#1ab5b5', border: 'none',
-        borderRadius: 8, padding: '7px 14px',
-        color: '#fff', fontSize: 11, fontWeight: 800,
-        cursor: 'pointer', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-        letterSpacing: 0.3,
-=======
         background: C.teal, border: 'none',
         borderRadius: 8, padding: '7px 14px',
         color: C.white, fontSize: 11, fontWeight: 800,
         cursor: 'pointer', fontFamily: FONT, letterSpacing: 0.3,
->>>>>>> 4799ebb (Add centralized theme/style system)
       }}
     >Sign in</button>
   );
 }
 
-<<<<<<< HEAD
-// Expose a global flag so child click handlers can bail out if a swipe just finished
-=======
->>>>>>> 4799ebb (Add centralized theme/style system)
 export let swipeConsumed = false;
 
 export default function App() {
@@ -175,13 +140,8 @@ export default function App() {
       if (!drag.current.axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
         drag.current.axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
       }
-<<<<<<< HEAD
-      if (drag.current.axis === 'h') {
-        e.preventDefault();
-      }
-=======
+
       if (drag.current.axis === 'h') e.preventDefault();
->>>>>>> 4799ebb (Add centralized theme/style system)
     }
 
     function onTouchEnd(e) {
@@ -208,36 +168,6 @@ export default function App() {
   }, [goTo]);
 
   function handlePointerDown(e) {
-<<<<<<< HEAD
-    if (e.pointerType !== 'mouse') return;
-    if (e.button !== 0) return;
-    swipeConsumed = false;
-    drag.current = { startX: e.clientX, startY: e.clientY, axis: null };
-  }
-
-  function handlePointerMove(e) {
-    if (e.pointerType !== 'mouse' || !drag.current) return;
-    const dx = e.clientX - drag.current.startX;
-    const dy = e.clientY - drag.current.startY;
-    if (!drag.current.axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
-      drag.current.axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
-    }
-  }
-
-  function handlePointerUp(e) {
-    if (e.pointerType !== 'mouse' || !drag.current) return;
-    const { startX, axis } = drag.current;
-    drag.current = null;
-    if (axis !== 'h') return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) < MIN_SWIPE_PX) return;
-    swipeConsumed = true;
-    goTo(pageIdxRef.current + (dx < 0 ? 1 : -1));
-  }
-
-  function handlePointerDown(e) {
-=======
->>>>>>> 4799ebb (Add centralized theme/style system)
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     swipeConsumed = false;
     drag.current = { startX: e.clientX, startY: e.clientY, axis: null };
@@ -256,17 +186,9 @@ export default function App() {
     if (!drag.current) return;
     const { startX, axis } = drag.current;
     drag.current = null;
-<<<<<<< HEAD
-
     if (axis !== 'h') return;
     const dx = e.clientX - startX;
     if (Math.abs(dx) < MIN_SWIPE_PX) return;
-
-=======
-    if (axis !== 'h') return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) < MIN_SWIPE_PX) return;
->>>>>>> 4799ebb (Add centralized theme/style system)
     swipeConsumed = true;
     goTo(pageIdxRef.current + (dx < 0 ? 1 : -1));
   }
@@ -279,34 +201,10 @@ export default function App() {
     <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
   ];
 
-<<<<<<< HEAD
-  const authModal = authOpen && (
-    <AuthModal
-      onSignIn={signIn}
-      onSignUp={signUp}
-      onResetPassword={resetPassword}
-      onClose={() => setAuthOpen(false)}
-    />
-  );
-   
-    
-=======
->>>>>>> 4799ebb (Add centralized theme/style system)
   return (
     <>
     <div style={{
       display: 'flex', flexDirection: 'column', height: '100vh',
-<<<<<<< HEAD
-      background: '#f7fafa', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-      maxWidth: 480, margin: '0 auto', overflow: 'hidden',
-    }}>
-      <header style={{
-        background: '#fff', borderBottom: '1px solid #eef2f2',
-        padding: '12px 16px',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        flexShrink: 0, zIndex: 100,
-        boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
-=======
       background: C.bg, fontFamily: FONT,
       maxWidth: 480, margin: '0 auto', overflow: 'hidden',
     }}>
@@ -315,27 +213,17 @@ export default function App() {
         padding: '12px 16px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         flexShrink: 0, zIndex: 100, boxShadow: SHADOW.header,
->>>>>>> 4799ebb (Add centralized theme/style system)
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Logo />
           <div>
-<<<<<<< HEAD
-            <div style={{ fontSize: 20, fontWeight: 800, color: '#1a2a2a', letterSpacing: -0.3, fontFamily: "'Nunito', 'Segoe UI', sans-serif" }}>kala-kala</div>
-            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1.5, color: '#8aabab', textTransform: 'uppercase', marginTop: -1, fontFamily: "'Nunito', 'Segoe UI', sans-serif" }}>Ohuhu Marker Tracker</div>
-=======
             <div style={{ fontSize: 20, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</div>
             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1.5, color: C.tealDim, textTransform: 'uppercase', marginTop: -1, fontFamily: FONT }}>Ohuhu Marker Tracker</div>
->>>>>>> 4799ebb (Add centralized theme/style system)
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <UserButton user={user} onSignIn={() => setAuthOpen(true)} onSignOut={signOut} />
-<<<<<<< HEAD
-          <button onClick={() => setSettingsOpen(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: '#8aabab' }}>
-=======
           <button onClick={() => setSettingsOpen(true)} style={iconBtn}>
->>>>>>> 4799ebb (Add centralized theme/style system)
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
               <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -345,15 +233,9 @@ export default function App() {
       </header>
 
       <nav style={{
-<<<<<<< HEAD
-        background: '#fff', padding: '8px 16px 10px',
-        display: 'flex', gap: 6, justifyContent: 'center',
-        borderBottom: '1px solid #eef2f2', flexShrink: 0,
-=======
         background: C.white, padding: '8px 16px 10px',
         display: 'flex', gap: 6, justifyContent: 'center',
         borderBottom: `1px solid ${C.border}`, flexShrink: 0,
->>>>>>> 4799ebb (Add centralized theme/style system)
       }}>
         {NAV.map((n, i) => {
           const active = pageIdx === i;
@@ -361,21 +243,7 @@ export default function App() {
             <button
               key={n.id}
               onClick={() => goTo(i)}
-<<<<<<< HEAD
-              style={{
-                padding: '8px 15px', borderRadius: 22,
-                border: active ? 'none' : '1.5px solid #e8f0f0',
-                background: active ? '#1ab5b5' : '#f7fafa',
-                color: active ? '#fff' : '#5a7a7a',
-                fontSize: 11, fontWeight: 800, cursor: 'pointer',
-                transition: 'all 0.18s',
-                display: 'flex', alignItems: 'center', gap: 5,
-                boxShadow: 'none',
-                letterSpacing: 0.8, textTransform: 'uppercase', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-              }}
-=======
               style={active ? navPillActive : navPillInactive}
->>>>>>> 4799ebb (Add centralized theme/style system)
             >
               {n.icon(active)}
               {n.label}
@@ -413,9 +281,6 @@ export default function App() {
       </div>
     </div>
     {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} />}
-<<<<<<< HEAD
-    {authModal}
-=======
     {authOpen && (
       <AuthModal
         onSignIn={signIn}
@@ -424,7 +289,6 @@ export default function App() {
         onClose={() => setAuthOpen(false)}
       />
     )}
->>>>>>> 4799ebb (Add centralized theme/style system)
     </>
   );
 }
