@@ -217,7 +217,7 @@ export default function App() {
     />
   );
 
-  if (wide) {
+  /* if (wide) {
     // Sidebar layout
     return (
       <>
@@ -225,14 +225,14 @@ export default function App() {
           display: 'flex', height: '100vh',
           background: '#f7fafa', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
         }}>
-          {/* Sidebar */}
+          
           <aside style={{
             width: 220, flexShrink: 0,
             background: '#fff', borderRight: '1px solid #eef2f2',
             display: 'flex', flexDirection: 'column',
             boxShadow: '1px 0 4px rgba(0,0,0,0.04)',
           }}>
-            {/* Logo */}
+            
             <div style={{
               padding: '20px 20px 16px',
               borderBottom: '1px solid #eef2f2',
@@ -245,7 +245,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Nav items */}
+            
             <nav style={{ padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
               {NAV.map((n, i) => {
                 const active = pageIdx === i;
@@ -274,7 +274,7 @@ export default function App() {
               })}
             </nav>
 
-            {/* Bottom: auth + settings */}
+            
             <div style={{ padding: '12px 12px 16px', borderTop: '1px solid #eef2f2', display: 'flex', flexDirection: 'column', gap: 6 }}>
               <div style={{ padding: '4px 2px' }}>
                 <UserButton user={user} onSignIn={() => setAuthOpen(true)} onSignOut={signOut} />
@@ -300,7 +300,7 @@ export default function App() {
             </div>
           </aside>
 
-          {/* Main content — show only active page, no slide carousel */}
+          
           <main style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             {pages[pageIdx]}
           </main>
@@ -309,15 +309,14 @@ export default function App() {
         {authModal}
       </>
     );
-  }
+  } */
 
   // Mobile layout
   return (
     <>
     <div style={{
       display: 'flex', flexDirection: 'column', height: '100vh',
-      background: '#f7fafa', fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-      overflow: 'hidden',
+      background: '#f7fafa', fontFamily: "'Nunito', 'Segoe UI', sans-serif", maxWidth: 480, margin: '0 auto',overflow: 'hidden',
     }}>
       <header style={{
         background: '#fff', borderBottom: '1px solid #eef2f2',
