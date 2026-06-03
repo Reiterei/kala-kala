@@ -4,10 +4,7 @@ import { getLegacyDisplay, getSeriesForColor } from '../utils/colorUtils';
 import { honoluluSets } from '../data/honolulu-sets';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
 import { isUnavailableSet } from '../hooks/useSettings';
-<<<<<<< HEAD
-=======
 import { C, FONT, RADIUS, SHADOW, statusOwned, statusOwnedOff, statusWish, statusWishOff } from '../styles/theme';
->>>>>>> 4799ebb (Add centralized theme/style system)
 
 const ALL_SETS = honoluluSets;
 
@@ -26,13 +23,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const legacy = getLegacyDisplay(color);
   const seriesInColor = getSeriesForColor(color.code, ALL_SETS);
   const allSeries = getDistinctSeries();
-<<<<<<< HEAD
-  const relevantSeries = allSeries.filter(s =>
-    seriesInColor.find(sc => sc.series === s.series)
-  );
-=======
   const relevantSeries = allSeries.filter(s => seriesInColor.find(sc => sc.series === s.series));
->>>>>>> 4799ebb (Add centralized theme/style system)
   const retailSets = ALL_SETS.filter(s =>
     s.colors.includes(color.code) &&
     !(settings?.hideUnavailable && isUnavailableSet(s))
@@ -43,11 +34,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const g = parseInt(color.hex.substring(2, 4), 16);
   const b = parseInt(color.hex.substring(4, 6), 16);
   const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-<<<<<<< HEAD
-  const textCol = lum > 0.55 ? '#2a3a3a' : '#fff';
-=======
   const textCol = lum > 0.55 ? C.textSub : C.white;
->>>>>>> 4799ebb (Add centralized theme/style system)
   const textColSub = lum > 0.55 ? 'rgba(40,60,60,0.7)' : 'rgba(255,255,255,0.8)';
 
   return createPortal(
@@ -61,16 +48,6 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
     >
       <div
         style={{
-<<<<<<< HEAD
-          background: '#fff', borderRadius: 16, width: '100%', maxWidth: 480,
-          maxHeight: '85vh', display: 'flex', flexDirection: 'column',
-          overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
-          fontFamily: "'Nunito', 'Segoe UI', sans-serif",
-        }}
-        onClick={e => e.stopPropagation()}
-      >
-        {/* Header — fixed */}
-=======
           background: C.white, borderRadius: RADIUS.xl, width: '100%', maxWidth: 480,
           maxHeight: '85vh', display: 'flex', flexDirection: 'column',
           overflow: 'hidden', boxShadow: SHADOW.lg, fontFamily: FONT,
@@ -78,7 +55,6 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
->>>>>>> 4799ebb (Add centralized theme/style system)
         <div style={{ background: bg, padding: '20px 20px 16px', position: 'relative', flexShrink: 0 }}>
           <button
             onClick={onClose}
@@ -104,11 +80,6 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
 
         {/* Scrollable body */}
         <div style={{ overflowY: 'auto', flex: 1 }}>
-<<<<<<< HEAD
-
-          {/* Series / status + Found In grouped */}
-=======
->>>>>>> 4799ebb (Add centralized theme/style system)
           <div style={{ padding: '12px 0 8px' }}>
             {relevantSeries.map(({ series, tipType1, tipType2 }) => {
               const status = ownership[color.code]?.[series] ?? null;
@@ -118,49 +89,22 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               return (
                 <div key={series} style={{ borderBottom: '1px solid #f0f4f4' }}>
                   <div style={{ display: 'flex', alignItems: 'center', padding: '10px 20px' }}>
-<<<<<<< HEAD
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: '#4a7c7c' }}>
-=======
                     <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: C.tealDeep }}>
->>>>>>> 4799ebb (Add centralized theme/style system)
                       <TipIcon type={getTipIcon(tipType1)} size={22} />
                       <TipIcon type={getTipIcon(tipType2)} size={22} />
                     </div>
                     <div style={{ flex: 1, marginLeft: 10 }}>
-<<<<<<< HEAD
-                      <div style={{ fontSize: 14, fontWeight: 600, color: '#1a2a2a' }}>{series}</div>
-                      <div style={{ fontSize: 11, color: '#8a9a9a' }}>{tipType1} / {tipType2}</div>
-=======
                       <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{series}</div>
                       <div style={{ fontSize: 11, color: C.textMuted }}>{tipType1} / {tipType2}</div>
->>>>>>> 4799ebb (Add centralized theme/style system)
                     </div>
                     <div style={{ display: 'flex', gap: 6 }}>
                       <button
                         onClick={() => onSetStatus(color.code, series, isOwned ? null : 'owned')}
-<<<<<<< HEAD
-                        style={{
-                          padding: '6px 14px', borderRadius: 20, border: 'none', cursor: 'pointer',
-                          fontSize: 12, fontWeight: 600,
-                          background: isOwned ? '#1ab5b5' : '#eef2f2',
-                          color: isOwned ? '#fff' : '#5a7a7a', transition: 'all 0.15s',
-                        }}
-                      >Own</button>
-                      <button
-                        onClick={() => onSetStatus(color.code, series, isWish ? null : 'wishlist')}
-                        style={{
-                          padding: '6px 14px', borderRadius: 20, border: 'none', cursor: 'pointer',
-                          fontSize: 12, fontWeight: 600,
-                          background: isWish ? '#f48fb1' : '#eef2f2',
-                          color: isWish ? '#fff' : '#5a7a7a', transition: 'all 0.15s',
-                        }}
-=======
                         style={isOwned ? statusOwned : statusOwnedOff}
                       >Own</button>
                       <button
                         onClick={() => onSetStatus(color.code, series, isWish ? null : 'wishlist')}
                         style={isWish ? statusWish : statusWishOff}
->>>>>>> 4799ebb (Add centralized theme/style system)
                       >Wish</button>
                     </div>
                   </div>
@@ -173,11 +117,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                           display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', textAlign: 'left',
                         }}
                       >
-<<<<<<< HEAD
-                        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: '#8a9a9a', textTransform: 'uppercase' }}>
-=======
                         <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase' }}>
->>>>>>> 4799ebb (Add centralized theme/style system)
                           <span style={{ fontSize: 13 }}>{foundOpen[series] ? '▾' : '▸'}</span> Found In
                         </span>
                         <span style={{ fontSize: 10, color: '#aababa' }}>({seriesSets.length})</span>
@@ -189,19 +129,11 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                             return (
                               <div key={s.id} style={{
                                 display: 'flex', flexDirection: 'column', justifyContent: 'center',
-<<<<<<< HEAD
-                                padding: '8px 10px', borderRadius: 8, background: '#f8fbfb',
-                              }}>
-                                <span style={{ fontSize: 12, fontWeight: 600, color: '#1a2a2a', lineHeight: 1.3 }}>{s.name}</span>
-                                {parts && (
-                                  <span style={{ fontSize: 10, color: '#8a9a9a', fontWeight: 500, marginTop: 2 }}>{parts}</span>
-=======
                                 padding: '8px 10px', borderRadius: RADIUS.sm, background: C.bgCard,
                               }}>
                                 <span style={{ fontSize: 12, fontWeight: 600, color: C.text, lineHeight: 1.3 }}>{s.name}</span>
                                 {parts && (
                                   <span style={{ fontSize: 10, color: C.textMuted, fontWeight: 500, marginTop: 2 }}>{parts}</span>
->>>>>>> 4799ebb (Add centralized theme/style system)
                                 )}
                               </div>
                             );
@@ -214,19 +146,11 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               );
             })}
             {relevantSeries.length === 0 && (
-<<<<<<< HEAD
-              <p style={{ padding: '12px 20px', color: '#8a9a9a', fontSize: 13 }}>
-=======
               <p style={{ padding: '12px 20px', color: C.textMuted, fontSize: 13 }}>
->>>>>>> 4799ebb (Add centralized theme/style system)
                 Not included in any known sets yet.
               </p>
             )}
           </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 4799ebb (Add centralized theme/style system)
         </div>
       </div>
     </div>

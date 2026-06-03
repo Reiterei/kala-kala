@@ -1,17 +1,10 @@
 import { getLegacyDisplay } from '../utils/colorUtils';
-<<<<<<< HEAD
-=======
 import { RADIUS, SHADOW } from '../styles/theme';
->>>>>>> 4799ebb (Add centralized theme/style system)
 
 export function ColorSwatch({ color, size = 'md' }) {
   const legacy = getLegacyDisplay(color);
   const bg = `#${color.hex}`;
 
-<<<<<<< HEAD
-  // Determine text color based on luminance
-=======
->>>>>>> 4799ebb (Add centralized theme/style system)
   const r = parseInt(color.hex.substring(0, 2), 16);
   const g = parseInt(color.hex.substring(2, 4), 16);
   const b = parseInt(color.hex.substring(4, 6), 16);
@@ -25,22 +18,6 @@ export function ColorSwatch({ color, size = 'md' }) {
   const s = sizes[size] || sizes.md;
 
   return (
-<<<<<<< HEAD
-    <div
-      style={{
-        width: s.width,
-        height: s.height,
-        backgroundColor: bg,
-        borderRadius: 10,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
-      }}
-    >
-=======
     <div style={{
       width: s.width, height: s.height,
       backgroundColor: bg, borderRadius: RADIUS.md,
@@ -48,7 +25,6 @@ export function ColorSwatch({ color, size = 'md' }) {
       alignItems: 'center', justifyContent: 'center',
       flexShrink: 0, boxShadow: SHADOW.sm,
     }}>
->>>>>>> 4799ebb (Add centralized theme/style system)
       <span style={{ color: textColor, fontWeight: 700, fontSize: s.fontSize, lineHeight: 1.2, letterSpacing: 0.3 }}>
         {color.code}
       </span>
