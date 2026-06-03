@@ -7,7 +7,6 @@ import { useSettings } from './hooks/useSettings';
 import { useAuth } from './hooks/useAuth';
 import { SettingsModal } from './components/SettingsModal';
 import { AuthModal } from './components/AuthModal';
-
 import { C, FONT, SHADOW, navPillActive, navPillInactive, iconBtn } from './styles/theme';
 
 const NAV = [
@@ -140,7 +139,6 @@ export default function App() {
       if (!drag.current.axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
         drag.current.axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
       }
-
       if (drag.current.axis === 'h') e.preventDefault();
     }
 
