@@ -4,6 +4,7 @@ import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { getLegacyDisplay } from '../utils/colorUtils';
 import { swipeConsumed } from '../App';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
 
@@ -13,6 +14,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
   const [search, setSearch] = useState('');
   const [tab, setTab] = useState('All');
   const [selected, setSelected] = useState(null);
+  const windowWidth = useWindowWidth();
 
   const filtered = useMemo(() => {
     const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
@@ -95,7 +97,11 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       </div>
 
       {/* List */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '0 16px 100px' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: windowWidth >= 1200 ? 'repeat(3, 1fr)' : windowWidth >= 768 ? 'repeat(2, 1fr)' : '1fr',
+        gap: 8, padding: '0 16px 100px',
+      }}>
         {filtered.map(color => {
           const entries = Object.values(ownership[color.code] || {});
           const owned = entries.includes('owned');
