@@ -103,5 +103,29 @@ export function useOwnership(user) {
     return Object.values(ownership[colorCode] || {}).includes('wishlist');
   }, [ownership]);
 
-  return { ownership, setStatus, getStatus, isOwned, isWishlist, syncing };
+  const clearAllOwned = useCallback(() => {
+    setOwnership(prev => {
+      const next = {};
+      for (const [colorCode, series] of Object.entries(prev)) {
+        const filtered = {};
+        for (const [seriesName, status] of Object.entries(series)) {
+          if (status !== 'owned') filtered[seriesName] = status;
+        }
+        if (Object.keys(filtered).length > 0) next[colorCode] = filtered;
+      }
+      if (userRef.current) {
+        supabase
+          .from('ownership')
+          .delete()
+          .eq('user_id', userRef.current.id)
+          .eq('status', 'owned')
+          .then(({ error }) => { if (error) console.error('clearAllOwned error:', error); });
+      } else {
+        save(next);
+      }
+      return next;
+    });
+  }, []);
+
+  return { ownership, setStatus, getStatus, isOwned, isWishlist, syncing, clearAllOwned };
 }
