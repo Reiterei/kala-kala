@@ -104,7 +104,7 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const { user, signIn, signUp, signOut, resetPassword } = useAuth();
-  const { ownership, setStatus } = useOwnership();
+  const { ownership, setStatus, clearAllOwned } = useOwnership();
   const { settings, setSetting } = useSettings();
 
   const pageIdxRef = useRef(0);
@@ -278,7 +278,7 @@ export default function App() {
         </div>
       </div>
     </div>
-    {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} />}
+    {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} onClearAllOwned={clearAllOwned} />}
     {authOpen && (
       <AuthModal
         onSignIn={signIn}
