@@ -525,7 +525,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y210", "Y216", "Y34", "Y43", "Y48", "YR07", "YR09", "YR25", "YR29", "YR37", "YR38", "YR39", "YR313", "YR57", "YR515", "E59", "E513", "E514", "E515", "E612", "E75", "E711", "E814", "GY163"],
+    colors: ["Y210", "Y216", "Y34", "Y48", "YR07", "YR09", "YR25", "YR29", "YR37", "YR38", "YR39", "YR313", "YR57", "YR515", "E59", "E511", "E513", "E514", "E515", "E612", "E75", "E711", "E814", "GY163"],
   },
   {
     id: "honolulu_bundle_33",
@@ -1017,7 +1017,7 @@ export const honoluluSets = [
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
-      michaels: "https://www.michaels.com/product/ohuhu-honolulu-series-b-120-color-basic-alcohol-markers-10761488",
+      michaels: "https://www.michaels.com/product/ohuhu-honolulu-series-b-200-color-basic-alcohol-markers-10789844",
       walmart: null,
       amazon: null,
     },
