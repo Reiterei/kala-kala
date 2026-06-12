@@ -109,7 +109,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
                 borderColor: owned ? '#d4f0f0' : wish ? '#ffccdd' : '#f0f4f4',
               }}
             >
-              <ColorSwatch color={color} size="md" />
+              <ColorSwatch color={color} size="md" settings={settings} />
               <div style={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                 <div style={{ minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'nowrap' }}>
