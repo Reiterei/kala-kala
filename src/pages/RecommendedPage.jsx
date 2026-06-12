@@ -59,8 +59,11 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
   const pct = total > 0 ? Math.round((owned / total) * 100) : 0;
   const meta = getMeta(set);
 
-  const handleAddAll = () => {
-    set.colors.forEach(code => { if (ownership[code]?.[set.series] !== 'owned') onSetStatus(code, set.series, 'owned'); });
+  const handleAddAll = (status) => {
+    set.colors.forEach(code => {
+      if (status === 'wishlist' && ownership[code]?.[set.series] === 'owned') return;
+      if (ownership[code]?.[set.series] !== status) onSetStatus(code, set.series, status);
+    });
     setConfirming(false);
   };
 
@@ -74,11 +77,12 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
       {confirming && createPortal(
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 32, fontFamily: FONT }} onClick={() => setConfirming(false)}>
           <div style={{ background: C.white, borderRadius: RADIUS.xl, padding: '24px 24px 20px', maxWidth: 320, width: '100%' }} onClick={e => e.stopPropagation()}>
-            <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 8 }}>Add all to owned?</div>
-            <div style={{ fontSize: 13, color: '#6a8a8a', marginBottom: 20 }}>This will mark all {set.colors.length} markers in <strong>{set.name}</strong> as owned.</div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button onClick={() => setConfirming(false)} style={{ flex: 1, padding: '10px', borderRadius: RADIUS.md, border: `1.5px solid ${C.borderMid}`, background: C.white, color: C.tealText, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-              <button onClick={handleAddAll} style={{ flex: 1, padding: '10px', borderRadius: RADIUS.md, border: 'none', background: C.teal, color: C.white, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Yes, Add All</button>
+            <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 8 }}>Add all markers?</div>
+            <div style={{ fontSize: 13, color: '#6a8a8a', marginBottom: 20 }}>Mark all {set.colors.length} markers in <strong>{set.name}</strong> as:</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <button onClick={() => handleAddAll('owned')} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: 'none', background: C.teal, color: C.white, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Add All to Owned</button>
+              <button onClick={() => handleAddAll('wishlist')} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: `1.5px solid ${C.teal}`, background: C.white, color: C.teal, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Add All to Wishlist</button>
+              <button onClick={() => setConfirming(false)} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: `1.5px solid ${C.borderMid}`, background: C.white, color: C.tealText, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
             </div>
           </div>
         </div>
