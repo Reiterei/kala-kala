@@ -114,7 +114,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
                 <div style={{ minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'nowrap' }}>
                     <span style={{ fontSize: 15, fontWeight: 800, color: C.text, whiteSpace: 'nowrap' }}>{color.name}</span>
-                    {legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
+                    {!settings?.hideLegacy && legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
                       <span style={{ fontSize: 11, color: C.tealDim, whiteSpace: 'nowrap' }}>({legacy.name})</span>
                     )}
                   </div>
