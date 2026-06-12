@@ -90,7 +90,7 @@ export default function App() {
   const [animating, setAnimating] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
-  const { ownership, setStatus } = useOwnership(user);
+  const { ownership, setStatus, clearAllWishlist } = useOwnership(user);
   const { settings, setSetting } = useSettings(user);
 
   const pageIdxRef = useRef(0);
@@ -277,7 +277,7 @@ export default function App() {
       />
     )}
 
-    {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} />}
+    {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} onClearAllWishlist={clearAllWishlist} />}
     </>
   );
 }
