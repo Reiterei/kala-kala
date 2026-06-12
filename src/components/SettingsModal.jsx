@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { C, FONT, RADIUS, SHADOW, overlayStyle, segmentActive, segmentInactive } from '../styles/theme';
 
-export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned }) {
+export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned, onClearAllWishlist }) {
   const [confirming, setConfirming] = useState(false);
+  const [confirmingWishlist, setConfirmingWishlist] = useState(false);
 
   function handleClearRequest() {
     setConfirming(true);
@@ -121,6 +122,63 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
                 </button>
                 <button
                   onClick={handleCancel}
+                  style={{
+                    flex: 1, padding: '7px 0', borderRadius: RADIUS.sm,
+                    border: `1.5px solid ${C.tealMid}`, background: C.white,
+                    color: C.tealText, fontSize: 12, fontWeight: 800,
+                    cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8,
+                    fontFamily: FONT,
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+          <div style={{ borderTop: `1px solid ${C.border}`, margin: '12px 0' }} />
+          {!confirmingWishlist ? (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Remove all colors from &lsquo;Wishlist&rsquo;</div>
+                <div style={{ fontSize: 11, color: C.tealDim, marginTop: 2 }}>Permanently clear your wishlist</div>
+              </div>
+              <button
+                onClick={() => setConfirmingWishlist(true)}
+                style={{
+                  padding: '6px 14px', borderRadius: RADIUS.pill,
+                  border: `1.5px solid ${C.error}`, background: 'transparent',
+                  color: C.error, fontSize: 11, fontWeight: 800,
+                  cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8,
+                  fontFamily: FONT, flexShrink: 0,
+                }}
+              >
+                Clear
+              </button>
+            </div>
+          ) : (
+            <div style={{
+              background: '#fff5f5', border: `1.5px solid ${C.error}`,
+              borderRadius: RADIUS.md, padding: '12px 14px',
+              display: 'flex', flexDirection: 'column', gap: 10,
+            }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: C.error }}>Are you sure?</div>
+              <div style={{ fontSize: 11, color: C.textMuted, lineHeight: 1.5 }}>
+                This will remove all &lsquo;Wishlist&rsquo; statuses. This cannot be undone.
+              </div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button
+                  onClick={() => { onClearAllWishlist(); setConfirmingWishlist(false); onClose(); }}
+                  style={{
+                    flex: 1, padding: '7px 0', borderRadius: RADIUS.sm,
+                    border: 'none', background: C.error, color: C.white,
+                    fontSize: 12, fontWeight: 800, cursor: 'pointer',
+                    textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT,
+                  }}
+                >
+                  Yes, clear all
+                </button>
+                <button
+                  onClick={() => setConfirmingWishlist(false)}
                   style={{
                     flex: 1, padding: '7px 0', borderRadius: RADIUS.sm,
                     border: `1.5px solid ${C.tealMid}`, background: C.white,
