@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 
-const DEFAULTS = { hideJapanese: false, hideUnavailable: false, hideDiscontinued: false };
+const DEFAULTS = { hideJapanese: false, hideUnavailable: false, hideDiscontinued: false, hideLegacy: false };
 
 export const JAPANESE_EXCLUSIVE_CODES = new Set([
   'B04','BV45','BV39','BV515','YR214','YR01','G48','YG35',
@@ -26,7 +26,7 @@ export function useSettings(user) {
     }
     supabase
       .from('user_settings')
-      .select('hide_japanese, hide_unavailable, hide_discontinued')
+      .select('hide_japanese, hide_unavailable, hide_discontinued, hide_legacy')
       .eq('user_id', user.id)
       .single()
       .then(({ data, error }) => {
@@ -35,6 +35,7 @@ export function useSettings(user) {
           hideJapanese: data.hide_japanese,
           hideUnavailable: data.hide_unavailable,
           hideDiscontinued: data.hide_discontinued,
+          hideLegacy: data.hide_legacy,
         });
       });
   }, [user?.id]);
@@ -50,6 +51,7 @@ export function useSettings(user) {
           hide_japanese: next.hideJapanese,
           hide_unavailable: next.hideUnavailable,
           hide_discontinued: next.hideDiscontinued,
+          hide_legacy: next.hideLegacy,
           updated_at: new Date().toISOString(),
         }, { onConflict: 'user_id' })
         .then(({ error }) => { if (error) console.error('Settings upsert error:', error); });
