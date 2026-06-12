@@ -60,39 +60,26 @@ function Logo() {
   );
 }
 
-function UserButton({ user, onSignIn, onSignOut }) {
-  if (user) {
-    const initials = (user.email || '?')[0].toUpperCase();
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <div style={{
-          width: 28, height: 28, borderRadius: '50%',
-          background: C.teal, color: C.white,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 12, fontWeight: 800, flexShrink: 0, fontFamily: FONT,
-        }}>{initials}</div>
-        <button
-          onClick={onSignOut}
-          style={{
-            background: 'none', border: `1.5px solid ${C.border}`,
-            borderRadius: 8, padding: '4px 10px',
-            color: C.tealDim, fontSize: 11, fontWeight: 700,
-            cursor: 'pointer', fontFamily: FONT,
-          }}
-        >Sign out</button>
-      </div>
-    );
-  }
+function UserMenu({ user, onSignOut }) {
+  const initials = (user.email || '?')[0].toUpperCase();
   return (
-    <button
-      onClick={onSignIn}
-      style={{
-        background: C.teal, border: 'none',
-        borderRadius: 8, padding: '7px 14px',
-        color: C.white, fontSize: 11, fontWeight: 800,
-        cursor: 'pointer', fontFamily: FONT, letterSpacing: 0.3,
-      }}
-    >Sign in</button>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{
+        width: 28, height: 28, borderRadius: '50%',
+        background: C.teal, color: C.white,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: 12, fontWeight: 800, flexShrink: 0, fontFamily: FONT,
+      }}>{initials}</div>
+      <button
+        onClick={onSignOut}
+        style={{
+          background: 'none', border: `1.5px solid ${C.border}`,
+          borderRadius: 8, padding: '4px 10px',
+          color: C.tealDim, fontSize: 11, fontWeight: 700,
+          cursor: 'pointer', fontFamily: FONT,
+        }}
+      >Sign out</button>
+    </div>
   );
 }
 
@@ -102,10 +89,9 @@ export default function App() {
   const [pageIdx, setPageIdx] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [authOpen, setAuthOpen] = useState(false);
-  const { user, signIn, signUp, signOut, resetPassword } = useAuth();
-  const { ownership, setStatus, clearAllOwned } = useOwnership();
-  const { settings, setSetting } = useSettings();
+  const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
+  const { ownership, setStatus } = useOwnership(user);
+  const { settings, setSetting } = useSettings(user);
 
   const pageIdxRef = useRef(0);
   pageIdxRef.current = pageIdx;
@@ -199,6 +185,9 @@ export default function App() {
     <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
   ];
 
+  // Show nothing while resolving session
+  if (loading) return null;
+
   return (
     <>
     <div style={{
@@ -220,7 +209,7 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <UserButton user={user} onSignIn={() => setAuthOpen(true)} onSignOut={signOut} />
+          {user && <UserMenu user={user} onSignOut={signOut} />}
           <button onClick={() => setSettingsOpen(true)} style={iconBtn}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -278,15 +267,17 @@ export default function App() {
         </div>
       </div>
     </div>
-    {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} onClearAllOwned={clearAllOwned} />}
-    {authOpen && (
+
+    {!user && (
       <AuthModal
         onSignIn={signIn}
         onSignUp={signUp}
         onResetPassword={resetPassword}
-        onClose={() => setAuthOpen(false)}
+        required
       />
     )}
+
+    {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} />}
     </>
   );
 }
