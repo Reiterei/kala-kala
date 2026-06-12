@@ -1,20 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 
-const STORAGE_KEY = 'kala-kala-ownership';
-
-function load() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-  } catch {
-    return {};
-  }
-}
-
-function save(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-}
-
 function rowsToOwnership(rows) {
   const ownership = {};
   for (const row of rows) {
@@ -25,15 +11,14 @@ function rowsToOwnership(rows) {
 }
 
 export function useOwnership(user) {
-  const [ownership, setOwnership] = useState(load);
+  const [ownership, setOwnership] = useState({});
   const [syncing, setSyncing] = useState(false);
   const userRef = useRef(user);
   userRef.current = user;
 
-  // When user logs in, fetch their data from Supabase
   useEffect(() => {
     if (!user) {
-      setOwnership(load());
+      setOwnership({});
       return;
     }
     setSyncing(true);
@@ -48,6 +33,7 @@ export function useOwnership(user) {
   }, [user?.id]);
 
   const setStatus = useCallback((colorCode, seriesName, status) => {
+    if (!userRef.current) return;
     setOwnership(prev => {
       const next = { ...prev };
       if (!next[colorCode]) next[colorCode] = {};
@@ -57,28 +43,24 @@ export function useOwnership(user) {
         next[colorCode] = { ...next[colorCode], [seriesName]: status };
       }
 
-      if (userRef.current) {
-        if (status === null || status === undefined) {
-          supabase
-            .from('ownership')
-            .delete()
-            .eq('color_code', colorCode)
-            .eq('series_name', seriesName)
-            .then(({ error }) => { if (error) console.error('Delete error:', error); });
-        } else {
-          supabase
-            .from('ownership')
-            .upsert({
-              user_id: userRef.current.id,
-              color_code: colorCode,
-              series_name: seriesName,
-              status,
-              updated_at: new Date().toISOString(),
-            }, { onConflict: 'user_id,color_code,series_name' })
-            .then(({ error }) => { if (error) console.error('Upsert error:', error); });
-        }
+      if (status === null || status === undefined) {
+        supabase
+          .from('ownership')
+          .delete()
+          .eq('color_code', colorCode)
+          .eq('series_name', seriesName)
+          .then(({ error }) => { if (error) console.error('Delete error:', error); });
       } else {
-        save(next);
+        supabase
+          .from('ownership')
+          .upsert({
+            user_id: userRef.current.id,
+            color_code: colorCode,
+            series_name: seriesName,
+            status,
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'user_id,color_code,series_name' })
+          .then(({ error }) => { if (error) console.error('Upsert error:', error); });
       }
 
       return next;
@@ -103,29 +85,5 @@ export function useOwnership(user) {
     return Object.values(ownership[colorCode] || {}).includes('wishlist');
   }, [ownership]);
 
-  const clearAllOwned = useCallback(() => {
-    setOwnership(prev => {
-      const next = {};
-      for (const [colorCode, series] of Object.entries(prev)) {
-        const filtered = {};
-        for (const [seriesName, status] of Object.entries(series)) {
-          if (status !== 'owned') filtered[seriesName] = status;
-        }
-        if (Object.keys(filtered).length > 0) next[colorCode] = filtered;
-      }
-      if (userRef.current) {
-        supabase
-          .from('ownership')
-          .delete()
-          .eq('user_id', userRef.current.id)
-          .eq('status', 'owned')
-          .then(({ error }) => { if (error) console.error('clearAllOwned error:', error); });
-      } else {
-        save(next);
-      }
-      return next;
-    });
-  }, []);
-
-  return { ownership, setStatus, getStatus, isOwned, isWishlist, syncing, clearAllOwned };
+  return { ownership, setStatus, getStatus, isOwned, isWishlist, syncing };
 }
