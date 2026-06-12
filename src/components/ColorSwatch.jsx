@@ -1,7 +1,7 @@
 import { getLegacyDisplay } from '../utils/colorUtils';
 import { RADIUS, SHADOW } from '../styles/theme';
 
-export function ColorSwatch({ color, size = 'md' }) {
+export function ColorSwatch({ color, size = 'md', settings }) {
   const legacy = getLegacyDisplay(color);
   const bg = `#${color.hex}`;
 
@@ -28,7 +28,7 @@ export function ColorSwatch({ color, size = 'md' }) {
       <span style={{ color: textColor, fontWeight: 700, fontSize: s.fontSize, lineHeight: 1.2, letterSpacing: 0.3 }}>
         {color.code}
       </span>
-      {legacy?.code && (
+      {!settings?.hideLegacy && legacy?.code && (
         <span style={{ color: textColor, fontSize: s.subSize, opacity: 0.75, lineHeight: 1.2 }}>
           {legacy.code}
         </span>

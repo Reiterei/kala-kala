@@ -71,7 +71,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           <p style={{ margin: '4px 0 0', fontSize: 13, color: textColSub }}>
             Color Code: <strong>{color.code}</strong>
           </p>
-          {legacy && (
+          {!settings?.hideLegacy && legacy && (
             <p style={{ margin: '2px 0 0', fontSize: 12, color: textColSub }}>
               Legacy Code: <strong>{legacy.code}</strong>&nbsp;&nbsp;Legacy Name: <strong>{legacy.name}</strong>
             </p>

@@ -51,6 +51,13 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
 
         <div style={{ padding: '16px 20px' }}>
           <SettingRow
+            label="Legacy Names/Codes"
+            description="Show legacy color names and codes"
+            value={settings.hideLegacy ? 'hide' : 'show'}
+            onChange={v => onSetSetting('hideLegacy', v === 'hide')}
+          />
+          <div style={{ borderTop: `1px solid ${C.border}`, margin: '12px 0' }} />
+          <SettingRow
             label="Japanese Exclusive Colors"
             description="Hide colors only available in Japan"
             value={settings.hideJapanese ? 'hide' : 'show'}
