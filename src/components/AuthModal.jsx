@@ -39,7 +39,7 @@ function Btn({ children, onClick, disabled, secondary }) {
   );
 }
 
-export function AuthModal({ onSignIn, onSignUp, onResetPassword, onClose }) {
+export function AuthModal({ onSignIn, onSignUp, onResetPassword, onClose, required }) {
   const [mode, setMode] = useState('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -78,13 +78,16 @@ export function AuthModal({ onSignIn, onSignUp, onResetPassword, onClose }) {
     const err = await onSignIn(email, password);
     setLoading(false);
     if (err) setError(err.message);
-    else onClose();
+    else if (onClose) onClose();
   }
 
   const titles = { signin: 'Sign In', signup: 'Create Account', reset: 'Reset Password' };
 
   return (
-    <div onClick={onClose} style={overlayStyle}>
+    <div
+      onClick={required ? undefined : onClose}
+      style={overlayStyle}
+    >
       <div
         onClick={e => e.stopPropagation()}
         style={{
@@ -98,8 +101,16 @@ export function AuthModal({ onSignIn, onSignUp, onResetPassword, onClose }) {
           <div style={{ fontSize: 18, fontWeight: 800, color: C.text, fontFamily: FONT }}>
             {titles[mode]}
           </div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.tealDim, fontSize: 20, lineHeight: 1 }}>×</button>
+          {!required && onClose && (
+            <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.tealDim, fontSize: 20, lineHeight: 1 }}>×</button>
+          )}
         </div>
+
+        {required && mode === 'signin' && (
+          <div style={{ fontSize: 13, color: C.tealDim, fontFamily: FONT }}>
+            Sign in to track your markers.
+          </div>
+        )}
 
         <Input type="email" placeholder="Email" value={email} onChange={setEmail} disabled={loading} />
         {mode !== 'reset' && (
