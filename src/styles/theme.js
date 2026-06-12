@@ -147,10 +147,12 @@ export const segmentInactive = {
 
 /** Color chip — unowned */
 export const chipBase = {
-  width: 44, height: 44, borderRadius: '50%',
+  width: 44, height: 44, minWidth: 44, minHeight: 44, borderRadius: '50%',
   display: 'flex', alignItems: 'center', justifyContent: 'center',
   fontSize: 9, fontWeight: 700, letterSpacing: 0.2,
   flexShrink: 0, transition: 'all 0.15s',
+  boxSizing: 'border-box', textAlign: 'center',
+  padding: 0, lineHeight: 1,
 };
 
 export const chipUnowned = {
