@@ -103,5 +103,23 @@ export function useOwnership(user) {
     });
   }, []);
 
-  return { ownership, setStatus, getStatus, isOwned, isWishlist, syncing, clearAllWishlist };
+  const clearAllOwned = useCallback(() => {
+    if (!userRef.current) return;
+    setOwnership(prev => {
+      const next = {};
+      for (const [code, series] of Object.entries(prev)) {
+        const filtered = Object.fromEntries(Object.entries(series).filter(([, v]) => v !== 'owned'));
+        if (Object.keys(filtered).length > 0) next[code] = filtered;
+      }
+      supabase
+        .from('ownership')
+        .delete()
+        .eq('user_id', userRef.current.id)
+        .eq('status', 'owned')
+        .then(({ error }) => { if (error) console.error('Clear owned error:', error); });
+      return next;
+    });
+  }, []);
+
+  return { ownership, setStatus, getStatus, isOwned, isWishlist, syncing, clearAllWishlist, clearAllOwned };
 }
