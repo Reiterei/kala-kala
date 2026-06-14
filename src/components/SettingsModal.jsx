@@ -1,23 +1,14 @@
 import { useState } from 'react';
 import { C, FONT, RADIUS, SHADOW, overlayStyle, segmentActive, segmentInactive } from '../styles/theme';
 
-export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned, onClearAllWishlist }) {
+export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned, onClearAllWishlist, user, onSignOut }) {
   const [confirming, setConfirming] = useState(false);
   const [confirmingWishlist, setConfirmingWishlist] = useState(false);
 
-  function handleClearRequest() {
-    setConfirming(true);
-  }
+  function handleClearRequest() { setConfirming(true); }
+  function handleConfirm() { onClearAllOwned(); setConfirming(false); onClose(); }
+  function handleCancel() { setConfirming(false); }
 
-  function handleConfirm() {
-    onClearAllOwned();
-    setConfirming(false);
-    onClose();
-  }
-
-  function handleCancel() {
-    setConfirming(false);
-  }
   return (
     <div onClick={onClose} style={overlayStyle}>
       <div
@@ -49,6 +40,27 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             </svg>
           </button>
         </div>
+
+        {user && (
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '12px 20px', borderBottom: `1px solid ${C.border}`,
+            background: C.bgInput,
+          }}>
+            <div style={{ fontSize: 12, color: C.tealDim, fontWeight: 600 }}>
+              Signed in as <span style={{ color: C.text, fontWeight: 700 }}>{user.email}</span>
+            </div>
+            <button
+              onClick={() => { onSignOut(); onClose(); }}
+              style={{
+                background: 'none', border: `1.5px solid ${C.border}`,
+                borderRadius: 8, padding: '4px 10px',
+                color: C.tealDim, fontSize: 11, fontWeight: 700,
+                cursor: 'pointer', fontFamily: FONT, flexShrink: 0,
+              }}
+            >Sign out</button>
+          </div>
+        )}
 
         <div style={{ padding: '16px 20px' }}>
           <SettingRow
@@ -94,9 +106,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
                   cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8,
                   fontFamily: FONT, flexShrink: 0,
                 }}
-              >
-                Clear
-              </button>
+              >Clear</button>
             </div>
           ) : (
             <div style={{
@@ -109,29 +119,8 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
                 This will remove all &lsquo;Owned&rsquo; statuses. This cannot be undone.
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
-                <button
-                  onClick={handleConfirm}
-                  style={{
-                    flex: 1, padding: '7px 0', borderRadius: RADIUS.sm,
-                    border: 'none', background: C.error, color: C.white,
-                    fontSize: 12, fontWeight: 800, cursor: 'pointer',
-                    textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT,
-                  }}
-                >
-                  Yes, clear all
-                </button>
-                <button
-                  onClick={handleCancel}
-                  style={{
-                    flex: 1, padding: '7px 0', borderRadius: RADIUS.sm,
-                    border: `1.5px solid ${C.tealMid}`, background: C.white,
-                    color: C.tealText, fontSize: 12, fontWeight: 800,
-                    cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8,
-                    fontFamily: FONT,
-                  }}
-                >
-                  Cancel
-                </button>
+                <button onClick={handleConfirm} style={{ flex: 1, padding: '7px 0', borderRadius: RADIUS.sm, border: 'none', background: C.error, color: C.white, fontSize: 12, fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT }}>Yes, clear all</button>
+                <button onClick={handleCancel} style={{ flex: 1, padding: '7px 0', borderRadius: RADIUS.sm, border: `1.5px solid ${C.tealMid}`, background: C.white, color: C.tealText, fontSize: 12, fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT }}>Cancel</button>
               </div>
             </div>
           )}
@@ -151,9 +140,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
                   cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8,
                   fontFamily: FONT, flexShrink: 0,
                 }}
-              >
-                Clear
-              </button>
+              >Clear</button>
             </div>
           ) : (
             <div style={{
@@ -166,29 +153,8 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
                 This will remove all &lsquo;Wishlist&rsquo; statuses. This cannot be undone.
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
-                <button
-                  onClick={() => { onClearAllWishlist(); setConfirmingWishlist(false); onClose(); }}
-                  style={{
-                    flex: 1, padding: '7px 0', borderRadius: RADIUS.sm,
-                    border: 'none', background: C.error, color: C.white,
-                    fontSize: 12, fontWeight: 800, cursor: 'pointer',
-                    textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT,
-                  }}
-                >
-                  Yes, clear all
-                </button>
-                <button
-                  onClick={() => setConfirmingWishlist(false)}
-                  style={{
-                    flex: 1, padding: '7px 0', borderRadius: RADIUS.sm,
-                    border: `1.5px solid ${C.tealMid}`, background: C.white,
-                    color: C.tealText, fontSize: 12, fontWeight: 800,
-                    cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8,
-                    fontFamily: FONT,
-                  }}
-                >
-                  Cancel
-                </button>
+                <button onClick={() => { onClearAllWishlist(); setConfirmingWishlist(false); onClose(); }} style={{ flex: 1, padding: '7px 0', borderRadius: RADIUS.sm, border: 'none', background: C.error, color: C.white, fontSize: 12, fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT }}>Yes, clear all</button>
+                <button onClick={() => setConfirmingWishlist(false)} style={{ flex: 1, padding: '7px 0', borderRadius: RADIUS.sm, border: `1.5px solid ${C.tealMid}`, background: C.white, color: C.tealText, fontSize: 12, fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT }}>Cancel</button>
               </div>
             </div>
           )}
@@ -216,13 +182,7 @@ function SettingRow({ label, description, value, onChange }) {
       </div>
       <div style={{ display: 'flex', borderRadius: RADIUS.sm, overflow: 'hidden', border: `1.5px solid ${C.tealMid}`, flexShrink: 0 }}>
         {['show', 'hide'].map(opt => (
-          <button
-            key={opt}
-            onClick={() => onChange(opt)}
-            style={value === opt ? segmentActive : segmentInactive}
-          >
-            {opt}
-          </button>
+          <button key={opt} onClick={() => onChange(opt)} style={value === opt ? segmentActive : segmentInactive}>{opt}</button>
         ))}
       </div>
     </div>
