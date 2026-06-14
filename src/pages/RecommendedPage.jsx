@@ -345,7 +345,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
         </div>
       </div>
 
-      <div style={{ padding: `12px ${px}px 100px` }}>
+      <div style={{ padding: `12px ${px}px 100px`, display: isWide ? 'grid' : 'block', gridTemplateColumns: isWide ? '1fr 1fr' : undefined, columnGap: isWide ? 16 : undefined }}>
         {filtered.map(set => (
           <SetCard key={set.id} set={set} ownership={ownership} colorMode={colorMode} onSetStatus={onSetStatus} settings={settings} />
         ))}

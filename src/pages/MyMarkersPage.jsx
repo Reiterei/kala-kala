@@ -209,7 +209,7 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
         ))}
       </div>
 
-      <div style={{ padding: `0 ${px}px 100px` }}>
+      <div style={{ padding: `0 ${px}px 100px`, display: isWide ? 'grid' : 'block', gridTemplateColumns: isWide ? '1fr 1fr' : undefined, columnGap: isWide ? 16 : undefined }}>
         {filteredGroups.map(({ series, tipType1, tipType2 }) => (
           <SeriesCard
             key={series} series={series} tipType1={tipType1} tipType2={tipType2}
