@@ -195,7 +195,7 @@ export default function App() {
     <div style={{
       display: 'flex', flexDirection: 'column', height: '100vh',
       background: C.bg, fontFamily: FONT,
-      maxWidth: 1500, margin: '0 auto', overflow: 'hidden',
+      maxWidth: 1000, margin: '0 auto', overflow: 'hidden',
     }}>
       <header style={{
         background: C.white, borderBottom: `1px solid ${C.border}`,
