@@ -122,11 +122,10 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
               <ColorSwatch color={color} size="md" settings={settings} />
               <div style={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'nowrap' }}>
-                    <span style={{ fontSize: 15, fontWeight: 800, color: C.text, whiteSpace: 'nowrap' }}>{color.name}</span>
-                    {!settings?.hideLegacy && legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
-                      <span style={{ fontSize: 11, color: C.tealDim, whiteSpace: 'nowrap' }}>({legacy.name})</span>
-                    )}
+                  <div style={{ fontSize: 15, fontWeight: 800, color: C.text }}>{color.name}</div>
+                  {!settings?.hideLegacy && legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
+                    <div style={{ fontSize: 11, color: C.tealDim, marginTop: 1 }}>({legacy.name})</div>
+                  )}
                   </div>
                 </div>
                 <Badge type={badgeType} />
