@@ -5,6 +5,7 @@ import { ColorDetailModal } from '../components/ColorDetailModal';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, RADIUS, scrollPage, pillActive, pillInactive, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
 const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
@@ -168,7 +169,9 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   const [tab, setTab] = useState('All');
   const [search, setSearch] = useState('');
   const seriesGroups = useMemo(() => getSeriesGroups(), []);
-
+  const windowWidth = useWindowWidth();
+  const isWide = windowWidth >= 900;
+  const px = isWide ? 20 : 16;
   const filteredGroups = useMemo(() => {
     let groups = seriesGroups;
     if (search.trim()) {
@@ -185,7 +188,7 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
 
   return (
     <div style={scrollPage}>
-      <div style={{ padding: '16px 16px 0' }}>
+      <div style={{ padding: `16px ${px}px 0` }}>
         <div style={{ display: 'flex', alignItems: 'center', background: C.white, borderRadius: RADIUS.lg, padding: '0 14px', gap: 8 }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.tealDim} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -200,13 +203,13 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: 8, padding: '12px 16px', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', gap: 8, padding: `12px ${px}px`, justifyContent: 'center' }}>
         {TABS.map(t => (
           <button key={t} onClick={() => setTab(t)} style={tab === t ? pillActive : pillInactive}>{t}</button>
         ))}
       </div>
 
-      <div style={{ padding: '0 16px 100px' }}>
+      <div style={{ padding: `0 ${px}px 100px` }}>
         {filteredGroups.map(({ series, tipType1, tipType2 }) => (
           <SeriesCard
             key={series} series={series} tipType1={tipType1} tipType2={tipType2}

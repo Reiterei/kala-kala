@@ -10,6 +10,7 @@ import michaelsLogo from '../assets/michaels-logo.png';
 import walmartLogo from '../assets/walmart-logo.png';
 import amazonLogo from '../assets/amazon-logo.png';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, isUnavailableSet } from '../hooks/useSettings';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, SHADOW, scrollPage, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
 const colorMap = Object.fromEntries(allColors.map(c => [c.code, c]));
@@ -193,6 +194,9 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
   const hideJapanese    = settings?.hideJapanese    ?? false;
   const hideUnavailable = settings?.hideUnavailable ?? false;
   const hideDiscontinued = settings?.hideDiscontinued ?? false;
+  const windowWidth = useWindowWidth();
+  const isWide = windowWidth >= 900;
+  const px = isWide ? 20 : 16;
   const [colorMode, setColorMode] = useState(() => localStorage.getItem('kk-rec-colorMode') ?? 'exact');
   const [seriesFilter, setSeriesFilter] = useState(() => {
     try { return new Set(JSON.parse(localStorage.getItem('kk-rec-series') || '[]')); } catch { return new Set(); }
@@ -265,7 +269,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
 
   return (
     <div style={{ ...scrollPage, background: C.bg }}>
-      <div style={{ padding: '16px 16px 12px', borderBottom: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ padding: `16px ${px}px 12px`, borderBottom: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column', gap: 10 }}>
         {/* Search */}
         <div style={{ display: 'flex', alignItems: 'center', background: C.white, borderRadius: RADIUS.lg, padding: '0 14px', gap: 8 }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.tealDim} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -341,7 +345,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
         </div>
       </div>
 
-      <div style={{ padding: '12px 16px 100px' }}>
+      <div style={{ padding: `12px ${px}px 100px` }}>
         {filtered.map(set => (
           <SetCard key={set.id} set={set} ownership={ownership} colorMode={colorMode} onSetStatus={onSetStatus} settings={settings} />
         ))}
