@@ -33,9 +33,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
   const [selected, setSelected] = useState(null);
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
-  const isMedium = windowWidth >= 600;
-  // In wide mode each column is ~1/3 of 1500px ≈ 500px; treat as medium
-  const colCount = isWide ? 2 : 1;
+  const colCount = windowWidth >= 550 ? 2 : 1;
   const px = isWide ? 20 : 16;
 
   const filtered = useMemo(() => {
