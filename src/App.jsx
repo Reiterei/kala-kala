@@ -93,7 +93,6 @@ export default function App() {
   const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
-  const isMedium = windowWidth >= 600;
   const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership(user);
   const { settings, setSetting } = useSettings(user);
 
@@ -189,7 +188,6 @@ export default function App() {
     <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
   ];
 
-  // Show nothing while resolving session
   if (loading) return null;
 
   return (
@@ -257,42 +255,29 @@ export default function App() {
       <div
         ref={containerRef}
         style={{ flex: 1, overflow: 'hidden', position: 'relative', touchAction: 'pan-y' }}
-        onPointerDown={!isWide ? handlePointerDown : undefined}
-        onPointerMove={!isWide ? handlePointerMove : undefined}
-        onPointerUp={!isWide ? handlePointerUp : undefined}
-        onPointerCancel={!isWide ? () => { drag.current = null; } : undefined}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={() => { drag.current = null; }}
       >
-        {isWide ? (
-          <div style={{ display: 'flex', height: '100%', gap: 0 }}>
-            {pages.map((page, i) => (
-              <div key={i} style={{
-                flex: 1, height: '100%', display: 'flex', flexDirection: 'column',
-                borderRight: i < pages.length - 1 ? `1px solid ${C.border}` : 'none',
-              }}>
-                {page}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div
-            style={{
-              display: 'flex',
-              width: `${PAGE_COUNT * 100}%`,
-              height: '100%',
-              transform: `translateX(${baseTranslate}%)`,
-              transition: animating
-                ? `transform ${ANIM_DURATION}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
-                : 'none',
-              willChange: 'transform',
-            }}
-          >
-            {pages.map((page, i) => (
-              <div key={i} style={{ width: `${100 / PAGE_COUNT}%`, height: '100%', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
-                {page}
-              </div>
-            ))}
-          </div>
-        )}
+        <div
+          style={{
+            display: 'flex',
+            width: `${PAGE_COUNT * 100}%`,
+            height: '100%',
+            transform: `translateX(${baseTranslate}%)`,
+            transition: animating
+              ? `transform ${ANIM_DURATION}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+              : 'none',
+            willChange: 'transform',
+          }}
+        >
+          {pages.map((page, i) => (
+            <div key={i} style={{ width: `${100 / PAGE_COUNT}%`, height: '100%', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
+              {page}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
 
