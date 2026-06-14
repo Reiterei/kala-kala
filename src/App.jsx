@@ -5,6 +5,7 @@ import { RecommendedPage } from './pages/RecommendedPage';
 import { useOwnership } from './hooks/useOwnership';
 import { useSettings } from './hooks/useSettings';
 import { useAuth } from './hooks/useAuth';
+import { useWindowWidth } from './hooks/useWindowWidth';
 import { SettingsModal } from './components/SettingsModal';
 import { AuthModal } from './components/AuthModal';
 import { C, FONT, SHADOW, navPillActive, navPillInactive, iconBtn } from './styles/theme';
@@ -90,6 +91,9 @@ export default function App() {
   const [animating, setAnimating] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
+  const windowWidth = useWindowWidth();
+  const isWide = windowWidth >= 900;
+  const isMedium = windowWidth >= 600;
   const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership(user);
   const { settings, setSetting } = useSettings(user);
 
@@ -193,22 +197,35 @@ export default function App() {
     <div style={{
       display: 'flex', flexDirection: 'column', height: '100vh',
       background: C.bg, fontFamily: FONT,
-      maxWidth: 480, margin: '0 auto', overflow: 'hidden',
+      maxWidth: 1500, margin: '0 auto', overflow: 'hidden',
     }}>
       <header style={{
         background: C.white, borderBottom: `1px solid ${C.border}`,
-        padding: '12px 16px',
+        padding: isWide ? '12px 32px' : '12px 16px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         flexShrink: 0, zIndex: 100, boxShadow: SHADOW.header,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Logo />
           <div>
-            <div style={{ fontSize: 20, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</div>
+            <div style={{ fontSize: isWide ? 22 : 20, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</div>
             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1.5, color: C.tealDim, textTransform: 'uppercase', marginTop: -1, fontFamily: FONT }}>Ohuhu Marker Tracker</div>
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: isWide ? 16 : 8 }}>
+          {isWide && (
+            <nav style={{ display: 'flex', gap: 6 }}>
+              {NAV.map((n, i) => {
+                const active = pageIdx === i;
+                return (
+                  <button key={n.id} onClick={() => goTo(i)} style={active ? navPillActive : navPillInactive}>
+                    {n.icon(active)}
+                    {n.label}
+                  </button>
+                );
+              })}
+            </nav>
+          )}
           {user && <UserMenu user={user} onSignOut={signOut} />}
           <button onClick={() => setSettingsOpen(true)} style={iconBtn}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -219,52 +236,63 @@ export default function App() {
         </div>
       </header>
 
-      <nav style={{
-        background: C.white, padding: '8px 16px 10px',
-        display: 'flex', gap: 6, justifyContent: 'center',
-        borderBottom: `1px solid ${C.border}`, flexShrink: 0,
-      }}>
-        {NAV.map((n, i) => {
-          const active = pageIdx === i;
-          return (
-            <button
-              key={n.id}
-              onClick={() => goTo(i)}
-              style={active ? navPillActive : navPillInactive}
-            >
-              {n.icon(active)}
-              {n.label}
-            </button>
-          );
-        })}
-      </nav>
+      {!isWide && (
+        <nav style={{
+          background: C.white, padding: '8px 16px 10px',
+          display: 'flex', gap: 6, justifyContent: 'center',
+          borderBottom: `1px solid ${C.border}`, flexShrink: 0,
+        }}>
+          {NAV.map((n, i) => {
+            const active = pageIdx === i;
+            return (
+              <button key={n.id} onClick={() => goTo(i)} style={active ? navPillActive : navPillInactive}>
+                {n.icon(active)}
+                {n.label}
+              </button>
+            );
+          })}
+        </nav>
+      )}
 
       <div
         ref={containerRef}
         style={{ flex: 1, overflow: 'hidden', position: 'relative', touchAction: 'pan-y' }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={() => { drag.current = null; }}
+        onPointerDown={!isWide ? handlePointerDown : undefined}
+        onPointerMove={!isWide ? handlePointerMove : undefined}
+        onPointerUp={!isWide ? handlePointerUp : undefined}
+        onPointerCancel={!isWide ? () => { drag.current = null; } : undefined}
       >
-        <div
-          style={{
-            display: 'flex',
-            width: `${PAGE_COUNT * 100}%`,
-            height: '100%',
-            transform: `translateX(${baseTranslate}%)`,
-            transition: animating
-              ? `transform ${ANIM_DURATION}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
-              : 'none',
-            willChange: 'transform',
-          }}
-        >
-          {pages.map((page, i) => (
-            <div key={i} style={{ width: `${100 / PAGE_COUNT}%`, height: '100%', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
-              {page}
-            </div>
-          ))}
-        </div>
+        {isWide ? (
+          <div style={{ display: 'flex', height: '100%', gap: 0 }}>
+            {pages.map((page, i) => (
+              <div key={i} style={{
+                flex: 1, height: '100%', display: 'flex', flexDirection: 'column',
+                borderRight: i < pages.length - 1 ? `1px solid ${C.border}` : 'none',
+              }}>
+                {page}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              width: `${PAGE_COUNT * 100}%`,
+              height: '100%',
+              transform: `translateX(${baseTranslate}%)`,
+              transition: animating
+                ? `transform ${ANIM_DURATION}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+                : 'none',
+              willChange: 'transform',
+            }}
+          >
+            {pages.map((page, i) => (
+              <div key={i} style={{ width: `${100 / PAGE_COUNT}%`, height: '100%', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
+                {page}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
 
