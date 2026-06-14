@@ -126,7 +126,6 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
                   {!settings?.hideLegacy && legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
                     <div style={{ fontSize: 11, color: C.tealDim, marginTop: 1 }}>({legacy.name})</div>
                   )}
-                  </div>
                 </div>
                 <Badge type={badgeType} />
               </div>
