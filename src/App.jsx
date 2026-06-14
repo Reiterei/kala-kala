@@ -48,38 +48,11 @@ const MIN_SWIPE_PX = 50;
 function Logo() {
   return (
     <div style={{
-      width: 36, height: 36, borderRadius: '50%',
-      background: C.teal,
+      width: 32, height: 32, borderRadius: '50%',
+      background: C.teal, flexShrink: 0,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
     }}>
-      <span style={{
-        fontFamily: FONT,
-        fontSize: 18, fontWeight: 800, color: C.white, lineHeight: 1,
-        userSelect: 'none',
-      }}>K</span>
-    </div>
-  );
-}
-
-function UserMenu({ user, onSignOut }) {
-  const initials = (user.email || '?')[0].toUpperCase();
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <div style={{
-        width: 28, height: 28, borderRadius: '50%',
-        background: C.teal, color: C.white,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: 12, fontWeight: 800, flexShrink: 0, fontFamily: FONT,
-      }}>{initials}</div>
-      <button
-        onClick={onSignOut}
-        style={{
-          background: 'none', border: `1.5px solid ${C.border}`,
-          borderRadius: 8, padding: '4px 10px',
-          color: C.tealDim, fontSize: 11, fontWeight: 700,
-          cursor: 'pointer', fontFamily: FONT,
-        }}
-      >Sign out</button>
+      <span style={{ fontFamily: FONT, fontSize: 16, fontWeight: 800, color: C.white, lineHeight: 1, userSelect: 'none' }}>K</span>
     </div>
   );
 }
@@ -92,7 +65,6 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
   const windowWidth = useWindowWidth();
-  const isWide = windowWidth >= 900;
   const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership(user);
   const { settings, setSetting } = useSettings(user);
 
@@ -199,47 +171,18 @@ export default function App() {
     }}>
       <header style={{
         background: C.white, borderBottom: `1px solid ${C.border}`,
-        padding: isWide ? '12px 32px' : '12px 16px',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '10px 16px',
+        display: 'flex', alignItems: 'center', gap: 10,
         flexShrink: 0, zIndex: 100, boxShadow: SHADOW.header,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        {/* Logo + name */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <Logo />
-          <div>
-            <div style={{ fontSize: isWide ? 22 : 20, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</div>
-            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1.5, color: C.tealDim, textTransform: 'uppercase', marginTop: -1, fontFamily: FONT }}>Ohuhu Marker Tracker</div>
-          </div>
+          <span style={{ fontSize: 18, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: isWide ? 16 : 8 }}>
-          {isWide && (
-            <nav style={{ display: 'flex', gap: 6 }}>
-              {NAV.map((n, i) => {
-                const active = pageIdx === i;
-                return (
-                  <button key={n.id} onClick={() => goTo(i)} style={active ? navPillActive : navPillInactive}>
-                    {n.icon(active)}
-                    {n.label}
-                  </button>
-                );
-              })}
-            </nav>
-          )}
-          {user && <UserMenu user={user} onSignOut={signOut} />}
-          <button onClick={() => setSettingsOpen(true)} style={iconBtn}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-            </svg>
-          </button>
-        </div>
-      </header>
 
-      {!isWide && (
-        <nav style={{
-          background: C.white, padding: '8px 16px 10px',
-          display: 'flex', gap: 6, justifyContent: 'center',
-          borderBottom: `1px solid ${C.border}`, flexShrink: 0,
-        }}>
+        {/* Nav — centered, fills remaining space */}
+        <nav style={{ display: 'flex', gap: 4, flex: 1, justifyContent: 'center', flexWrap: 'nowrap' }}>
           {NAV.map((n, i) => {
             const active = pageIdx === i;
             return (
@@ -250,7 +193,15 @@ export default function App() {
             );
           })}
         </nav>
-      )}
+
+        {/* Settings gear */}
+        <button onClick={() => setSettingsOpen(true)} style={{ ...iconBtn, flexShrink: 0 }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </header>
 
       <div
         ref={containerRef}
@@ -290,7 +241,17 @@ export default function App() {
       />
     )}
 
-    {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} settings={settings} onSetSetting={setSetting} onClearAllOwned={clearAllOwned} onClearAllWishlist={clearAllWishlist} />}
+    {settingsOpen && (
+      <SettingsModal
+        onClose={() => setSettingsOpen(false)}
+        settings={settings}
+        onSetSetting={setSetting}
+        onClearAllOwned={clearAllOwned}
+        onClearAllWishlist={clearAllWishlist}
+        user={user}
+        onSignOut={signOut}
+      />
+    )}
     </>
   );
 }
