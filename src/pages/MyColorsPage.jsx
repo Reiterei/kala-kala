@@ -33,7 +33,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
   const [selected, setSelected] = useState(null);
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
-  const colCount = windowWidth >= 550 ? 2 : 1;
+
   const px = isWide ? 20 : 16;
 
   const filtered = useMemo(() => {
@@ -97,7 +97,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       {/* List */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: `repeat(${colCount}, 1fr)`,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
         gap: 8,
         padding: `0 ${px}px 100px`,
       }}>
