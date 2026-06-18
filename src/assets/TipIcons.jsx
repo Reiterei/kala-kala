@@ -1,7 +1,7 @@
 // AUTO-GENERATED from tips/ SVG assets
 // Usage:
 //   import { TipIcon, getTipIcon } from '../assets/TipIcons';
-//   <TipIcon type="brush" size={24} color="#1ab5b5" />
+//   <TipIcon type="brush" size={24} color="#27ad85" />
 //
 // getTipIcon(tipType) maps a tipType string from the data files to an icon key.
 // Known tipType values from honolulu-sets.js:
@@ -100,10 +100,10 @@ export function getTipIcon(tipType) {
  * Renders a tip SVG icon.
  * @param {string}  type   - icon key (e.g. 'brush', 'chisel', 'fine')
  * @param {number}  size   - width & height in px (default 24)
- * @param {string}  color  - stroke/fill color (default '#1ab5b5')
+ * @param {string}  color  - stroke/fill color (default '#27ad85')
  * @param {object}  style  - optional extra style on the <svg> element
  */
-export function TipIcon({ type = 'brush', size = 24, color = '#1ab5b5', style }) {
+export function TipIcon({ type = 'brush', size = 24, color = '#27ad85', style }) {
   const paths = PATHS[type] ?? PATHS['brush'];
   return (
     <svg
