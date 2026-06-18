@@ -283,7 +283,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
 
         {/* Color mode toggle */}
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ display: 'inline-flex', background: '#fcefd9', borderRadius: 24, padding: 3 }}>
+          <div style={{ display: 'inline-flex', background: C.white, borderRadius: 24, padding: 3 }}>
             {['exact', 'colors'].map((mode, i) => (
               <button key={mode} onClick={() => setColorMode(mode)} style={{
                 padding: '6px 16px', borderRadius: RADIUS.pill, border: 'none',
