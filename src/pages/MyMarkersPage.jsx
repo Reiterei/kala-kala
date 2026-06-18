@@ -147,7 +147,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
       </div>
 
       <div style={{ height: 5, background: C.tealLight, margin: '0 16px', borderRadius: 4, overflow: 'hidden' }}>
-        <div style={{ height: '100%', borderRadius: 4, background: 'linear-gradient(90deg, #1ab5b5, #0fd4a0)', width: `${pct}%`, transition: 'width 0.4s ease' }} />
+        <div style={{ height: '100%', borderRadius: 4, background: 'linear-gradient(90deg, #27ad85, #0fd4a0)', width: `${pct}%`, transition: 'width 0.4s ease' }} />
       </div>
 
       <div style={{ display: 'flex', borderTop: `1px solid ${C.border}`, marginTop: 12 }}>
