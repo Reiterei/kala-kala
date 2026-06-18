@@ -20,10 +20,14 @@ export const C = {
   borderMid: '#fbdcb0',
 
   headerBg:  '#ffd863',
+  tipBg:     '#fff6d9',
 
-  wish:      '#e0392b',
-  wishText:  '#c0584a',
+  wish:      '#d6336c',
+  wishText:  '#a8265a',
   error:     '#e0392b',
+
+  missing:   '#b08858',
+  missingText: '#8a6840',
 };
 
 // ─── Typography ────────────────────────────────────────────────
@@ -159,7 +163,7 @@ export const chipBase = {
 
 export const chipUnowned = {
   ...chipBase, cursor: 'pointer',
-  background: C.bgInput, border: `2px solid ${C.tealMid}`, color: C.tealDim,
+  background: C.white, border: `2px solid ${C.tealMid}`, color: C.tealDim,
 };
 
 export const chipWish = {
