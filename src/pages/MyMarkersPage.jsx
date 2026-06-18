@@ -100,7 +100,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 32, fontFamily: FONT }} onClick={() => setConfirming(false)}>
           <div style={{ background: C.white, borderRadius: RADIUS.xl, padding: '24px 24px 20px', maxWidth: 320, width: '100%' }} onClick={e => e.stopPropagation()}>
             <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 8 }}>Add all markers?</div>
-            <div style={{ fontSize: 13, color: '#6a8a8a', marginBottom: 20 }}>Mark all {seriesColors.length} markers in <strong>{series}</strong> as:</div>
+            <div style={{ fontSize: 13, color: '#a8784a', marginBottom: 20 }}>Mark all {seriesColors.length} markers in <strong>{series}</strong> as:</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <button onClick={() => handleAddAll('owned')} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: 'none', background: C.teal, color: C.white, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Add All to Owned</button>
               <button onClick={() => handleAddAll('wishlist')} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: `1.5px solid ${C.teal}`, background: C.white, color: C.teal, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Add All to Wishlist</button>
@@ -117,7 +117,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
             <div style={{ marginBottom: 4 }}>
               <span style={{
                 fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal,
-                background: '#e3f5ed', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase',
+                background: '#fbe2c0', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase',
               }}>{SERIES_SHORT[series] || series}</span>
             </div>
             <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{series}</div>
@@ -133,7 +133,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
             <TipIcon type={getTipIcon(tipType1)} size={22} />
             <TipIcon type={getTipIcon(tipType2)} size={22} />
           </div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: '#4a6a6a' }}>{tipType1} / {tipType2}</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#7a5430' }}>{tipType1} / {tipType2}</span>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
@@ -147,7 +147,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
       </div>
 
       <div style={{ height: 5, background: C.tealLight, margin: '0 16px', borderRadius: 4, overflow: 'hidden' }}>
-        <div style={{ height: '100%', borderRadius: 4, background: '#00a178', width: `${pct}%`, transition: 'width 0.4s ease' }} />
+        <div style={{ height: '100%', borderRadius: 4, background: C.teal, width: `${pct}%`, transition: 'width 0.4s ease' }} />
       </div>
 
       <div style={{ display: 'flex', borderTop: `1px solid ${C.border}`, marginTop: 12 }}>
@@ -162,14 +162,14 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
           <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.tealDim, textTransform: 'uppercase', lineHeight: 1.6 }}>
             <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
           </span>
-          <span style={{ fontSize: 10, color: '#aababa' }}>({displayColors.length})</span>
+          <span style={{ fontSize: 10, color: '#c9a880' }}>({displayColors.length})</span>
         </button>
       </div>
 
       {expanded && (
         <div style={{ padding: '12px 16px 16px', display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {displayColors.length === 0
-            ? <span style={{ fontSize: 12, color: '#aababa' }}>None to show.</span>
+            ? <span style={{ fontSize: 12, color: '#c9a880' }}>None to show.</span>
             : displayColors.map(code => (
                 <ColorChip key={code} colorCode={code} status={getStatus(code)}
                   onClick={() => { if (swipeConsumed) return; setSelectedColor(colorMap[code] || null); }} />

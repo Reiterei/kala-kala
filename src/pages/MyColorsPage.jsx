@@ -116,7 +116,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
                 background: C.white, borderRadius: RADIUS.lg,
                 padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 12,
                 cursor: 'pointer', border: '1.5px solid',
-                borderColor: owned ? '#cfe9de' : wish ? '#ffccdd' : '#f0f4f4',
+                borderColor: owned ? '#f6cba0' : wish ? '#f5b8a0' : '#fbe8d3',
               }}
             >
               <ColorSwatch color={color} size="md" settings={settings} />

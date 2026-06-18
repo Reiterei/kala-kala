@@ -79,7 +79,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 32, fontFamily: FONT }} onClick={() => setConfirming(false)}>
           <div style={{ background: C.white, borderRadius: RADIUS.xl, padding: '24px 24px 20px', maxWidth: 320, width: '100%' }} onClick={e => e.stopPropagation()}>
             <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 8 }}>Add all markers?</div>
-            <div style={{ fontSize: 13, color: '#6a8a8a', marginBottom: 20 }}>Mark all {set.colors.length} markers in <strong>{set.name}</strong> as:</div>
+            <div style={{ fontSize: 13, color: '#a8784a', marginBottom: 20 }}>Mark all {set.colors.length} markers in <strong>{set.name}</strong> as:</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <button onClick={() => handleAddAll('owned')} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: 'none', background: C.teal, color: C.white, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Add All to Owned</button>
               <button onClick={() => handleAddAll('wishlist')} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: `1.5px solid ${C.teal}`, background: C.white, color: C.teal, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Add All to Wishlist</button>
@@ -94,7 +94,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
             <div style={{ flex: 1 }}>
               <div style={{ marginBottom: 4 }}>
-                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal, background: '#e3f5ed', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal, background: '#fbe2c0', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
                   {SERIES_SHORT[set.series] || set.series}
                 </span>
               </div>
@@ -112,7 +112,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
               <TipIcon type={getTipIcon(set.tipType1)} size={22} />
               <TipIcon type={getTipIcon(set.tipType2)} size={22} />
             </div>
-            <span style={{ fontSize: 11, fontWeight: 600, color: '#4a6a6a' }}>{set.tipType1} / {set.tipType2}</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#7a5430' }}>{set.tipType1} / {set.tipType2}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
@@ -127,7 +127,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
         </div>
 
         <div style={{ height: 5, background: C.tealLight, margin: '0 16px', borderRadius: 4, overflow: 'hidden' }}>
-          <div style={{ height: '100%', borderRadius: 4, background: pct === 100 ? C.teal : '#00a178', width: `${pct}%`, transition: 'width 0.4s ease' }} />
+          <div style={{ height: '100%', borderRadius: 4, background: pct === 100 ? C.teal : C.teal, width: `${pct}%`, transition: 'width 0.4s ease' }} />
         </div>
 
         <div style={{ display: 'flex', borderTop: `1px solid ${C.border}`, marginTop: 12 }}>
@@ -136,7 +136,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
             <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.tealDim, textTransform: 'uppercase', lineHeight: 1.6 }}>
               <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
             </span>
-            <span style={{ fontSize: 10, color: '#aababa' }}>({total})</span>
+            <span style={{ fontSize: 10, color: '#c9a880' }}>({total})</span>
           </button>
           {set.urls && Object.values(set.urls).some(Boolean) && (
             <button onClick={toggleBuyOpen} style={{ background: C.bgCard, border: 'none', borderLeft: `1px solid ${C.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', whiteSpace: 'nowrap' }}>
@@ -283,7 +283,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
 
         {/* Color mode toggle */}
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ display: 'inline-flex', background: '#eef4f4', borderRadius: 24, padding: 3 }}>
+          <div style={{ display: 'inline-flex', background: '#fcefd9', borderRadius: 24, padding: 3 }}>
             {['exact', 'colors'].map((mode, i) => (
               <button key={mode} onClick={() => setColorMode(mode)} style={{
                 padding: '6px 16px', borderRadius: RADIUS.pill, border: 'none',
@@ -335,7 +335,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
               <div style={{ ...dropdownMenu, right: 0, minWidth: 140 }}>
                 {['Most New', '% New', 'Most Wishlist', 'Largest', 'Smallest'].map(opt => (
                   <button key={opt} onClick={() => { setSortBy(opt); setSortDropdownOpen(false); }}
-                    style={{ display: 'block', width: '100%', textAlign: 'left', padding: '7px 14px', border: 'none', background: sortBy === opt ? '#e3f5ed' : 'transparent', color: sortBy === opt ? C.teal : C.textSub, fontSize: 13, fontWeight: sortBy === opt ? 700 : 400, cursor: 'pointer' }}
+                    style={{ display: 'block', width: '100%', textAlign: 'left', padding: '7px 14px', border: 'none', background: sortBy === opt ? '#fbe2c0' : 'transparent', color: sortBy === opt ? C.teal : C.textSub, fontSize: 13, fontWeight: sortBy === opt ? 700 : 400, cursor: 'pointer' }}
                   >{opt}</button>
                 ))}
               </div>
