@@ -1,6 +1,6 @@
 // ─── Brand Colors ──────────────────────────────────────────────
 export const C = {
-  teal:      '#1ab5b5',
+  teal:      '#27ad85',
   tealLight: '#eef2f2',
   tealMid:   '#e0e8e8',
   tealDim:   '#8aabab',
