@@ -1,27 +1,29 @@
 // ─── Brand Colors ──────────────────────────────────────────────
 export const C = {
-  teal:      '#00a178',
-  tealLight: '#ebf0f3',
-  tealMid:   '#e5ebee',
-  tealDim:   '#9aa9b0',
-  tealDeep:  '#4a5a60',
-  tealText:  '#5a6a70',
+  teal:      '#e8590c',
+  tealLight: '#fdebd3',
+  tealMid:   '#fbdcb0',
+  tealDim:   '#e0a868',
+  tealDeep:  '#8a3d10',
+  tealText:  '#a8631f',
 
-  text:      '#1a2a2a',
-  textSub:   '#2a3a3a',
-  textMuted: '#8a9aa0',
+  text:      '#3a2410',
+  textSub:   '#4a3018',
+  textMuted: '#b08858',
 
-  bg:        '#ebf0f3',
-  bgCard:    '#f4f6f8',
-  bgInput:   '#ebf0f3',
+  bg:        '#fdf3e0',
+  bgCard:    '#fff9ee',
+  bgInput:   '#fdebd3',
   white:     '#fff',
 
-  border:    '#ebf0f3',
-  borderMid: '#e5ebee',
+  border:    '#fdebd3',
+  borderMid: '#fbdcb0',
 
-  wish:      '#f48fb1',
-  wishText:  '#c0a0a8',
-  error:     '#e57373',
+  headerBg:  '#ffd863',
+
+  wish:      '#e0392b',
+  wishText:  '#c0584a',
+  error:     '#e0392b',
 };
 
 // ─── Typography ────────────────────────────────────────────────
