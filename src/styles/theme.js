@@ -25,7 +25,7 @@ export const C = {
 };
 
 // ─── Typography ────────────────────────────────────────────────
-export const FONT = "'Nunito', 'Segoe UI', sans-serif";
+export const FONT = "'Montserrat', 'Segoe UI', sans-serif";
 
 // ─── Border Radius ─────────────────────────────────────────────
 export const RADIUS = {
