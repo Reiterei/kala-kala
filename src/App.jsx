@@ -65,6 +65,7 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
   const windowWidth = useWindowWidth();
+  const stacked = windowWidth < 480;
   const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership(user);
   const { settings, setSetting } = useSettings(user);
 
@@ -170,33 +171,33 @@ export default function App() {
       maxWidth: 1000, margin: '0 auto', overflow: 'hidden',
     }}>
       <header style={{
-        background: C.white, borderBottom: `1px solid ${C.border}`,
-        padding: windowWidth < 380 ? '10px 8px' : '10px 16px',
-        display: 'flex', alignItems: 'center', gap: windowWidth < 380 ? 4 : 10,
-        flexShrink: 0, zIndex: 100, boxShadow: SHADOW.header,
+        background: C.white, borderBottom: stacked ? 'none' : `1px solid ${C.border}`,
+        padding: '10px 16px',
+        display: 'flex', alignItems: 'center', gap: 10,
+        flexShrink: 0, zIndex: 100, boxShadow: stacked ? 'none' : SHADOW.header,
       }}>
         {/* Logo + name */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <Logo />
-          {windowWidth >= 380 && (
-            <span style={{ fontSize: 18, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</span>
-          )}
+          <span style={{ fontSize: 18, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</span>
         </div>
 
-        {/* Nav — centered, fills remaining space */}
-        <nav style={{ display: 'flex', gap: windowWidth < 380 ? 2 : 4, flex: 1, justifyContent: 'center', flexWrap: 'nowrap', minWidth: 0 }}>
-          {NAV.map((n, i) => {
-            const active = pageIdx === i;
-            const compact = windowWidth < 380;
-            const style = active ? navPillActive : navPillInactive;
-            return (
-              <button key={n.id} onClick={() => goTo(i)} style={compact ? { ...style, padding: '8px 9px', fontSize: 9, gap: 3 } : style}>
-                {n.icon(active)}
-                {n.label}
-              </button>
-            );
-          })}
-        </nav>
+        {/* Nav — centered, fills remaining space (wide screens only) */}
+        {!stacked && (
+          <nav style={{ display: 'flex', gap: 4, flex: 1, justifyContent: 'center', flexWrap: 'nowrap' }}>
+            {NAV.map((n, i) => {
+              const active = pageIdx === i;
+              return (
+                <button key={n.id} onClick={() => goTo(i)} style={active ? navPillActive : navPillInactive}>
+                  {n.icon(active)}
+                  {n.label}
+                </button>
+              );
+            })}
+          </nav>
+        )}
+
+        {stacked && <div style={{ flex: 1 }} />}
 
         {/* Settings gear */}
         <button onClick={() => setSettingsOpen(true)} style={{ ...iconBtn, flexShrink: 0 }}>
@@ -206,6 +207,25 @@ export default function App() {
           </svg>
         </button>
       </header>
+
+      {stacked && (
+        <nav style={{
+          background: C.white, borderBottom: `1px solid ${C.border}`,
+          padding: '0 10px 10px', display: 'flex', gap: 6,
+          justifyContent: 'center', flexWrap: 'nowrap',
+          flexShrink: 0, zIndex: 100, boxShadow: SHADOW.header,
+        }}>
+          {NAV.map((n, i) => {
+            const active = pageIdx === i;
+            return (
+              <button key={n.id} onClick={() => goTo(i)} style={{ ...(active ? navPillActive : navPillInactive), flex: 1, justifyContent: 'center' }}>
+                {n.icon(active)}
+                {n.label}
+              </button>
+            );
+          })}
+        </nav>
+      )}
 
       <div
         ref={containerRef}
