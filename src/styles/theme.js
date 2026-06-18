@@ -2,7 +2,7 @@
 export const C = {
   teal:      '#00a178',
   tealLight: '#ebf0f3',
-  tealMid:   '#dbe3e8',
+  tealMid:   '#e5ebee',
   tealDim:   '#9aa9b0',
   tealDeep:  '#4a5a60',
   tealText:  '#5a6a70',
@@ -17,7 +17,7 @@ export const C = {
   white:     '#fff',
 
   border:    '#ebf0f3',
-  borderMid: '#dbe3e8',
+  borderMid: '#e5ebee',
 
   wish:      '#f48fb1',
   wishText:  '#c0a0a8',
