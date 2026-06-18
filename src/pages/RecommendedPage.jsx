@@ -94,16 +94,16 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
             <div style={{ flex: 1 }}>
               <div style={{ marginBottom: 4 }}>
-                <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: 1, color: C.teal, background: '#e8fafa', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal, background: '#e8fafa', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
                   {SERIES_SHORT[set.series] || set.series}
                 </span>
               </div>
-              <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.2 }}>{set.name}</div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{set.name}</div>
               {meta && <div style={{ fontSize: 11, color: C.textMuted, marginTop: 2 }}>{meta}</div>}
             </div>
             <div style={{ textAlign: 'right', flexShrink: 0, marginLeft: 12 }}>
-              <div style={{ fontSize: 22, fontWeight: 800, color: C.teal, lineHeight: 1 }}>{pct}%</div>
-              <div style={{ fontSize: 9, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5 }}>Complete</div>
+              <div style={{ fontSize: 22, fontWeight: 700, color: C.teal, lineHeight: 1.2 }}>{pct}%</div>
+              <div style={{ fontSize: 9, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Complete</div>
             </div>
           </div>
 
@@ -116,25 +116,24 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
-            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase' }}>
-              {colorMode === 'exact' ? 'Exact Markers' : 'Colors'} Owned
+            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase', lineHeight: 1.6 }}>
             </span>
             <div style={{ display: 'flex', gap: 10 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, color: C.teal }}>{owned} Owned</span>
-              {wishlist > 0 && <span style={{ fontSize: 11, fontWeight: 700, color: C.wish }}>{wishlist} Wishlist</span>}
-              <span style={{ fontSize: 11, fontWeight: 700, color: C.error }}>{missing} Missing</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.teal, lineHeight: 1.4 }}>{owned} Owned</span>
+              {wishlist > 0 && <span style={{ fontSize: 11, fontWeight: 700, color: C.wish, lineHeight: 1.4 }}>{wishlist} Wishlist</span>}
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.error, lineHeight: 1.4 }}>{missing} Missing</span>
             </div>
           </div>
         </div>
 
         <div style={{ height: 5, background: C.tealLight, margin: '0 16px', borderRadius: 4, overflow: 'hidden' }}>
-          <div style={{ height: '100%', borderRadius: 4, background: pct === 100 ? C.teal : 'linear-gradient(90deg, #27ad85, #0fd4a0)', width: `${pct}%`, transition: 'width 0.4s ease' }} />
+          <div style={{ height: '100%', borderRadius: 4, background: pct === 100 ? C.teal : '#00a178', width: `${pct}%`, transition: 'width 0.4s ease' }} />
         </div>
 
         <div style={{ display: 'flex', borderTop: `1px solid ${C.border}`, marginTop: 12 }}>
-          <button onClick={() => setConfirming(true)} style={{ padding: '8px 16px', background: 'none', border: 'none', borderRight: `1px solid ${C.border}`, cursor: 'pointer', fontSize: 12, fontWeight: 700, color: C.teal, whiteSpace: 'nowrap' }}>+ Add All</button>
+          <button onClick={() => setConfirming(true)} style={{ padding: '8px 16px', background: 'none', border: 'none', borderRight: `1px solid ${C.border}`, cursor: 'pointer', fontSize: 12, fontWeight: 700, color: C.teal, lineHeight: 1.4, whiteSpace: 'nowrap' }}>+ Add All</button>
           <button onClick={toggleExpanded} style={{ flex: 1, background: C.bgCard, border: 'none', padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', textAlign: 'left' }}>
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.tealDim, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.tealDim, textTransform: 'uppercase', lineHeight: 1.6 }}>
               <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
             </span>
             <span style={{ fontSize: 10, color: '#aababa' }}>({total})</span>
@@ -301,7 +300,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
           {/* Series dropdown */}
           <div style={{ position: 'relative' }} ref={seriesDropdownRef}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-              <span style={{ fontSize: 10, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5 }}>Series</span>
+              <span style={{ fontSize: 10, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Series</span>
               <button onClick={() => setSeriesDropdownOpen(o => !o)} style={{ fontSize: 12, fontWeight: 600, color: C.text, border: 'none', background: 'transparent', cursor: 'pointer', outline: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
                 {seriesFilter.size === 0 ? 'All Markers' : seriesFilter.size === 1 ? [...seriesFilter][0] : `${seriesFilter.size} Selected`}
                 <span style={{ fontSize: 10, color: C.textMuted }}>{seriesDropdownOpen ? '▲' : '▼'}</span>
@@ -326,7 +325,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
           {/* Sort dropdown */}
           <div style={{ position: 'relative' }} ref={sortDropdownRef}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-              <span style={{ fontSize: 10, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5 }}>Sort</span>
+              <span style={{ fontSize: 10, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Sort</span>
               <button onClick={() => setSortDropdownOpen(o => !o)} style={{ fontSize: 12, fontWeight: 600, color: C.text, border: 'none', background: 'transparent', cursor: 'pointer', outline: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
                 {sortBy}
                 <span style={{ fontSize: 10, color: C.textMuted }}>{sortDropdownOpen ? '▲' : '▼'}</span>
