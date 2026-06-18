@@ -171,22 +171,26 @@ export default function App() {
     }}>
       <header style={{
         background: C.white, borderBottom: `1px solid ${C.border}`,
-        padding: '10px 16px',
-        display: 'flex', alignItems: 'center', gap: 10,
+        padding: windowWidth < 380 ? '10px 8px' : '10px 16px',
+        display: 'flex', alignItems: 'center', gap: windowWidth < 380 ? 4 : 10,
         flexShrink: 0, zIndex: 100, boxShadow: SHADOW.header,
       }}>
         {/* Logo + name */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <Logo />
-          <span style={{ fontSize: 18, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</span>
+          {windowWidth >= 380 && (
+            <span style={{ fontSize: 18, fontWeight: 800, color: C.text, letterSpacing: -0.3, fontFamily: FONT }}>kala-kala</span>
+          )}
         </div>
 
         {/* Nav — centered, fills remaining space */}
-        <nav style={{ display: 'flex', gap: 4, flex: 1, justifyContent: 'center', flexWrap: 'nowrap' }}>
+        <nav style={{ display: 'flex', gap: windowWidth < 380 ? 2 : 4, flex: 1, justifyContent: 'center', flexWrap: 'nowrap', minWidth: 0 }}>
           {NAV.map((n, i) => {
             const active = pageIdx === i;
+            const compact = windowWidth < 380;
+            const style = active ? navPillActive : navPillInactive;
             return (
-              <button key={n.id} onClick={() => goTo(i)} style={active ? navPillActive : navPillInactive}>
+              <button key={n.id} onClick={() => goTo(i)} style={compact ? { ...style, padding: '8px 9px', fontSize: 9, gap: 3 } : style}>
                 {n.icon(active)}
                 {n.label}
               </button>
