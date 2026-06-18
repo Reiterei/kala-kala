@@ -122,7 +122,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
               <ColorSwatch color={color} size="md" settings={settings} />
               <div style={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: C.text }}>{color.name}</div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.3 }}>{color.name}</div>
                   {!settings?.hideLegacy && legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
                     <div style={{ fontSize: 11, color: C.tealDim, marginTop: 1 }}>({legacy.name})</div>
                   )}
