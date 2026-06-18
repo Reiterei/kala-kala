@@ -88,7 +88,7 @@ export const pillInactive = {
 export const navPillActive = {
   padding: '8px 15px', borderRadius: 22,
   border: 'none', background: C.teal, color: C.white,
-  fontSize: 11, fontWeight: 800, cursor: 'pointer',
+  fontSize: 11, fontWeight: 700, lineHeight: 1.4, cursor: 'pointer',
   transition: 'all 0.18s',
   display: 'flex', alignItems: 'center', gap: 5,
   letterSpacing: 0.8, textTransform: 'uppercase', fontFamily: FONT,
@@ -99,7 +99,7 @@ export const navPillInactive = {
   padding: '8px 15px', borderRadius: 22,
   border: `1.5px solid ${C.tealLight}`,
   background: C.bg, color: C.tealText,
-  fontSize: 11, fontWeight: 800, cursor: 'pointer',
+  fontSize: 11, fontWeight: 700, lineHeight: 1.4, cursor: 'pointer',
   transition: 'all 0.18s',
   display: 'flex', alignItems: 'center', gap: 5,
   letterSpacing: 0.8, textTransform: 'uppercase', fontFamily: FONT,
