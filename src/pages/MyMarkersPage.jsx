@@ -128,7 +128,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
           </div>
         </div>
 
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: C.bgInput, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: C.tipBg, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: C.tealDeep }}>
             <TipIcon type={getTipIcon(tipType1)} size={22} />
             <TipIcon type={getTipIcon(tipType2)} size={22} />
@@ -141,7 +141,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
           <div style={{ display: 'flex', gap: 10 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: C.teal, lineHeight: 1.4 }}>{owned} Owned</span>
             {wishCodes.length > 0 && <span style={{ fontSize: 11, fontWeight: 700, color: C.wish, lineHeight: 1.4 }}>{wishCodes.length} Wishlist</span>}
-            <span style={{ fontSize: 11, fontWeight: 700, color: C.error, lineHeight: 1.4 }}>{missing} Missing</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: C.missingText, lineHeight: 1.4 }}>{missing} Missing</span>
           </div>
         </div>
       </div>

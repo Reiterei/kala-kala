@@ -107,7 +107,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
             </div>
           </div>
 
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: C.bgInput, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: C.tipBg, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
             <div style={{ display: 'flex', alignItems: 'center', color: C.tealDeep }}>
               <TipIcon type={getTipIcon(set.tipType1)} size={22} />
               <TipIcon type={getTipIcon(set.tipType2)} size={22} />
