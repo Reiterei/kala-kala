@@ -13,7 +13,7 @@ const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 const BADGE = {
   owned:    { color: C.teal,    border: `1.5px solid ${C.teal}`,    label: 'OWNED'    },
   wishlist: { color: C.wish,    border: `1.5px solid ${C.wish}`,    label: 'WISHLIST' },
-  unowned:  { color: '#aababa', border: '1.5px solid #dde8e8',      label: 'UNOWNED'  },
+  unowned:  { color: C.tealDim, border: `1.5px solid ${C.tealMid}`,  label: 'UNOWNED'  },
 };
 
 function Badge({ type }) {
@@ -116,7 +116,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
                 background: C.white, borderRadius: RADIUS.lg,
                 padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 12,
                 cursor: 'pointer', border: '1.5px solid',
-                borderColor: owned ? '#d4f0f0' : wish ? '#ffccdd' : '#f0f4f4',
+                borderColor: owned ? '#cfe9de' : wish ? '#ffccdd' : '#f0f4f4',
               }}
             >
               <ColorSwatch color={color} size="md" settings={settings} />

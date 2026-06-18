@@ -117,7 +117,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
             <div style={{ marginBottom: 4 }}>
               <span style={{
                 fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal,
-                background: '#e8fafa', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase',
+                background: '#e3f5ed', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase',
               }}>{SERIES_SHORT[series] || series}</span>
             </div>
             <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{series}</div>

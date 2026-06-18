@@ -94,7 +94,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
             <div style={{ flex: 1 }}>
               <div style={{ marginBottom: 4 }}>
-                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal, background: '#e8fafa', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal, background: '#e3f5ed', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
                   {SERIES_SHORT[set.series] || set.series}
                 </span>
               </div>
@@ -335,7 +335,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
               <div style={{ ...dropdownMenu, right: 0, minWidth: 140 }}>
                 {['Most New', '% New', 'Most Wishlist', 'Largest', 'Smallest'].map(opt => (
                   <button key={opt} onClick={() => { setSortBy(opt); setSortDropdownOpen(false); }}
-                    style={{ display: 'block', width: '100%', textAlign: 'left', padding: '7px 14px', border: 'none', background: sortBy === opt ? '#f0fafa' : 'transparent', color: sortBy === opt ? C.teal : C.textSub, fontSize: 13, fontWeight: sortBy === opt ? 700 : 400, cursor: 'pointer' }}
+                    style={{ display: 'block', width: '100%', textAlign: 'left', padding: '7px 14px', border: 'none', background: sortBy === opt ? '#e3f5ed' : 'transparent', color: sortBy === opt ? C.teal : C.textSub, fontSize: 13, fontWeight: sortBy === opt ? 700 : 400, cursor: 'pointer' }}
                   >{opt}</button>
                 ))}
               </div>
