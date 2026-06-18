@@ -171,7 +171,7 @@ export default function App() {
       maxWidth: 1000, margin: '0 auto', overflow: 'hidden',
     }}>
       <header style={{
-        background: C.white, borderBottom: stacked ? 'none' : `1px solid ${C.border}`,
+        background: C.headerBg, borderBottom: stacked ? 'none' : `1px solid ${C.border}`,
         padding: '10px 16px',
         display: 'flex', alignItems: 'center', gap: 10,
         flexShrink: 0, zIndex: 100, boxShadow: stacked ? 'none' : SHADOW.header,
@@ -210,7 +210,7 @@ export default function App() {
 
       {stacked && (
         <nav style={{
-          background: C.white, borderBottom: `1px solid ${C.border}`,
+          background: C.headerBg, borderBottom: `1px solid ${C.border}`,
           padding: '0 10px 10px', display: 'flex', gap: 6,
           justifyContent: 'center', flexWrap: 'nowrap',
           flexShrink: 0, zIndex: 100, boxShadow: SHADOW.header,
