@@ -608,6 +608,22 @@ export const honoluluSets = [
     colors: ["Y210", "Y216", "Y34", "Y43", "Y48", "Y415", "YR02", "YR04", "YR09", "YR17", "YR25", "YR29", "YR33", "YR34", "YR37", "YR38", "YR39", "YR313", "YR47", "YR57", "YR515", "E47", "E49", "E59", "E511", "E513", "E514", "E515", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16"],
   },
   {
+    id: "honolulu_bundle_38",
+    name: "Honolulu B 48",
+    series: "Honolulu B",
+    edition: "Coco Wyo",
+    version: null,
+    count: 48,
+    tipType1: "Brush",  tipType2: "Fine",
+    urls: {
+      ohuhu: null,
+      michaels: null,
+      walmart: null,
+      amazon: null,
+    },
+    colors: ["Y02", "Y06", "Y26", "Y28", "Y55", "Y59", "Y62", "YR07", "YR19", "YR52", "E46", "E58", "E85", "R015", "R15", "R22", "R25", "R210", "R412", "RV04", "RV23", "RV28", "RV34", "RV35", "V14", "V22", "V34", "V38", "V46", "BV32", "BV35", "BV38", "B02", "B06", "B28", "BG09", "BG21", "BG24", "G34", "G41", "G49", "YG06", "YG36", "YG66", "CG02", "CG24", "BGY02", "YGY11"],
+  },
+  {
     id: "honolulu_bundle_39",
     name: "Honolulu 36 - Grey Tones",
     series: "Honolulu",
