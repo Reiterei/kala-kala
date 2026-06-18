@@ -87,7 +87,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               const isWish = status === 'wishlist';
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
-                <div key={series} style={{ borderBottom: '1px solid #f0f4f4' }}>
+                <div key={series} style={{ borderBottom: '1px solid #fbe8d3' }}>
                   <div style={{ display: 'flex', alignItems: 'center', padding: '10px 20px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: C.tealDeep }}>
                       <TipIcon type={getTipIcon(tipType1)} size={22} />
@@ -120,7 +120,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                         <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase' }}>
                           <span style={{ fontSize: 13 }}>{foundOpen[series] ? '▾' : '▸'}</span> Found In
                         </span>
-                        <span style={{ fontSize: 10, color: '#aababa' }}>({seriesSets.length})</span>
+                        <span style={{ fontSize: 10, color: '#c9a880' }}>({seriesSets.length})</span>
                       </button>
                       {foundOpen[series] && (
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, paddingBottom: 12 }}>

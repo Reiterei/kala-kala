@@ -110,7 +110,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             </div>
           ) : (
             <div style={{
-              background: '#fff5f5', border: `1.5px solid ${C.error}`,
+              background: '#fdeee8', border: `1.5px solid ${C.error}`,
               borderRadius: RADIUS.md, padding: '12px 14px',
               display: 'flex', flexDirection: 'column', gap: 10,
             }}>
@@ -144,7 +144,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             </div>
           ) : (
             <div style={{
-              background: '#fff5f5', border: `1.5px solid ${C.error}`,
+              background: '#fdeee8', border: `1.5px solid ${C.error}`,
               borderRadius: RADIUS.md, padding: '12px 14px',
               display: 'flex', flexDirection: 'column', gap: 10,
             }}>

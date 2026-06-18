@@ -9,7 +9,7 @@ export function ColorSwatch({ color, size = 'md', settings }) {
   const g = parseInt(color.hex.substring(2, 4), 16);
   const b = parseInt(color.hex.substring(4, 6), 16);
   const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  const textColor = lum > 0.55 ? '#3a4a4a' : '#ffffff';
+  const textColor = lum > 0.55 ? '#3a2410' : '#ffffff';
 
   const sizes = {
     sm: { width: 44, height: 44, fontSize: 11, subSize: 8 },
