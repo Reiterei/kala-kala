@@ -11,7 +11,7 @@ export const C = {
   textSub:   '#4a3018',
   textMuted: '#b08858',
 
-  bg:        '#fdf3e0',
+  bg:        '#fef8ec',
   bgCard:    '#fff9ee',
   bgInput:   '#fdebd3',
   white:     '#fff',
