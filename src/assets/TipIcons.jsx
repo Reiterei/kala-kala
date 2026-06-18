@@ -103,7 +103,7 @@ export function getTipIcon(tipType) {
  * @param {string}  color  - stroke/fill color (default '#27ad85')
  * @param {object}  style  - optional extra style on the <svg> element
  */
-export function TipIcon({ type = 'brush', size = 24, color = '#27ad85', style }) {
+export function TipIcon({ type = 'brush', size = 24, color = '#e8590c', style }) {
   const paths = PATHS[type] ?? PATHS['brush'];
   return (
     <svg
