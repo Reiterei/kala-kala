@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { honoluluSets } from '../data/honolulu-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
@@ -6,7 +7,7 @@ import { TipIcon, getTipIcon } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
-import { C, RADIUS, scrollPage, pillActive, pillInactive, chipBase, chipUnowned, chipWish } from '../styles/theme';
+import { C, FONT, RADIUS, scrollPage, pillActive, pillInactive, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
 const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 const colorMap = Object.fromEntries(allColors.map(c => [c.code, c]));
@@ -58,6 +59,7 @@ function ColorChip({ colorCode, status, onClick }) {
 function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, hideJapanese, hideDiscontinued, settings }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [confirming, setConfirming] = useState(false);
 
   const seriesColors = useMemo(() => {
     const all = getColorsForSeries(series);
@@ -84,8 +86,31 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
 
   const getStatus = (code) => ownership[code]?.[series] ?? null;
 
+  const handleAddAll = (status) => {
+    seriesColors.forEach(code => {
+      if (status === 'wishlist' && ownership[code]?.[series] === 'owned') return;
+      if (ownership[code]?.[series] !== status) onSetStatus(code, series, status);
+    });
+    setConfirming(false);
+  };
+
   return (
-    <div style={{ background: C.white, borderRadius: RADIUS.lg, border: `1.5px solid ${C.border}`, marginBottom: 12, overflow: 'hidden' }}>
+    <>
+      {confirming && createPortal(
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 32, fontFamily: FONT }} onClick={() => setConfirming(false)}>
+          <div style={{ background: C.white, borderRadius: RADIUS.xl, padding: '24px 24px 20px', maxWidth: 320, width: '100%' }} onClick={e => e.stopPropagation()}>
+            <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 8 }}>Add all markers?</div>
+            <div style={{ fontSize: 13, color: '#6a8a8a', marginBottom: 20 }}>Mark all {seriesColors.length} markers in <strong>{series}</strong> as:</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <button onClick={() => handleAddAll('owned')} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: 'none', background: C.teal, color: C.white, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Add All to Owned</button>
+              <button onClick={() => handleAddAll('wishlist')} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: `1.5px solid ${C.teal}`, background: C.white, color: C.teal, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Add All to Wishlist</button>
+              <button onClick={() => setConfirming(false)} style={{ width: '100%', padding: '10px', borderRadius: RADIUS.md, border: `1.5px solid ${C.borderMid}`, background: C.white, color: C.tealText, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      , document.body)}
+
+      <div style={{ background: C.white, borderRadius: RADIUS.lg, border: `1.5px solid ${C.border}`, marginBottom: 12, overflow: 'hidden' }}>
       <div style={{ padding: '14px 16px 0' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div style={{ flex: 1 }}>
@@ -125,19 +150,21 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
         <div style={{ height: '100%', borderRadius: 4, background: 'linear-gradient(90deg, #1ab5b5, #0fd4a0)', width: `${pct}%`, transition: 'width 0.4s ease' }} />
       </div>
 
-      <button
-        onClick={() => setExpanded(e => !e)}
-        style={{
-          width: '100%', background: C.bgCard, border: 'none',
-          borderTop: `1px solid ${C.border}`, marginTop: 12, padding: '8px 16px',
-          display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', textAlign: 'left',
-        }}
-      >
-        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.tealDim, textTransform: 'uppercase' }}>
-          <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
-        </span>
-        <span style={{ fontSize: 10, color: '#aababa' }}>({displayColors.length})</span>
-      </button>
+      <div style={{ display: 'flex', borderTop: `1px solid ${C.border}`, marginTop: 12 }}>
+        <button onClick={() => setConfirming(true)} style={{ padding: '8px 16px', background: 'none', border: 'none', borderRight: `1px solid ${C.border}`, cursor: 'pointer', fontSize: 12, fontWeight: 700, color: C.teal, whiteSpace: 'nowrap' }}>+ Add All</button>
+        <button
+          onClick={() => setExpanded(e => !e)}
+          style={{
+            flex: 1, background: C.bgCard, border: 'none',
+            padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', textAlign: 'left',
+          }}
+        >
+          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.tealDim, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
+          </span>
+          <span style={{ fontSize: 10, color: '#aababa' }}>({displayColors.length})</span>
+        </button>
+      </div>
 
       {expanded && (
         <div style={{ padding: '12px 16px 16px', display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -160,6 +187,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
         />
       )}
     </div>
+    </>
   );
 }
 
