@@ -1,23 +1,23 @@
 // ─── Brand Colors ──────────────────────────────────────────────
 export const C = {
-  teal:      '#27ad85',
-  tealLight: '#eef2f2',
-  tealMid:   '#e0e8e8',
-  tealDim:   '#8aabab',
-  tealDeep:  '#4a7c7c',
-  tealText:  '#5a7a7a',
+  teal:      '#00a178',
+  tealLight: '#ebf0f3',
+  tealMid:   '#dbe3e8',
+  tealDim:   '#9aa9b0',
+  tealDeep:  '#4a5a60',
+  tealText:  '#5a6a70',
 
   text:      '#1a2a2a',
   textSub:   '#2a3a3a',
-  textMuted: '#8a9a9a',
+  textMuted: '#8a9aa0',
 
-  bg:        '#f7fafa',
-  bgCard:    '#f8fbfb',
-  bgInput:   '#f4f7f7',
+  bg:        '#ebf0f3',
+  bgCard:    '#f4f6f8',
+  bgInput:   '#ebf0f3',
   white:     '#fff',
 
-  border:    '#eef2f2',
-  borderMid: '#e0e8e8',
+  border:    '#ebf0f3',
+  borderMid: '#dbe3e8',
 
   wish:      '#f48fb1',
   wishText:  '#c0a0a8',
