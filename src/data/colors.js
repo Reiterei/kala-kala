@@ -2,19 +2,7 @@
 // DO NOT edit manually.
 
 export const colors = [
-  {
-    "sort": 999,
-    "name": "Colorless Blender",
-    "code": "0",
-    "hex": "ffffff",
-    "legacy": {
-      "honolulu": null,
-      "oahu": null,
-      "kaala": null,
-      "original": null
-    }
-  },
-    {
+      {
     "sort": 1,
     "name": "Lemon Mist",
     "code": "Y00",
@@ -9156,6 +9144,18 @@ export const colors = [
         "name": "Green Bice",
         "code": "GY163"
       },
+      "oahu": null,
+      "kaala": null,
+      "original": null
+    }
+  },
+  {
+    "sort": 999,
+    "name": "Colorless Blender",
+    "code": "0",
+    "hex": "ffffff",
+    "legacy": {
+      "honolulu": null,
       "oahu": null,
       "kaala": null,
       "original": null
