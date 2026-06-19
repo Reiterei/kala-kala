@@ -120,14 +120,14 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
           </div>
           <div style={{ textAlign: 'right', flexShrink: 0, marginLeft: 12 }}>
             <div style={{ fontSize: 22, fontWeight: 700, color: cc.accent, lineHeight: 1.2 }}>{pct}%</div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Complete</div>
+            <div style={{ fontSize: 9, fontWeight: 700, color: cc.accentSoft, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Complete</div>
           </div>
         </div>
 
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent }}>
-            <TipIcon type={getTipIcon(tipType1)} size={22} />
-            <TipIcon type={getTipIcon(tipType2)} size={22} />
+            <TipIcon type={getTipIcon(tipType1)} size={22} color={cc.accent} />
+            <TipIcon type={getTipIcon(tipType2)} size={22} color={cc.accent} />
           </div>
           <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{tipType1} / {tipType2}</span>
         </div>

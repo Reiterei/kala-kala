@@ -95,18 +95,18 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
                 </span>
               </div>
               <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{set.name}</div>
-              {meta && <div style={{ fontSize: 11, color: C.textMuted, marginTop: 2 }}>{meta}</div>}
+              {meta && <div style={{ fontSize: 11, color: cc.accentSoft, marginTop: 2 }}>{meta}</div>}
             </div>
             <div style={{ textAlign: 'right', flexShrink: 0, marginLeft: 12 }}>
               <div style={{ fontSize: 22, fontWeight: 700, color: cc.accent, lineHeight: 1.2 }}>{pct}%</div>
-              <div style={{ fontSize: 9, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Complete</div>
+              <div style={{ fontSize: 9, fontWeight: 700, color: cc.accentSoft, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Complete</div>
             </div>
           </div>
 
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
             <div style={{ display: 'flex', alignItems: 'center', color: cc.accent }}>
-              <TipIcon type={getTipIcon(set.tipType1)} size={22} />
-              <TipIcon type={getTipIcon(set.tipType2)} size={22} />
+              <TipIcon type={getTipIcon(set.tipType1)} size={22} color={cc.accent} />
+              <TipIcon type={getTipIcon(set.tipType2)} size={22} color={cc.accent} />
             </div>
             <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{set.tipType1} / {set.tipType2}</span>
           </div>
