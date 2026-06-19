@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getLegacyList, getSeriesForColor } from '../utils/colorUtils';
-import { honoluluSets } from '../data/honolulu-sets';
+import { allSets } from '../data/all-sets';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
 import { isUnavailableSet } from '../hooks/useSettings';
 import { C, FONT, RADIUS, SHADOW, statusOwned, statusOwnedOff, statusWish, statusWishOff } from '../styles/theme';
 
-const ALL_SETS = honoluluSets;
+const ALL_SETS = allSets;
 
 function getDistinctSeries() {
   const seen = new Map();
