@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { getLegacyDisplay, getSeriesForColor } from '../utils/colorUtils';
+import { getLegacyList, getSeriesForColor } from '../utils/colorUtils';
 import { honoluluSets } from '../data/honolulu-sets';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
 import { isUnavailableSet } from '../hooks/useSettings';
@@ -20,7 +20,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const [foundOpen, setFoundOpen] = useState({});
   if (!color) return null;
 
-  const legacy = getLegacyDisplay(color);
+  const legacyList = getLegacyList(color);
   const seriesInColor = getSeriesForColor(color.code, ALL_SETS);
   const allSeries = getDistinctSeries();
   const relevantSeries = allSeries.filter(s => seriesInColor.find(sc => sc.series === s.series));
@@ -71,9 +71,14 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           <p style={{ margin: '4px 0 0', fontSize: 13, color: textColSub }}>
             Color Code: <strong>{color.code}</strong>
           </p>
-          {!settings?.hideLegacy && legacy && (
+          {!settings?.hideLegacy && legacyList.length > 0 && (
             <p style={{ margin: '2px 0 0', fontSize: 12, color: textColSub }}>
-              Legacy Code: <strong>{legacy.code}</strong>&nbsp;&nbsp;Legacy Name: <strong>{legacy.name}</strong>
+              {legacyList.map((l, i) => (
+                <span key={l.set}>
+                  {i > 0 && <br />}
+                  {l.label}: <strong>{l.code}</strong>&nbsp;&nbsp;{l.name}
+                </span>
+              ))}
             </p>
           )}
         </div>

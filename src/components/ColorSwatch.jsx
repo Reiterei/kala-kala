@@ -1,8 +1,8 @@
-import { getLegacyDisplay } from '../utils/colorUtils';
+import { getLegacyList } from '../utils/colorUtils';
 import { RADIUS, SHADOW } from '../styles/theme';
 
 export function ColorSwatch({ color, size = 'md', settings }) {
-  const legacy = getLegacyDisplay(color);
+  const legacyList = getLegacyList(color);
   const bg = `#${color.hex}`;
 
   const r = parseInt(color.hex.substring(0, 2), 16);
@@ -28,10 +28,14 @@ export function ColorSwatch({ color, size = 'md', settings }) {
       <span style={{ color: textColor, fontWeight: 700, fontSize: s.fontSize, lineHeight: 1.2, letterSpacing: 0.3 }}>
         {color.code}
       </span>
-      {!settings?.hideLegacy && legacy?.code && (
-        <span style={{ color: textColor, fontSize: s.subSize, opacity: 0.75, lineHeight: 1.2 }}>
-          {legacy.code}
-        </span>
+      {!settings?.hideLegacy && legacyList.length > 0 && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 1 }}>
+          {legacyList.map((l) => (
+            <span key={l.set} style={{ color: textColor, fontSize: s.subSize, opacity: 0.75, lineHeight: 1.2 }}>
+              {l.label}: {l.code}
+            </span>
+          ))}
+        </div>
       )}
     </div>
   );
