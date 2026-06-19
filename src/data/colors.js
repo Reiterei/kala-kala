@@ -3,7 +3,7 @@
 
 export const colors = [
   {
-    "sort": 0,
+    "sort": 999,
     "name": "Colorless Blender",
     "code": "0",
     "hex": "ffffff",
