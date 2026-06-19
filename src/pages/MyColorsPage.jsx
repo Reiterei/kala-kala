@@ -106,7 +106,6 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           const entries = Object.values(ownership[color.code] || {});
           const owned = entries.includes('owned');
           const wish = entries.includes('wishlist');
-          const legacy = getLegacyDisplay(color);
           const badgeType = owned ? 'owned' : wish ? 'wishlist' : 'unowned';
 
           return (
@@ -124,9 +123,6 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
               <div style={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                 <div style={{ minWidth: 0 }}>
                   <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.3 }}>{color.name}</div>
-                  {legacy && legacy.name.toLowerCase() !== color.name.toLowerCase() && (
-                    <div style={{ fontSize: 11, color: C.tealDim, marginTop: 1 }}>({legacy.name})</div>
-                  )}
                 </div>
                 <Badge type={badgeType} />
               </div>
