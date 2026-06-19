@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { allSets, SERIES_SHORT } from '../data/all-sets';
+import { allSets, SERIES_SHORT, getSeriesBadgeColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
@@ -111,8 +111,8 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
           <div style={{ flex: 1 }}>
             <div style={{ marginBottom: 4 }}>
               <span style={{
-                fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal,
-                background: '#fbe2c0', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase',
+                fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: getSeriesBadgeColors(series).text,
+                background: getSeriesBadgeColors(series).bg, borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase',
               }}>{SERIES_SHORT[series] || series}</span>
             </div>
             <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{series}</div>

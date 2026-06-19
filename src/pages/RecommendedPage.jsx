@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { allSets, SERIES_ORDER, SERIES_SHORT } from '../data/all-sets';
+import { allSets, SERIES_ORDER, SERIES_SHORT, getSeriesBadgeColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
@@ -89,7 +89,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
             <div style={{ flex: 1 }}>
               <div style={{ marginBottom: 4 }}>
-                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: C.teal, background: '#fbe2c0', borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: getSeriesBadgeColors(set.series).text, background: getSeriesBadgeColors(set.series).bg, borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
                   {SERIES_SHORT[set.series] || set.series}
                 </span>
               </div>
