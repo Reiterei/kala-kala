@@ -1,8 +1,6 @@
-import { getLegacyList } from '../utils/colorUtils';
 import { RADIUS, SHADOW } from '../styles/theme';
 
-export function ColorSwatch({ color, size = 'md', settings }) {
-  const legacyList = getLegacyList(color);
+export function ColorSwatch({ color, size = 'md' }) {
   const bg = `#${color.hex}`;
 
   const r = parseInt(color.hex.substring(0, 2), 16);
@@ -12,8 +10,8 @@ export function ColorSwatch({ color, size = 'md', settings }) {
   const textColor = lum > 0.55 ? '#3a2410' : '#ffffff';
 
   const sizes = {
-    sm: { width: 44, height: 44, fontSize: 11, subSize: 8 },
-    md: { width: 54, height: 54, fontSize: 13, subSize: 10 },
+    sm: { width: 44, height: 44, fontSize: 11 },
+    md: { width: 54, height: 54, fontSize: 13 },
   };
   const s = sizes[size] || sizes.md;
 
@@ -28,11 +26,6 @@ export function ColorSwatch({ color, size = 'md', settings }) {
       <span style={{ color: textColor, fontWeight: 700, fontSize: s.fontSize, lineHeight: 1.2, letterSpacing: 0.3 }}>
         {color.code}
       </span>
-      {!settings?.hideLegacy && legacyList.length > 0 && (
-        <span style={{ color: textColor, fontSize: s.subSize, opacity: 0.75, lineHeight: 1.2, marginTop: 1 }}>
-          {[...new Set(legacyList.map((l) => l.code))].join(' / ')}
-        </span>
-      )}
     </div>
   );
 }

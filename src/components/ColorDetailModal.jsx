@@ -71,7 +71,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           <p style={{ margin: '4px 0 0', fontSize: 13, color: textColSub }}>
             Color Code: <strong>{color.code}</strong>
           </p>
-          {!settings?.hideLegacy && legacyList.length > 0 && (
+          {legacyList.length > 0 && (
             <p style={{ margin: '2px 0 0', fontSize: 12, color: textColSub }}>
               {legacyList.map((l, i) => (
                 <span key={l.set}>
