@@ -30,7 +30,7 @@ export function ColorSwatch({ color, size = 'md', settings }) {
       </span>
       {!settings?.hideLegacy && legacyList.length > 0 && (
         <span style={{ color: textColor, fontSize: s.subSize, opacity: 0.75, lineHeight: 1.2, marginTop: 1 }}>
-          {legacyList.map((l) => l.code).join(' / ')}
+          {[...new Set(legacyList.map((l) => l.code))].join(' / ')}
         </span>
       )}
     </div>
