@@ -51,9 +51,10 @@ function mix(hex, amount) {
 export function getSeriesCardColors(series) {
   const { bg, text } = getSeriesBadgeColors(series);
   return {
-    cardBg: mix(bg, 0.10),
-    border: mix(bg, 0.55),
+    cardBg: mix(bg, 0.05),
+    border: mix(bg, 0.45),
     accent: text,
+    accentSoft: mix(text, 0.65),
     track: mix(bg, 0.30),
   };
 }
