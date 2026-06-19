@@ -37,3 +37,23 @@ const DEFAULT_BADGE_COLOR = { bg: '#fbe2c0', text: '#a8784a' };
 export function getSeriesBadgeColors(series) {
   return SERIES_BADGE_COLORS[series] || DEFAULT_BADGE_COLOR;
 }
+
+// Derives a near-white card tint + matching border/accent from a badge bg color.
+// mix(): blends a hex color toward white by `amount` (0 = white, 1 = full color).
+function mix(hex, amount) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const blend = (c) => Math.round(c * amount + 255 * (1 - amount));
+  return `rgb(${blend(r)}, ${blend(g)}, ${blend(b)})`;
+}
+
+export function getSeriesCardColors(series) {
+  const { bg, text } = getSeriesBadgeColors(series);
+  return {
+    cardBg: mix(bg, 0.10),
+    border: mix(bg, 0.55),
+    accent: text,
+    track: mix(bg, 0.30),
+  };
+}
