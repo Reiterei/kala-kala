@@ -53,7 +53,7 @@ export const molokaiSets = [
     series: "Molokai",
     edition: null,
     version: null,
-    count: 5,
+    count: 6,
     tipType1: "Extra-Wide",  tipType2: null,
     urls: {
       ohuhu: "https://ohuhu.com/products/ohuhu-molokai-four-tones-extra-largenib-dual-tips-alcohol-art-markers?variant=44284431368479",
@@ -61,6 +61,6 @@ export const molokaiSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Wide-Tip/dp/B0B6F45QQR/?th=1",
     },
-    colors: ["0","CG01", "CG17", "BGY24", "WG10", "GG10"],
+    colors: ["CG01", "CG17", "BGY24", "WG10", "GG10","0"],
   },
 ];
