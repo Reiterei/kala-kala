@@ -3,6 +3,18 @@
 
 export const colors = [
   {
+    "sort": 0,
+    "name": "Colorless Blender",
+    "code": "0",
+    "hex": "ffffff",
+    "legacy": {
+      "honolulu": null,
+      "oahu": null,
+      "kaala": null,
+      "original": null
+    }
+  },
+    {
     "sort": 1,
     "name": "Lemon Mist",
     "code": "Y00",
