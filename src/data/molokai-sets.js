@@ -61,6 +61,6 @@ export const molokaiSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Wide-Tip/dp/B0B6F45QQR/?th=1",
     },
-    colors: ["CG01", "CG17", "BGY24", "WG10", "GG10"],
+    colors: ["0","CG01", "CG17", "BGY24", "WG10", "GG10"],
   },
 ];
