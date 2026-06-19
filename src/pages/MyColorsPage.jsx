@@ -48,6 +48,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           c.legacy?.honolulu?.name, c.legacy?.honolulu?.code,
           c.legacy?.oahu?.name, c.legacy?.oahu?.code,
           c.legacy?.kaala?.name, c.legacy?.kaala?.code,
+          c.legacy?.original?.name, c.legacy?.original?.code,
         ].filter(Boolean).join(' ').toLowerCase();
         if (!tokens.every(t => haystack.includes(t))) return false;
       }
