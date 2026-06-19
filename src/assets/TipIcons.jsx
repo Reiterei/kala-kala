@@ -85,6 +85,9 @@ const TIP_TYPE_MAP = {
   'Chisel²':           'chisel',
   // Honolulu² B
   'Fine²':           'fine',
+  // Kaala / Kaala B
+  'Slim Broad':      'extra-wide',
+  'Mini Brush':      'brush',
   // Add future mappings here as new series data files are introduced
 };
 
