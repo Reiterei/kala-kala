@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { allSets, SERIES_SHORT, getSeriesBadgeColors } from '../data/all-sets';
+import { allSets, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
@@ -80,6 +80,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
   }, [tab, seriesColors, ownedCodes, wishCodes, series, ownership]);
 
   const getStatus = (code) => ownership[code]?.[series] ?? null;
+  const cc = getSeriesCardColors(series);
 
   const handleAddAll = (status) => {
     seriesColors.forEach(code => {
@@ -105,7 +106,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
         </div>
       , document.body)}
 
-      <div style={{ background: C.white, borderRadius: RADIUS.lg, border: `1.5px solid ${C.border}`, marginBottom: 12, overflow: 'hidden' }}>
+      <div style={{ background: cc.cardBg, borderRadius: RADIUS.lg, border: `1.5px solid ${cc.border}`, marginBottom: 12, overflow: 'hidden' }}>
       <div style={{ padding: '14px 16px 0' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div style={{ flex: 1 }}>
@@ -118,43 +119,43 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
             <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{series}</div>
           </div>
           <div style={{ textAlign: 'right', flexShrink: 0, marginLeft: 12 }}>
-            <div style={{ fontSize: 22, fontWeight: 700, color: C.teal, lineHeight: 1.2 }}>{pct}%</div>
+            <div style={{ fontSize: 22, fontWeight: 700, color: cc.accent, lineHeight: 1.2 }}>{pct}%</div>
             <div style={{ fontSize: 9, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Complete</div>
           </div>
         </div>
 
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: C.tipBg, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: C.tealDeep }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent }}>
             <TipIcon type={getTipIcon(tipType1)} size={22} />
             <TipIcon type={getTipIcon(tipType2)} size={22} />
           </div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: '#7a5430' }}>{tipType1} / {tipType2}</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{tipType1} / {tipType2}</span>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
           <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase', lineHeight: 1.6 }}>Markers Owned</span>
           <div style={{ display: 'flex', gap: 10 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: C.teal, lineHeight: 1.4 }}>{owned} Owned</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: cc.accent, lineHeight: 1.4 }}>{owned} Owned</span>
             {wishCodes.length > 0 && <span style={{ fontSize: 11, fontWeight: 700, color: C.wish, lineHeight: 1.4 }}>{wishCodes.length} Wishlist</span>}
             <span style={{ fontSize: 11, fontWeight: 700, color: C.missingText, lineHeight: 1.4 }}>{missing} Missing</span>
           </div>
         </div>
       </div>
 
-      <div style={{ height: 5, background: C.tealLight, margin: '0 16px', borderRadius: 4, overflow: 'hidden' }}>
-        <div style={{ height: '100%', borderRadius: 4, background: C.teal, width: `${pct}%`, transition: 'width 0.4s ease' }} />
+      <div style={{ height: 5, background: cc.track, margin: '0 16px', borderRadius: 4, overflow: 'hidden' }}>
+        <div style={{ height: '100%', borderRadius: 4, background: cc.accent, width: `${pct}%`, transition: 'width 0.4s ease' }} />
       </div>
 
-      <div style={{ display: 'flex', borderTop: `1px solid ${C.border}`, marginTop: 12 }}>
-        <button onClick={() => setConfirming(true)} style={{ padding: '8px 16px', background: 'none', border: 'none', borderRight: `1px solid ${C.border}`, cursor: 'pointer', fontSize: 12, fontWeight: 700, color: C.teal, lineHeight: 1.4, whiteSpace: 'nowrap' }}>+ Add All</button>
+      <div style={{ display: 'flex', borderTop: `1px solid ${cc.border}`, marginTop: 12 }}>
+        <button onClick={() => setConfirming(true)} style={{ padding: '8px 16px', background: 'none', border: 'none', borderRight: `1px solid ${cc.border}`, cursor: 'pointer', fontSize: 12, fontWeight: 700, color: cc.accent, lineHeight: 1.4, whiteSpace: 'nowrap' }}>+ Add All</button>
         <button
           onClick={() => setExpanded(e => !e)}
           style={{
-            flex: 1, background: C.bgCard, border: 'none',
+            flex: 1, background: cc.cardBg, border: 'none',
             padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', textAlign: 'left',
           }}
         >
-          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.tealDim, textTransform: 'uppercase', lineHeight: 1.6 }}>
+          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accent, textTransform: 'uppercase', lineHeight: 1.6 }}>
             <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
           </span>
           <span style={{ fontSize: 10, color: '#c9a880' }}>({displayColors.length})</span>
