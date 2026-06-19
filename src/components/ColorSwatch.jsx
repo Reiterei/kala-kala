@@ -29,13 +29,9 @@ export function ColorSwatch({ color, size = 'md', settings }) {
         {color.code}
       </span>
       {!settings?.hideLegacy && legacyList.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 1 }}>
-          {legacyList.map((l) => (
-            <span key={l.set} style={{ color: textColor, fontSize: s.subSize, opacity: 0.75, lineHeight: 1.2 }}>
-              {l.label}: {l.code}
-            </span>
-          ))}
-        </div>
+        <span style={{ color: textColor, fontSize: s.subSize, opacity: 0.75, lineHeight: 1.2, marginTop: 1 }}>
+          {legacyList.map((l) => l.code).join(' / ')}
+        </span>
       )}
     </div>
   );
