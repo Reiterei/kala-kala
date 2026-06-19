@@ -158,14 +158,14 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
           <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accent, textTransform: 'uppercase', lineHeight: 1.6 }}>
             <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
           </span>
-          <span style={{ fontSize: 10, color: '#c9a880' }}>({displayColors.length})</span>
+          <span style={{ fontSize: 10, color: cc.accentSoft }}>({displayColors.length})</span>
         </button>
       </div>
 
       {expanded && (
         <div style={{ padding: '12px 16px 16px', display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {displayColors.length === 0
-            ? <span style={{ fontSize: 12, color: '#c9a880' }}>None to show.</span>
+            ? <span style={{ fontSize: 12, color: cc.accentSoft }}>None to show.</span>
             : displayColors.map(code => (
                 <ColorChip key={code} colorCode={code} status={getStatus(code)}
                   onClick={() => { if (swipeConsumed) return; setSelectedColor(colorMap[code] || null); }} />

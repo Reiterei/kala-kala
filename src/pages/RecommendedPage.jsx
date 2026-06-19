@@ -132,11 +132,11 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
             <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accent, textTransform: 'uppercase', lineHeight: 1.6 }}>
               <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
             </span>
-            <span style={{ fontSize: 10, color: '#c9a880' }}>({total})</span>
+            <span style={{ fontSize: 10, color: cc.accentSoft }}>({total})</span>
           </button>
           {set.urls && Object.values(set.urls).some(Boolean) && (
             <button onClick={toggleBuyOpen} style={{ background: cc.cardBg, border: 'none', borderLeft: `1px solid ${cc.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', whiteSpace: 'nowrap' }}>
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase' }}>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accentSoft, textTransform: 'uppercase' }}>
                 <span style={{ fontSize: 13 }}>{buyOpen ? '▾' : '▸'}</span> Where to Buy
               </span>
             </button>
