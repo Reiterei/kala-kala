@@ -89,7 +89,7 @@ const TIP_TYPE_MAP = {
   'Slim Broad':      'slim-broad',
   'Mini Brush':      'brush',
   // Molokai
-  'Extra Wide':      'extra-wide',
+  'Extra-Wide':      'extra-wide',
   // Add future mappings here as new series data files are introduced
 };
 
