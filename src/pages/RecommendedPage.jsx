@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { honoluluSets } from '../data/honolulu-sets';
+import { allSets, SERIES_ORDER, SERIES_SHORT } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
@@ -14,11 +14,6 @@ import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, SHADOW, scrollPage, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
 const colorMap = Object.fromEntries(allColors.map(c => [c.code, c]));
-const SERIES_ORDER = ['Honolulu', 'Honolulu B', 'Honolulu Plus', 'Honolulu S', 'Honolulu²', 'Honolulu² B'];
-const SERIES_SHORT = {
-  'Honolulu': 'HONOLULU', 'Honolulu B': 'HONOLULU B', 'Honolulu Plus': 'HONOLULU+',
-  'Honolulu S': 'HONOLULU S', 'Honolulu²': 'HONOLULU²', 'Honolulu² B': 'HONOLULU² B',
-};
 
 function getMeta(set) { return [set.edition, set.version].filter(Boolean).join(' · '); }
 
@@ -226,7 +221,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
   }, [sortDropdownOpen]);
 
   const retailSets = useMemo(() => {
-    let sets = honoluluSets.filter(s => !s.name.includes('Individual'));
+    let sets = allSets.filter(s => !s.name.includes('Individual'));
     if (hideUnavailable) sets = sets.filter(s => !isUnavailableSet(s));
     if (hideJapanese || hideDiscontinued) {
       sets = sets

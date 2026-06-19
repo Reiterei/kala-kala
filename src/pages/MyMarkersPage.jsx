@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { honoluluSets } from '../data/honolulu-sets';
+import { allSets, SERIES_SHORT } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { TipIcon, getTipIcon } from '../assets/TipIcons';
@@ -12,14 +12,9 @@ import { C, FONT, RADIUS, scrollPage, pillActive, pillInactive, chipBase, chipUn
 const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 const colorMap = Object.fromEntries(allColors.map(c => [c.code, c]));
 
-const SERIES_SHORT = {
-  'Honolulu': 'HONOLULU', 'Honolulu B': 'HONOLULU B', 'Honolulu Plus': 'HONOLULU+',
-  'Honolulu S': 'HONOLULU S', 'Honolulu²': 'HONOLULU²', 'Honolulu² B': 'HONOLULU² B',
-};
-
 function getSeriesGroups() {
   const seen = new Map();
-  for (const set of honoluluSets) {
+  for (const set of allSets) {
     if (!seen.has(set.series)) seen.set(set.series, { tipType1: set.tipType1, tipType2: set.tipType2 });
   }
   return [...seen.entries()].map(([series, { tipType1, tipType2 }]) => ({ series, tipType1, tipType2 }));
@@ -27,7 +22,7 @@ function getSeriesGroups() {
 
 function getColorsForSeries(series) {
   const seen = new Set();
-  for (const set of honoluluSets) {
+  for (const set of allSets) {
     if (set.series === series) for (const code of set.colors) seen.add(code);
   }
   return [...seen].sort((a, b) => (colorMap[a]?.sort ?? 9999) - (colorMap[b]?.sort ?? 9999));
