@@ -4,14 +4,13 @@ import { allSets, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
-import { FilterModal, FilterSection, FilterPillRow } from '../components/FilterModal';
+import { FilterModal, FilterSection, FilterToggleRow } from '../components/FilterModal';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, scrollPage, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
-const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 const colorMap = Object.fromEntries(allColors.map(c => [c.code, c]));
 
 function getSeriesGroups() {
@@ -60,7 +59,7 @@ function ColorChip({ colorCode, status, onClick, cc }) {
   );
 }
 
-function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, hideJapanese, hideDiscontinued, hideColorlessBlender, settings }) {
+function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, showUnowned, showOwned, showWishlist, hideJapanese, hideDiscontinued, hideColorlessBlender, settings }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
   const [confirming, setConfirming] = useState(false);
@@ -83,11 +82,13 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
   const pct = total > 0 ? Math.round((owned / total) * 100) : 0;
 
   const displayColors = useMemo(() => {
-    if (tab === 'Owned') return ownedCodes;
-    if (tab === 'Wishlist') return wishCodes;
-    if (tab === 'Unowned') return seriesColors.filter(c => ownership[c]?.[series] !== 'owned');
-    return seriesColors;
-  }, [tab, seriesColors, ownedCodes, wishCodes, series, ownership]);
+    return seriesColors.filter(c => {
+      const status = ownership[c]?.[series];
+      if (status === 'owned') return showOwned === 'show';
+      if (status === 'wishlist') return showWishlist === 'show';
+      return showUnowned === 'show';
+    });
+  }, [seriesColors, series, ownership, showUnowned, showOwned, showWishlist]);
 
   const getStatus = (code) => ownership[code]?.[series] ?? null;
   const cc = getSeriesCardColors(series);
@@ -203,27 +204,29 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   const hideJapanese = settings?.hideJapanese ?? false;
   const hideDiscontinued = settings?.hideDiscontinued ?? false;
   const hideColorlessBlender = settings?.hideColorlessBlender ?? false;
-  const [tab, setTab] = useState('All');
+  const [showUnowned, setShowUnowned] = useState(() => localStorage.getItem('kk-mymarkers-showUnowned') ?? 'show');
+  const [showOwned, setShowOwned] = useState(() => localStorage.getItem('kk-mymarkers-showOwned') ?? 'show');
+  const [showWishlist, setShowWishlist] = useState(() => localStorage.getItem('kk-mymarkers-showWishlist') ?? 'show');
   const [search, setSearch] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
   const seriesGroups = useMemo(() => getSeriesGroups(), []);
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
   const px = isWide ? 20 : 16;
-  const filterActive = tab !== 'All';
+  const filterActive = showUnowned === 'hide' || showOwned === 'hide' || showWishlist === 'hide';
+
+  const setShowUnownedAndSave = (v) => { setShowUnowned(v); localStorage.setItem('kk-mymarkers-showUnowned', v); };
+  const setShowOwnedAndSave = (v) => { setShowOwned(v); localStorage.setItem('kk-mymarkers-showOwned', v); };
+  const setShowWishlistAndSave = (v) => { setShowWishlist(v); localStorage.setItem('kk-mymarkers-showWishlist', v); };
+
   const filteredGroups = useMemo(() => {
     let groups = seriesGroups;
     if (search.trim()) {
       const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
       groups = groups.filter(({ series }) => tokens.every(t => series.toLowerCase().includes(t)));
     }
-    if (tab === 'Owned') {
-      groups = groups.filter(({ series }) => getColorsForSeries(series).some(c => ownership[c]?.[series] === 'owned'));
-    } else if (tab === 'Wishlist') {
-      groups = groups.filter(({ series }) => getColorsForSeries(series).some(c => ownership[c]?.[series] === 'wishlist'));
-    }
     return groups;
-  }, [seriesGroups, search, tab, ownership]);
+  }, [seriesGroups, search]);
 
   return (
     <div style={scrollPage}>
@@ -241,7 +244,8 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
         {filteredGroups.map(({ series, tipType1, tipType2 }) => (
           <SeriesCard
             key={series} series={series} tipType1={tipType1} tipType2={tipType2}
-            ownership={ownership} onSetStatus={onSetStatus} tab={tab}
+            ownership={ownership} onSetStatus={onSetStatus}
+            showUnowned={showUnowned} showOwned={showOwned} showWishlist={showWishlist}
             hideJapanese={hideJapanese} hideDiscontinued={hideDiscontinued} hideColorlessBlender={hideColorlessBlender} settings={settings}
           />
         ))}
@@ -251,10 +255,12 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
         <FilterModal
           title="Filter Markers"
           onClose={() => setFilterOpen(false)}
-          onReset={() => setTab('All')}
+          onReset={() => { setShowUnownedAndSave('show'); setShowOwnedAndSave('show'); setShowWishlistAndSave('show'); }}
         >
           <FilterSection label="Status">
-            <FilterPillRow options={TABS} value={tab} onChange={setTab} />
+            <FilterToggleRow label="Unowned Colors" value={showUnowned} onChange={setShowUnownedAndSave} />
+            <FilterToggleRow label="Owned Colors" value={showOwned} onChange={setShowOwnedAndSave} />
+            <FilterToggleRow label="Wishlist Colors" value={showWishlist} onChange={setShowWishlistAndSave} />
           </FilterSection>
         </FilterModal>
       )}

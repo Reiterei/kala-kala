@@ -4,14 +4,12 @@ import { allSets, SERIES_ORDER } from '../data/all-sets';
 import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
-import { FilterModal, FilterSection, FilterCheckRow, FilterPillRow } from '../components/FilterModal';
+import { FilterModal, FilterSection, FilterCheckRow, FilterToggleRow } from '../components/FilterModal';
 import { getLegacyDisplay } from '../utils/colorUtils';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, RADIUS, scrollPage } from '../styles/theme';
-
-const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 
 const BADGE = {
   owned:    { color: C.teal,    border: `1.5px solid ${C.teal}`,    label: 'OWNED'    },
@@ -32,7 +30,9 @@ function Badge({ type }) {
 
 export function MyColorsPage({ ownership, onSetStatus, settings }) {
   const [search, setSearch] = useState('');
-  const [tab, setTab] = useState('All');
+  const [showUnowned, setShowUnowned] = useState(() => localStorage.getItem('kk-mycolors-showUnowned') ?? 'show');
+  const [showOwned, setShowOwned] = useState(() => localStorage.getItem('kk-mycolors-showOwned') ?? 'show');
+  const [showWishlist, setShowWishlist] = useState(() => localStorage.getItem('kk-mycolors-showWishlist') ?? 'show');
   const [selected, setSelected] = useState(null);
   const [filterOpen, setFilterOpen] = useState(false);
   const [seriesFilter, setSeriesFilter] = useState(() => {
@@ -52,6 +52,9 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
     next.has(s) ? next.delete(s) : next.add(s);
     setSeriesAndSave(next);
   };
+  const setShowUnownedAndSave = (v) => { setShowUnowned(v); localStorage.setItem('kk-mycolors-showUnowned', v); };
+  const setShowOwnedAndSave = (v) => { setShowOwned(v); localStorage.setItem('kk-mycolors-showOwned', v); };
+  const setShowWishlistAndSave = (v) => { setShowWishlist(v); localStorage.setItem('kk-mycolors-showWishlist', v); };
 
   const codeToSeries = useMemo(() => {
     const map = new Map();
@@ -69,7 +72,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
     return SERIES_ORDER.filter(s => seen.has(s));
   }, []);
 
-  const filterActive = seriesFilter.size > 0 || tab !== 'All';
+  const filterActive = seriesFilter.size > 0 || showUnowned === 'hide' || showOwned === 'hide' || showWishlist === 'hide';
 
   const filtered = useMemo(() => {
     const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
@@ -95,12 +98,12 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       const entries = Object.values(ownership[c.code] || {});
       const owned = entries.includes('owned');
       const wish = entries.includes('wishlist');
-      if (tab === 'Owned') return owned;
-      if (tab === 'Wishlist') return wish;
-      if (tab === 'Unowned') return !owned;
+      if (owned && showOwned === 'hide') return false;
+      if (wish && !owned && showWishlist === 'hide') return false;
+      if (!owned && !wish && showUnowned === 'hide') return false;
       return true;
     });
-  }, [search, tab, ownership, settings, seriesFilter, codeToSeries]);
+  }, [search, ownership, settings, seriesFilter, codeToSeries, showUnowned, showOwned, showWishlist]);
 
   return (
     <div style={scrollPage}>
@@ -155,10 +158,12 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
         <FilterModal
           title="Filter Colors"
           onClose={() => setFilterOpen(false)}
-          onReset={() => { setTab('All'); setSeriesAndSave(new Set()); }}
+          onReset={() => { setShowUnownedAndSave('show'); setShowOwnedAndSave('show'); setShowWishlistAndSave('show'); setSeriesAndSave(new Set()); }}
         >
           <FilterSection label="Status">
-            <FilterPillRow options={TABS} value={tab} onChange={setTab} />
+            <FilterToggleRow label="Unowned Colors" value={showUnowned} onChange={setShowUnownedAndSave} />
+            <FilterToggleRow label="Owned Colors" value={showOwned} onChange={setShowOwnedAndSave} />
+            <FilterToggleRow label="Wishlist Colors" value={showWishlist} onChange={setShowWishlistAndSave} />
           </FilterSection>
 
           <FilterSection label="Series">
