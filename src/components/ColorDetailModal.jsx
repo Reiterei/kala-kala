@@ -92,7 +92,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           .kk-modal-scroll-${color.code}::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
         `}</style>
         <div className={`kk-modal-scroll-${color.code}`} style={{ overflowY: 'auto', flex: 1 }}>
-          <div style={{ padding: '12px 0 8px' }}>
+          <div style={{ padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
             {relevantSeries.map(({ series, tipType1, tipType2 }) => {
               const status = ownership[color.code]?.[series] ?? null;
               const isOwned = status === 'owned';
@@ -106,8 +106,8 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               const wishBtn = { ...btnBase, background: isWish ? C.wish : cc.track, color: isWish ? C.white : cc.accent };
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
-                <div key={series} style={{ borderBottom: `1px solid ${cc.border}` }}>
-                  <div style={{ display: 'flex', alignItems: 'center', padding: '10px 20px' }}>
+                <div key={series} style={{ background: cc.cardBg, borderRadius: RADIUS.lg, border: `1.5px solid ${cc.border}`, overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', padding: '10px 16px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <TipIcon type={getTipIcon(tipType1)} size={22} color={cc.accent} />
                       {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} color={cc.accent} />}
@@ -128,7 +128,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                     </div>
                   </div>
                   {seriesSets.length > 0 && (
-                    <div style={{ padding: '0 20px 4px' }}>
+                    <div style={{ padding: '0 16px 12px' }}>
                       <button
                         onClick={() => setFoundOpen(o => ({ ...o, [series]: !o[series] }))}
                         style={{
@@ -148,7 +148,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                             return (
                               <div key={s.id} style={{
                                 display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                                padding: '8px 10px', borderRadius: RADIUS.sm, background: cc.track,
+                                padding: '8px 10px', borderRadius: RADIUS.sm, background: C.white,
                               }}>
                                 <span style={{ fontSize: 12, fontWeight: 600, color: C.text, lineHeight: 1.3 }}>{s.name}</span>
                                 {parts && (
