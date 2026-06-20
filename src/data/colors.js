@@ -4578,7 +4578,7 @@ export const colors = [
         "name": "Raspberry Jam",
         "code": "RV315"
       },
-      "oahu": null
+      "oahu": null,
       "kaala": {
         "name": "Hydrangea Violet",
         "code": "V286"
