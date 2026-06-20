@@ -102,15 +102,15 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                 padding: '6px 14px', borderRadius: RADIUS.pill, border: 'none', cursor: 'pointer',
                 fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
               };
-              const ownBtn = { ...btnBase, background: isOwned ? cc.accent : cc.cardBg, color: isOwned ? C.white : cc.accent };
-              const wishBtn = { ...btnBase, background: isWish ? cc.accentSoft : cc.cardBg, color: isWish ? C.white : cc.accent };
+              const ownBtn = { ...btnBase, background: isOwned ? cc.accent : cc.track, color: isOwned ? C.white : cc.accent };
+              const wishBtn = { ...btnBase, background: isWish ? cc.accentSoft : cc.track, color: isWish ? C.white : cc.accent };
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
                 <div key={series} style={{ borderBottom: `1px solid ${cc.border}` }}>
                   <div style={{ display: 'flex', alignItems: 'center', padding: '10px 20px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent }}>
-                      <TipIcon type={getTipIcon(tipType1)} size={22} />
-                      {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} />}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <TipIcon type={getTipIcon(tipType1)} size={22} color={cc.accent} />
+                      {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} color={cc.accent} />}
                     </div>
                     <div style={{ flex: 1, marginLeft: 10 }}>
                       <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{series}</div>
