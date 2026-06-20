@@ -74,8 +74,8 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
     >
       <div
         style={{
-          display: 'flex', alignItems: 'center', gap: 10,
-          width: '100%', maxWidth: 560, justifyContent: 'center',
+          display: 'flex', alignItems: 'stretch', gap: 0,
+          width: '100%', maxWidth: 480, justifyContent: 'center',
         }}
         onClick={e => e.stopPropagation()}
       >
@@ -83,16 +83,17 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           <button
             onClick={goPrev}
             style={{
-              flexShrink: 0, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
-              width: 36, height: 36, cursor: 'pointer', fontSize: 18, fontWeight: 700,
+              flexShrink: 0, background: 'rgba(255,255,255,0.95)', border: 'none',
+              borderRadius: `${RADIUS.xl}px 0 0 ${RADIUS.xl}px`,
+              width: 22, cursor: 'pointer', fontSize: 16, fontWeight: 700,
               color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: SHADOW.md,
+              boxShadow: SHADOW.md, marginRight: -1,
             }}
           >‹</button>
         )}
         <div
           style={{
-            background: C.white, borderRadius: RADIUS.xl, width: '100%', maxWidth: 440, minWidth: 0,
+            background: C.white, borderRadius: hasNav ? 0 : RADIUS.xl, width: '100%', maxWidth: 440, minWidth: 0,
             maxHeight: '85vh', display: 'flex', flexDirection: 'column',
             overflow: 'hidden', boxShadow: SHADOW.lg, fontFamily: FONT,
           }}
@@ -216,10 +217,11 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           <button
             onClick={goNext}
             style={{
-              flexShrink: 0, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
-              width: 36, height: 36, cursor: 'pointer', fontSize: 18, fontWeight: 700,
+              flexShrink: 0, background: 'rgba(255,255,255,0.95)', border: 'none',
+              borderRadius: `0 ${RADIUS.xl}px ${RADIUS.xl}px 0`,
+              width: 22, cursor: 'pointer', fontSize: 16, fontWeight: 700,
               color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: SHADOW.md,
+              boxShadow: SHADOW.md, marginLeft: -1,
             }}
           >›</button>
         )}
