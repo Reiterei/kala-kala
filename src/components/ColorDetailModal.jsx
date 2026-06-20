@@ -115,7 +115,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                       {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} color={cc.accent} />}
                     </div>
                     <div style={{ flex: 1, marginLeft: 10 }}>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{series}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: cc.accent }}>{series}</div>
                       <div style={{ fontSize: 11, color: cc.accentSoft }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</div>
                     </div>
                     <div style={{ display: 'flex', gap: 6 }}>
