@@ -7635,7 +7635,7 @@ export const colors = [
     "sort": 414.5,
     "name": "Avocado Green",
     "code": "YG59",
-    "hex": "#cfe895",
+    "hex": "cfe895",
     "legacy": {
       "honolulu": null,
       "oahu": null,
