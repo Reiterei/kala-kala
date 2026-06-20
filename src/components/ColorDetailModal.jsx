@@ -74,8 +74,8 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
     >
       <div
         style={{
-          display: 'flex', alignItems: 'stretch', gap: 0,
-          width: '100%', maxWidth: 480, justifyContent: 'center',
+          position: 'relative',
+          width: '100%', maxWidth: 440,
         }}
         onClick={e => e.stopPropagation()}
       >
@@ -83,17 +83,17 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           <button
             onClick={goPrev}
             style={{
-              flexShrink: 0, background: 'rgba(255,255,255,0.95)', border: 'none',
-              borderRadius: `${RADIUS.xl}px 0 0 ${RADIUS.xl}px`,
-              width: 22, cursor: 'pointer', fontSize: 16, fontWeight: 700,
+              position: 'absolute', left: -14, top: '50%', transform: 'translateY(-50%)',
+              background: 'rgba(255,255,255,0.95)', border: 'none', borderRadius: '50%',
+              width: 28, height: 28, cursor: 'pointer', fontSize: 14, fontWeight: 700,
               color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: SHADOW.md, marginRight: -1,
+              boxShadow: SHADOW.md, zIndex: 1,
             }}
           >‹</button>
         )}
         <div
           style={{
-            background: C.white, borderRadius: hasNav ? 0 : RADIUS.xl, width: '100%', maxWidth: 440, minWidth: 0,
+            background: C.white, borderRadius: RADIUS.xl, width: '100%', minWidth: 0,
             maxHeight: '85vh', display: 'flex', flexDirection: 'column',
             overflow: 'hidden', boxShadow: SHADOW.lg, fontFamily: FONT,
           }}
@@ -217,11 +217,11 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           <button
             onClick={goNext}
             style={{
-              flexShrink: 0, background: 'rgba(255,255,255,0.95)', border: 'none',
-              borderRadius: `0 ${RADIUS.xl}px ${RADIUS.xl}px 0`,
-              width: 22, cursor: 'pointer', fontSize: 16, fontWeight: 700,
+              position: 'absolute', right: -14, top: '50%', transform: 'translateY(-50%)',
+              background: 'rgba(255,255,255,0.95)', border: 'none', borderRadius: '50%',
+              width: 28, height: 28, cursor: 'pointer', fontSize: 14, fontWeight: 700,
               color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: SHADOW.md, marginLeft: -1,
+              boxShadow: SHADOW.md, zIndex: 1,
             }}
           >›</button>
         )}
