@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { C, FONT, RADIUS, SHADOW, overlayStyle } from '../styles/theme';
+import { C, FONT, RADIUS, SHADOW, overlayStyle, segmentActive, segmentInactive } from '../styles/theme';
 
 export function FilterModal({ title, onClose, onReset, children }) {
   return createPortal(
@@ -82,6 +82,19 @@ export function FilterPillRow({ options, value, onChange }) {
           }}
         >{opt}</button>
       ))}
+    </div>
+  );
+}
+
+export function FilterToggleRow({ label, value, onChange }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '7px 0' }}>
+      <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{label}</div>
+      <div style={{ display: 'flex', borderRadius: RADIUS.sm, overflow: 'hidden', border: `1.5px solid ${C.tealMid}`, flexShrink: 0 }}>
+        {['show', 'hide'].map(opt => (
+          <button key={opt} onClick={() => onChange(opt)} style={value === opt ? segmentActive : segmentInactive}>{opt}</button>
+        ))}
+      </div>
     </div>
   );
 }
