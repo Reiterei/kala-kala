@@ -163,7 +163,7 @@ export const chipBase = {
 
 export const chipUnowned = {
   ...chipBase, cursor: 'pointer',
-  background: C.white, border: `2px solid ${C.tealMid}`, color: C.tealDim,
+  background: C.white, border: `2px dashed ${C.tealMid}`, color: C.tealDim,
 };
 
 export const chipWish = {
