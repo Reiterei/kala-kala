@@ -21,7 +21,8 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const [foundOpen, setFoundOpen] = useState({});
   if (!color) return null;
 
-  const legacyList = getLegacyList(color);
+  const legacyList = getLegacyList(color).filter(l => l.code !== color.code || l.name !== color.name);
+  const legacyDisplayLabel = (l) => l.set === 'original' ? 'Original Sets' : `${l.label} (Old)`;
   const seriesInColor = getSeriesForColor(color.code, ALL_SETS);
   const allSeries = getDistinctSeries();
   const relevantSeries = allSeries.filter(s => seriesInColor.find(sc => sc.series === s.series));
@@ -71,17 +72,14 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
             }}
           >×</button>
           <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: textCol }}>
-            {color.name}
+            {color.code} - {color.name}
           </h2>
-          <p style={{ margin: '4px 0 0', fontSize: 13, color: textColSub }}>
-            Color Code: <strong>{color.code}</strong>
-          </p>
           {legacyList.length > 0 && (
-            <p style={{ margin: '2px 0 0', fontSize: 12, color: textColSub }}>
+            <p style={{ margin: '4px 0 0', fontSize: 12, color: textColSub }}>
               {legacyList.map((l, i) => (
                 <span key={l.set}>
                   {i > 0 && <br />}
-                  {l.label}: <strong>{l.code}</strong>&nbsp;&nbsp;{l.name}
+                  {legacyDisplayLabel(l)}: <strong>{l.code}</strong> - {l.name}
                 </span>
               ))}
             </p>
