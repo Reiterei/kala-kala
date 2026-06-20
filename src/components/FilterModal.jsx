@@ -165,8 +165,7 @@ export function SeriesFilterTree({ groups, selected, onChange }) {
                     onClick={() => seriesList.length > 1 && toggleExpanded(groupLabel)}
                     style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1, fontSize: 13, color: C.textSub, cursor: seriesList.length > 1 ? 'pointer' : 'default' }}
                   >
-                    {groupLabel}
-                    <span style={{ fontSize: 11, fontWeight: 700, color: C.tealText }}>Series</span>
+                    {groupLabel} Series
                     {seriesList.length > 1 && (
                       <span style={{ marginLeft: 'auto', fontSize: 10, color: C.textMuted }}>{isOpen ? '▲' : '▼'}</span>
                     )}
