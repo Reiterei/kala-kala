@@ -13,13 +13,31 @@ import { C, FONT, SHADOW, navPillActive, navPillInactive, iconBtn } from './styl
 const NAV = [
   {
     id: 'colors', label: 'My Colors',
+    icon: (active) => (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2.5C6.75 2.5 2.5 6.75 2.5 12S6.75 21.5 12 21.5c.97 0 1.75-.78 1.75-1.75 0-.46-.18-.88-.46-1.19-.28-.3-.45-.71-.45-1.06 0-.97.78-1.75 1.75-1.75h2.06c3.04 0 5.5-2.46 5.5-5.5C22.65 6.89 17.85 2.5 12 2.5z"/>
+        <circle cx="8.5" cy="10.5" r="1.5" fill="currentColor" stroke="none"/>
+        <circle cx="14.5" cy="7.5" r="1.5" fill="currentColor" stroke="none"/>
+        <circle cx="17.5" cy="12.5" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
     ),
   },
   {
     id: 'markers', label: 'My Markers',
+    icon: (active) => (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2 L15 8 L15 18 Q15 21 12 21 Q9 21 9 18 L9 8 Z"/>
+        <line x1="9" y1="11" x2="15" y2="11"/>
+      </svg>
+    ),
   },
   {
     id: 'recommended', label: 'Retail Sets',
+    icon: (active) => (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+    ),
   },
 ];
 
@@ -171,6 +189,7 @@ export default function App() {
               const active = pageIdx === i;
               return (
                 <button key={n.id} onClick={() => goTo(i)} style={active ? navPillActive : navPillInactive}>
+                  {n.icon(active)}
                   {n.label}
                 </button>
               );
