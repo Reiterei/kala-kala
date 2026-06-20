@@ -54,6 +54,16 @@ function mix(hex, amount) {
   return `rgb(${blend(r)}, ${blend(g)}, ${blend(b)})`;
 }
 
+// Blends a hex color toward neutral grey by `amount` (0 = grey, 1 = full color).
+function mixGrey(hex, amount) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const grey = 222;
+  const blend = (c) => Math.round(c * amount + grey * (1 - amount));
+  return `rgb(${blend(r)}, ${blend(g)}, ${blend(b)})`;
+}
+
 export function getSeriesCardColors(series) {
   const { bg, text } = getSeriesBadgeColors(series);
   return {
@@ -62,5 +72,7 @@ export function getSeriesCardColors(series) {
     accent: text,
     accentSoft: mix(text, 0.65),
     track: mix(bg, 0.30),
+    swatchEmptyBorder: mixGrey(bg, 0.35),
+    swatchEmptyText: mixGrey(text, 0.45),
   };
 }
