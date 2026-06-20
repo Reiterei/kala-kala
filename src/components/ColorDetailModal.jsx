@@ -72,6 +72,30 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
       }}
       onClick={onClose}
     >
+      {hasNav && (
+        <button
+          onClick={(e) => { e.stopPropagation(); goPrev(); }}
+          style={{
+            position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)',
+            background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+            width: 40, height: 40, cursor: 'pointer', fontSize: 20, fontWeight: 700,
+            color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: SHADOW.md, zIndex: 1001,
+          }}
+        >‹</button>
+      )}
+      {hasNav && (
+        <button
+          onClick={(e) => { e.stopPropagation(); goNext(); }}
+          style={{
+            position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)',
+            background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+            width: 40, height: 40, cursor: 'pointer', fontSize: 20, fontWeight: 700,
+            color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: SHADOW.md, zIndex: 1001,
+          }}
+        >›</button>
+      )}
       <div
         style={{
           background: C.white, borderRadius: RADIUS.xl, width: '100%', maxWidth: 480,
@@ -82,34 +106,12 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
       >
         {/* Header */}
         <div style={{ background: bg, padding: '20px 20px 16px', position: 'relative', flexShrink: 0 }}>
-          {hasNav && (
-            <button
-              onClick={goPrev}
-              style={{
-                position: 'absolute', top: 14, right: 76,
-                background: 'rgba(255,255,255,0.3)', border: 'none', borderRadius: '50%',
-                width: 28, height: 28, cursor: 'pointer', fontSize: 16,
-                color: textCol, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}
-            >‹</button>
-          )}
-          {hasNav && (
-            <button
-              onClick={goNext}
-              style={{
-                position: 'absolute', top: 14, right: 44,
-                background: 'rgba(255,255,255,0.3)', border: 'none', borderRadius: '50%',
-                width: 28, height: 28, cursor: 'pointer', fontSize: 16,
-                color: textCol, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}
-            >›</button>
-          )}
           <button
             onClick={onClose}
             style={{
               position: 'absolute', top: 14, right: 14,
               background: 'rgba(255,255,255,0.3)', border: 'none', borderRadius: '50%',
-              width: 28, height: 28, cursor: 'pointer', fontSize: 16,
+              width: 28, height: 28, cursor: 'pointer', fontSize: 18, fontWeight: 700,
               color: textCol, display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}
           >×</button>
