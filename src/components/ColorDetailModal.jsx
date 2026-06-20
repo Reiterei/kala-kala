@@ -26,13 +26,37 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const goNext = () => { if (hasNav) onNavigate(colorList[(navIndex + 1) % colorList.length]); };
 
   const touchStart = useRef(null);
-  const onTouchStart = (e) => { touchStart.current = e.touches[0].clientX; };
+  const [dragPx, setDragPx] = useState(0);
+  const [dragDir, setDragDir] = useState(0);
+  const cardRef = useRef(null);
+
+  const onTouchStart = (e) => {
+    touchStart.current = { x: e.touches[0].clientX, axis: null };
+  };
+  const onTouchMove = (e) => {
+    if (!touchStart.current) return;
+    const dx = e.touches[0].clientX - touchStart.current.x;
+    if (touchStart.current.axis === null) touchStart.current.axis = 'h';
+    if (!hasNav) return;
+    const atStart = navIndex === 0;
+    const atEnd = navIndex === colorList.length - 1;
+    let clamped = dx;
+    if ((atStart && dx > 0) || (atEnd && dx < 0)) clamped = dx * 0.35;
+    setDragPx(clamped);
+  };
   const onTouchEnd = (e) => {
-    if (touchStart.current == null) return;
-    const dx = e.changedTouches[0].clientX - touchStart.current;
+    if (touchStart.current == null) { setDragPx(0); return; }
+    const dx = e.changedTouches[0].clientX - touchStart.current.x;
     touchStart.current = null;
-    if (Math.abs(dx) < 50) return;
-    if (dx > 0) goPrev(); else goNext();
+    const width = cardRef.current?.clientWidth || 1;
+    if (Math.abs(dx) < 50 && Math.abs(dx) < width * 0.2) { setDragPx(0); return; }
+    setDragDir(dx > 0 ? -1 : 1);
+    setDragPx(dx > 0 ? width : -width);
+    setTimeout(() => {
+      if (dx > 0) goPrev(); else goNext();
+      setDragPx(0);
+      setDragDir(0);
+    }, 220);
   };
 
   useEffect(() => {
@@ -73,13 +97,17 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
       onClick={onClose}
     >
       <div
+        ref={cardRef}
         style={{
           background: C.white, borderRadius: RADIUS.xl, width: '100%', maxWidth: 440,
           maxHeight: '85vh', display: 'flex', flexDirection: 'column',
           overflow: 'hidden', boxShadow: SHADOW.lg, fontFamily: FONT,
+          transform: dragPx !== 0 ? `translateX(${dragPx}px)` : 'none',
+          transition: dragDir !== 0 ? 'transform 220ms cubic-bezier(0.25,0.46,0.45,0.94)' : 'none',
         }}
         onClick={e => e.stopPropagation()}
         onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
         {/* Header */}
