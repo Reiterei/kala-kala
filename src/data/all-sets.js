@@ -14,6 +14,18 @@ export const SERIES_ORDER = [
   'Kaala', 'Kaala B', 'Kauai', 'Molokai','Nalu',
 ];
 
+// Groups series into parent buckets for nested filter UI: { groupLabel: [seriesNames] }.
+// A group with a single series renders as a flat checkbox (no parent row).
+// To add a new series variant under an existing parent, append it to that array.
+export const SERIES_GROUPS = {
+  'Honolulu': ['Honolulu', 'Honolulu B', 'Honolulu Plus', 'Honolulu S', 'Honolulu²', 'Honolulu² B'],
+  'Oahu': ['Oahu'],
+  'Kaala': ['Kaala', 'Kaala B'],
+  'Kauai': ['Kauai'],
+  'Molokai': ['Molokai'],
+  'Nalu': ['Nalu'],
+};
+
 export const SERIES_SHORT = {
   'Honolulu': 'HONOLULU', 'Honolulu B': 'HONOLULU B', 'Honolulu Plus': 'HONOLULU+',
   'Honolulu S': 'HONOLULU S', 'Honolulu²': 'HONOLULU²', 'Honolulu² B': 'HONOLULU² B',
