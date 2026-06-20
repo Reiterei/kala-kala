@@ -1,8 +1,10 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { allSets, SERIES_ORDER, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
+import { SearchBar } from '../components/SearchBar';
+import { FilterModal, FilterSection, FilterCheckRow, FilterPillRow } from '../components/FilterModal';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import ohuhuLogo from '../assets/ohuhu-logo.png';
@@ -194,6 +196,11 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
   );
 }
 
+const SORT_OPTIONS = ['Most New', '% New', 'Most Wishlist', 'Largest', 'Smallest'];
+const COLOR_MODE_OPTIONS = ['Exact Markers', 'Colors Only'];
+const COLOR_MODE_TO_VALUE = { 'Exact Markers': 'exact', 'Colors Only': 'colors' };
+const VALUE_TO_COLOR_MODE = { exact: 'Exact Markers', colors: 'Colors Only' };
+
 export function RecommendedPage({ ownership, onSetStatus, settings }) {
   const hideJapanese    = settings?.hideJapanese    ?? false;
   const hideUnavailable = settings?.hideUnavailable ?? false;
@@ -206,30 +213,18 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
   const [seriesFilter, setSeriesFilter] = useState(() => {
     try { return new Set(JSON.parse(localStorage.getItem('kk-rec-series') || '[]')); } catch { return new Set(); }
   });
-  const [seriesDropdownOpen, setSeriesDropdownOpen] = useState(false);
   const [sortBy, setSortBy] = useState(() => localStorage.getItem('kk-rec-sort') ?? 'Most New');
-  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const seriesDropdownRef = useRef(null);
-  const sortDropdownRef   = useRef(null);
+  const [filterOpen, setFilterOpen] = useState(false);
 
-  useEffect(() => { localStorage.setItem('kk-rec-colorMode', colorMode); }, [colorMode]);
-  useEffect(() => { localStorage.setItem('kk-rec-series', JSON.stringify([...seriesFilter])); }, [seriesFilter]);
-  useEffect(() => { localStorage.setItem('kk-rec-sort', sortBy); }, [sortBy]);
-
-  useEffect(() => {
-    if (!seriesDropdownOpen) return;
-    const handler = e => { if (seriesDropdownRef.current && !seriesDropdownRef.current.contains(e.target)) setSeriesDropdownOpen(false); };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, [seriesDropdownOpen]);
-
-  useEffect(() => {
-    if (!sortDropdownOpen) return;
-    const handler = e => { if (sortDropdownRef.current && !sortDropdownRef.current.contains(e.target)) setSortDropdownOpen(false); };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, [sortDropdownOpen]);
+  const setColorModeAndSave = (mode) => { setColorMode(mode); localStorage.setItem('kk-rec-colorMode', mode); };
+  const setSortByAndSave = (s) => { setSortBy(s); localStorage.setItem('kk-rec-sort', s); };
+  const setSeriesAndSave = (next) => { setSeriesFilter(next); localStorage.setItem('kk-rec-series', JSON.stringify([...next])); };
+  const toggleSeries = (s) => {
+    const next = new Set(seriesFilter);
+    next.has(s) ? next.delete(s) : next.add(s);
+    setSeriesAndSave(next);
+  };
 
   const retailSets = useMemo(() => {
     let sets = allSets.filter(s => !s.name.includes('Individual'));
@@ -248,8 +243,10 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
 
   const allSeries = useMemo(() => {
     const seen = new Set(retailSets.map(s => s.series));
-    return ['All Markers', ...SERIES_ORDER.filter(s => seen.has(s))];
+    return SERIES_ORDER.filter(s => seen.has(s));
   }, [retailSets]);
+
+  const filterActive = seriesFilter.size > 0 || sortBy !== 'Most New' || colorMode !== 'exact';
 
   const filtered = useMemo(() => {
     let sets = seriesFilter.size === 0 ? retailSets : retailSets.filter(s => seriesFilter.has(s.series));
@@ -270,88 +267,16 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
     return sets;
   }, [retailSets, seriesFilter, sortBy, ownership, colorMode, search]);
 
-  const dropdownMenu = {
-    position: 'absolute', top: '100%', zIndex: 200, marginTop: 4,
-    background: C.white, border: `1.5px solid ${C.border}`, borderRadius: RADIUS.md,
-    boxShadow: '0 4px 16px rgba(0,0,0,0.10)', padding: '6px 0',
-  };
-
   return (
     <div style={{ ...scrollPage, background: C.bg }}>
-      <div style={{ padding: `16px ${px}px 12px`, borderBottom: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {/* Search */}
-        <div style={{ display: 'flex', alignItems: 'center', background: C.white, borderRadius: RADIUS.lg, padding: '0 14px', gap: 8 }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.tealDim} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          <input
-            value={search} onChange={e => setSearch(e.target.value)} placeholder="Search sets..."
-            style={{ flex: 1, border: 'none', background: 'transparent', padding: '12px 0', fontSize: 14, color: C.textSub, outline: 'none' }}
-          />
-          {search && <button onClick={() => setSearch('')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.tealDim, fontSize: 16, padding: 0 }}>×</button>}
-        </div>
-
-        {/* Color mode toggle */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ display: 'inline-flex', background: C.white, borderRadius: 24, padding: 3 }}>
-            {['exact', 'colors'].map((mode, i) => (
-              <button key={mode} onClick={() => setColorMode(mode)} style={{
-                padding: '6px 16px', borderRadius: RADIUS.pill, border: 'none',
-                background: colorMode === mode ? C.teal : 'transparent',
-                color: colorMode === mode ? C.white : C.tealText,
-                fontSize: 12, fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s',
-              }}>{i === 0 ? 'Exact Markers' : 'Colors Only'}</button>
-            ))}
-          </div>
-        </div>
-
-        {/* Series + Sort row */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center' }}>
-          {/* Series dropdown */}
-          <div style={{ position: 'relative' }} ref={seriesDropdownRef}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-              <span style={{ fontSize: 10, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Series</span>
-              <button onClick={() => setSeriesDropdownOpen(o => !o)} style={{ fontSize: 12, fontWeight: 600, color: C.text, border: 'none', background: 'transparent', cursor: 'pointer', outline: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
-                {seriesFilter.size === 0 ? 'All Markers' : seriesFilter.size === 1 ? [...seriesFilter][0] : `${seriesFilter.size} Selected`}
-                <span style={{ fontSize: 10, color: C.textMuted }}>{seriesDropdownOpen ? '▲' : '▼'}</span>
-              </button>
-            </div>
-            {seriesDropdownOpen && (
-              <div style={{ ...dropdownMenu, left: 0, minWidth: 170 }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 14px', cursor: 'pointer', fontSize: 13, fontWeight: 600, color: C.text, borderBottom: `1px solid ${C.border}` }}>
-                  <input type="checkbox" checked={seriesFilter.size === 0} onChange={() => setSeriesFilter(new Set())} style={{ accentColor: C.teal, width: 15, height: 15 }} />
-                  All Markers
-                </label>
-                {allSeries.filter(s => s !== 'All Markers').map(s => (
-                  <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 14px', cursor: 'pointer', fontSize: 13, color: C.textSub }}>
-                    <input type="checkbox" checked={seriesFilter.has(s)} onChange={() => setSeriesFilter(prev => { const next = new Set(prev); if (next.has(s)) next.delete(s); else next.add(s); return next; })} style={{ accentColor: C.teal, width: 15, height: 15 }} />
-                    {s}
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Sort dropdown */}
-          <div style={{ position: 'relative' }} ref={sortDropdownRef}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-              <span style={{ fontSize: 10, fontWeight: 700, color: C.textMuted, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Sort</span>
-              <button onClick={() => setSortDropdownOpen(o => !o)} style={{ fontSize: 12, fontWeight: 600, color: C.text, border: 'none', background: 'transparent', cursor: 'pointer', outline: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
-                {sortBy}
-                <span style={{ fontSize: 10, color: C.textMuted }}>{sortDropdownOpen ? '▲' : '▼'}</span>
-              </button>
-            </div>
-            {sortDropdownOpen && (
-              <div style={{ ...dropdownMenu, right: 0, minWidth: 140 }}>
-                {['Most New', '% New', 'Most Wishlist', 'Largest', 'Smallest'].map(opt => (
-                  <button key={opt} onClick={() => { setSortBy(opt); setSortDropdownOpen(false); }}
-                    style={{ display: 'block', width: '100%', textAlign: 'left', padding: '7px 14px', border: 'none', background: sortBy === opt ? '#fbe2c0' : 'transparent', color: sortBy === opt ? C.teal : C.textSub, fontSize: 13, fontWeight: sortBy === opt ? 700 : 400, cursor: 'pointer' }}
-                  >{opt}</button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+      <div style={{ padding: `16px ${px}px 12px`, borderBottom: `1px solid ${C.border}` }}>
+        <SearchBar
+          value={search}
+          onChange={setSearch}
+          placeholder="Search sets..."
+          onFilterClick={() => setFilterOpen(true)}
+          filterActive={filterActive}
+        />
       </div>
 
       <div style={{ padding: `12px ${px}px 100px`, display: isWide ? 'grid' : 'block', gridTemplateColumns: isWide ? '1fr 1fr' : undefined, columnGap: isWide ? 16 : undefined }}>
@@ -359,6 +284,37 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
           <SetCard key={set.id} set={set} ownership={ownership} colorMode={colorMode} onSetStatus={onSetStatus} settings={settings} />
         ))}
       </div>
+
+      {filterOpen && (
+        <FilterModal
+          title="Filter Sets"
+          onClose={() => setFilterOpen(false)}
+          onReset={() => { setColorModeAndSave('exact'); setSeriesAndSave(new Set()); setSortByAndSave('Most New'); }}
+        >
+          <FilterSection label="Color Mode">
+            <FilterPillRow
+              options={COLOR_MODE_OPTIONS}
+              value={VALUE_TO_COLOR_MODE[colorMode]}
+              onChange={opt => setColorModeAndSave(COLOR_MODE_TO_VALUE[opt])}
+            />
+          </FilterSection>
+
+          <FilterSection label="Sort">
+            <FilterPillRow options={SORT_OPTIONS} value={sortBy} onChange={setSortByAndSave} />
+          </FilterSection>
+
+          <FilterSection label="Series">
+            <FilterCheckRow checked={seriesFilter.size === 0} onChange={() => setSeriesAndSave(new Set())} bold>
+              All Markers
+            </FilterCheckRow>
+            {allSeries.map(s => (
+              <FilterCheckRow key={s} checked={seriesFilter.has(s)} onChange={() => toggleSeries(s)}>
+                {s}
+              </FilterCheckRow>
+            ))}
+          </FilterSection>
+        </FilterModal>
+      )}
     </div>
   );
 }

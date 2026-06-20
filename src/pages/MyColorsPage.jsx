@@ -1,12 +1,15 @@
 import { useState, useMemo } from 'react';
 import { colors } from '../data/colors';
+import { allSets, SERIES_ORDER } from '../data/all-sets';
 import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
+import { SearchBar } from '../components/SearchBar';
+import { FilterModal, FilterSection, FilterCheckRow, FilterPillRow } from '../components/FilterModal';
 import { getLegacyDisplay } from '../utils/colorUtils';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
-import { C, RADIUS, scrollPage, pillActive, pillInactive } from '../styles/theme';
+import { C, RADIUS, scrollPage } from '../styles/theme';
 
 const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 
@@ -31,10 +34,42 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
   const [search, setSearch] = useState('');
   const [tab, setTab] = useState('All');
   const [selected, setSelected] = useState(null);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [seriesFilter, setSeriesFilter] = useState(() => {
+    try { return new Set(JSON.parse(localStorage.getItem('kk-mycolors-series') || '[]')); } catch { return new Set(); }
+  });
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
 
   const px = isWide ? 20 : 16;
+
+  const setSeriesAndSave = (next) => {
+    setSeriesFilter(next);
+    localStorage.setItem('kk-mycolors-series', JSON.stringify([...next]));
+  };
+  const toggleSeries = (s) => {
+    const next = new Set(seriesFilter);
+    next.has(s) ? next.delete(s) : next.add(s);
+    setSeriesAndSave(next);
+  };
+
+  const codeToSeries = useMemo(() => {
+    const map = new Map();
+    for (const set of allSets) {
+      for (const code of set.colors) {
+        if (!map.has(code)) map.set(code, new Set());
+        map.get(code).add(set.series);
+      }
+    }
+    return map;
+  }, []);
+
+  const allSeries = useMemo(() => {
+    const seen = new Set(allSets.map(s => s.series));
+    return SERIES_ORDER.filter(s => seen.has(s));
+  }, []);
+
+  const filterActive = seriesFilter.size > 0 || tab !== 'All';
 
   const filtered = useMemo(() => {
     const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
@@ -42,6 +77,10 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       if (settings?.hideJapanese && JAPANESE_EXCLUSIVE_CODES.has(c.code)) return false;
       if (settings?.hideDiscontinued && DISCONTINUED_CODES.has(c.code)) return false;
       if (settings?.hideColorlessBlender && c.code === COLORLESS_BLENDER_CODE) return false;
+      if (seriesFilter.size > 0) {
+        const series = codeToSeries.get(c.code);
+        if (!series || ![...seriesFilter].some(s => series.has(s))) return false;
+      }
       if (tokens.length) {
         const legacy = getLegacyDisplay(c);
         const haystack = [
@@ -61,39 +100,19 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       if (tab === 'Unowned') return !owned;
       return true;
     });
-  }, [search, tab, ownership, settings]);
+  }, [search, tab, ownership, settings, seriesFilter, codeToSeries]);
 
   return (
     <div style={scrollPage}>
-      {/* Search */}
+      {/* Search + Filter */}
       <div style={{ padding: `16px ${px}px 0` }}>
-        <div style={{
-          display: 'flex', alignItems: 'center', background: C.white,
-          borderRadius: RADIUS.lg, padding: '0 14px', gap: 8,
-        }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.tealDim} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Search colors, codes..."
-            style={{
-              flex: 1, border: 'none', background: 'transparent', padding: '12px 0',
-              fontSize: 14, color: C.textSub, outline: 'none',
-            }}
-          />
-          {search && (
-            <button onClick={() => setSearch('')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.tealDim, fontSize: 16, padding: 0 }}>×</button>
-          )}
-        </div>
-      </div>
-
-      {/* Tabs */}
-      <div style={{ display: 'flex', gap: 8, padding: `12px ${px}px`, justifyContent: 'center' }}>
-        {TABS.map(t => (
-          <button key={t} onClick={() => setTab(t)} style={tab === t ? pillActive : pillInactive}>{t}</button>
-        ))}
+        <SearchBar
+          value={search}
+          onChange={setSearch}
+          placeholder="Search colors, codes..."
+          onFilterClick={() => setFilterOpen(true)}
+          filterActive={filterActive}
+        />
       </div>
 
       {/* List */}
@@ -101,7 +120,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
         gap: 8,
-        padding: `0 ${px}px 100px`,
+        padding: `16px ${px}px 100px`,
       }}>
         {filtered.map(color => {
           const entries = Object.values(ownership[color.code] || {});
@@ -131,6 +150,29 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           );
         })}
       </div>
+
+      {filterOpen && (
+        <FilterModal
+          title="Filter Colors"
+          onClose={() => setFilterOpen(false)}
+          onReset={() => { setTab('All'); setSeriesAndSave(new Set()); }}
+        >
+          <FilterSection label="Status">
+            <FilterPillRow options={TABS} value={tab} onChange={setTab} />
+          </FilterSection>
+
+          <FilterSection label="Series">
+            <FilterCheckRow checked={seriesFilter.size === 0} onChange={() => setSeriesAndSave(new Set())} bold>
+              All Markers
+            </FilterCheckRow>
+            {allSeries.map(s => (
+              <FilterCheckRow key={s} checked={seriesFilter.has(s)} onChange={() => toggleSeries(s)}>
+                {s}
+              </FilterCheckRow>
+            ))}
+          </FilterSection>
+        </FilterModal>
+      )}
 
       {selected && (
         <ColorDetailModal

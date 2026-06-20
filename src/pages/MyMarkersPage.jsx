@@ -3,11 +3,13 @@ import { createPortal } from 'react-dom';
 import { allSets, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
+import { SearchBar } from '../components/SearchBar';
+import { FilterModal, FilterSection, FilterPillRow } from '../components/FilterModal';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
-import { C, FONT, RADIUS, scrollPage, pillActive, pillInactive, chipBase, chipUnowned, chipWish } from '../styles/theme';
+import { C, FONT, RADIUS, scrollPage, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
 const TABS = ['All', 'Owned', 'Unowned', 'Wishlist'];
 const colorMap = Object.fromEntries(allColors.map(c => [c.code, c]));
@@ -203,10 +205,12 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   const hideColorlessBlender = settings?.hideColorlessBlender ?? false;
   const [tab, setTab] = useState('All');
   const [search, setSearch] = useState('');
+  const [filterOpen, setFilterOpen] = useState(false);
   const seriesGroups = useMemo(() => getSeriesGroups(), []);
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
   const px = isWide ? 20 : 16;
+  const filterActive = tab !== 'All';
   const filteredGroups = useMemo(() => {
     let groups = seriesGroups;
     if (search.trim()) {
@@ -224,27 +228,16 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   return (
     <div style={scrollPage}>
       <div style={{ padding: `16px ${px}px 0` }}>
-        <div style={{ display: 'flex', alignItems: 'center', background: C.white, borderRadius: RADIUS.lg, padding: '0 14px', gap: 8 }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.tealDim} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Search series..."
-            style={{ flex: 1, border: 'none', background: 'transparent', padding: '12px 0', fontSize: 14, color: C.textSub, outline: 'none' }}
-          />
-          {search && <button onClick={() => setSearch('')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.tealDim, fontSize: 16, padding: 0 }}>×</button>}
-        </div>
+        <SearchBar
+          value={search}
+          onChange={setSearch}
+          placeholder="Search series..."
+          onFilterClick={() => setFilterOpen(true)}
+          filterActive={filterActive}
+        />
       </div>
 
-      <div style={{ display: 'flex', gap: 8, padding: `12px ${px}px`, justifyContent: 'center' }}>
-        {TABS.map(t => (
-          <button key={t} onClick={() => setTab(t)} style={tab === t ? pillActive : pillInactive}>{t}</button>
-        ))}
-      </div>
-
-      <div style={{ padding: `0 ${px}px 100px`, display: isWide ? 'grid' : 'block', gridTemplateColumns: isWide ? '1fr 1fr' : undefined, columnGap: isWide ? 16 : undefined }}>
+      <div style={{ padding: `16px ${px}px 100px`, display: isWide ? 'grid' : 'block', gridTemplateColumns: isWide ? '1fr 1fr' : undefined, columnGap: isWide ? 16 : undefined }}>
         {filteredGroups.map(({ series, tipType1, tipType2 }) => (
           <SeriesCard
             key={series} series={series} tipType1={tipType1} tipType2={tipType2}
@@ -253,6 +246,18 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
           />
         ))}
       </div>
+
+      {filterOpen && (
+        <FilterModal
+          title="Filter Markers"
+          onClose={() => setFilterOpen(false)}
+          onReset={() => setTab('All')}
+        >
+          <FilterSection label="Status">
+            <FilterPillRow options={TABS} value={tab} onChange={setTab} />
+          </FilterSection>
+        </FilterModal>
+      )}
     </div>
   );
 }
