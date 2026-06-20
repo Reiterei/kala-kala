@@ -6,7 +6,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 321,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: null,
       michaels: null,
@@ -22,7 +22,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 6,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: null,
       michaels: "https://www.michaels.com/product/ohuhu-oahu-6-color-primary-alcohol-marker-set-10761483",
@@ -38,7 +38,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 6,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: null,
       michaels: "https://www.michaels.com/product/ohuhu-oahu-6-color-pastel-alcohol-marker-set-10761482",
@@ -54,7 +54,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 6,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: null,
       michaels: "https://www.michaels.com/product/ohuhu-oahu-6-color-portrait-alcohol-marker-set-10761481",
@@ -70,7 +70,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 25,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: null,
       michaels: null,
@@ -86,7 +86,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 36,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-36-skin-tone-colors-dual-tips-alcohol-art-markers-fine-chisel",
       michaels: null,
@@ -102,7 +102,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 37,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-36-gray-tone-colors-dual-tips-alcohol-art-markers-set-chisel-fine",
       michaels: null,
@@ -118,7 +118,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 41,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-40-color-markers",
       michaels: null,
@@ -134,7 +134,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 49,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-48-pastel-colors-dual-tips-alcohol-art-markers-fine-chisel",
       michaels: null,
@@ -150,7 +150,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 61,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-60-colors-markers",
       michaels: null,
@@ -166,7 +166,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 81,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-80-colors-dual-tips-permanent-marker-pens",
       michaels: null,
@@ -182,7 +182,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 101,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-100-colors-dual-tips-marker-pens",
       michaels: null,
@@ -198,7 +198,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 121,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-120-colors-dual-tips-marker-pens",
       michaels: null,
@@ -214,7 +214,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 121,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-new-120-colors-dual-tips-alcohol-art-markers-fine-chisel",
       michaels: null,
@@ -230,7 +230,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 161,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/160-colors-alcohol-markers-ohuhu-dual-tips-permanent-art-markers-for-kids-great-christmas-gift-idea",
       michaels: null,
@@ -246,7 +246,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 201,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-200-color-chisel-fine-tip-markers",
       michaels: null,
@@ -262,7 +262,7 @@ export const oahuSets = [
     edition: null,
     version: null,
     count: 321,
-    tipType1: "Fine",  tipType2: "Chisel",
+    tipType1: "Chisel",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/oahu-series/products/ohuhu-320-colors-dual-tips-alcohol-art-markers-fine-chisel",
       michaels: null,
