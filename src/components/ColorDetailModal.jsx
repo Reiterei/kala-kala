@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { getLegacyList, getSeriesForColor } from '../utils/colorUtils';
 import { allSets } from '../data/all-sets';
@@ -25,19 +25,19 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const goPrev = () => { if (hasNav) onNavigate(colorList[(navIndex - 1 + colorList.length) % colorList.length]); };
   const goNext = () => { if (hasNav) onNavigate(colorList[(navIndex + 1) % colorList.length]); };
 
+  const touchStart = useRef(null);
+  const onTouchStart = (e) => { touchStart.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStart.current == null) return;
+    const dx = e.changedTouches[0].clientX - touchStart.current;
+    touchStart.current = null;
+    if (Math.abs(dx) < 50) return;
+    if (dx > 0) goPrev(); else goNext();
+  };
+
   useEffect(() => {
     setFoundOpen({});
   }, [color?.code]);
-
-  useEffect(() => {
-    if (!color) return;
-    const onKey = (e) => {
-      if (e.key === 'ArrowLeft') goPrev();
-      if (e.key === 'ArrowRight') goNext();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [color, navIndex, colorList]);
 
   if (!color) return null;
 
@@ -74,30 +74,14 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
     >
       <div
         style={{
-          position: 'relative',
-          width: '100%', maxWidth: 440,
+          background: C.white, borderRadius: RADIUS.xl, width: '100%', maxWidth: 440,
+          maxHeight: '85vh', display: 'flex', flexDirection: 'column',
+          overflow: 'hidden', boxShadow: SHADOW.lg, fontFamily: FONT,
         }}
         onClick={e => e.stopPropagation()}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
-        {hasNav && (
-          <button
-            onClick={goPrev}
-            style={{
-              position: 'absolute', left: -14, top: '50%', transform: 'translateY(-50%)',
-              background: 'rgba(255,255,255,0.95)', border: 'none', borderRadius: '50%',
-              width: 28, height: 28, cursor: 'pointer', fontSize: 14, fontWeight: 700,
-              color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: SHADOW.md, zIndex: 1,
-            }}
-          >‹</button>
-        )}
-        <div
-          style={{
-            background: C.white, borderRadius: RADIUS.xl, width: '100%', minWidth: 0,
-            maxHeight: '85vh', display: 'flex', flexDirection: 'column',
-            overflow: 'hidden', boxShadow: SHADOW.lg, fontFamily: FONT,
-          }}
-        >
         {/* Header */}
         <div style={{ background: bg, padding: '20px 20px 16px', position: 'relative', flexShrink: 0 }}>
           <button
@@ -212,19 +196,6 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
             )}
           </div>
         </div>
-        </div>
-        {hasNav && (
-          <button
-            onClick={goNext}
-            style={{
-              position: 'absolute', right: -14, top: '50%', transform: 'translateY(-50%)',
-              background: 'rgba(255,255,255,0.95)', border: 'none', borderRadius: '50%',
-              width: 28, height: 28, cursor: 'pointer', fontSize: 14, fontWeight: 700,
-              color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: SHADOW.md, zIndex: 1,
-            }}
-          >›</button>
-        )}
       </div>
     </div>
   , document.body);
