@@ -6,7 +6,7 @@ export const kauaiSets = [
     edition: null,
     version: null,
     count: 36,
-    tipType1: "Brush",  tipType2: null,
+    tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/products/ohuhu-kauai-36-colors-dual-tips-low-odor-washable-alcohol-art-markers?variant=51206343033119",
       michaels: null,
