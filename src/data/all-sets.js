@@ -3,13 +3,14 @@ import { kaalaSets } from './kaala-sets';
 import { molokaiSets } from './molokai-sets';
 import { naluSets } from './nalu-sets';
 import { kauaiSets } from './kauai-sets';
+import { oahuSets } from './oahu-sets';
 
 // Add new series imports above and append below to register them everywhere.
-export const allSets = [...honoluluSets, ...kaalaSets, ...kauaiSets, ...molokaiSets, ...naluSets,];
+export const allSets = [...honoluluSets, ...kaalaSets, ...kauaiSets, ...molokaiSets, ...naluSets, ...oahuSets,];
 
 export const SERIES_ORDER = [
   'Honolulu', 'Honolulu B', 'Honolulu Plus', 'Honolulu S', 'Honolulu²', 'Honolulu² B',
-  'Kaala', 'Kaala B', 'Kauai', 'Molokai','Nalu',
+  'Kaala', 'Kaala B', 'Kauai', 'Molokai','Nalu', 'Oahu',
 ];
 
 export const SERIES_SHORT = {
@@ -19,6 +20,7 @@ export const SERIES_SHORT = {
   'Kauai': 'KAUAI',
   'Molokai': 'MOLOKAI',
   'Nalu': 'NALU',
+  'Oahu': 'OAHU',
 };
 
 // Series badge colors: { bg, text }. Add an entry per series; falls back to

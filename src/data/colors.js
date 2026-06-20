@@ -4579,10 +4579,6 @@ export const colors = [
         "code": "RV315"
       },
       "oahu": null,
-      "kaala": {
-        "name": "Hydrangea Violet",
-        "code": "V286"
-      },
       "original": null
     }
   },
