@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { MyColorsPage } from './pages/MyColorsPage';
 import { MyMarkersPage } from './pages/MyMarkersPage';
 import { RecommendedPage } from './pages/RecommendedPage';
@@ -83,63 +83,49 @@ export default function App() {
     setTimeout(() => setAnimating(false), ANIM_DURATION);
   }, []);
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    function onTouchStart(e) {
-      swipeConsumed = false;
-      const t = e.touches[0];
-      drag.current = { startX: t.clientX, startY: t.clientY, axis: null, width: el.clientWidth };
-    }
-
-    function onTouchMove(e) {
-      if (!drag.current) return;
-      const t = e.touches[0];
-      const dx = t.clientX - drag.current.startX;
-      const dy = t.clientY - drag.current.startY;
-      if (!drag.current.axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
-        drag.current.axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
-      }
-      if (drag.current.axis === 'h') {
-        e.preventDefault();
-        const atStart = pageIdxRef.current === 0;
-        const atEnd = pageIdxRef.current === PAGE_COUNT - 1;
-        let clampedDx = dx;
-        if ((atStart && dx > 0) || (atEnd && dx < 0)) clampedDx = dx * 0.35;
-        setDragPx(clampedDx);
-      }
-    }
-
-    function onTouchEnd(e) {
-      if (!drag.current) return;
-      const { startX, axis, width } = drag.current;
-      drag.current = null;
-      if (axis !== 'h') { setDragPx(0); return; }
-      const dx = e.changedTouches[0].clientX - startX;
-      setDragPx(0);
-      if (Math.abs(dx) < MIN_SWIPE_PX && Math.abs(dx) < width * 0.2) return;
-      swipeConsumed = true;
-      goTo(pageIdxRef.current + (dx < 0 ? 1 : -1));
-    }
-
-    function onTouchCancel() {
-      drag.current = null;
-      setDragPx(0);
-    }
-
-    el.addEventListener('touchstart', onTouchStart, { passive: true });
-    el.addEventListener('touchmove', onTouchMove, { passive: false });
-    el.addEventListener('touchend', onTouchEnd, { passive: true });
-    el.addEventListener('touchcancel', onTouchCancel, { passive: true });
-
-    return () => {
-      el.removeEventListener('touchstart', onTouchStart);
-      el.removeEventListener('touchmove', onTouchMove);
-      el.removeEventListener('touchend', onTouchEnd);
-      el.removeEventListener('touchcancel', onTouchCancel);
+  function handlePointerDown(e) {
+    if (e.pointerType !== 'touch') return;
+    swipeConsumed = false;
+    drag.current = {
+      startX: e.clientX, startY: e.clientY, axis: null,
+      width: containerRef.current?.clientWidth || 1,
+      pointerId: e.pointerId,
     };
-  }, [goTo]);
+  }
+
+  function handlePointerMove(e) {
+    if (!drag.current || e.pointerId !== drag.current.pointerId) return;
+    const dx = e.clientX - drag.current.startX;
+    const dy = e.clientY - drag.current.startY;
+    if (!drag.current.axis && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
+      drag.current.axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+    }
+    if (drag.current.axis === 'h') {
+      const atStart = pageIdxRef.current === 0;
+      const atEnd = pageIdxRef.current === PAGE_COUNT - 1;
+      let clampedDx = dx;
+      if ((atStart && dx > 0) || (atEnd && dx < 0)) clampedDx = dx * 0.35;
+      setDragPx(clampedDx);
+    }
+  }
+
+  function handlePointerUp(e) {
+    if (!drag.current || e.pointerId !== drag.current.pointerId) return;
+    const { startX, axis, width } = drag.current;
+    drag.current = null;
+    if (axis !== 'h') { setDragPx(0); return; }
+    const dx = e.clientX - startX;
+    setDragPx(0);
+    if (Math.abs(dx) < MIN_SWIPE_PX && Math.abs(dx) < width * 0.2) return;
+    swipeConsumed = true;
+    goTo(pageIdxRef.current + (dx < 0 ? 1 : -1));
+  }
+
+  function handlePointerCancel(e) {
+    if (!drag.current || e.pointerId !== drag.current.pointerId) return;
+    drag.current = null;
+    setDragPx(0);
+  }
 
   const containerWidth = containerRef.current?.clientWidth || 1;
   const dragPercent = (dragPx / containerWidth) * 100;
@@ -220,6 +206,10 @@ export default function App() {
       <div
         ref={containerRef}
         style={{ flex: 1, overflow: 'hidden', position: 'relative', touchAction: 'pan-y' }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
       >
         <div
           style={{
