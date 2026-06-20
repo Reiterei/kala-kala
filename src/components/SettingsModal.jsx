@@ -22,7 +22,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
       >
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '16px 20px', borderBottom: `1px solid ${C.border}`,
+          padding: '16px 20px', background: C.headerBg,
         }}>
           <span style={{ fontSize: 17, fontWeight: 800, color: C.text, letterSpacing: -0.2 }}>
             Settings
@@ -30,9 +30,9 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
           <button
             onClick={onClose}
             style={{
-              background: C.bgInput, border: 'none', borderRadius: '50%',
+              background: 'rgba(255,255,255,0.5)', border: 'none', borderRadius: '50%',
               width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', color: C.tealText,
+              cursor: 'pointer', color: C.text,
             }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -45,7 +45,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             padding: '12px 20px', borderBottom: `1px solid ${C.border}`,
-            background: C.bgInput,
+            background: C.white,
           }}>
             <div style={{ fontSize: 12, color: C.tealDim, fontWeight: 600 }}>
               Signed in as <span style={{ color: C.text, fontWeight: 700 }}>{user.email}</span>
@@ -53,9 +53,9 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             <button
               onClick={() => { onSignOut(); onClose(); }}
               style={{
-                background: 'none', border: `1.5px solid ${C.border}`,
-                borderRadius: 8, padding: '4px 10px',
-                color: C.tealDim, fontSize: 11, fontWeight: 700,
+                background: 'none', border: 'none',
+                padding: '4px 10px',
+                color: C.teal, fontSize: 11, fontWeight: 700,
                 cursor: 'pointer', fontFamily: FONT, flexShrink: 0,
               }}
             >Sign out</button>
@@ -65,24 +65,28 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
         <div style={{ padding: '16px 20px' }}>
           <SettingRow
             label="Japanese Exclusive Colors"
+            description="Hide colors only available in Japan"
             value={settings.hideJapanese ? 'hide' : 'show'}
             onChange={v => onSetSetting('hideJapanese', v === 'hide')}
           />
           <div style={{ borderTop: `1px solid ${C.border}`, margin: '12px 0' }} />
           <SettingRow
             label="Discontinued Colors"
+            description="Hide colors no longer in production"
             value={settings.hideDiscontinued ? 'hide' : 'show'}
             onChange={v => onSetSetting('hideDiscontinued', v === 'hide')}
           />
           <div style={{ borderTop: `1px solid ${C.border}`, margin: '12px 0' }} />
           <SettingRow
             label="Colorless Blender"
+            description="Hide Color 0 - Colorless Blender"
             value={settings.hideColorlessBlender ? 'hide' : 'show'}
             onChange={v => onSetSetting('hideColorlessBlender', v === 'hide')}
           />
           <div style={{ borderTop: `1px solid ${C.border}`, margin: '12px 0' }} />
           <SettingRow
             label="Unavailable Sets"
+            description="Hide sets with no retail links"
             value={settings.hideUnavailable ? 'hide' : 'show'}
             onChange={v => onSetSetting('hideUnavailable', v === 'hide')}
           />
@@ -91,6 +95,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Remove all colors from &lsquo;Owned&rsquo;</div>
+                <div style={{ fontSize: 11, color: C.tealDim, marginTop: 2 }}>Permanently clear your owned list</div>
               </div>
               <button
                 onClick={handleClearRequest}
@@ -124,6 +129,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Remove all colors from &lsquo;Wishlist&rsquo;</div>
+                <div style={{ fontSize: 11, color: C.tealDim, marginTop: 2 }}>Permanently clear your wishlist</div>
               </div>
               <button
                 onClick={() => setConfirmingWishlist(true)}
@@ -167,11 +173,12 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
   );
 }
 
-function SettingRow({ label, value, onChange }) {
+function SettingRow({ label, description, value, onChange }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
       <div>
         <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{label}</div>
+        {description && <div style={{ fontSize: 11, color: C.tealDim, marginTop: 2 }}>{description}</div>}
       </div>
       <div style={{ display: 'flex', borderRadius: RADIUS.sm, overflow: 'hidden', border: `1.5px solid ${C.tealMid}`, flexShrink: 0 }}>
         {['show', 'hide'].map(opt => (
