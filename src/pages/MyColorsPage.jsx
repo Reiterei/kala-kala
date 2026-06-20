@@ -4,7 +4,7 @@ import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { getLegacyDisplay } from '../utils/colorUtils';
 import { swipeConsumed } from '../App';
-import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
+import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, RADIUS, scrollPage, pillActive, pillInactive } from '../styles/theme';
 
@@ -41,6 +41,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
     return colors.filter(c => {
       if (settings?.hideJapanese && JAPANESE_EXCLUSIVE_CODES.has(c.code)) return false;
       if (settings?.hideDiscontinued && DISCONTINUED_CODES.has(c.code)) return false;
+      if (settings?.hideColorlessBlender && c.code === COLORLESS_BLENDER_CODE) return false;
       if (tokens.length) {
         const legacy = getLegacyDisplay(c);
         const haystack = [

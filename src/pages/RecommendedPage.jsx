@@ -9,7 +9,7 @@ import ohuhuLogo from '../assets/ohuhu-logo.png';
 import michaelsLogo from '../assets/michaels-logo.png';
 import walmartLogo from '../assets/walmart-logo.png';
 import amazonLogo from '../assets/amazon-logo.png';
-import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, isUnavailableSet } from '../hooks/useSettings';
+import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE, isUnavailableSet } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, SHADOW, scrollPage, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
@@ -196,6 +196,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
   const hideJapanese    = settings?.hideJapanese    ?? false;
   const hideUnavailable = settings?.hideUnavailable ?? false;
   const hideDiscontinued = settings?.hideDiscontinued ?? false;
+  const hideColorlessBlender = settings?.hideColorlessBlender ?? false;
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
   const px = isWide ? 20 : 16;
@@ -231,13 +232,17 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
   const retailSets = useMemo(() => {
     let sets = allSets.filter(s => !s.name.includes('Individual'));
     if (hideUnavailable) sets = sets.filter(s => !isUnavailableSet(s));
-    if (hideJapanese || hideDiscontinued) {
+    if (hideJapanese || hideDiscontinued || hideColorlessBlender) {
       sets = sets
-        .map(s => ({ ...s, colors: s.colors.filter(c => !(hideJapanese && JAPANESE_EXCLUSIVE_CODES.has(c)) && !(hideDiscontinued && DISCONTINUED_CODES.has(c))) }))
+        .map(s => ({ ...s, colors: s.colors.filter(c =>
+          !(hideJapanese && JAPANESE_EXCLUSIVE_CODES.has(c)) &&
+          !(hideDiscontinued && DISCONTINUED_CODES.has(c)) &&
+          !(hideColorlessBlender && c === COLORLESS_BLENDER_CODE)
+        ) }))
         .filter(s => s.colors.length > 0);
     }
     return sets;
-  }, [hideJapanese, hideUnavailable, hideDiscontinued]);
+  }, [hideJapanese, hideUnavailable, hideDiscontinued, hideColorlessBlender]);
 
   const allSeries = useMemo(() => {
     const seen = new Set(retailSets.map(s => s.series));

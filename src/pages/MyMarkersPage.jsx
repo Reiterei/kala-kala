@@ -5,7 +5,7 @@ import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
-import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
+import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, scrollPage, pillActive, pillInactive, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
@@ -58,7 +58,7 @@ function ColorChip({ colorCode, status, onClick, cc }) {
   );
 }
 
-function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, hideJapanese, hideDiscontinued, settings }) {
+function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, hideJapanese, hideDiscontinued, hideColorlessBlender, settings }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
   const [confirming, setConfirming] = useState(false);
@@ -67,9 +67,10 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
     const all = getColorsForSeries(series);
     return all.filter(c =>
       !(hideJapanese && JAPANESE_EXCLUSIVE_CODES.has(c)) &&
-      !(hideDiscontinued && DISCONTINUED_CODES.has(c))
+      !(hideDiscontinued && DISCONTINUED_CODES.has(c)) &&
+      !(hideColorlessBlender && c === COLORLESS_BLENDER_CODE)
     );
-  }, [series, hideJapanese, hideDiscontinued]);
+  }, [series, hideJapanese, hideDiscontinued, hideColorlessBlender]);
 
   const ownedCodes = useMemo(() => seriesColors.filter(c => ownership[c]?.[series] === 'owned'), [seriesColors, series, ownership]);
   const wishCodes  = useMemo(() => seriesColors.filter(c => ownership[c]?.[series] === 'wishlist'), [seriesColors, series, ownership]);
@@ -197,6 +198,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
 export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   const hideJapanese = settings?.hideJapanese ?? false;
   const hideDiscontinued = settings?.hideDiscontinued ?? false;
+  const hideColorlessBlender = settings?.hideColorlessBlender ?? false;
   const [tab, setTab] = useState('All');
   const [search, setSearch] = useState('');
   const seriesGroups = useMemo(() => getSeriesGroups(), []);
@@ -245,7 +247,7 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
           <SeriesCard
             key={series} series={series} tipType1={tipType1} tipType2={tipType2}
             ownership={ownership} onSetStatus={onSetStatus} tab={tab}
-            hideJapanese={hideJapanese} hideDiscontinued={hideDiscontinued} settings={settings}
+            hideJapanese={hideJapanese} hideDiscontinued={hideDiscontinued} hideColorlessBlender={hideColorlessBlender} settings={settings}
           />
         ))}
       </div>
