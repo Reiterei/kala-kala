@@ -106,9 +106,9 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
             <div style={{ display: 'flex', alignItems: 'center', color: cc.accent }}>
               <TipIcon type={getTipIcon(set.tipType1)} size={22} color={cc.accent} />
-              <TipIcon type={getTipIcon(set.tipType2)} size={22} color={cc.accent} />
+              {set.tipType2 && <TipIcon type={getTipIcon(set.tipType2)} size={22} color={cc.accent} />}
             </div>
-            <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{set.tipType1} / {set.tipType2}</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{set.tipType2 ? `${set.tipType1} / ${set.tipType2}` : set.tipType1}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
