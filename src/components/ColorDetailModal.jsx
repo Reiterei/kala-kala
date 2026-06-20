@@ -35,8 +35,10 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const g = parseInt(color.hex.substring(2, 4), 16);
   const b = parseInt(color.hex.substring(4, 6), 16);
   const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  const textCol = lum > 0.55 ? '#1a1a1a' : C.white;
-  const textColSub = lum > 0.55 ? 'rgba(0,0,0,0.62)' : 'rgba(255,255,255,0.8)';
+  const sat = (Math.max(r, g, b) - Math.min(r, g, b)) / 255;
+  const useLight = lum < 0.6 || (sat > 0.35 && lum < 0.75);
+  const textCol = useLight ? C.white : '#1a1a1a';
+  const textColSub = useLight ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.62)';
 
   const bodyBg = `rgb(${Math.round(r * 0.16 + 255 * 0.84)}, ${Math.round(g * 0.16 + 255 * 0.84)}, ${Math.round(b * 0.16 + 255 * 0.84)})`;
 
