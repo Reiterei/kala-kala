@@ -78,6 +78,13 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
           />
           <div style={{ borderTop: `1px solid ${C.border}`, margin: '12px 0' }} />
           <SettingRow
+            label="Colorless Blender"
+            description="Hide Color 0 - Colorless Blender"
+            value={settings.hideColorlessBlender ? 'hide' : 'show'}
+            onChange={v => onSetSetting('hideColorlessBlender', v === 'hide')}
+          />
+          <div style={{ borderTop: `1px solid ${C.border}`, margin: '12px 0' }} />
+          <SettingRow
             label="Unavailable Sets"
             description="Hide sets with no retail links"
             value={settings.hideUnavailable ? 'hide' : 'show'}
