@@ -38,7 +38,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const textCol = lum > 0.55 ? C.textSub : C.white;
   const textColSub = lum > 0.55 ? 'rgba(40,60,60,0.7)' : 'rgba(255,255,255,0.8)';
 
-  const bodyBg = `rgb(${Math.round(r * 0.06 + 255 * 0.94)}, ${Math.round(g * 0.06 + 255 * 0.94)}, ${Math.round(b * 0.06 + 255 * 0.94)})`;
+  const bodyBg = `rgb(${Math.round(r * 0.16 + 255 * 0.84)}, ${Math.round(g * 0.16 + 255 * 0.84)}, ${Math.round(b * 0.16 + 255 * 0.84)})`;
 
   return createPortal(
     <div
