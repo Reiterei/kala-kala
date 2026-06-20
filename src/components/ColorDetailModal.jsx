@@ -108,7 +108,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               const wishBtn = { ...btnBase, background: isWish ? C.wish : cc.track, color: isWish ? C.white : cc.accent };
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
-                <div key={series} style={{ background: cc.cardBg, borderRadius: RADIUS.lg, border: `1.5px solid ${cc.border}`, overflow: 'hidden' }}>
+                <div key={series} style={{ background: cc.cardBg, borderRadius: RADIUS.lg, border: `1.5px solid ${cc.accent}`, overflow: 'hidden' }}>
                   <div style={{ display: 'flex', alignItems: 'center', padding: '10px 16px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <TipIcon type={getTipIcon(tipType1)} size={22} color={cc.accent} />
