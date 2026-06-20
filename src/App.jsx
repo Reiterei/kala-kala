@@ -74,10 +74,10 @@ export default function App() {
 
   const drag = useRef(null);
   const containerRef = useRef(null);
+  const [dragPx, setDragPx] = useState(0);
 
   const goTo = useCallback((idx) => {
     const clamped = Math.max(0, Math.min(PAGE_COUNT - 1, idx));
-    if (clamped === pageIdxRef.current) return;
     setAnimating(true);
     setPageIdx(clamped);
     setTimeout(() => setAnimating(false), ANIM_DURATION);
@@ -90,7 +90,7 @@ export default function App() {
     function onTouchStart(e) {
       swipeConsumed = false;
       const t = e.touches[0];
-      drag.current = { startX: t.clientX, startY: t.clientY, axis: null };
+      drag.current = { startX: t.clientX, startY: t.clientY, axis: null, width: el.clientWidth };
     }
 
     function onTouchMove(e) {
@@ -101,59 +101,49 @@ export default function App() {
       if (!drag.current.axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
         drag.current.axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
       }
-      if (drag.current.axis === 'h') e.preventDefault();
+      if (drag.current.axis === 'h') {
+        e.preventDefault();
+        const atStart = pageIdxRef.current === 0;
+        const atEnd = pageIdxRef.current === PAGE_COUNT - 1;
+        let clampedDx = dx;
+        if ((atStart && dx > 0) || (atEnd && dx < 0)) clampedDx = dx * 0.35;
+        setDragPx(clampedDx);
+      }
     }
 
     function onTouchEnd(e) {
       if (!drag.current) return;
-      const { startX, axis } = drag.current;
+      const { startX, axis, width } = drag.current;
       drag.current = null;
-      if (axis !== 'h') return;
+      if (axis !== 'h') { setDragPx(0); return; }
       const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) < MIN_SWIPE_PX) return;
+      setDragPx(0);
+      if (Math.abs(dx) < MIN_SWIPE_PX && Math.abs(dx) < width * 0.2) return;
       swipeConsumed = true;
       goTo(pageIdxRef.current + (dx < 0 ? 1 : -1));
+    }
+
+    function onTouchCancel() {
+      drag.current = null;
+      setDragPx(0);
     }
 
     el.addEventListener('touchstart', onTouchStart, { passive: true });
     el.addEventListener('touchmove', onTouchMove, { passive: false });
     el.addEventListener('touchend', onTouchEnd, { passive: true });
-    el.addEventListener('touchcancel', () => { drag.current = null; }, { passive: true });
+    el.addEventListener('touchcancel', onTouchCancel, { passive: true });
 
     return () => {
       el.removeEventListener('touchstart', onTouchStart);
       el.removeEventListener('touchmove', onTouchMove);
       el.removeEventListener('touchend', onTouchEnd);
+      el.removeEventListener('touchcancel', onTouchCancel);
     };
   }, [goTo]);
 
-  function handlePointerDown(e) {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    swipeConsumed = false;
-    drag.current = { startX: e.clientX, startY: e.clientY, axis: null };
-  }
-
-  function handlePointerMove(e) {
-    if (!drag.current) return;
-    const dx = e.clientX - drag.current.startX;
-    const dy = e.clientY - drag.current.startY;
-    if (!drag.current.axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
-      drag.current.axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
-    }
-  }
-
-  function handlePointerUp(e) {
-    if (!drag.current) return;
-    const { startX, axis } = drag.current;
-    drag.current = null;
-    if (axis !== 'h') return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) < MIN_SWIPE_PX) return;
-    swipeConsumed = true;
-    goTo(pageIdxRef.current + (dx < 0 ? 1 : -1));
-  }
-
-  const baseTranslate = -(pageIdx / PAGE_COUNT) * 100;
+  const containerWidth = containerRef.current?.clientWidth || 1;
+  const dragPercent = (dragPx / containerWidth) * 100;
+  const baseTranslate = -(pageIdx / PAGE_COUNT) * 100 + dragPercent / PAGE_COUNT;
 
   const pages = [
     <MyColorsPage key="colors" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
@@ -230,10 +220,6 @@ export default function App() {
       <div
         ref={containerRef}
         style={{ flex: 1, overflow: 'hidden', position: 'relative', touchAction: 'pan-y' }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={() => { drag.current = null; }}
       >
         <div
           style={{
@@ -241,7 +227,7 @@ export default function App() {
             width: `${PAGE_COUNT * 100}%`,
             height: '100%',
             transform: `translateX(${baseTranslate}%)`,
-            transition: animating
+            transition: animating && !drag.current
               ? `transform ${ANIM_DURATION}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
               : 'none',
             willChange: 'transform',
