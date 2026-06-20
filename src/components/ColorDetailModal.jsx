@@ -85,7 +85,13 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
         </div>
 
         {/* Scrollable body */}
-        <div style={{ overflowY: 'auto', flex: 1 }}>
+        <style>{`
+          .kk-modal-scroll-${color.code}::-webkit-scrollbar { width: 8px; }
+          .kk-modal-scroll-${color.code}::-webkit-scrollbar-track { background: transparent; }
+          .kk-modal-scroll-${color.code}::-webkit-scrollbar-thumb { background: ${bg}; border-radius: 4px; }
+          .kk-modal-scroll-${color.code} { scrollbar-color: ${bg} transparent; }
+        `}</style>
+        <div className={`kk-modal-scroll-${color.code}`} style={{ overflowY: 'auto', flex: 1 }}>
           <div style={{ padding: '12px 0 8px' }}>
             {relevantSeries.map(({ series, tipType1, tipType2 }) => {
               const status = ownership[color.code]?.[series] ?? null;
