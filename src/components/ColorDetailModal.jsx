@@ -72,38 +72,31 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
       }}
       onClick={onClose}
     >
-      {hasNav && (
-        <button
-          onClick={(e) => { e.stopPropagation(); goPrev(); }}
-          style={{
-            position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)',
-            background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
-            width: 40, height: 40, cursor: 'pointer', fontSize: 20, fontWeight: 700,
-            color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: SHADOW.md, zIndex: 1001,
-          }}
-        >‹</button>
-      )}
-      {hasNav && (
-        <button
-          onClick={(e) => { e.stopPropagation(); goNext(); }}
-          style={{
-            position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)',
-            background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
-            width: 40, height: 40, cursor: 'pointer', fontSize: 20, fontWeight: 700,
-            color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: SHADOW.md, zIndex: 1001,
-          }}
-        >›</button>
-      )}
       <div
         style={{
-          background: C.white, borderRadius: RADIUS.xl, width: '100%', maxWidth: 480,
-          maxHeight: '85vh', display: 'flex', flexDirection: 'column',
-          overflow: 'hidden', boxShadow: SHADOW.lg, fontFamily: FONT,
+          display: 'flex', alignItems: 'center', gap: 10,
+          width: '100%', maxWidth: 560, justifyContent: 'center',
         }}
         onClick={e => e.stopPropagation()}
       >
+        {hasNav && (
+          <button
+            onClick={goPrev}
+            style={{
+              flexShrink: 0, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: 36, height: 36, cursor: 'pointer', fontSize: 18, fontWeight: 700,
+              color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: SHADOW.md,
+            }}
+          >‹</button>
+        )}
+        <div
+          style={{
+            background: C.white, borderRadius: RADIUS.xl, width: '100%', maxWidth: 440, minWidth: 0,
+            maxHeight: '85vh', display: 'flex', flexDirection: 'column',
+            overflow: 'hidden', boxShadow: SHADOW.lg, fontFamily: FONT,
+          }}
+        >
         {/* Header */}
         <div style={{ background: bg, padding: '20px 20px 16px', position: 'relative', flexShrink: 0 }}>
           <button
@@ -217,6 +210,17 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
             )}
           </div>
         </div>
+        {hasNav && (
+          <button
+            onClick={goNext}
+            style={{
+              flexShrink: 0, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: 36, height: 36, cursor: 'pointer', fontSize: 18, fontWeight: 700,
+              color: C.textSub, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: SHADOW.md,
+            }}
+          >›</button>
+        )}
       </div>
     </div>
   , document.body);
