@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { C, FONT, RADIUS, SHADOW, overlayStyle, segmentActive, segmentInactive } from '../styles/theme';
 
@@ -101,7 +101,7 @@ export function FilterToggleRow({ label, value, onChange }) {
 }
 
 export function SeriesFilterTree({ groups, selected, onChange }) {
-  const allSeries = useMemo(() => Object.values(groups).flat(), [groups]);
+  const [rootOpen, setRootOpen] = useState(false);
   const [expanded, setExpanded] = useState(() => new Set());
 
   const toggleExpanded = (groupLabel) => {
@@ -125,54 +125,67 @@ export function SeriesFilterTree({ groups, selected, onChange }) {
     onChange(next);
   };
 
+  const summary = selected.size === 0 ? 'All Markers' : selected.size === 1 ? [...selected][0] : `${selected.size} Selected`;
+
   return (
-    <>
-      <FilterCheckRow checked={selected.size === 0} onChange={() => onChange(new Set())} bold>
-        All Markers
-      </FilterCheckRow>
-      {Object.entries(groups).map(([groupLabel, seriesList]) => {
-        if (seriesList.length === 1) {
-          const s = seriesList[0];
-          return (
-            <FilterCheckRow key={s} checked={selected.has(s)} onChange={() => toggleOne(s)}>
-              {s}
-            </FilterCheckRow>
-          );
-        }
-        const allChecked = seriesList.every(s => selected.has(s));
-        const someChecked = seriesList.some(s => selected.has(s));
-        const isOpen = expanded.has(groupLabel);
-        return (
-          <div key={groupLabel}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 0', cursor: 'pointer' }}>
-              <input
-                type="checkbox"
-                checked={allChecked}
-                ref={el => { if (el) el.indeterminate = someChecked && !allChecked; }}
-                onChange={() => toggleGroup(seriesList)}
-                style={{ accentColor: C.teal, width: 16, height: 16 }}
-              />
-              <span
-                onClick={() => toggleExpanded(groupLabel)}
-                style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1, fontSize: 13, color: C.textSub }}
-              >
-                {groupLabel}
-                <span style={{ fontSize: 11, fontWeight: 700, color: C.tealText }}>Series</span>
-                <span style={{ marginLeft: 'auto', fontSize: 10, color: C.textMuted }}>{isOpen ? '▲' : '▼'}</span>
-              </span>
-            </div>
-            {isOpen && (
-              <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: 26 }}>
-                {seriesList.map(s => (
-                  <FilterCheckRow key={s} checked={selected.has(s)} onChange={() => toggleOne(s)}>
-                    {s}
-                  </FilterCheckRow>
-                ))}
+    <div>
+      <button
+        onClick={() => setRootOpen(o => !o)}
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          width: '100%', padding: '10px 12px', borderRadius: RADIUS.md,
+          border: `1.5px solid ${C.tealMid}`, background: C.white, cursor: 'pointer',
+          fontSize: 13, fontWeight: 600, color: C.text,
+        }}
+      >
+        {summary}
+        <span style={{ fontSize: 10, color: C.textMuted }}>{rootOpen ? '▲' : '▼'}</span>
+      </button>
+
+      {rootOpen && (
+        <div style={{ marginTop: 8, padding: '4px 4px 0' }}>
+          <FilterCheckRow checked={selected.size === 0} onChange={() => onChange(new Set())} bold>
+            All Markers
+          </FilterCheckRow>
+          {Object.entries(groups).map(([groupLabel, seriesList]) => {
+            const allChecked = seriesList.every(s => selected.has(s));
+            const someChecked = seriesList.some(s => selected.has(s));
+            const isOpen = expanded.has(groupLabel);
+            return (
+              <div key={groupLabel}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 0', cursor: 'pointer' }}>
+                  <input
+                    type="checkbox"
+                    checked={allChecked}
+                    ref={el => { if (el) el.indeterminate = someChecked && !allChecked; }}
+                    onChange={() => toggleGroup(seriesList)}
+                    style={{ accentColor: C.teal, width: 16, height: 16 }}
+                  />
+                  <span
+                    onClick={() => seriesList.length > 1 && toggleExpanded(groupLabel)}
+                    style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1, fontSize: 13, color: C.textSub, cursor: seriesList.length > 1 ? 'pointer' : 'default' }}
+                  >
+                    {groupLabel}
+                    <span style={{ fontSize: 11, fontWeight: 700, color: C.tealText }}>Series</span>
+                    {seriesList.length > 1 && (
+                      <span style={{ marginLeft: 'auto', fontSize: 10, color: C.textMuted }}>{isOpen ? '▲' : '▼'}</span>
+                    )}
+                  </span>
+                </div>
+                {seriesList.length > 1 && isOpen && (
+                  <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: 26 }}>
+                    {seriesList.map(s => (
+                      <FilterCheckRow key={s} checked={selected.has(s)} onChange={() => toggleOne(s)}>
+                        {s}
+                      </FilterCheckRow>
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        );
-      })}
-    </>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }
