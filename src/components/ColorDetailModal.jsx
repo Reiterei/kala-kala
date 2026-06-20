@@ -103,7 +103,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                 fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
               };
               const ownBtn = { ...btnBase, background: isOwned ? cc.accent : cc.track, color: isOwned ? C.white : cc.accent };
-              const wishBtn = { ...btnBase, background: isWish ? cc.accentSoft : cc.track, color: isWish ? C.white : cc.accent };
+              const wishBtn = { ...btnBase, background: isWish ? C.wish : cc.track, color: isWish ? C.white : cc.accent };
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
                 <div key={series} style={{ borderBottom: `1px solid ${cc.border}` }}>
@@ -114,7 +114,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                     </div>
                     <div style={{ flex: 1, marginLeft: 10 }}>
                       <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{series}</div>
-                      <div style={{ fontSize: 11, color: C.textMuted }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</div>
+                      <div style={{ fontSize: 11, color: cc.accentSoft }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</div>
                     </div>
                     <div style={{ display: 'flex', gap: 6 }}>
                       <button
@@ -136,7 +136,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                           display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', textAlign: 'left',
                         }}
                       >
-                        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase' }}>
+                        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accentSoft, textTransform: 'uppercase' }}>
                           <span style={{ fontSize: 13 }}>{foundOpen[series] ? '▾' : '▸'}</span> Found In
                         </span>
                         <span style={{ fontSize: 10, color: cc.accentSoft }}>({seriesSets.length})</span>
@@ -148,7 +148,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                             return (
                               <div key={s.id} style={{
                                 display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                                padding: '8px 10px', borderRadius: RADIUS.sm, background: C.bgCard,
+                                padding: '8px 10px', borderRadius: RADIUS.sm, background: cc.track,
                               }}>
                                 <span style={{ fontSize: 12, fontWeight: 600, color: C.text, lineHeight: 1.3 }}>{s.name}</span>
                                 {parts && (
