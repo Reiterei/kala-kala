@@ -38,7 +38,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const sat = (Math.max(r, g, b) - Math.min(r, g, b)) / 255;
   const useLight = lum < 0.6 || (sat > 0.35 && lum < 0.75);
   const textCol = useLight ? C.white : '#1a1a1a';
-  const textColSub = useLight ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.62)';
+  const textColSub = useLight ? 'rgba(255,255,255,0.85)' : '#1a1a1a';
 
   const bodyBg = `rgb(${Math.round(r * 0.16 + 255 * 0.84)}, ${Math.round(g * 0.16 + 255 * 0.84)}, ${Math.round(b * 0.16 + 255 * 0.84)})`;
 
@@ -156,7 +156,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                               }}>
                                 <span style={{ fontSize: 12, fontWeight: 600, color: C.text, lineHeight: 1.3 }}>{s.name}</span>
                                 {parts && (
-                                  <span style={{ fontSize: 10, color: C.textMuted, fontWeight: 500, marginTop: 2 }}>{parts}</span>
+                                  <span style={{ fontSize: 10, color: cc.accentSoft, fontWeight: 500, marginTop: 2 }}>{parts}</span>
                                 )}
                               </div>
                             );
