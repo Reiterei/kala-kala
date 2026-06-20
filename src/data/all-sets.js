@@ -7,7 +7,7 @@ export const allSets = [...honoluluSets, ...kaalaSets, ...molokaiSets];
 
 export const SERIES_ORDER = [
   'Honolulu', 'Honolulu B', 'Honolulu Plus', 'Honolulu S', 'Honolulu²', 'Honolulu² B',
-  'Kaala', 'Kaala B','Molokai',
+  'Kaala', 'Kaala B','Molokai','Nalu',
 ];
 
 export const SERIES_SHORT = {
@@ -15,6 +15,7 @@ export const SERIES_SHORT = {
   'Honolulu S': 'HONOLULU S', 'Honolulu²': 'HONOLULU²', 'Honolulu² B': 'HONOLULU² B',
   'Kaala': 'KAALA', 'Kaala B': 'KAALA B',
   'Molokai': 'MOLOKAI',
+  'Nalu': 'NALU',
 };
 
 // Series badge colors: { bg, text }. Add an entry per series; falls back to
