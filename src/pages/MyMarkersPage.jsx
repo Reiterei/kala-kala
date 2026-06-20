@@ -188,6 +188,8 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
           onSetStatus={onSetStatus}
           onClose={() => setSelectedColor(null)}
           settings={settings}
+          colorList={displayColors.map(code => colorMap[code]).filter(Boolean)}
+          onNavigate={setSelectedColor}
         />
       )}
     </div>

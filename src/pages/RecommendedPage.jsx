@@ -186,6 +186,8 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           onSetStatus={onSetStatus}
           onClose={() => setSelectedColor(null)}
           settings={settings}
+          colorList={set.colors.map(code => colorMap[code]).filter(Boolean)}
+          onNavigate={setSelectedColor}
         />
       )}
     </>

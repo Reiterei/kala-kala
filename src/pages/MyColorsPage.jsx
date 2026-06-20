@@ -139,6 +139,8 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           onSetStatus={onSetStatus}
           onClose={() => setSelected(null)}
           settings={settings}
+          colorList={filtered}
+          onNavigate={setSelected}
         />
       )}
     </div>
