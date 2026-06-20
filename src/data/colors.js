@@ -1353,10 +1353,7 @@ export const colors = [
     "hex": "e77b49",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Sanguine Orange",
-        "code": "Y794"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Sanguine Orange",
         "code": "Y794"
@@ -1410,10 +1407,7 @@ export const colors = [
     "hex": "f5ac83",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Yellowish Orange",
-        "code": "Y360"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Yellowish Orange",
         "code": "Y360"
@@ -2490,10 +2484,7 @@ export const colors = [
     "hex": "d1ad95",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Light Grey Orange",
-        "code": "E198"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Light Grey Orange",
         "code": "E198"
@@ -3264,10 +3255,7 @@ export const colors = [
     "hex": "f8cccc",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Baby Skin Pink",
-        "code": "R188"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Baby Skin Pink",
         "code": "R188"
@@ -3333,10 +3321,7 @@ export const colors = [
     "hex": "d54a4b",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Bright Orange",
-        "code": "R688"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Bright Orange",
         "code": "R688"
@@ -3915,10 +3900,7 @@ export const colors = [
     "hex": "7c5a5a",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Grape Ash",
-        "code": "R573"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Grape Ash",
         "code": "R573"
@@ -4596,10 +4578,7 @@ export const colors = [
         "name": "Raspberry Jam",
         "code": "RV315"
       },
-      "oahu": {
-        "name": "Hydrangea Violet",
-        "code": "V286"
-      },
+      "oahu": null
       "kaala": {
         "name": "Hydrangea Violet",
         "code": "V286"
@@ -4932,10 +4911,7 @@ export const colors = [
     "hex": "cbb8d6",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Soft Violet",
-        "code": "V285"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Soft Violet",
         "code": "V285"
@@ -5817,10 +5793,7 @@ export const colors = [
     "hex": "3f669a",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Lapis Lazuli",
-        "code": "B288"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Lapis Lazuli",
         "code": "B288"
@@ -6639,10 +6612,7 @@ export const colors = [
     "hex": "38a88b",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Bright Parrot Green",
-        "code": "G463"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Bright Parrot Green",
         "code": "G463"
@@ -6732,10 +6702,7 @@ export const colors = [
     "hex": "30ad9f",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Lake Green",
-        "code": "G474"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Lake Green",
         "code": "G474"
@@ -7809,10 +7776,7 @@ export const colors = [
     "hex": "babec0",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Slategrey",
-        "code": "CG081"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Slategrey",
         "code": "CG081"
@@ -7827,10 +7791,7 @@ export const colors = [
     "hex": "b5bbbe",
     "legacy": {
       "honolulu": null,
-      "oahu": {
-        "name": "Neutral Grey",
-        "code": "CG083"
-      },
+      "oahu": null,
       "kaala": {
         "name": "Neutral Grey",
         "code": "CG083"
