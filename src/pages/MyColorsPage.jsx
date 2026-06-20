@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react';
 import { colors } from '../data/colors';
-import { allSets, SERIES_ORDER } from '../data/all-sets';
+import { allSets, SERIES_GROUPS } from '../data/all-sets';
 import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
-import { FilterModal, FilterSection, FilterCheckRow, FilterToggleRow } from '../components/FilterModal';
+import { FilterModal, FilterSection, FilterToggleRow, SeriesFilterTree } from '../components/FilterModal';
 import { getLegacyDisplay } from '../utils/colorUtils';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
@@ -47,11 +47,6 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
     setSeriesFilter(next);
     localStorage.setItem('kk-mycolors-series', JSON.stringify([...next]));
   };
-  const toggleSeries = (s) => {
-    const next = new Set(seriesFilter);
-    next.has(s) ? next.delete(s) : next.add(s);
-    setSeriesAndSave(next);
-  };
   const setShowUnownedAndSave = (v) => { setShowUnowned(v); localStorage.setItem('kk-mycolors-showUnowned', v); };
   const setShowOwnedAndSave = (v) => { setShowOwned(v); localStorage.setItem('kk-mycolors-showOwned', v); };
   const setShowWishlistAndSave = (v) => { setShowWishlist(v); localStorage.setItem('kk-mycolors-showWishlist', v); };
@@ -65,11 +60,6 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       }
     }
     return map;
-  }, []);
-
-  const allSeries = useMemo(() => {
-    const seen = new Set(allSets.map(s => s.series));
-    return SERIES_ORDER.filter(s => seen.has(s));
   }, []);
 
   const filterActive = seriesFilter.size > 0 || showUnowned === 'hide' || showOwned === 'hide' || showWishlist === 'hide';
@@ -167,14 +157,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           </FilterSection>
 
           <FilterSection label="Series">
-            <FilterCheckRow checked={seriesFilter.size === 0} onChange={() => setSeriesAndSave(new Set())} bold>
-              All Markers
-            </FilterCheckRow>
-            {allSeries.map(s => (
-              <FilterCheckRow key={s} checked={seriesFilter.has(s)} onChange={() => toggleSeries(s)}>
-                {s}
-              </FilterCheckRow>
-            ))}
+            <SeriesFilterTree groups={SERIES_GROUPS} selected={seriesFilter} onChange={setSeriesAndSave} />
           </FilterSection>
         </FilterModal>
       )}

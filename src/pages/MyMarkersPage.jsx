@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { allSets, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
+import { allSets, SERIES_SHORT, SERIES_GROUPS, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
-import { FilterModal, FilterSection, FilterToggleRow } from '../components/FilterModal';
+import { FilterModal, FilterSection, FilterToggleRow, SeriesFilterTree } from '../components/FilterModal';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
@@ -207,26 +207,33 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   const [showUnowned, setShowUnowned] = useState(() => localStorage.getItem('kk-mymarkers-showUnowned') ?? 'show');
   const [showOwned, setShowOwned] = useState(() => localStorage.getItem('kk-mymarkers-showOwned') ?? 'show');
   const [showWishlist, setShowWishlist] = useState(() => localStorage.getItem('kk-mymarkers-showWishlist') ?? 'show');
+  const [seriesFilter, setSeriesFilter] = useState(() => {
+    try { return new Set(JSON.parse(localStorage.getItem('kk-mymarkers-series') || '[]')); } catch { return new Set(); }
+  });
   const [search, setSearch] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
   const seriesGroups = useMemo(() => getSeriesGroups(), []);
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
   const px = isWide ? 20 : 16;
-  const filterActive = showUnowned === 'hide' || showOwned === 'hide' || showWishlist === 'hide';
+  const filterActive = showUnowned === 'hide' || showOwned === 'hide' || showWishlist === 'hide' || seriesFilter.size > 0;
 
   const setShowUnownedAndSave = (v) => { setShowUnowned(v); localStorage.setItem('kk-mymarkers-showUnowned', v); };
   const setShowOwnedAndSave = (v) => { setShowOwned(v); localStorage.setItem('kk-mymarkers-showOwned', v); };
   const setShowWishlistAndSave = (v) => { setShowWishlist(v); localStorage.setItem('kk-mymarkers-showWishlist', v); };
+  const setSeriesAndSave = (next) => { setSeriesFilter(next); localStorage.setItem('kk-mymarkers-series', JSON.stringify([...next])); };
 
   const filteredGroups = useMemo(() => {
     let groups = seriesGroups;
+    if (seriesFilter.size > 0) {
+      groups = groups.filter(({ series }) => seriesFilter.has(series));
+    }
     if (search.trim()) {
       const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
       groups = groups.filter(({ series }) => tokens.every(t => series.toLowerCase().includes(t)));
     }
     return groups;
-  }, [seriesGroups, search]);
+  }, [seriesGroups, search, seriesFilter]);
 
   return (
     <div style={scrollPage}>
@@ -255,12 +262,16 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
         <FilterModal
           title="Filter Markers"
           onClose={() => setFilterOpen(false)}
-          onReset={() => { setShowUnownedAndSave('show'); setShowOwnedAndSave('show'); setShowWishlistAndSave('show'); }}
+          onReset={() => { setShowUnownedAndSave('show'); setShowOwnedAndSave('show'); setShowWishlistAndSave('show'); setSeriesAndSave(new Set()); }}
         >
           <FilterSection label="Status">
             <FilterToggleRow label="Unowned Colors" value={showUnowned} onChange={setShowUnownedAndSave} />
             <FilterToggleRow label="Owned Colors" value={showOwned} onChange={setShowOwnedAndSave} />
             <FilterToggleRow label="Wishlist Colors" value={showWishlist} onChange={setShowWishlistAndSave} />
+          </FilterSection>
+
+          <FilterSection label="Series">
+            <SeriesFilterTree groups={SERIES_GROUPS} selected={seriesFilter} onChange={setSeriesAndSave} />
           </FilterSection>
         </FilterModal>
       )}

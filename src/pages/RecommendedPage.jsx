@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { allSets, SERIES_ORDER, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
+import { allSets, SERIES_GROUPS, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
-import { FilterModal, FilterSection, FilterCheckRow, FilterPillRow } from '../components/FilterModal';
+import { FilterModal, FilterSection, FilterPillRow, SeriesFilterTree } from '../components/FilterModal';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import ohuhuLogo from '../assets/ohuhu-logo.png';
@@ -220,11 +220,6 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
   const setColorModeAndSave = (mode) => { setColorMode(mode); localStorage.setItem('kk-rec-colorMode', mode); };
   const setSortByAndSave = (s) => { setSortBy(s); localStorage.setItem('kk-rec-sort', s); };
   const setSeriesAndSave = (next) => { setSeriesFilter(next); localStorage.setItem('kk-rec-series', JSON.stringify([...next])); };
-  const toggleSeries = (s) => {
-    const next = new Set(seriesFilter);
-    next.has(s) ? next.delete(s) : next.add(s);
-    setSeriesAndSave(next);
-  };
 
   const retailSets = useMemo(() => {
     let sets = allSets.filter(s => !s.name.includes('Individual'));
@@ -240,11 +235,6 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
     }
     return sets;
   }, [hideJapanese, hideUnavailable, hideDiscontinued, hideColorlessBlender]);
-
-  const allSeries = useMemo(() => {
-    const seen = new Set(retailSets.map(s => s.series));
-    return SERIES_ORDER.filter(s => seen.has(s));
-  }, [retailSets]);
 
   const filterActive = seriesFilter.size > 0 || sortBy !== 'Most New' || colorMode !== 'exact';
 
@@ -304,14 +294,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
           </FilterSection>
 
           <FilterSection label="Series">
-            <FilterCheckRow checked={seriesFilter.size === 0} onChange={() => setSeriesAndSave(new Set())} bold>
-              All Markers
-            </FilterCheckRow>
-            {allSeries.map(s => (
-              <FilterCheckRow key={s} checked={seriesFilter.has(s)} onChange={() => toggleSeries(s)}>
-                {s}
-              </FilterCheckRow>
-            ))}
+            <SeriesFilterTree groups={SERIES_GROUPS} selected={seriesFilter} onChange={setSeriesAndSave} />
           </FilterSection>
         </FilterModal>
       )}
