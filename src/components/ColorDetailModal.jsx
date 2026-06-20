@@ -35,8 +35,8 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
   const g = parseInt(color.hex.substring(2, 4), 16);
   const b = parseInt(color.hex.substring(4, 6), 16);
   const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  const textCol = lum > 0.55 ? C.textSub : C.white;
-  const textColSub = lum > 0.55 ? 'rgba(40,60,60,0.7)' : 'rgba(255,255,255,0.8)';
+  const textCol = lum > 0.55 ? '#1a1a1a' : C.white;
+  const textColSub = lum > 0.55 ? 'rgba(0,0,0,0.62)' : 'rgba(255,255,255,0.8)';
 
   const bodyBg = `rgb(${Math.round(r * 0.16 + 255 * 0.84)}, ${Math.round(g * 0.16 + 255 * 0.84)}, ${Math.round(b * 0.16 + 255 * 0.84)})`;
 
@@ -108,7 +108,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               const wishBtn = { ...btnBase, background: isWish ? C.wish : cc.track, color: isWish ? C.white : cc.accent };
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
-                <div key={series} style={{ background: cc.cardBg, borderRadius: RADIUS.lg, border: `1.5px solid ${cc.accent}`, overflow: 'hidden' }}>
+                <div key={series} style={{ background: cc.cardBg, borderRadius: RADIUS.lg, border: `1.5px solid ${cc.accentSoft}`, overflow: 'hidden' }}>
                   <div style={{ display: 'flex', alignItems: 'center', padding: '10px 16px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <TipIcon type={getTipIcon(tipType1)} size={22} color={cc.accent} />
