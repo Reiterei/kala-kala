@@ -1426,11 +1426,11 @@ export const colors = [
         "code": "YR8"
       },
       "oahu": {
-        "name": "Powdery Orange",
+        "name": "Salmon",
         "code": "YR495"
       },
       "kaala": {
-        "name": "Powdery Orange",
+        "name": "Salmon",
         "code": "YR495"
       },
       "original": {
