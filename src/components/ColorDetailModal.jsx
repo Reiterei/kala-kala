@@ -96,11 +96,11 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                   <div style={{ display: 'flex', alignItems: 'center', padding: '10px 20px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: C.tealDeep }}>
                       <TipIcon type={getTipIcon(tipType1)} size={22} />
-                      <TipIcon type={getTipIcon(tipType2)} size={22} />
+                      {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} />}
                     </div>
                     <div style={{ flex: 1, marginLeft: 10 }}>
                       <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{series}</div>
-                      <div style={{ fontSize: 11, color: C.textMuted }}>{tipType1} / {tipType2}</div>
+                      <div style={{ fontSize: 11, color: C.textMuted }}>{tipType2 ? `${tipType1} / ${tipType2}` : tipType1}</div>
                     </div>
                     <div style={{ display: 'flex', gap: 6 }}>
                       <button
