@@ -2,19 +2,21 @@ import { honoluluSets } from './honolulu-sets';
 import { kaalaSets } from './kaala-sets';
 import { molokaiSets } from './molokai-sets';
 import { naluSets } from './nalu-sets';
+import { kauaiSets } from './kauai-sets';
 
 // Add new series imports above and append below to register them everywhere.
-export const allSets = [...honoluluSets, ...kaalaSets, ...molokaiSets, ...naluSets,];
+export const allSets = [...honoluluSets, ...kaalaSets, ...molokaiSets, ...naluSets, ...kauaiSets,];
 
 export const SERIES_ORDER = [
   'Honolulu', 'Honolulu B', 'Honolulu Plus', 'Honolulu S', 'Honolulu²', 'Honolulu² B',
-  'Kaala', 'Kaala B','Molokai','Nalu',
+  'Kaala', 'Kaala B', 'Kauai', 'Molokai','Nalu',
 ];
 
 export const SERIES_SHORT = {
   'Honolulu': 'HONOLULU', 'Honolulu B': 'HONOLULU B', 'Honolulu Plus': 'HONOLULU+',
   'Honolulu S': 'HONOLULU S', 'Honolulu²': 'HONOLULU²', 'Honolulu² B': 'HONOLULU² B',
   'Kaala': 'KAALA', 'Kaala B': 'KAALA B',
+  'Kauai': 'KAUAI',
   'Molokai': 'MOLOKAI',
   'Nalu': 'NALU',
 };
