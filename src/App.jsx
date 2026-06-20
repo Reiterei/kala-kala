@@ -161,7 +161,7 @@ export default function App() {
         {/* Logo + name */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <Logo />
-          <span style={{ fontSize: 18, fontWeight: 700, color: C.text, letterSpacing: -0.3, lineHeight: 1.4, fontFamily: FONT }}>kala-kala</span>
+          <span style={{ fontSize: 18, fontWeight: 700, color: C.text, letterSpacing: -0.3, lineHeight: 1.4, fontFamily: FONT }}>KALA-KALA</span>
         </div>
 
         {/* Nav — centered, fills remaining space (wide screens only) */}
@@ -171,7 +171,6 @@ export default function App() {
               const active = pageIdx === i;
               return (
                 <button key={n.id} onClick={() => goTo(i)} style={active ? navPillActive : navPillInactive}>
-                  {n.icon(active)}
                   {n.label}
                 </button>
               );
