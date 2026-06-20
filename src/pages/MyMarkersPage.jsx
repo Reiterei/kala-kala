@@ -133,11 +133,11 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
-          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase', lineHeight: 1.6 }}>Markers Owned</span>
+          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, color: cc.accent, textTransform: 'uppercase', lineHeight: 1.6 }}>Markers Owned</span>
           <div style={{ display: 'flex', gap: 10 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: cc.accent, lineHeight: 1.4 }}>{owned} Owned</span>
             {wishCodes.length > 0 && <span style={{ fontSize: 11, fontWeight: 700, color: C.wish, lineHeight: 1.4 }}>{wishCodes.length} Wishlist</span>}
-            <span style={{ fontSize: 11, fontWeight: 700, color: C.missingText, lineHeight: 1.4 }}>{missing} Missing</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: C.error, lineHeight: 1.4 }}>{missing} Missing</span>
           </div>
         </div>
       </div>
