@@ -4,7 +4,7 @@ import { molokaiSets } from './molokai-sets';
 import { naluSets } from './nalu-sets';
 
 // Add new series imports above and append below to register them everywhere.
-export const allSets = [...honoluluSets, ...kaalaSets, ...molokaiSets];
+export const allSets = [...honoluluSets, ...kaalaSets, ...molokaiSets, ...naluSets,];
 
 export const SERIES_ORDER = [
   'Honolulu', 'Honolulu B', 'Honolulu Plus', 'Honolulu S', 'Honolulu²', 'Honolulu² B',
