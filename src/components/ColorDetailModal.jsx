@@ -89,7 +89,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
           .kk-modal-scroll-${color.code}::-webkit-scrollbar { width: 8px; }
           .kk-modal-scroll-${color.code}::-webkit-scrollbar-track { background: transparent; }
           .kk-modal-scroll-${color.code}::-webkit-scrollbar-thumb { background: ${bg}; border-radius: 4px; }
-          .kk-modal-scroll-${color.code} { scrollbar-color: ${bg} transparent; }
+          .kk-modal-scroll-${color.code}::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
         `}</style>
         <div className={`kk-modal-scroll-${color.code}`} style={{ overflowY: 'auto', flex: 1 }}>
           <div style={{ padding: '12px 0 8px' }}>
@@ -106,7 +106,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               const wishBtn = { ...btnBase, background: isWish ? cc.accentSoft : cc.cardBg, color: isWish ? C.white : cc.accent };
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
-                <div key={series} style={{ borderBottom: '1px solid #fbe8d3' }}>
+                <div key={series} style={{ borderBottom: `1px solid ${cc.border}` }}>
                   <div style={{ display: 'flex', alignItems: 'center', padding: '10px 20px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent }}>
                       <TipIcon type={getTipIcon(tipType1)} size={22} />
@@ -139,7 +139,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                         <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase' }}>
                           <span style={{ fontSize: 13 }}>{foundOpen[series] ? '▾' : '▸'}</span> Found In
                         </span>
-                        <span style={{ fontSize: 10, color: '#c9a880' }}>({seriesSets.length})</span>
+                        <span style={{ fontSize: 10, color: cc.accentSoft }}>({seriesSets.length})</span>
                       </button>
                       {foundOpen[series] && (
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, paddingBottom: 12 }}>
