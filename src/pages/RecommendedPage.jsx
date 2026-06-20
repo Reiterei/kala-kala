@@ -17,7 +17,7 @@ const colorMap = Object.fromEntries(allColors.map(c => [c.code, c]));
 
 function getMeta(set) { return [set.edition, set.version].filter(Boolean).join(' · '); }
 
-function ColorChip({ colorCode, status, onClick }) {
+function ColorChip({ colorCode, status, onClick, cc }) {
   const color = colorMap[colorCode];
   const hex = color ? `#${color.hex}` : '#ccc';
   if (status === 'owned') {
@@ -28,7 +28,14 @@ function ColorChip({ colorCode, status, onClick }) {
     return <div onClick={onClick} style={{ ...chipBase, cursor: 'pointer', background: hex, border: '2px solid rgba(0,0,0,0.08)', color: lum > 0.55 ? C.textSub : C.white }}>{colorCode}</div>;
   }
   if (status === 'wishlist') return <div onClick={onClick} style={chipWish}>{colorCode}</div>;
-  return <div onClick={onClick} style={chipUnowned}>{colorCode}</div>;
+  return (
+    <div onClick={onClick} style={{
+      ...chipUnowned,
+      background: C.white,
+      border: `2px dashed ${cc?.swatchEmptyBorder ?? C.tealMid}`,
+      color: cc?.swatchEmptyText ?? C.tealDim,
+    }}>{colorCode}</div>
+  );
 }
 
 function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
@@ -165,7 +172,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
         {expanded && (
           <div style={{ padding: '12px 16px 16px', display: 'flex', flexWrap: 'wrap', gap: 6 }}>
             {set.colors.map(code => (
-              <ColorChip key={code} colorCode={code} status={getStatus(code)}
+              <ColorChip key={code} colorCode={code} status={getStatus(code)} cc={cc}
                 onClick={() => { if (swipeConsumed) return; setSelectedColor(colorMap[code] || null); }} />
             ))}
           </div>
