@@ -1,7 +1,8 @@
+import { createPortal } from 'react-dom';
 import { C, FONT, RADIUS, SHADOW, overlayStyle } from '../styles/theme';
 
 export function FilterModal({ title, onClose, onReset, children }) {
-  return (
+  return createPortal(
     <div onClick={onClose} style={overlayStyle}>
       <div
         onClick={e => e.stopPropagation()}
@@ -42,7 +43,8 @@ export function FilterModal({ title, onClose, onReset, children }) {
           <button onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: RADIUS.md, border: 'none', background: C.teal, color: C.white, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Done</button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
