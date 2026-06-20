@@ -4,7 +4,8 @@ import { getLegacyList, getSeriesForColor } from '../utils/colorUtils';
 import { allSets } from '../data/all-sets';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { isUnavailableSet } from '../hooks/useSettings';
-import { C, FONT, RADIUS, SHADOW, statusOwned, statusOwnedOff, statusWish, statusWishOff } from '../styles/theme';
+import { getSeriesCardColors } from '../data/all-sets';
+import { C, FONT, RADIUS, SHADOW } from '../styles/theme';
 
 const ALL_SETS = allSets;
 
@@ -90,11 +91,18 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               const status = ownership[color.code]?.[series] ?? null;
               const isOwned = status === 'owned';
               const isWish = status === 'wishlist';
+              const cc = getSeriesCardColors(series);
+              const btnBase = {
+                padding: '6px 14px', borderRadius: RADIUS.pill, border: 'none', cursor: 'pointer',
+                fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
+              };
+              const ownBtn = { ...btnBase, background: isOwned ? cc.accent : cc.cardBg, color: isOwned ? C.white : cc.accent };
+              const wishBtn = { ...btnBase, background: isWish ? cc.accentSoft : cc.cardBg, color: isWish ? C.white : cc.accent };
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
                 <div key={series} style={{ borderBottom: '1px solid #fbe8d3' }}>
                   <div style={{ display: 'flex', alignItems: 'center', padding: '10px 20px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: C.tealDeep }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent }}>
                       <TipIcon type={getTipIcon(tipType1)} size={22} />
                       {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} />}
                     </div>
@@ -105,11 +113,11 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                     <div style={{ display: 'flex', gap: 6 }}>
                       <button
                         onClick={() => onSetStatus(color.code, series, isOwned ? null : 'owned')}
-                        style={isOwned ? statusOwned : statusOwnedOff}
+                        style={ownBtn}
                       >Own</button>
                       <button
                         onClick={() => onSetStatus(color.code, series, isWish ? null : 'wishlist')}
-                        style={isWish ? statusWish : statusWishOff}
+                        style={wishBtn}
                       >Wish</button>
                     </div>
                   </div>
