@@ -5,7 +5,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 344,
+    count: 345,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-individual-series",
@@ -13,7 +13,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y09", "Y14", "Y17", "Y19", "Y111", "Y26", "Y27", "Y28", "Y29", "Y210", "Y213", "Y215", "Y216", "Y34", "Y39", "Y311", "Y315", "Y42", "Y43", "Y45", "Y46", "Y48", "Y49", "Y410", "Y412", "Y413", "Y415", "Y416", "Y55", "Y59", "Y515", "Y62", "Y69", "Y611", "YR00", "YR02", "YR03", "YR04", "YR05", "YR06", "YR07", "YR09", "YR015", "YR11", "YR17", "YR19", "YR111", "YR112", "YR25", "YR29", "YR213", "YR215", "YR33", "YR34", "YR37", "YR38", "YR39", "YR312", "YR313", "YR314", "YR43", "YR45", "YR47", "YR52", "YR55", "YR56", "YR57", "YR58", "YR59", "YR511", "YR513", "YR515", "E05", "E06", "E011", "E14", "E17", "E19", "E111", "E22", "E26", "E211", "E212", "E311", "E313", "E314", "E44", "E46", "E47", "E49", "E413", "E415", "E58", "E59", "E511", "E513", "E514", "E515", "E66", "E69", "E610", "E612", "E614", "E615", "E75", "E711", "E713", "E81", "E85", "E814", "E92", "E97", "E914", "R012", "R013", "R014", "R015", "R016", "R15", "R16", "R112", "R22", "R23", "R25", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R310", "R312", "R46", "R48", "R410", "R412", "R413", "R50", "R54", "R56", "R57", "R59", "R513", "R514", "R69", "R612", "R615", "RV01", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV23", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV35", "RV39", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "RV515", "V08", "V010", "V013", "V015", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V32", "V34", "V38", "V46", "V412", "V414", "V416", "BV05", "BV08", "BV013", "BV015", "BV15", "BV115", "BV26", "BV28", "BV29", "BV210", "BV31", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV314", "BV315", "BV48", "BV414", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B21", "B27", "B28", "B310", "B311", "B315", "B411", "B412", "B415", "BG04", "BG05", "BG09", "BG011", "BG19", "BG114", "BG21", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G012", "G013", "G112", "G113", "G114", "G24", "G210", "G34", "G36", "G310", "G311", "G312", "G313", "G315", "G316", "G41", "G43", "G44", "G47", "G49", "G410", "YG06", "YG07", "YG012", "YG015", "YG111", "YG112", "YG113", "YG29", "YG211", "YG212", "YG215", "YG36", "YG312", "YG413", "YG414", "YG415", "YG510", "YG66", "YG610", "YG611", "CG01", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG03", "GG05", "GG07", "GG10", "GG11", "GG12", "GG15", "GG16", "GG24", "GG25", "FY00", "FY01", "FY02", "FY04", "120"],
+    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y09", "Y14", "Y17", "Y19", "Y111", "Y26", "Y27", "Y28", "Y29", "Y210", "Y213", "Y215", "Y216", "Y34", "Y39", "Y311", "Y315", "Y42", "Y43", "Y45", "Y46", "Y48", "Y49", "Y410", "Y412", "Y413", "Y415", "Y416", "Y55", "Y59", "Y515", "Y62", "Y69", "Y611", "YR00", "YR02", "YR03", "YR04", "YR05", "YR06", "YR07", "YR09", "YR015", "YR11", "YR17", "YR19", "YR111", "YR112", "YR25", "YR29", "YR213", "YR215", "YR33", "YR34", "YR37", "YR38", "YR39", "YR312", "YR313", "YR314", "YR43", "YR45", "YR47", "YR52", "YR55", "YR56", "YR57", "YR58", "YR59", "YR511", "YR513", "YR515", "E05", "E06", "E011", "E14", "E17", "E19", "E111", "E22", "E26", "E211", "E212", "E311", "E313", "E314", "E44", "E46", "E47", "E49", "E413", "E415", "E58", "E59", "E511", "E513", "E514", "E515", "E66", "E69", "E610", "E612", "E614", "E615", "E75", "E711", "E713", "E81", "E85", "E814", "E92", "E97", "E914", "R012", "R013", "R014", "R015", "R016", "R15", "R16", "R112", "R22", "R23", "R25", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R310", "R312", "R46", "R48", "R410", "R412", "R413", "R50", "R54", "R56", "R57", "R59", "R513", "R514", "R69", "R612", "R615", "RV01", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV23", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV35", "RV39", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "RV515", "V08", "V010", "V013", "V015", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V32", "V34", "V38", "V46", "V412", "V414", "V416", "BV05", "BV08", "BV013", "BV015", "BV15", "BV115", "BV26", "BV28", "BV29", "BV210", "BV31", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV314", "BV315", "BV48", "BV414", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B21", "B27", "B28", "B310", "B311", "B315", "B411", "B412", "B415", "BG04", "BG05", "BG09", "BG011", "BG19", "BG114", "BG21", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G012", "G013", "G112", "G113", "G114", "G24", "G210", "G34", "G36", "G310", "G311", "G312", "G313", "G315", "G316", "G41", "G43", "G44", "G47", "G49", "G410", "YG06", "YG07", "YG012", "YG015", "YG111", "YG112", "YG113", "YG29", "YG211", "YG212", "YG215", "YG36", "YG312", "YG413", "YG414", "YG415", "YG510", "YG66", "YG610", "YG611", "CG01", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG03", "GG05", "GG07", "GG10", "GG11", "GG12", "GG15", "GG16", "GG24", "GG25", "FY00", "FY01", "FY02", "FY04", "120","0"],
   },
   {
     id: "honolulu_bundle_1",
@@ -21,7 +21,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 61,
+    count: 62,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-b-individual-series",
@@ -29,7 +29,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y09", "Y111", "Y26", "Y210", "Y43", "Y48", "Y55", "Y69", "YR02", "YR04", "YR05", "YR06", "YR09", "YR19", "YR25", "YR29", "YR37", "YR38", "YR312", "YR313", "YR43", "YR47", "YR56", "E111", "E46", "E47", "E49", "E413", "E58", "E59", "E513", "E514", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R014", "R016", "R22", "R23", "R215", "V46", "V412", "BV35", "B02", "B03", "B09", "B111", "G310", "G315", "G43", "YG012", "YG015", "YG610", "CG01", "YGY11", "WG10", "120"],
+    colors: ["Y09", "Y111", "Y26", "Y210", "Y43", "Y48", "Y55", "Y69", "YR02", "YR04", "YR05", "YR06", "YR09", "YR19", "YR25", "YR29", "YR37", "YR38", "YR312", "YR313", "YR43", "YR47", "YR56", "E111", "E46", "E47", "E49", "E413", "E58", "E59", "E513", "E514", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R014", "R016", "R22", "R23", "R215", "V46", "V412", "BV35", "B02", "B03", "B09", "B111", "G310", "G315", "G43", "YG012", "YG015", "YG610", "CG01", "YGY11", "WG10", "120","0"],
   },
   {
     id: "honolulu_bundle_2",
@@ -261,7 +261,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Black Case",
     version: null,
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-24-basic-color-art-markers-set-chisel-brush-tip?variant=43637889499423",
@@ -269,7 +269,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Brush-Tip-Double-Tipped-Alcohol-Based-Art-Marker-Set-Artist-Sketching-Adult-Coloring-Illustration-24-Basic-Colors-w-1-Colorless/14673422002",
       amazon: "https://www.amazon.com/Ohuhu-Certificated-Sketching-Coloring-Illustration/dp/B0FWZJWMTV/?th=1",
     },
-    colors: ["Y111", "Y26", "Y216", "YR313", "R014", "R210", "R413", "RV08", "RV311", "V010", "V18", "V416", "BV310", "B08", "B111", "BG114", "BG311", "G36", "G310", "G312", "G410", "CG18", "BGY24", "120"],
+    colors: ["Y111", "Y26", "Y216", "YR313", "R014", "R210", "R413", "RV08", "RV311", "V010", "V18", "V416", "BV310", "B08", "B111", "BG114", "BG311", "G36", "G310", "G312", "G410", "CG18", "BGY24", "120","0"],
   },
   {
     id: "honolulu_bundle_17",
@@ -277,7 +277,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Black Case",
     version: null,
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-24-basic-color-art-markers-set-chisel-brush-tip?variant=43637889532191",
@@ -285,7 +285,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Brush-Tip-Double-Tipped-Alcohol-Based-Art-Marker-Set-Artist-Sketching-Adult-Coloring-Illustration-24-Basic-Colors-w-1-Colorless/15037358890",
       amazon: "https://www.amazon.com/Ohuhu-Certificated-Sketching-Coloring-Illustration/dp/B0FWZLFJRQ/?th=1",
     },
-    colors: ["Y111", "Y26", "Y216", "YR313", "R014", "R210", "R413", "RV08", "RV311", "V010", "V18", "V416", "BV310", "B08", "B111", "BG114", "BG311", "G36", "G310", "G312", "G410", "CG18", "BGY24", "120"],
+    colors: ["Y111", "Y26", "Y216", "YR313", "R014", "R210", "R413", "RV08", "RV311", "V010", "V18", "V416", "BV310", "B08", "B111", "BG114", "BG311", "G36", "G310", "G312", "G410", "CG18", "BGY24", "120","0"],
   },
   {
     id: "honolulu_bundle_18",
@@ -293,7 +293,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Black Case",
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-48-color-art-markers-set-chisel-brush-tip?variant=50741742600479",
@@ -301,7 +301,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-48-Pieces-Double-Tipped-Brush-Chisel-Alcohol-Markers-for-Artist/11016873576",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Brush-Fine/dp/B0FWRPRHWD?th=1",
     },
-    colors: ["Y06", "Y111", "Y26", "Y213", "Y216", "YR07", "YR112", "YR39", "YR313", "YR515", "E415", "R014", "R28", "R210", "R215", "R412", "R413", "R514", "RV08", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "BG114", "BG311", "G114", "G36", "G310", "G312", "G315", "G49", "G410", "YG012", "YG211", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120"],
+    colors: ["Y06", "Y111", "Y26", "Y213", "Y216", "YR07", "YR112", "YR39", "YR313", "YR515", "E415", "R014", "R28", "R210", "R215", "R412", "R413", "R514", "RV08", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "BG114", "BG311", "G114", "G36", "G310", "G312", "G315", "G49", "G410", "YG012", "YG211", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120","0"],
   },
   {
     id: "honolulu_bundle_19",
@@ -309,7 +309,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Black Case",
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-48-color-art-markers-set-chisel-brush-tip?variant=50741742567711",
@@ -317,7 +317,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-48-Colors-Brush-Fine-Honolulu-B-Refillable-for-Artist-Adults-Coloring-Illustration/11023516453",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Brush-Fine/dp/B0FWZJXS1D?th=1",
     },
-    colors: ["Y06", "Y111", "Y26", "Y213", "Y216", "YR07", "YR112", "YR39", "YR313", "YR515", "E415", "R014", "R28", "R210", "R215", "R412", "R413", "R514", "RV08", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "BG114", "BG311", "G114", "G36", "G310", "G312", "G315", "G49", "G410", "YG012", "YG211", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120"],
+    colors: ["Y06", "Y111", "Y26", "Y213", "Y216", "YR07", "YR112", "YR39", "YR313", "YR515", "E415", "R014", "R28", "R210", "R215", "R412", "R413", "R514", "RV08", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "BG114", "BG311", "G114", "G36", "G310", "G312", "G315", "G49", "G410", "YG012", "YG211", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120","0"],
   },
   {
     id: "honolulu_bundle_20",
@@ -325,7 +325,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 72,
+    count: 73,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-72-color-chisel-brush-tips-marker?variant=43637889138975",
@@ -333,7 +333,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-72-Colors-Alcohol-Chisel-Brush-Markers-with-1-Blender/11045453237",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Brush-Illustration/dp/B0FWZKVHCX/?th=1",
     },
-    colors: ["Y07", "Y111", "Y26", "Y29", "Y213", "Y216", "YR07", "YR17", "YR112", "YR39", "YR313", "YR515", "E22", "E415", "R013", "R014", "R28", "R210", "R215", "R46", "R412", "R413", "R514", "RV08", "RV111", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV29", "BV31", "BV38", "BV310", "B02", "B08", "B111", "B114", "B115", "BG114", "BG212", "BG311", "G013", "G112", "G113", "G114", "G36", "G310", "G312", "G315", "G43", "G49", "G410", "YG06", "YG012", "YG211", "YG212", "YG510", "CG17", "CG18", "BGY15", "BGY24", "YGY11", "WG10", "WG26", "WG27", "GG03", "GG05", "GG10", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y29", "Y213", "Y216", "YR07", "YR17", "YR112", "YR39", "YR313", "YR515", "E22", "E415", "R013", "R014", "R28", "R210", "R215", "R46", "R412", "R413", "R514", "RV08", "RV111", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV29", "BV31", "BV38", "BV310", "B02", "B08", "B111", "B114", "B115", "BG114", "BG212", "BG311", "G013", "G112", "G113", "G114", "G36", "G310", "G312", "G315", "G43", "G49", "G410", "YG06", "YG012", "YG211", "YG212", "YG510", "CG17", "CG18", "BGY15", "BGY24", "YGY11", "WG10", "WG26", "WG27", "GG03", "GG05", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_21",
@@ -341,7 +341,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 72,
+    count: 73,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-72-color-chisel-brush-tips-marker?variant=43637889106207",
@@ -349,7 +349,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Brush-Tip-72-Colors-Fine-Brush-Dual-Tips-Honolulu-B-Refillable-Ink/14802874821",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Brush-Illustration/dp/B0FWRTV52P/?th=1",
     },
-    colors: ["Y07", "Y111", "Y26", "Y29", "Y213", "Y216", "YR07", "YR17", "YR112", "YR39", "YR313", "YR515", "E22", "E415", "R013", "R014", "R28", "R210", "R215", "R46", "R412", "R413", "R514", "RV08", "RV111", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV29", "BV31", "BV38", "BV310", "B02", "B08", "B111", "B114", "B115", "BG114", "BG212", "BG311", "G013", "G112", "G113", "G114", "G36", "G310", "G312", "G315", "G43", "G49", "G410", "YG06", "YG012", "YG211", "YG212", "YG510", "CG17", "CG18", "BGY15", "BGY24", "YGY11", "WG10", "WG26", "WG27", "GG03", "GG05", "GG10", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y29", "Y213", "Y216", "YR07", "YR17", "YR112", "YR39", "YR313", "YR515", "E22", "E415", "R013", "R014", "R28", "R210", "R215", "R46", "R412", "R413", "R514", "RV08", "RV111", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV29", "BV31", "BV38", "BV310", "B02", "B08", "B111", "B114", "B115", "BG114", "BG212", "BG311", "G013", "G112", "G113", "G114", "G36", "G310", "G312", "G315", "G43", "G49", "G410", "YG06", "YG012", "YG211", "YG212", "YG510", "CG17", "CG18", "BGY15", "BGY24", "YGY11", "WG10", "WG26", "WG27", "GG03", "GG05", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_22",
@@ -357,7 +357,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 104,
+    count: 105,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-honolulu-104-colors-dual-tips-alcohol-art-markers?variant=44964927013151",
@@ -365,7 +365,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-104-Color-Double-Tipped-Brush-Chisel-Refillable-Markers/10622211437",
       amazon: "https://www.amazon.com/Ohuhu-104-color-Coloring-Illustration-Refillable/dp/B0B4SWGHRT/?th=1",
     },
-    colors: ["Y00", "Y03", "Y06", "Y17", "Y19", "Y215", "Y34", "Y42", "Y49", "Y416", "Y59", "Y515", "YR00", "YR03", "YR015", "YR213", "YR215", "YR314", "YR45", "YR47", "YR57", "YR58", "YR511", "E06", "E011", "E17", "E313", "E314", "E44", "E69", "E614", "E713", "E914", "R012", "R016", "R112", "R25", "R26", "R211", "R212", "R310", "R312", "R50", "R56", "R59", "R513", "R69", "R612", "R615", "RV01", "RV23", "RV35", "RV310", "RV514", "RV515", "V08", "V013", "V015", "V112", "V32", "V34", "V414", "BV015", "BV15", "BV115", "BV210", "BV311", "BV312", "BV414", "B06", "B015", "B112", "B27", "B412", "BG04", "BG09", "BG011", "BG19", "BG21", "G012", "G24", "G210", "G313", "G41", "YG07", "YG113", "YG29", "YG215", "YG312", "YG413", "YG66", "CG02", "YGY05", "YGY17", "YGY18", "WG08", "WG38", "GG07", "GG11", "GG25", "FY00", "FY01", "FY02", "FY04"],
+    colors: ["Y00", "Y03", "Y06", "Y17", "Y19", "Y215", "Y34", "Y42", "Y49", "Y416", "Y59", "Y515", "YR00", "YR03", "YR015", "YR213", "YR215", "YR314", "YR45", "YR47", "YR57", "YR58", "YR511", "E06", "E011", "E17", "E313", "E314", "E44", "E69", "E614", "E713", "E914", "R012", "R016", "R112", "R25", "R26", "R211", "R212", "R310", "R312", "R50", "R56", "R59", "R513", "R69", "R612", "R615", "RV01", "RV23", "RV35", "RV310", "RV514", "RV515", "V08", "V013", "V015", "V112", "V32", "V34", "V414", "BV015", "BV15", "BV115", "BV210", "BV311", "BV312", "BV414", "B06", "B015", "B112", "B27", "B412", "BG04", "BG09", "BG011", "BG19", "BG21", "G012", "G24", "G210", "G313", "G41", "YG07", "YG113", "YG29", "YG215", "YG312", "YG413", "YG66", "CG02", "YGY05", "YGY17", "YGY18", "WG08", "WG38", "GG07", "GG11", "GG25", "FY00", "FY01", "FY02", "FY04","0"],
   },
   {
     id: "honolulu_bundle_23",
@@ -373,7 +373,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 104,
+    count: 105,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-honolulu-104-colors-dual-tips-alcohol-art-markers?variant=44813524336927",
@@ -381,7 +381,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Brush-Tip-104-color-Double-Tipped-Alcohol-Based-Art-Marker-Set-Artists-Adults-Coloring-Illustration-Honolulu-B-Ohuhu-Markers-Du/16526166106",
       amazon: "https://www.amazon.com/Ohuhu-104-color-Coloring-Illustration-Refillable/dp/B0BPM8G7X6/",
     },
-    colors: ["Y00", "Y03", "Y06", "Y17", "Y19", "Y215", "Y34", "Y42", "Y49", "Y416", "Y59", "Y515", "YR00", "YR03", "YR015", "YR213", "YR215", "YR314", "YR45", "YR47", "YR57", "YR58", "YR511", "E06", "E011", "E17", "E313", "E314", "E44", "E69", "E614", "E713", "E914", "R012", "R016", "R112", "R25", "R26", "R211", "R212", "R310", "R312", "R50", "R56", "R59", "R513", "R69", "R612", "R615", "RV01", "RV23", "RV35", "RV310", "RV514", "RV515", "V08", "V013", "V015", "V112", "V32", "V34", "V414", "BV015", "BV15", "BV115", "BV210", "BV311", "BV312", "BV414", "B06", "B015", "B112", "B27", "B412", "BG04", "BG09", "BG011", "BG19", "BG21", "G012", "G24", "G210", "G313", "G41", "YG07", "YG113", "YG29", "YG215", "YG312", "YG413", "YG66", "CG02", "YGY05", "YGY17", "YGY18", "WG08", "WG38", "GG07", "GG11", "GG25", "FY00", "FY01", "FY02", "FY04"],
+    colors: ["Y00", "Y03", "Y06", "Y17", "Y19", "Y215", "Y34", "Y42", "Y49", "Y416", "Y59", "Y515", "YR00", "YR03", "YR015", "YR213", "YR215", "YR314", "YR45", "YR47", "YR57", "YR58", "YR511", "E06", "E011", "E17", "E313", "E314", "E44", "E69", "E614", "E713", "E914", "R012", "R016", "R112", "R25", "R26", "R211", "R212", "R310", "R312", "R50", "R56", "R59", "R513", "R69", "R612", "R615", "RV01", "RV23", "RV35", "RV310", "RV514", "RV515", "V08", "V013", "V015", "V112", "V32", "V34", "V414", "BV015", "BV15", "BV115", "BV210", "BV311", "BV312", "BV414", "B06", "B015", "B112", "B27", "B412", "BG04", "BG09", "BG011", "BG19", "BG21", "G012", "G24", "G210", "G313", "G41", "YG07", "YG113", "YG29", "YG215", "YG312", "YG413", "YG66", "CG02", "YGY05", "YGY17", "YGY18", "WG08", "WG38", "GG07", "GG11", "GG25", "FY00", "FY01", "FY02", "FY04","0"],
   },
   {
     id: "honolulu_bundle_24",
@@ -389,7 +389,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Black Case",
     version: null,
-    count: 120,
+    count: 121,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-120-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=43637889073439",
@@ -397,7 +397,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Brush-Tip-Double-Tipped-Art-Marker-Set-Artist-Adults-Coloring-Illustration-120-Colors-Brush-Chisel-Dual-Tips-Honolulu-Ohuhu-Mar/16558709583",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Brush-Tip/dp/B0FWRMJ8NZ?th=1",
     },
-    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_25",
@@ -405,7 +405,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Black Case",
     version: null,
-    count: 120,
+    count: 121,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-120-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=44814052065567",
@@ -413,7 +413,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Brush-Tip-120-Colors-Brush-Fine-Double-Tipped-Art-Marker-Set-Honolulu-B-Refillable-New-Color-Codes/18302121786",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Brush-Tip/dp/B0FWRMLG2G?th=1",
     },
-    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_26",
@@ -421,7 +421,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 168,
+    count: 169,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-168-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=43637889007903",
@@ -429,7 +429,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Brush-Markers-168-Color-Art-Marker-Set-Brush-Chisel-Double-Tipped-for-Coloring-Illustration-1-Alcohol-Marker-Blender-Honolulu-Series/15126964564",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Brush-Illustrations/dp/B08H4ZLYRC?th=1",
     },
-    colors: ["Y02", "Y07", "Y14", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y45", "Y415", "Y55", "Y62", "Y69", "Y611", "YR04", "YR06", "YR07", "YR11", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR43", "YR52", "YR55", "YR59", "YR515", "E05", "E14", "E22", "E26", "E212", "E46", "E415", "E511", "E515", "E85", "E92", "R013", "R014", "R015", "R15", "R16", "R22", "R27", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R54", "R514", "RV04", "RV05", "RV08", "RV17", "RV18", "RV19", "RV111", "RV25", "RV212", "RV33", "RV34", "RV311", "RV314", "RV316", "V010", "V13", "V14", "V18", "V22", "V216", "V38", "V416", "BV05", "BV26", "BV29", "BV31", "BV32", "BV35", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B03", "B05", "B08", "B111", "B114", "B115", "B21", "B28", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG24", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G34", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G47", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG01", "CG17", "CG18", "CG24", "CG25", "BGY00", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "GG24", "120"],
+    colors: ["Y02", "Y07", "Y14", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y45", "Y415", "Y55", "Y62", "Y69", "Y611", "YR04", "YR06", "YR07", "YR11", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR43", "YR52", "YR55", "YR59", "YR515", "E05", "E14", "E22", "E26", "E212", "E46", "E415", "E511", "E515", "E85", "E92", "R013", "R014", "R015", "R15", "R16", "R22", "R27", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R54", "R514", "RV04", "RV05", "RV08", "RV17", "RV18", "RV19", "RV111", "RV25", "RV212", "RV33", "RV34", "RV311", "RV314", "RV316", "V010", "V13", "V14", "V18", "V22", "V216", "V38", "V416", "BV05", "BV26", "BV29", "BV31", "BV32", "BV35", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B03", "B05", "B08", "B111", "B114", "B115", "B21", "B28", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG24", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G34", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G47", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG01", "CG17", "CG18", "CG24", "CG25", "BGY00", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "GG24", "120","0"],
   },
   {
     id: "honolulu_bundle_27",
@@ -437,7 +437,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 168,
+    count: 169,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-168-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=48948617838879",
@@ -445,7 +445,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Brush-Markers-168-Color-Art-Marker-Set-Brush-Chisel-Double-Tipped-for-Coloring-Illustration-1-Alcohol-Marker-Blender-Honolulu-Series/16798010797",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Brush-Illustrations/dp/B0D1QZ7SHB?th=1",
     },
-    colors: ["Y02", "Y07", "Y14", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y45", "Y415", "Y55", "Y62", "Y69", "Y611", "YR04", "YR06", "YR07", "YR11", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR43", "YR52", "YR55", "YR59", "YR515", "E05", "E14", "E22", "E26", "E212", "E46", "E415", "E511", "E515", "E85", "E92", "R013", "R014", "R015", "R15", "R16", "R22", "R27", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R54", "R514", "RV04", "RV05", "RV08", "RV17", "RV18", "RV19", "RV111", "RV25", "RV212", "RV33", "RV34", "RV311", "RV314", "RV316", "V010", "V13", "V14", "V18", "V22", "V216", "V38", "V416", "BV05", "BV26", "BV29", "BV31", "BV32", "BV35", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B03", "B05", "B08", "B111", "B114", "B115", "B21", "B28", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG24", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G34", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G47", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG01", "CG17", "CG18", "CG24", "CG25", "BGY00", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "GG24", "120"],
+    colors: ["Y02", "Y07", "Y14", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y45", "Y415", "Y55", "Y62", "Y69", "Y611", "YR04", "YR06", "YR07", "YR11", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR43", "YR52", "YR55", "YR59", "YR515", "E05", "E14", "E22", "E26", "E212", "E46", "E415", "E511", "E515", "E85", "E92", "R013", "R014", "R015", "R15", "R16", "R22", "R27", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R54", "R514", "RV04", "RV05", "RV08", "RV17", "RV18", "RV19", "RV111", "RV25", "RV212", "RV33", "RV34", "RV311", "RV314", "RV316", "V010", "V13", "V14", "V18", "V22", "V216", "V38", "V416", "BV05", "BV26", "BV29", "BV31", "BV32", "BV35", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B03", "B05", "B08", "B111", "B114", "B115", "B21", "B28", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG24", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G34", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G47", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG01", "CG17", "CG18", "CG24", "CG25", "BGY00", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "GG24", "120","0"],
   },
   {
     id: "honolulu_bundle_28",
@@ -453,7 +453,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 216,
+    count: 217,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-216-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=43637888909599",
@@ -461,7 +461,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Brush-Markers-216-color-Double-Tipped-Alcohol-based-Art-Marker-Set-Artist-Adults-Coloring-Illustration-Brush-Chisel-Dual-Tips-Honolulu-Series-O/7580812781",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Based-Brush-Markers/dp/B08N4DD8HQ/?th=1",
     },
-    colors: ["Y02", "Y07", "Y09", "Y14", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y39", "Y311", "Y315", "Y45", "Y46", "Y410", "Y412", "Y413", "Y415", "Y55", "Y62", "Y69", "Y611", "YR04", "YR06", "YR07", "YR11", "YR17", "YR19", "YR111", "YR112", "YR33", "YR34", "YR39", "YR312", "YR313", "YR43", "YR52", "YR55", "YR59", "YR513", "YR515", "E05", "E14", "E19", "E22", "E26", "E211", "E212", "E311", "E46", "E413", "E415", "E58", "E511", "E515", "E610", "E85", "E92", "E97", "R013", "R014", "R015", "R15", "R16", "R22", "R23", "R27", "R28", "R210", "R213", "R215", "R38", "R46", "R48", "R410", "R412", "R413", "R54", "R57", "R514", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV39", "RV311", "RV314", "RV316", "RV57", "V010", "V13", "V14", "V18", "V22", "V29", "V216", "V38", "V46", "V412", "V416", "BV05", "BV08", "BV013", "BV26", "BV28", "BV29", "BV31", "BV32", "BV35", "BV38", "BV310", "BV314", "BV315", "BV48", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B08", "B09", "B111", "B114", "B115", "B21", "B28", "B310", "B311", "B315", "B411", "B415", "BG05", "BG114", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G34", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G44", "G47", "G49", "G410", "YG06", "YG012", "YG015", "YG111", "YG112", "YG211", "YG212", "YG36", "YG414", "YG415", "YG510", "YG610", "YG611", "CG01", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG15", "GG16", "GG24", "120"],
+    colors: ["Y02", "Y07", "Y09", "Y14", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y39", "Y311", "Y315", "Y45", "Y46", "Y410", "Y412", "Y413", "Y415", "Y55", "Y62", "Y69", "Y611", "YR04", "YR06", "YR07", "YR11", "YR17", "YR19", "YR111", "YR112", "YR33", "YR34", "YR39", "YR312", "YR313", "YR43", "YR52", "YR55", "YR59", "YR513", "YR515", "E05", "E14", "E19", "E22", "E26", "E211", "E212", "E311", "E46", "E413", "E415", "E58", "E511", "E515", "E610", "E85", "E92", "E97", "R013", "R014", "R015", "R15", "R16", "R22", "R23", "R27", "R28", "R210", "R213", "R215", "R38", "R46", "R48", "R410", "R412", "R413", "R54", "R57", "R514", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV39", "RV311", "RV314", "RV316", "RV57", "V010", "V13", "V14", "V18", "V22", "V29", "V216", "V38", "V46", "V412", "V416", "BV05", "BV08", "BV013", "BV26", "BV28", "BV29", "BV31", "BV32", "BV35", "BV38", "BV310", "BV314", "BV315", "BV48", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B08", "B09", "B111", "B114", "B115", "B21", "B28", "B310", "B311", "B315", "B411", "B415", "BG05", "BG114", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G34", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G44", "G47", "G49", "G410", "YG06", "YG012", "YG015", "YG111", "YG112", "YG211", "YG212", "YG36", "YG414", "YG415", "YG510", "YG610", "YG611", "CG01", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG15", "GG16", "GG24", "120","0"],
   },
   {
     id: "honolulu_bundle_29",
@@ -469,7 +469,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 216,
+    count: 217,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-216-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=43637888942367",
@@ -477,7 +477,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-216-color-Double-Tipped-Brush-Fine-Refillable-Markers/10563768418",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Based-Brush-Markers/dp/B09P7WS4P7/?th=1",
     },
-    colors: ["Y02", "Y07", "Y09", "Y14", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y39", "Y311", "Y315", "Y45", "Y46", "Y410", "Y412", "Y413", "Y415", "Y55", "Y62", "Y69", "Y611", "YR04", "YR06", "YR07", "YR11", "YR17", "YR19", "YR111", "YR112", "YR33", "YR34", "YR39", "YR312", "YR313", "YR43", "YR52", "YR55", "YR59", "YR513", "YR515", "E05", "E14", "E19", "E22", "E26", "E211", "E212", "E311", "E46", "E413", "E415", "E58", "E511", "E515", "E610", "E85", "E92", "E97", "R013", "R014", "R015", "R15", "R16", "R22", "R23", "R27", "R28", "R210", "R213", "R215", "R38", "R46", "R48", "R410", "R412", "R413", "R54", "R57", "R514", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV39", "RV311", "RV314", "RV316", "RV57", "V010", "V13", "V14", "V18", "V22", "V29", "V216", "V38", "V46", "V412", "V416", "BV05", "BV08", "BV013", "BV26", "BV28", "BV29", "BV31", "BV32", "BV35", "BV38", "BV310", "BV314", "BV315", "BV48", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B08", "B09", "B111", "B114", "B115", "B21", "B28", "B310", "B311", "B315", "B411", "B415", "BG05", "BG114", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G34", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G44", "G47", "G49", "G410", "YG06", "YG012", "YG015", "YG111", "YG112", "YG211", "YG212", "YG36", "YG414", "YG415", "YG510", "YG610", "YG611", "CG01", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG15", "GG16", "GG24", "120"],
+    colors: ["Y02", "Y07", "Y09", "Y14", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y39", "Y311", "Y315", "Y45", "Y46", "Y410", "Y412", "Y413", "Y415", "Y55", "Y62", "Y69", "Y611", "YR04", "YR06", "YR07", "YR11", "YR17", "YR19", "YR111", "YR112", "YR33", "YR34", "YR39", "YR312", "YR313", "YR43", "YR52", "YR55", "YR59", "YR513", "YR515", "E05", "E14", "E19", "E22", "E26", "E211", "E212", "E311", "E46", "E413", "E415", "E58", "E511", "E515", "E610", "E85", "E92", "E97", "R013", "R014", "R015", "R15", "R16", "R22", "R23", "R27", "R28", "R210", "R213", "R215", "R38", "R46", "R48", "R410", "R412", "R413", "R54", "R57", "R514", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV39", "RV311", "RV314", "RV316", "RV57", "V010", "V13", "V14", "V18", "V22", "V29", "V216", "V38", "V46", "V412", "V416", "BV05", "BV08", "BV013", "BV26", "BV28", "BV29", "BV31", "BV32", "BV35", "BV38", "BV310", "BV314", "BV315", "BV48", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B08", "B09", "B111", "B114", "B115", "B21", "B28", "B310", "B311", "B315", "B411", "B415", "BG05", "BG114", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G34", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G44", "G47", "G49", "G410", "YG06", "YG012", "YG015", "YG111", "YG112", "YG211", "YG212", "YG36", "YG414", "YG415", "YG510", "YG610", "YG611", "CG01", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG15", "GG16", "GG24", "120","0"],
   },
   {
     id: "honolulu_bundle_30",
@@ -485,7 +485,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 320,
+    count: 321,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-honolulu-320-colors-dual-tips-alcohol-art-markers?variant=46202146324767",
@@ -493,11 +493,11 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Brush-Tip-320-color-Double-Tipped-Art-Sketch-Marker-Set-Artists-Adults-Coloring-Illustration-Brush-Chisel-Dual-Tips-Honolulu-Se/18284560925",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-320-color-Double/dp/B0B4T76DCW/?th=1",
     },
-    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y09", "Y14", "Y17", "Y19", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y215", "Y216", "Y34", "Y39", "Y311", "Y315", "Y42", "Y45", "Y46", "Y49", "Y410", "Y412", "Y413", "Y415", "Y416", "Y55", "Y59", "Y515", "Y62", "Y69", "Y611", "YR00", "YR03", "YR04", "YR06", "YR07", "YR015", "YR11", "YR17", "YR19", "YR111", "YR112", "YR213", "YR215", "YR33", "YR34", "YR39", "YR312", "YR313", "YR314", "YR43", "YR45", "YR47", "YR52", "YR55", "YR57", "YR58", "YR59", "YR511", "YR513", "YR515", "E05", "E06", "E011", "E14", "E17", "E19", "E22", "E26", "E211", "E212", "E311", "E313", "E314", "E44", "E46", "E413", "E415", "E58", "E511", "E515", "E69", "E610", "E614", "E713", "E85", "E92", "E97", "E914", "R012", "R013", "R014", "R015", "R016", "R15", "R16", "R112", "R22", "R23", "R25", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R310", "R312", "R46", "R48", "R410", "R412", "R413", "R50", "R54", "R56", "R57", "R59", "R513", "R514", "R69", "R612", "R615", "RV01", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV23", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV35", "RV39", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "RV515", "V08", "V010", "V013", "V015", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V32", "V34", "V38", "V46", "V412", "V414", "V416", "BV05", "BV08", "BV013", "BV015", "BV15", "BV115", "BV26", "BV28", "BV29", "BV210", "BV31", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV314", "BV315", "BV48", "BV414", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B21", "B27", "B28", "B310", "B311", "B315", "B411", "B412", "B415", "BG04", "BG05", "BG09", "BG011", "BG19", "BG114", "BG21", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G012", "G013", "G112", "G113", "G114", "G24", "G210", "G34", "G36", "G310", "G311", "G312", "G313", "G315", "G316", "G41", "G43", "G44", "G47", "G49", "G410", "YG06", "YG07", "YG012", "YG015", "YG111", "YG112", "YG113", "YG29", "YG211", "YG212", "YG215", "YG36", "YG312", "YG413", "YG414", "YG415", "YG510", "YG66", "YG610", "YG611", "CG01", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG03", "GG05", "GG07", "GG10", "GG11", "GG12", "GG15", "GG16", "GG24", "GG25", "FY00", "FY01", "FY02", "FY04", "120"],
+    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y09", "Y14", "Y17", "Y19", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y215", "Y216", "Y34", "Y39", "Y311", "Y315", "Y42", "Y45", "Y46", "Y49", "Y410", "Y412", "Y413", "Y415", "Y416", "Y55", "Y59", "Y515", "Y62", "Y69", "Y611", "YR00", "YR03", "YR04", "YR06", "YR07", "YR015", "YR11", "YR17", "YR19", "YR111", "YR112", "YR213", "YR215", "YR33", "YR34", "YR39", "YR312", "YR313", "YR314", "YR43", "YR45", "YR47", "YR52", "YR55", "YR57", "YR58", "YR59", "YR511", "YR513", "YR515", "E05", "E06", "E011", "E14", "E17", "E19", "E22", "E26", "E211", "E212", "E311", "E313", "E314", "E44", "E46", "E413", "E415", "E58", "E511", "E515", "E69", "E610", "E614", "E713", "E85", "E92", "E97", "E914", "R012", "R013", "R014", "R015", "R016", "R15", "R16", "R112", "R22", "R23", "R25", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R310", "R312", "R46", "R48", "R410", "R412", "R413", "R50", "R54", "R56", "R57", "R59", "R513", "R514", "R69", "R612", "R615", "RV01", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV23", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV35", "RV39", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "RV515", "V08", "V010", "V013", "V015", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V32", "V34", "V38", "V46", "V412", "V414", "V416", "BV05", "BV08", "BV013", "BV015", "BV15", "BV115", "BV26", "BV28", "BV29", "BV210", "BV31", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV314", "BV315", "BV48", "BV414", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B21", "B27", "B28", "B310", "B311", "B315", "B411", "B412", "B415", "BG04", "BG05", "BG09", "BG011", "BG19", "BG114", "BG21", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G012", "G013", "G112", "G113", "G114", "G24", "G210", "G34", "G36", "G310", "G311", "G312", "G313", "G315", "G316", "G41", "G43", "G44", "G47", "G49", "G410", "YG06", "YG07", "YG012", "YG015", "YG111", "YG112", "YG113", "YG29", "YG211", "YG212", "YG215", "YG36", "YG312", "YG413", "YG414", "YG415", "YG510", "YG66", "YG610", "YG611", "CG01", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG03", "GG05", "GG07", "GG10", "GG11", "GG12", "GG15", "GG16", "GG24", "GG25", "FY00", "FY01", "FY02", "FY04", "120","0"],
   },
   {
     id: "honolulu_bundle_31",
-    name: "Honolulu B 320",
+    name: "Honolulu B 321",
     series: "Honolulu B",
     edition: null,
     version: null,
@@ -509,7 +509,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Refillable-320-Colors-Alcohol-Markers-Brush-Fine-Dual-Tips/11720765306",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-320-color-Double/dp/B0BPMFNJYR/?th=1",
     },
-    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y09", "Y14", "Y17", "Y19", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y215", "Y216", "Y34", "Y39", "Y311", "Y315", "Y42", "Y45", "Y46", "Y49", "Y410", "Y412", "Y413", "Y415", "Y416", "Y55", "Y59", "Y515", "Y62", "Y69", "Y611", "YR00", "YR03", "YR04", "YR06", "YR07", "YR015", "YR11", "YR17", "YR19", "YR111", "YR112", "YR213", "YR215", "YR33", "YR34", "YR39", "YR312", "YR313", "YR314", "YR43", "YR45", "YR47", "YR52", "YR55", "YR57", "YR58", "YR59", "YR511", "YR513", "YR515", "E05", "E06", "E011", "E14", "E17", "E19", "E22", "E26", "E211", "E212", "E311", "E313", "E314", "E44", "E46", "E413", "E415", "E58", "E511", "E515", "E69", "E610", "E614", "E713", "E85", "E92", "E97", "E914", "R012", "R013", "R014", "R015", "R016", "R15", "R16", "R112", "R22", "R23", "R25", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R310", "R312", "R46", "R48", "R410", "R412", "R413", "R50", "R54", "R56", "R57", "R59", "R513", "R514", "R69", "R612", "R615", "RV01", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV23", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV35", "RV39", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "RV515", "V08", "V010", "V013", "V015", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V32", "V34", "V38", "V46", "V412", "V414", "V416", "BV05", "BV08", "BV013", "BV015", "BV15", "BV115", "BV26", "BV28", "BV29", "BV210", "BV31", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV314", "BV315", "BV48", "BV414", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B21", "B27", "B28", "B310", "B311", "B315", "B411", "B412", "B415", "BG04", "BG05", "BG09", "BG011", "BG19", "BG114", "BG21", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G012", "G013", "G112", "G113", "G114", "G24", "G210", "G34", "G36", "G310", "G311", "G312", "G313", "G315", "G316", "G41", "G43", "G44", "G47", "G49", "G410", "YG06", "YG07", "YG012", "YG015", "YG111", "YG112", "YG113", "YG29", "YG211", "YG212", "YG215", "YG36", "YG312", "YG413", "YG414", "YG415", "YG510", "YG66", "YG610", "YG611", "CG01", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG03", "GG05", "GG07", "GG10", "GG11", "GG12", "GG15", "GG16", "GG24", "GG25", "FY00", "FY01", "FY02", "FY04", "120"],
+    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y09", "Y14", "Y17", "Y19", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y215", "Y216", "Y34", "Y39", "Y311", "Y315", "Y42", "Y45", "Y46", "Y49", "Y410", "Y412", "Y413", "Y415", "Y416", "Y55", "Y59", "Y515", "Y62", "Y69", "Y611", "YR00", "YR03", "YR04", "YR06", "YR07", "YR015", "YR11", "YR17", "YR19", "YR111", "YR112", "YR213", "YR215", "YR33", "YR34", "YR39", "YR312", "YR313", "YR314", "YR43", "YR45", "YR47", "YR52", "YR55", "YR57", "YR58", "YR59", "YR511", "YR513", "YR515", "E05", "E06", "E011", "E14", "E17", "E19", "E22", "E26", "E211", "E212", "E311", "E313", "E314", "E44", "E46", "E413", "E415", "E58", "E511", "E515", "E69", "E610", "E614", "E713", "E85", "E92", "E97", "E914", "R012", "R013", "R014", "R015", "R016", "R15", "R16", "R112", "R22", "R23", "R25", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R310", "R312", "R46", "R48", "R410", "R412", "R413", "R50", "R54", "R56", "R57", "R59", "R513", "R514", "R69", "R612", "R615", "RV01", "RV04", "RV05", "RV08", "RV09", "RV17", "RV18", "RV19", "RV111", "RV23", "RV25", "RV28", "RV29", "RV212", "RV33", "RV34", "RV35", "RV39", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "RV515", "V08", "V010", "V013", "V015", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V32", "V34", "V38", "V46", "V412", "V414", "V416", "BV05", "BV08", "BV013", "BV015", "BV15", "BV115", "BV26", "BV28", "BV29", "BV210", "BV31", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV314", "BV315", "BV48", "BV414", "BV415", "BV58", "BV514", "B02", "B03", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B21", "B27", "B28", "B310", "B311", "B315", "B411", "B412", "B415", "BG04", "BG05", "BG09", "BG011", "BG19", "BG114", "BG21", "BG24", "BG211", "BG212", "BG215", "BG310", "BG311", "BG314", "BG315", "G012", "G013", "G112", "G113", "G114", "G24", "G210", "G34", "G36", "G310", "G311", "G312", "G313", "G315", "G316", "G41", "G43", "G44", "G47", "G49", "G410", "YG06", "YG07", "YG012", "YG015", "YG111", "YG112", "YG113", "YG29", "YG211", "YG212", "YG215", "YG36", "YG312", "YG413", "YG414", "YG415", "YG510", "YG66", "YG610", "YG611", "CG01", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY00", "BGY02", "BGY13", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG03", "GG05", "GG07", "GG10", "GG11", "GG12", "GG15", "GG16", "GG24", "GG25", "FY00", "FY01", "FY02", "FY04", "120","0"],
   },
   {
     id: "honolulu_bundle_32",
@@ -517,7 +517,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: "Version 1",
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -525,7 +525,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y210", "Y216", "Y34", "Y48", "YR07", "YR09", "YR25", "YR29", "YR37", "YR38", "YR39", "YR313", "YR57", "YR515", "E59", "E511", "E513", "E514", "E515", "E612", "E75", "E711", "E814", "GY163"],
+    colors: ["Y210", "Y216", "Y34", "Y48", "YR07", "YR09", "YR25", "YR29", "YR37", "YR38", "YR39", "YR313", "YR57", "YR515", "E59", "E511", "E513", "E514", "E515", "E612", "E75", "E711", "E814", "GY163","0"],
   },
   {
     id: "honolulu_bundle_33",
@@ -533,7 +533,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: "Version 2",
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-24-skin-tone-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=44409365561631",
@@ -541,7 +541,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-24-Skin-Tone-Color-Alcohol-Based-Markers-Chisel-Brush-Honolulu-Refillable/11006622209",
       amazon: "https://www.amazon.com/Skin-Tone-Ohuhu-Alcohol-based-Coloring-Illustration/dp/B07X1XMFH6/?th=1",
     },
-    colors: ["Y415", "YR02", "YR04", "YR09", "YR17", "YR33", "YR34", "YR37", "YR38", "YR313", "YR47", "YR515", "E47", "E49", "E511", "E513", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16"],
+    colors: ["Y415", "YR02", "YR04", "YR09", "YR17", "YR33", "YR34", "YR37", "YR38", "YR313", "YR47", "YR515", "E47", "E49", "E511", "E513", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16","0"],
   },
   {
     id: "honolulu_bundle_34",
@@ -549,7 +549,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-24-skin-tone-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=44409365627167",
@@ -557,7 +557,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/24-Ohuhu-Skin-Tone-Markers-Brush-Fine-Tip-Alcohol-Based-Markers-Gifts/7377661040",
       amazon: "https://www.amazon.com/Skin-Tone-Ohuhu-Alcohol-based-Coloring-Illustration/dp/B088DB4P5C/?th=1",
     },
-    colors: ["Y415", "YR02", "YR04", "YR09", "YR17", "YR33", "YR34", "YR37", "YR38", "YR313", "YR47", "YR515", "E47", "E49", "E511", "E513", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16"],
+    colors: ["Y415", "YR02", "YR04", "YR09", "YR17", "YR33", "YR34", "YR37", "YR38", "YR313", "YR47", "YR515", "E47", "E49", "E511", "E513", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16","0"],
   },
   {
     id: "honolulu_bundle_35",
@@ -565,7 +565,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Black Case",
     version: null,
-    count: 36,
+    count: 37,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-36-skin-tone-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=43637889401119",
@@ -573,7 +573,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Skin-Tone-36-Portrait-Colors-Refillable-Ink-Brush-Chisel-Dual-Tips/14804958046",
       amazon: "https://www.amazon.com/Ohuhu-Skin-Tone-Alcohol-Based-Coloring-Illustration/dp/B08FMGPYQ2/?th=1",
     },
-    colors: ["Y210", "Y216", "Y34", "Y43", "Y48", "Y415", "YR02", "YR04", "YR09", "YR17", "YR25", "YR29", "YR33", "YR34", "YR37", "YR38", "YR39", "YR313", "YR47", "YR57", "YR515", "E47", "E49", "E59", "E511", "E513", "E514", "E515", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16"],
+    colors: ["Y210", "Y216", "Y34", "Y43", "Y48", "Y415", "YR02", "YR04", "YR09", "YR17", "YR25", "YR29", "YR33", "YR34", "YR37", "YR38", "YR39", "YR313", "YR47", "YR57", "YR515", "E47", "E49", "E59", "E511", "E513", "E514", "E515", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16","0"],
   },
   {
     id: "honolulu_bundle_36",
@@ -581,7 +581,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Black Case",
     version: null,
-    count: 36,
+    count: 37,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-36-skin-tone-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=43637889368351",
@@ -589,7 +589,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Brush-Markers-Skin-Tone-36-Portrait-Skin-Colors-Double-Tipped-Art-Marker-Set-Artist-Adults-Coloring-Illustration-Refillable-Brush-Fine-Dual-Tip/15090419948",
       amazon: "https://www.amazon.com/Ohuhu-Skin-Tone-Alcohol-Based-Coloring-Illustration/dp/B08YDJJKSX/?th=1",
     },
-    colors: ["Y210", "Y216", "Y34", "Y43", "Y48", "Y415", "YR02", "YR04", "YR09", "YR17", "YR25", "YR29", "YR33", "YR34", "YR37", "YR38", "YR39", "YR313", "YR47", "YR57", "YR515", "E47", "E49", "E59", "E511", "E513", "E514", "E515", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16"],
+    colors: ["Y210", "Y216", "Y34", "Y43", "Y48", "Y415", "YR02", "YR04", "YR09", "YR17", "YR25", "YR29", "YR33", "YR34", "YR37", "YR38", "YR39", "YR313", "YR47", "YR57", "YR515", "E47", "E49", "E59", "E511", "E513", "E514", "E515", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16","0"],
   },
   {
     id: "honolulu_bundle_37",
@@ -597,7 +597,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "White Case",
     version: null,
-    count: 36,
+    count: 37,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -605,7 +605,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Art-Marker-Single-Piece-Fine-Pen-36-Skin-tone-colors-37-Pieces/2187091141",
       amazon: null,
     },
-    colors: ["Y210", "Y216", "Y34", "Y43", "Y48", "Y415", "YR02", "YR04", "YR09", "YR17", "YR25", "YR29", "YR33", "YR34", "YR37", "YR38", "YR39", "YR313", "YR47", "YR57", "YR515", "E47", "E49", "E59", "E511", "E513", "E514", "E515", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16"],
+    colors: ["Y210", "Y216", "Y34", "Y43", "Y48", "Y415", "YR02", "YR04", "YR09", "YR17", "YR25", "YR29", "YR33", "YR34", "YR37", "YR38", "YR39", "YR313", "YR47", "YR57", "YR515", "E47", "E49", "E59", "E511", "E513", "E514", "E515", "E66", "E612", "E615", "E75", "E711", "E81", "E814", "R16","0"],
   },
   {
     id: "honolulu_bundle_38",
@@ -613,7 +613,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Coco Wyo",
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -621,7 +621,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y02", "Y06", "Y26", "Y28", "Y55", "Y59", "Y62", "YR07", "YR19", "YR52", "E46", "E58", "E85", "R015", "R15", "R22", "R25", "R210", "R412", "RV04", "RV23", "RV28", "RV34", "RV35", "V14", "V22", "V34", "V38", "V46", "BV32", "BV35", "BV38", "B02", "B06", "B28", "BG09", "BG21", "BG24", "G34", "G41", "G49", "YG06", "YG36", "YG66", "CG02", "CG24", "BGY02", "YGY11"],
+    colors: ["Y02", "Y06", "Y26", "Y28", "Y55", "Y59", "Y62", "YR07", "YR19", "YR52", "E46", "E58", "E85", "R015", "R15", "R22", "R25", "R210", "R412", "RV04", "RV23", "RV28", "RV34", "RV35", "V14", "V22", "V34", "V38", "V46", "BV32", "BV35", "BV38", "B02", "B06", "B28", "BG09", "BG21", "BG24", "G34", "G41", "G49", "YG06", "YG36", "YG66", "CG02", "CG24", "BGY02", "YGY11","0"],
   },
   {
     id: "honolulu_bundle_39",
@@ -629,7 +629,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 36,
+    count: 37,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-36-gray-tone-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=43637889335583",
@@ -637,7 +637,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-36-Grey-Tone-Colors-Alcohol-Based-Markers-Dual-Tips-Brush-and-Chisel-Markers-Set-for-Adult-Coloring-Illustration/3245429311",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Coloring-Illustration-Grey-tone/dp/B09BJCQQVD/?th=1",
     },
-    colors: ["YR02", "E14", "E19", "E111", "B21", "B310", "B311", "B411", "B415", "CG01", "CG02", "CG17", "CG18", "CG25", "CG28", "BGY00", "BGY13", "BGY15", "BGY18", "BGY24", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG24"],
+    colors: ["YR02", "E14", "E19", "E111", "B21", "B310", "B311", "B411", "B415", "CG01", "CG02", "CG17", "CG18", "CG25", "CG28", "BGY00", "BGY13", "BGY15", "BGY18", "BGY24", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG24","0"],
   },
   {
     id: "honolulu_bundle_40",
@@ -645,7 +645,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 36,
+    count: 37,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-36-gray-tone-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=44192897859871",
@@ -653,7 +653,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Alcohol-Markers-Brush-Tip-Grey-tone-Double-Tipped-Alcohol-Based-Art-Marker-Set-Artist-Adults-Coloring-Illustration-Shading-36-Grayscale-Colors/16866052928",
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Coloring-Illustration-Grey-tone/dp/B09W8LZZMJ/?th=1",
     },
-    colors: ["YR02", "E14", "E19", "E111", "B21", "B310", "B311", "B411", "B415", "CG01", "CG02", "CG17", "CG18", "CG25", "CG28", "BGY00", "BGY13", "BGY15", "BGY18", "BGY24", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG24"],
+    colors: ["YR02", "E14", "E19", "E111", "B21", "B310", "B311", "B411", "B415", "CG01", "CG02", "CG17", "CG18", "CG25", "CG28", "BGY00", "BGY13", "BGY15", "BGY18", "BGY24", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG24","0"],
   },
   {
     id: "honolulu_bundle_43",
@@ -661,7 +661,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-48-mid-tone-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=43637889237279",
@@ -669,7 +669,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Ohuhu-Mid-tone-Honolulu-Sketching-Illustration/dp/B097THCBLR/?th=1",
     },
-    colors: ["Y09", "Y39", "Y311", "Y46", "Y410", "Y412", "Y413", "YR19", "YR312", "YR513", "E19", "E211", "E311", "E413", "E58", "E610", "E97", "R23", "R48", "R410", "R57", "RV09", "RV28", "RV29", "RV39", "RV57", "V29", "V46", "V412", "BV08", "BV013", "BV28", "BV48", "BV415", "BV58", "B09", "B311", "BG211", "G44", "YG111", "YG112", "YG36", "YG610", "YG611", "CG28", "BGY13", "WG06", "GG12"],
+    colors: ["Y09", "Y39", "Y311", "Y46", "Y410", "Y412", "Y413", "YR19", "YR312", "YR513", "E19", "E211", "E311", "E413", "E58", "E610", "E97", "R23", "R48", "R410", "R57", "RV09", "RV28", "RV29", "RV39", "RV57", "V29", "V46", "V412", "BV08", "BV013", "BV28", "BV48", "BV415", "BV58", "B09", "B311", "BG211", "G44", "YG111", "YG112", "YG36", "YG610", "YG611", "CG28", "BGY13", "WG06", "GG12","0"],
   },
   {
     id: "honolulu_bundle_44",
@@ -677,7 +677,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-48-mid-tone-colors-dual-tips-alcohol-art-markers-brush-chisel?variant=44192877871391",
@@ -685,7 +685,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Ohuhu-Mid-tone-Honolulu-Sketching-Illustration/dp/B09W8PNNPW/?th=1",
     },
-    colors: ["Y09", "Y39", "Y311", "Y46", "Y410", "Y412", "Y413", "YR19", "YR312", "YR513", "E19", "E211", "E311", "E413", "E58", "E610", "E97", "R23", "R48", "R410", "R57", "RV09", "RV28", "RV29", "RV39", "RV57", "V29", "V46", "V412", "BV08", "BV013", "BV28", "BV48", "BV415", "BV58", "B09", "B311", "BG211", "G44", "YG111", "YG112", "YG36", "YG610", "YG611", "CG28", "BGY13", "WG06", "GG12"],
+    colors: ["Y09", "Y39", "Y311", "Y46", "Y410", "Y412", "Y413", "YR19", "YR312", "YR513", "E19", "E211", "E311", "E413", "E58", "E610", "E97", "R23", "R48", "R410", "R57", "RV09", "RV28", "RV29", "RV39", "RV57", "V29", "V46", "V412", "BV08", "BV013", "BV28", "BV48", "BV415", "BV58", "B09", "B311", "BG211", "G44", "YG111", "YG112", "YG36", "YG610", "YG611", "CG28", "BGY13", "WG06", "GG12","0"],
   },
   {
     id: "honolulu_bundle_45",
@@ -693,7 +693,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: "Sweetness",
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-48-color-chisel-brush-tip-pastel-markers?variant=43637889302815",
@@ -701,7 +701,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-48-Color-Pastel-Brush-Chisel-Alcohol-Based-Markers-Set-Refillable-Ink/11045958227",
       amazon: "https://www.amazon.com/Alcohol-Ohuhu-Coloring-Illustration-Colorless/dp/B08H4DK2NN?th=1",
     },
-    colors: ["Y02", "Y14", "Y45", "Y55", "Y62", "Y69", "YR06", "YR11", "YR43", "YR52", "YR55", "YR59", "E05", "E14", "E26", "E46", "E85", "E92", "R15", "R22", "R27", "R54", "RV04", "RV05", "RV25", "RV33", "RV34", "V14", "V22", "BV05", "BV32", "BV35", "B03", "B05", "B21", "B28", "BG24", "BG310", "G34", "G47", "CG01", "CG24", "BGY00", "YGY02", "YGY13", "WG01", "WG04", "GG24"],
+    colors: ["Y02", "Y14", "Y45", "Y55", "Y62", "Y69", "YR06", "YR11", "YR43", "YR52", "YR55", "YR59", "E05", "E14", "E26", "E46", "E85", "E92", "R15", "R22", "R27", "R54", "RV04", "RV05", "RV25", "RV33", "RV34", "V14", "V22", "BV05", "BV32", "BV35", "B03", "B05", "B21", "B28", "BG24", "BG310", "G34", "G47", "CG01", "CG24", "BGY00", "YGY02", "YGY13", "WG01", "WG04", "GG24","0"],
   },
   {
     id: "honolulu_bundle_46",
@@ -709,7 +709,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: "Sweetness",
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-48-color-chisel-brush-tip-pastel-markers?variant=43637889270047",
@@ -717,7 +717,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Pastel-Markers-Brush-Tip-Alcohol-based-Markers-Double-Tipped-Artist-Art-Sketch-Adults-Coloring-Illustration-48-Pastel-Colors-1-Alcohol-Marker-B/18585356638",
       amazon: "https://www.amazon.com/Ohuhu-Markers-Alcohol-based-Coloring-Illustration/dp/B08YDDCBDZ?th=1",
     },
-    colors: ["Y02", "Y14", "Y45", "Y55", "Y62", "Y69", "YR06", "YR11", "YR43", "YR52", "YR55", "YR59", "E05", "E14", "E26", "E46", "E85", "E92", "R15", "R22", "R27", "R54", "RV04", "RV05", "RV25", "RV33", "RV34", "V14", "V22", "BV05", "BV32", "BV35", "B03", "B05", "B21", "B28", "BG24", "BG310", "G34", "G47", "CG01", "CG24", "BGY00", "YGY02", "YGY13", "WG01", "WG04", "GG24"],
+    colors: ["Y02", "Y14", "Y45", "Y55", "Y62", "Y69", "YR06", "YR11", "YR43", "YR52", "YR55", "YR59", "E05", "E14", "E26", "E46", "E85", "E92", "R15", "R22", "R27", "R54", "RV04", "RV05", "RV25", "RV33", "RV34", "V14", "V22", "BV05", "BV32", "BV35", "B03", "B05", "B21", "B28", "BG24", "BG310", "G34", "G47", "CG01", "CG24", "BGY00", "YGY02", "YGY13", "WG01", "WG04", "GG24","0"],
   },
   {
     id: "honolulu_bundle_47",
@@ -725,7 +725,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: "Blossoming",
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-new-48-pastel-colors-dual-tips-alcohol-art-markers-blossoming?variant=44567093182751",
@@ -733,7 +733,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Pastel-Alcohol-Brush-Markers-48-New-Pastel-Colors-Blossoming-Alcohol-Based-Double-Tipped-Art-Alcohol-Markers-Artist-Adults-Coloring-Illustratio/15141510056",
       amazon: "https://www.amazon.com/Alcohol-Ohuhu-Coloring-Illustration-Colorless/dp/B0B4T93H24?th=1",
     },
-    colors: ["Y00", "Y03", "Y06", "Y07", "Y26", "Y42", "YR00", "YR03", "YR05", "YR07", "YR33", "YR45", "YR47", "YR56", "YR57", "YR58", "E22", "R25", "R50", "RV01", "RV23", "RV35", "V32", "V34", "V38", "BV26", "BV31", "BV38", "B02", "B06", "B310", "BG04", "BG09", "BG21", "G24", "G36", "G41", "G43", "G49", "YG06", "YG07", "YG66", "CG02", "BGY02", "YGY11", "WG10", "GG03", "GG10"],
+    colors: ["Y00", "Y03", "Y06", "Y07", "Y26", "Y42", "YR00", "YR03", "YR05", "YR07", "YR33", "YR45", "YR47", "YR56", "YR57", "YR58", "E22", "R25", "R50", "RV01", "RV23", "RV35", "V32", "V34", "V38", "BV26", "BV31", "BV38", "B02", "B06", "B310", "BG04", "BG09", "BG21", "G24", "G36", "G41", "G43", "G49", "YG06", "YG07", "YG66", "CG02", "BGY02", "YGY11", "WG10", "GG03", "GG10","0"],
   },
   {
     id: "honolulu_bundle_48",
@@ -741,7 +741,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: "Blossoming",
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-new-48-pastel-colors-dual-tips-alcohol-art-markers-blossoming?variant=45167889645855",
@@ -749,7 +749,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Pastel-Alcohol-Brush-Markers-48-Pastel-Colors-of-Honolulu-Blossoming-Brush-Chisel-Dual-Tips-Refillable-New-Color-Codes/18311654643",
       amazon: "https://www.amazon.com/Ohuhu-Markers-Alcohol-based-Coloring-Illustration/dp/B0C2TW563N?th=1",
     },
-    colors: ["Y00", "Y03", "Y06", "Y07", "Y26", "Y42", "YR00", "YR03", "YR05", "YR07", "YR33", "YR45", "YR47", "YR56", "YR57", "YR58", "E22", "R25", "R50", "RV01", "RV23", "RV35", "V32", "V34", "V38", "BV26", "BV31", "BV38", "B02", "B06", "B310", "BG04", "BG09", "BG21", "G24", "G36", "G41", "G43", "G49", "YG06", "YG07", "YG66", "CG02", "BGY02", "YGY11", "WG10", "GG03", "GG10"],
+    colors: ["Y00", "Y03", "Y06", "Y07", "Y26", "Y42", "YR00", "YR03", "YR05", "YR07", "YR33", "YR45", "YR47", "YR56", "YR57", "YR58", "E22", "R25", "R50", "RV01", "RV23", "RV35", "V32", "V34", "V38", "BV26", "BV31", "BV38", "B02", "B06", "B310", "BG04", "BG09", "BG21", "G24", "G36", "G41", "G43", "G49", "YG06", "YG07", "YG66", "CG02", "BGY02", "YGY11", "WG10", "GG03", "GG10","0"],
   },
   {
     id: "honolulu_bundle_49",
@@ -757,7 +757,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: null,
     version: null,
-    count: 96,
+    count: 97,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-96-pastel-colors-dual-tips-alcohol-art-markers-sweetness-blossoming?variant=44553402024223",
@@ -765,7 +765,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Pastel-Markers-Alcohol-Based-96-Pastel-Colors-of-Honolulu-Sweetness-Blossoming-Brush-Chisel-Refillable-Ink-New-Color-Codes/18279314397",
       amazon: "https://www.amazon.com/Alcohol-Ohuhu-Coloring-Illustration-Colorless/dp/B0B4TDJGP1?th=1",
     },
-    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y14", "Y26", "Y42", "Y45", "Y55", "Y62", "Y69", "YR00", "YR03", "YR05", "YR06", "YR07", "YR11", "YR33", "YR43", "YR45", "YR47", "YR52", "YR55", "YR56", "YR57", "YR58", "YR59", "E05", "E14", "E22", "E26", "E46", "E85", "E92", "R15", "R22", "R25", "R27", "R50", "R54", "RV01", "RV04", "RV05", "RV23", "RV25", "RV33", "RV34", "RV35", "V14", "V22", "V32", "V34", "V38", "BV05", "BV26", "BV31", "BV32", "BV35", "BV38", "B02", "B03", "B05", "B06", "B21", "B28", "B310", "BG04", "BG09", "BG21", "BG24", "BG310", "G24", "G34", "G36", "G41", "G43", "G47", "G49", "YG06", "YG07", "YG66", "CG01", "CG02", "CG24", "BGY00", "BGY02", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG10", "GG03", "GG10", "GG24"],
+    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y14", "Y26", "Y42", "Y45", "Y55", "Y62", "Y69", "YR00", "YR03", "YR05", "YR06", "YR07", "YR11", "YR33", "YR43", "YR45", "YR47", "YR52", "YR55", "YR56", "YR57", "YR58", "YR59", "E05", "E14", "E22", "E26", "E46", "E85", "E92", "R15", "R22", "R25", "R27", "R50", "R54", "RV01", "RV04", "RV05", "RV23", "RV25", "RV33", "RV34", "RV35", "V14", "V22", "V32", "V34", "V38", "BV05", "BV26", "BV31", "BV32", "BV35", "BV38", "B02", "B03", "B05", "B06", "B21", "B28", "B310", "BG04", "BG09", "BG21", "BG24", "BG310", "G24", "G34", "G36", "G41", "G43", "G47", "G49", "YG06", "YG07", "YG66", "CG01", "CG02", "CG24", "BGY00", "BGY02", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG10", "GG03", "GG10", "GG24","0"],
   },
   {
     id: "honolulu_bundle_50",
@@ -773,7 +773,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 96,
+    count: 97,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-96-pastel-colors-dual-tips-alcohol-art-markers-sweetness-blossoming?variant=45266250498335",
@@ -781,7 +781,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Pastel-Markers-Alcohol-Based-96-Pastel-Colors-of-Sweetness-Blossoming-New-Color-Codes-Brush-Fine-Honolulu-B/18268306300",
       amazon: "https://www.amazon.com/Ohuhu-Markers-Alcohol-based-Coloring-Illustration/dp/B0C2TT6N6V?th=1",
     },
-    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y14", "Y26", "Y42", "Y45", "Y55", "Y62", "Y69", "YR00", "YR03", "YR05", "YR06", "YR07", "YR11", "YR33", "YR43", "YR45", "YR47", "YR52", "YR55", "YR56", "YR57", "YR58", "YR59", "E05", "E14", "E22", "E26", "E46", "E85", "E92", "R15", "R22", "R25", "R27", "R50", "R54", "RV01", "RV04", "RV05", "RV23", "RV25", "RV33", "RV34", "RV35", "V14", "V22", "V32", "V34", "V38", "BV05", "BV26", "BV31", "BV32", "BV35", "BV38", "B02", "B03", "B05", "B06", "B21", "B28", "B310", "BG04", "BG09", "BG21", "BG24", "BG310", "G24", "G34", "G36", "G41", "G43", "G47", "G49", "YG06", "YG07", "YG66", "CG01", "CG02", "CG24", "BGY00", "BGY02", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG10", "GG03", "GG10", "GG24"],
+    colors: ["Y00", "Y02", "Y03", "Y06", "Y07", "Y14", "Y26", "Y42", "Y45", "Y55", "Y62", "Y69", "YR00", "YR03", "YR05", "YR06", "YR07", "YR11", "YR33", "YR43", "YR45", "YR47", "YR52", "YR55", "YR56", "YR57", "YR58", "YR59", "E05", "E14", "E22", "E26", "E46", "E85", "E92", "R15", "R22", "R25", "R27", "R50", "R54", "RV01", "RV04", "RV05", "RV23", "RV25", "RV33", "RV34", "RV35", "V14", "V22", "V32", "V34", "V38", "BV05", "BV26", "BV31", "BV32", "BV35", "BV38", "B02", "B03", "B05", "B06", "B21", "B28", "B310", "BG04", "BG09", "BG21", "BG24", "BG310", "G24", "G34", "G36", "G41", "G43", "G47", "G49", "YG06", "YG07", "YG66", "CG01", "CG02", "CG24", "BGY00", "BGY02", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG10", "GG03", "GG10", "GG24","0"],
   },
   {
     id: "honolulu_bundle_51",
@@ -789,7 +789,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Black Case",
     version: "Japan",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -797,7 +797,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y06", "Y19", "Y110", "Y212", "Y413", "Y56", "YR00", "YR01", "YR03", "YR05", "YR06", "YR19", "YR214", "YR314", "YR45", "YR54", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E413", "E614", "E85", "R12", "R14", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV02", "RV04", "RV05", "RV07", "RV23", "RV32", "V08", "V016", "V22", "V29", "V34", "BV18", "BV28", "BV210", "BV35", "BV39", "BV312", "BV45", "BV515", "B03", "B04", "B05", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G48", "YG07", "YG215", "YG35", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120"],
+    colors: ["Y00", "Y02", "Y06", "Y19", "Y110", "Y212", "Y413", "Y56", "YR00", "YR01", "YR03", "YR05", "YR06", "YR19", "YR214", "YR314", "YR45", "YR54", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E413", "E614", "E85", "R12", "R14", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV02", "RV04", "RV05", "RV07", "RV23", "RV32", "V08", "V016", "V22", "V29", "V34", "BV18", "BV28", "BV210", "BV35", "BV39", "BV312", "BV45", "BV515", "B03", "B04", "B05", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G48", "YG07", "YG215", "YG35", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120","0"],
   },
   {
     id: "honolulu_bundle_52",
@@ -805,7 +805,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Black Case",
     version: "Japan",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -813,7 +813,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y06", "Y19", "Y110", "Y212", "Y413", "Y56", "YR00", "YR01", "YR03", "YR05", "YR06", "YR19", "YR214", "YR314", "YR45", "YR54", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E413", "E614", "E85", "R12", "R14", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV02", "RV04", "RV05", "RV07", "RV23", "RV32", "V08", "V016", "V22", "V29", "V34", "BV18", "BV28", "BV210", "BV35", "BV39", "BV312", "BV45", "BV515", "B03", "B04", "B05", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G48", "YG07", "YG215", "YG35", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120"],
+    colors: ["Y00", "Y02", "Y06", "Y19", "Y110", "Y212", "Y413", "Y56", "YR00", "YR01", "YR03", "YR05", "YR06", "YR19", "YR214", "YR314", "YR45", "YR54", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E413", "E614", "E85", "R12", "R14", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV02", "RV04", "RV05", "RV07", "RV23", "RV32", "V08", "V016", "V22", "V29", "V34", "BV18", "BV28", "BV210", "BV35", "BV39", "BV312", "BV45", "BV515", "B03", "B04", "B05", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G48", "YG07", "YG215", "YG35", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120","0"],
   },
   {
     id: "honolulu_bundle_53",
@@ -821,7 +821,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "White Case",
     version: "Version 1",
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -829,7 +829,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y06", "Y19", "Y110", "Y212", "YR52", "YR59", "YR511", "R012", "R016", "R27", "R48", "B04", "B09", "B015", "BG211", "BG310", "G313", "G47", "CG17", "WG01", "WG04", "WG06", "GG10", "120"],
+    colors: ["Y06", "Y19", "Y110", "Y212", "YR52", "YR59", "YR511", "R012", "R016", "R27", "R48", "B04", "B09", "B015", "BG211", "BG310", "G313", "G47", "CG17", "WG01", "WG04", "WG06", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_54",
@@ -837,7 +837,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "White Case",
     version: "Version 2",
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -845,7 +845,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y06", "Y19", "Y215", "Y410", "YR52", "YR59", "YR511", "R012", "R016", "R27", "R48", "B02", "B09", "B015", "BG211", "BG310", "G313", "G47", "CG17", "WG01", "WG04", "WG06", "GG10", "120"],
+    colors: ["Y06", "Y19", "Y215", "Y410", "YR52", "YR59", "YR511", "R012", "R016", "R27", "R48", "B02", "B09", "B015", "BG211", "BG310", "G313", "G47", "CG17", "WG01", "WG04", "WG06", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_55",
@@ -853,7 +853,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "White Case",
     version: "Version 1",
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -861,7 +861,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y06", "Y19", "Y110", "Y212", "YR52", "YR59", "YR511", "R012", "R016", "R27", "R48", "B04", "B09", "B015", "BG211", "BG310", "G313", "G47", "CG17", "WG01", "WG04", "WG06", "GG10", "120"],
+    colors: ["Y06", "Y19", "Y110", "Y212", "YR52", "YR59", "YR511", "R012", "R016", "R27", "R48", "B04", "B09", "B015", "BG211", "BG310", "G313", "G47", "CG17", "WG01", "WG04", "WG06", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_56",
@@ -869,7 +869,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "White Case",
     version: "Version 2",
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -877,7 +877,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y06", "Y19", "Y215", "Y410", "YR52", "YR59", "YR511", "R012", "R016", "R27", "R48", "B02", "B09", "B015", "BG211", "BG310", "G313", "G47", "CG17", "WG01", "WG04", "WG06", "GG10", "120"],
+    colors: ["Y06", "Y19", "Y215", "Y410", "YR52", "YR59", "YR511", "R012", "R016", "R27", "R48", "B02", "B09", "B015", "BG211", "BG310", "G313", "G47", "CG17", "WG01", "WG04", "WG06", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_57",
@@ -885,7 +885,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "White Case",
     version: null,
-    count: 40,
+    count: 41,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -893,7 +893,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-40-Unique-Color-Markers-Brush-and-Chisel-Double-Tipped-Marker-Set-for-Drawing-and-Illustration/5330123383",
       amazon: null,
     },
-    colors: ["Y111", "Y26", "Y27", "Y29", "Y213", "Y216", "YR07", "YR112", "YR313", "E415", "R014", "R015", "R28", "R210", "R215", "R413", "RV08", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "G36", "G310", "G312", "G49", "G410", "YG510", "CG18", "BGY24", "YGY11", "WG10", "WG26", "120"],
+    colors: ["Y111", "Y26", "Y27", "Y29", "Y213", "Y216", "YR07", "YR112", "YR313", "E415", "R014", "R015", "R28", "R210", "R215", "R413", "RV08", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "G36", "G310", "G312", "G49", "G410", "YG510", "CG18", "BGY24", "YGY11", "WG10", "WG26", "120","0"],
   },
   {
     id: "honolulu_bundle_59",
@@ -901,7 +901,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "White Case",
     version: "Version 1",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -909,7 +909,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y06", "Y19", "Y110", "Y111", "Y26", "Y27", "Y29", "Y212", "Y213", "Y216", "Y42", "Y59", "YR05", "YR07", "YR112", "YR214", "YR313", "YR45", "YR52", "YR59", "YR511", "E415", "E69", "E85", "R012", "R014", "R015", "R016", "R27", "R28", "R210", "R211", "R215", "R46", "R48", "R413", "RV08", "RV111", "RV212", "RV34", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B04", "B08", "B09", "B015", "B111", "B115", "BG05", "BG114", "BG211", "BG310", "BG311", "G36", "G310", "G312", "G313", "G47", "G49", "G410", "YG510", "CG17", "CG18", "BGY24", "YGY11", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG10", "120"],
+    colors: ["Y06", "Y19", "Y110", "Y111", "Y26", "Y27", "Y29", "Y212", "Y213", "Y216", "Y42", "Y59", "YR05", "YR07", "YR112", "YR214", "YR313", "YR45", "YR52", "YR59", "YR511", "E415", "E69", "E85", "R012", "R014", "R015", "R016", "R27", "R28", "R210", "R211", "R215", "R46", "R48", "R413", "RV08", "RV111", "RV212", "RV34", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B04", "B08", "B09", "B015", "B111", "B115", "BG05", "BG114", "BG211", "BG310", "BG311", "G36", "G310", "G312", "G313", "G47", "G49", "G410", "YG510", "CG17", "CG18", "BGY24", "YGY11", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_60",
@@ -917,7 +917,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "White Case",
     version: "Version 1",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -925,7 +925,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y06", "Y19", "Y110", "Y111", "Y26", "Y27", "Y29", "Y212", "Y213", "Y216", "Y42", "Y59", "YR05", "YR07", "YR112", "YR214", "YR313", "YR45", "YR52", "YR59", "YR511", "E415", "E69", "E85", "R012", "R014", "R015", "R016", "R27", "R28", "R210", "R211", "R215", "R46", "R48", "R413", "RV08", "RV111", "RV212", "RV34", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B04", "B08", "B09", "B015", "B111", "B115", "BG05", "BG114", "BG211", "BG310", "BG311", "G36", "G310", "G312", "G313", "G47", "G49", "G410", "YG510", "CG17", "CG18", "BGY24", "YGY11", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG10", "120"],
+    colors: ["Y06", "Y19", "Y110", "Y111", "Y26", "Y27", "Y29", "Y212", "Y213", "Y216", "Y42", "Y59", "YR05", "YR07", "YR112", "YR214", "YR313", "YR45", "YR52", "YR59", "YR511", "E415", "E69", "E85", "R012", "R014", "R015", "R016", "R27", "R28", "R210", "R211", "R215", "R46", "R48", "R413", "RV08", "RV111", "RV212", "RV34", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B04", "B08", "B09", "B015", "B111", "B115", "BG05", "BG114", "BG211", "BG310", "BG311", "G36", "G310", "G312", "G313", "G47", "G49", "G410", "YG510", "CG17", "CG18", "BGY24", "YGY11", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_61",
@@ -933,7 +933,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "White Case",
     version: "Version 2",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -941,7 +941,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-40-Unique-Color-Markers-Brush-and-Chisel-Double-Tipped-Marker-Set-for-Drawing-and-Illustration/13310018640",
       amazon: null,
     },
-    colors: ["Y06", "Y19", "Y111", "Y26", "Y27", "Y29", "Y213", "Y215", "Y216", "Y42", "Y410", "Y59", "YR05", "YR07", "YR112", "YR215", "YR313", "YR45", "YR52", "YR59", "YR511", "E415", "E69", "E85", "R012", "R014", "R015", "R016", "R27", "R28", "R210", "R211", "R215", "R46", "R48", "R413", "RV08", "RV111", "RV212", "RV34", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B02", "B08", "B09", "B015", "B111", "B115", "BG05", "BG114", "BG211", "BG310", "BG311", "G36", "G310", "G312", "G313", "G47", "G49", "G410", "YG510", "CG17", "CG18", "BGY24", "YGY11", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG10", "120"],
+    colors: ["Y06", "Y19", "Y111", "Y26", "Y27", "Y29", "Y213", "Y215", "Y216", "Y42", "Y410", "Y59", "YR05", "YR07", "YR112", "YR215", "YR313", "YR45", "YR52", "YR59", "YR511", "E415", "E69", "E85", "R012", "R014", "R015", "R016", "R27", "R28", "R210", "R211", "R215", "R46", "R48", "R413", "RV08", "RV111", "RV212", "RV34", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B02", "B08", "B09", "B015", "B111", "B115", "BG05", "BG114", "BG211", "BG310", "BG311", "G36", "G310", "G312", "G313", "G47", "G49", "G410", "YG510", "CG17", "CG18", "BGY24", "YGY11", "WG01", "WG04", "WG06", "WG10", "WG26", "WG27", "WG37", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_63",
@@ -949,7 +949,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "White Case",
     version: "Version 1",
-    count: 120,
+    count: 121,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -957,7 +957,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y09", "Y28", "Y39", "Y311", "Y315", "Y46", "Y49", "Y412", "Y415", "Y55", "Y56", "Y515", "YR03", "YR015", "YR17", "YR19", "YR111", "YR213", "YR312", "YR314", "YR55", "YR58", "YR513", "E05", "E311", "E44", "E46", "E413", "E58", "E610", "E614", "R013", "R12", "R14", "R15", "R112", "R26", "R212", "R213", "R38", "R312", "R410", "R412", "R514", "RV04", "RV09", "RV17", "RV19", "RV25", "RV28", "RV29", "RV35", "RV310", "RV316", "RV57", "RV514", "V08", "V013", "V016", "V14", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "BV26", "BV28", "BV32", "BV35", "BV311", "BV312", "BV414", "BV415", "BV58", "BV515", "B03", "B05", "B06", "B112", "B114", "B28", "B310", "B411", "B415", "BG212", "BG314", "BG315", "G013", "G113", "G311", "G48", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG610", "YG611", "CG02", "CG24", "CG25", "CG28", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY13", "YGY17", "YGY18", "WG08", "WG38", "GG16", "120"],
+    colors: ["Y00", "Y02", "Y09", "Y28", "Y39", "Y311", "Y315", "Y46", "Y49", "Y412", "Y415", "Y55", "Y56", "Y515", "YR03", "YR015", "YR17", "YR19", "YR111", "YR213", "YR312", "YR314", "YR55", "YR58", "YR513", "E05", "E311", "E44", "E46", "E413", "E58", "E610", "E614", "R013", "R12", "R14", "R15", "R112", "R26", "R212", "R213", "R38", "R312", "R410", "R412", "R514", "RV04", "RV09", "RV17", "RV19", "RV25", "RV28", "RV29", "RV35", "RV310", "RV316", "RV57", "RV514", "V08", "V013", "V016", "V14", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "BV26", "BV28", "BV32", "BV35", "BV311", "BV312", "BV414", "BV415", "BV58", "BV515", "B03", "B05", "B06", "B112", "B114", "B28", "B310", "B411", "B415", "BG212", "BG314", "BG315", "G013", "G113", "G311", "G48", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG610", "YG611", "CG02", "CG24", "CG25", "CG28", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY13", "YGY17", "YGY18", "WG08", "WG38", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_64",
@@ -965,7 +965,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "White Case",
     version: "Version 2",
-    count: 120,
+    count: 121,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -973,7 +973,7 @@ export const honoluluSets = [
       walmart: "https://www.walmart.com/ip/Ohuhu-Honolulu-Serie-200-Colors-Markers-Set-Brush-and-Chisel-Dual-Tips-Alcohol-Art-Markers/13140824057",
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y09", "Y28", "Y39", "Y311", "Y315", "Y45", "Y46", "Y49", "Y412", "Y415", "Y55", "Y515", "YR03", "YR015", "YR17", "YR19", "YR111", "YR213", "YR33", "YR34", "YR312", "YR314", "YR55", "YR58", "YR513", "E05", "E311", "E44", "E46", "E413", "E58", "E610", "E614", "R013", "R15", "R112", "R26", "R212", "R213", "R38", "R312", "R410", "R412", "R514", "RV04", "RV09", "RV17", "RV19", "RV25", "RV28", "RV29", "RV35", "RV310", "RV316", "RV57", "RV514", "V08", "V013", "V015", "V14", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "BV26", "BV28", "BV32", "BV35", "BV311", "BV312", "BV315", "BV414", "BV415", "BV58", "B03", "B05", "B06", "B112", "B114", "B28", "B310", "B411", "B415", "BG212", "BG314", "BG315", "G013", "G113", "G34", "G311", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG610", "YG611", "CG02", "CG24", "CG25", "CG28", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY13", "YGY17", "YGY18", "WG08", "WG38", "GG16", "120"],
+    colors: ["Y00", "Y02", "Y09", "Y28", "Y39", "Y311", "Y315", "Y45", "Y46", "Y49", "Y412", "Y415", "Y55", "Y515", "YR03", "YR015", "YR17", "YR19", "YR111", "YR213", "YR33", "YR34", "YR312", "YR314", "YR55", "YR58", "YR513", "E05", "E311", "E44", "E46", "E413", "E58", "E610", "E614", "R013", "R15", "R112", "R26", "R212", "R213", "R38", "R312", "R410", "R412", "R514", "RV04", "RV09", "RV17", "RV19", "RV25", "RV28", "RV29", "RV35", "RV310", "RV316", "RV57", "RV514", "V08", "V013", "V015", "V14", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "BV26", "BV28", "BV32", "BV35", "BV311", "BV312", "BV315", "BV414", "BV415", "BV58", "B03", "B05", "B06", "B112", "B114", "B28", "B310", "B411", "B415", "BG212", "BG314", "BG315", "G013", "G113", "G34", "G311", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG610", "YG611", "CG02", "CG24", "CG25", "CG28", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY13", "YGY17", "YGY18", "WG08", "WG38", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_65",
@@ -981,7 +981,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "White Case",
     version: "Version 1",
-    count: 120,
+    count: 121,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -989,7 +989,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y09", "Y28", "Y39", "Y311", "Y315", "Y46", "Y49", "Y412", "Y415", "Y55", "Y56", "Y515", "YR03", "YR015", "YR17", "YR19", "YR111", "YR213", "YR312", "YR314", "YR55", "YR58", "YR513", "E05", "E311", "E44", "E46", "E413", "E58", "E610", "E614", "R013", "R12", "R14", "R15", "R112", "R26", "R212", "R213", "R38", "R312", "R410", "R412", "R514", "RV04", "RV09", "RV17", "RV19", "RV25", "RV28", "RV29", "RV35", "RV310", "RV316", "RV57", "RV514", "V08", "V013", "V016", "V14", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "BV26", "BV28", "BV32", "BV35", "BV311", "BV312", "BV414", "BV415", "BV58", "BV515", "B03", "B05", "B06", "B112", "B114", "B28", "B310", "B411", "B415", "BG212", "BG314", "BG315", "G013", "G113", "G311", "G48", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG610", "YG611", "CG02", "CG24", "CG25", "CG28", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY13", "YGY17", "YGY18", "WG08", "WG38", "GG16", "120"],
+    colors: ["Y00", "Y02", "Y09", "Y28", "Y39", "Y311", "Y315", "Y46", "Y49", "Y412", "Y415", "Y55", "Y56", "Y515", "YR03", "YR015", "YR17", "YR19", "YR111", "YR213", "YR312", "YR314", "YR55", "YR58", "YR513", "E05", "E311", "E44", "E46", "E413", "E58", "E610", "E614", "R013", "R12", "R14", "R15", "R112", "R26", "R212", "R213", "R38", "R312", "R410", "R412", "R514", "RV04", "RV09", "RV17", "RV19", "RV25", "RV28", "RV29", "RV35", "RV310", "RV316", "RV57", "RV514", "V08", "V013", "V016", "V14", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "BV26", "BV28", "BV32", "BV35", "BV311", "BV312", "BV414", "BV415", "BV58", "BV515", "B03", "B05", "B06", "B112", "B114", "B28", "B310", "B411", "B415", "BG212", "BG314", "BG315", "G013", "G113", "G311", "G48", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG610", "YG611", "CG02", "CG24", "CG25", "CG28", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY13", "YGY17", "YGY18", "WG08", "WG38", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_66",
@@ -997,7 +997,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "White Case",
     version: "Version 2",
-    count: 120,
+    count: 121,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -1005,7 +1005,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y09", "Y28", "Y39", "Y311", "Y315", "Y45", "Y46", "Y49", "Y412", "Y415", "Y55", "Y515", "YR03", "YR015", "YR17", "YR19", "YR111", "YR213", "YR33", "YR34", "YR312", "YR314", "YR55", "YR58", "YR513", "E05", "E311", "E44", "E46", "E413", "E58", "E610", "E614", "R013", "R15", "R112", "R26", "R212", "R213", "R38", "R312", "R410", "R412", "R514", "RV04", "RV09", "RV17", "RV19", "RV25", "RV28", "RV29", "RV35", "RV310", "RV316", "RV57", "RV514", "V08", "V013", "V015", "V14", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "BV26", "BV28", "BV32", "BV35", "BV311", "BV312", "BV315", "BV414", "BV415", "BV58", "B03", "B05", "B06", "B112", "B114", "B28", "B310", "B411", "B415", "BG212", "BG314", "BG315", "G013", "G113", "G34", "G311", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG610", "YG611", "CG02", "CG24", "CG25", "CG28", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY13", "YGY17", "YGY18", "WG08", "WG38", "GG16", "120"],
+    colors: ["Y00", "Y02", "Y09", "Y28", "Y39", "Y311", "Y315", "Y45", "Y46", "Y49", "Y412", "Y415", "Y55", "Y515", "YR03", "YR015", "YR17", "YR19", "YR111", "YR213", "YR33", "YR34", "YR312", "YR314", "YR55", "YR58", "YR513", "E05", "E311", "E44", "E46", "E413", "E58", "E610", "E614", "R013", "R15", "R112", "R26", "R212", "R213", "R38", "R312", "R410", "R412", "R514", "RV04", "RV09", "RV17", "RV19", "RV25", "RV28", "RV29", "RV35", "RV310", "RV316", "RV57", "RV514", "V08", "V013", "V015", "V14", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "BV26", "BV28", "BV32", "BV35", "BV311", "BV312", "BV315", "BV414", "BV415", "BV58", "B03", "B05", "B06", "B112", "B114", "B28", "B310", "B411", "B415", "BG212", "BG314", "BG315", "G013", "G113", "G34", "G311", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG610", "YG611", "CG02", "CG24", "CG25", "CG28", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY13", "YGY17", "YGY18", "WG08", "WG38", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_68",
@@ -1013,7 +1013,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "White Case",
     version: "Version 1",
-    count: 200,
+    count: 201,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -1021,7 +1021,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y06", "Y09", "Y19", "Y110", "Y111", "Y26", "Y27", "Y28", "Y29", "Y212", "Y213", "Y216", "Y39", "Y311", "Y315", "Y42", "Y46", "Y49", "Y412", "Y415", "Y55", "Y56", "Y59", "Y515", "YR03", "YR05", "YR07", "YR015", "YR17", "YR19", "YR111", "YR112", "YR213", "YR214", "YR39", "YR312", "YR313", "YR314", "YR45", "YR52", "YR55", "YR58", "YR59", "YR511", "YR513", "E05", "E311", "E44", "E46", "E413", "E415", "E58", "E69", "E610", "E614", "E85", "R012", "R013", "R014", "R015", "R016", "R12", "R14", "R15", "R112", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R312", "R46", "R48", "R410", "R412", "R413", "R514", "RV04", "RV08", "RV09", "RV17", "RV19", "RV111", "RV25", "RV28", "RV29", "RV212", "RV34", "RV35", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "V08", "V010", "V013", "V016", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "V416", "BV26", "BV28", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV414", "BV415", "BV58", "BV515", "B03", "B04", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B28", "B310", "B411", "B415", "BG05", "BG114", "BG211", "BG212", "BG310", "BG311", "BG314", "BG315", "G013", "G113", "G36", "G310", "G311", "G312", "G313", "G47", "G48", "G49", "G410", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG510", "YG610", "YG611", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG10", "GG16", "120"],
+    colors: ["Y00", "Y02", "Y06", "Y09", "Y19", "Y110", "Y111", "Y26", "Y27", "Y28", "Y29", "Y212", "Y213", "Y216", "Y39", "Y311", "Y315", "Y42", "Y46", "Y49", "Y412", "Y415", "Y55", "Y56", "Y59", "Y515", "YR03", "YR05", "YR07", "YR015", "YR17", "YR19", "YR111", "YR112", "YR213", "YR214", "YR39", "YR312", "YR313", "YR314", "YR45", "YR52", "YR55", "YR58", "YR59", "YR511", "YR513", "E05", "E311", "E44", "E46", "E413", "E415", "E58", "E69", "E610", "E614", "E85", "R012", "R013", "R014", "R015", "R016", "R12", "R14", "R15", "R112", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R312", "R46", "R48", "R410", "R412", "R413", "R514", "RV04", "RV08", "RV09", "RV17", "RV19", "RV111", "RV25", "RV28", "RV29", "RV212", "RV34", "RV35", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "V08", "V010", "V013", "V016", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "V416", "BV26", "BV28", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV414", "BV415", "BV58", "BV515", "B03", "B04", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B28", "B310", "B411", "B415", "BG05", "BG114", "BG211", "BG212", "BG310", "BG311", "BG314", "BG315", "G013", "G113", "G36", "G310", "G311", "G312", "G313", "G47", "G48", "G49", "G410", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG510", "YG610", "YG611", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG10", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_70",
@@ -1029,7 +1029,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "White Case",
     version: "Version 2",
-    count: 200,
+    count: 201,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -1037,7 +1037,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y06", "Y09", "Y19", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y215", "Y216", "Y39", "Y311", "Y315", "Y42", "Y45", "Y46", "Y49", "Y410", "Y412", "Y415", "Y55", "Y59", "Y515", "YR03", "YR05", "YR07", "YR015", "YR17", "YR19", "YR111", "YR112", "YR213", "YR215", "YR33", "YR34", "YR39", "YR312", "YR313", "YR314", "YR45", "YR52", "YR55", "YR58", "YR59", "YR511", "YR513", "E05", "E311", "E44", "E46", "E413", "E415", "E58", "E69", "E610", "E614", "E85", "R012", "R013", "R014", "R015", "R016", "R15", "R112", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R312", "R46", "R48", "R410", "R412", "R413", "R514", "RV04", "RV08", "RV09", "RV17", "RV19", "RV111", "RV25", "RV28", "RV29", "RV212", "RV34", "RV35", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "V08", "V010", "V013", "V015", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "V416", "BV26", "BV28", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV315", "BV414", "BV415", "BV58", "B02", "B03", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B28", "B310", "B411", "B415", "BG05", "BG114", "BG211", "BG212", "BG310", "BG311", "BG314", "BG315", "G013", "G113", "G34", "G36", "G310", "G311", "G312", "G313", "G47", "G49", "G410", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG510", "YG610", "YG611", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG10", "GG16", "120"],
+    colors: ["Y00", "Y02", "Y06", "Y09", "Y19", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y215", "Y216", "Y39", "Y311", "Y315", "Y42", "Y45", "Y46", "Y49", "Y410", "Y412", "Y415", "Y55", "Y59", "Y515", "YR03", "YR05", "YR07", "YR015", "YR17", "YR19", "YR111", "YR112", "YR213", "YR215", "YR33", "YR34", "YR39", "YR312", "YR313", "YR314", "YR45", "YR52", "YR55", "YR58", "YR59", "YR511", "YR513", "E05", "E311", "E44", "E46", "E413", "E415", "E58", "E69", "E610", "E614", "E85", "R012", "R013", "R014", "R015", "R016", "R15", "R112", "R26", "R27", "R28", "R210", "R211", "R212", "R213", "R215", "R38", "R312", "R46", "R48", "R410", "R412", "R413", "R514", "RV04", "RV08", "RV09", "RV17", "RV19", "RV111", "RV25", "RV28", "RV29", "RV212", "RV34", "RV35", "RV310", "RV311", "RV314", "RV316", "RV57", "RV514", "V08", "V010", "V013", "V015", "V13", "V14", "V18", "V112", "V22", "V29", "V216", "V38", "V46", "V412", "V414", "V416", "BV26", "BV28", "BV32", "BV35", "BV38", "BV310", "BV311", "BV312", "BV315", "BV414", "BV415", "BV58", "B02", "B03", "B05", "B06", "B08", "B09", "B015", "B111", "B112", "B114", "B115", "B28", "B310", "B411", "B415", "BG05", "BG114", "BG211", "BG212", "BG310", "BG311", "BG314", "BG315", "G013", "G113", "G34", "G36", "G310", "G311", "G312", "G313", "G47", "G49", "G410", "YG07", "YG111", "YG112", "YG29", "YG36", "YG415", "YG510", "YG610", "YG611", "CG02", "CG17", "CG18", "CG24", "CG25", "CG28", "BGY24", "BGY25", "BGY35", "BGY38", "YGY02", "YGY05", "YGY11", "YGY13", "YGY17", "YGY18", "WG01", "WG04", "WG06", "WG08", "WG10", "WG26", "WG27", "WG37", "WG38", "GG10", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_71",
@@ -1045,7 +1045,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Sanrio",
     version: "Version 1",
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -1053,7 +1053,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y02", "Y14", "Y45", "Y55", "Y62", "Y69", "YR06", "YR11", "YR43", "YR52", "YR55", "YR59", "E05", "E14", "E26", "E46", "E85", "E92", "R15", "R22", "R27", "R54", "RV04", "RV05", "RV25", "RV33", "RV34", "V14", "V22", "BV05", "BV32", "BV35", "B03", "B05", "B21", "B28", "BG24", "BG310", "G34", "G47", "CG01", "CG24", "BGY00", "YGY02", "YGY13", "WG01", "WG04", "GG24"],
+    colors: ["Y02", "Y14", "Y45", "Y55", "Y62", "Y69", "YR06", "YR11", "YR43", "YR52", "YR55", "YR59", "E05", "E14", "E26", "E46", "E85", "E92", "R15", "R22", "R27", "R54", "RV04", "RV05", "RV25", "RV33", "RV34", "V14", "V22", "BV05", "BV32", "BV35", "B03", "B05", "B21", "B28", "BG24", "BG310", "G34", "G47", "CG01", "CG24", "BGY00", "YGY02", "YGY13", "WG01", "WG04", "GG24","0"],
   },
   {
     id: "honolulu_bundle_72",
@@ -1061,7 +1061,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Sanrio",
     version: "Version 1",
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -1069,7 +1069,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y02", "Y14", "Y45", "Y55", "Y62", "Y69", "YR06", "YR11", "YR43", "YR52", "YR55", "YR59", "E05", "E14", "E26", "E46", "E85", "E92", "R15", "R22", "R27", "R54", "RV04", "RV05", "RV25", "RV33", "RV34", "V14", "V22", "BV05", "BV32", "BV35", "B03", "B05", "B21", "B28", "BG24", "BG310", "G34", "G47", "CG01", "CG24", "BGY00", "YGY02", "YGY13", "WG01", "WG04", "GG24"],
+    colors: ["Y02", "Y14", "Y45", "Y55", "Y62", "Y69", "YR06", "YR11", "YR43", "YR52", "YR55", "YR59", "E05", "E14", "E26", "E46", "E85", "E92", "R15", "R22", "R27", "R54", "RV04", "RV05", "RV25", "RV33", "RV34", "V14", "V22", "BV05", "BV32", "BV35", "B03", "B05", "B21", "B28", "BG24", "BG310", "G34", "G47", "CG01", "CG24", "BGY00", "YGY02", "YGY13", "WG01", "WG04", "GG24","0"],
   },
   {
     id: "honolulu_bundle_73",
@@ -1077,7 +1077,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Sanrio",
     version: "Version 1",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -1085,7 +1085,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y06", "Y19", "Y110", "Y212", "Y413", "Y56", "YR00", "YR01", "YR03", "YR05", "YR06", "YR19", "YR214", "YR314", "YR45", "YR54", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E413", "E614", "E85", "R12", "R14", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV02", "RV04", "RV05", "RV07", "RV23", "RV32", "V08", "V016", "V22", "V29", "V34", "BV18", "BV28", "BV210", "BV35", "BV39", "BV312", "BV45", "BV515", "B03", "B04", "B05", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G48", "YG07", "YG215", "YG35", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120"],
+    colors: ["Y00", "Y02", "Y06", "Y19", "Y110", "Y212", "Y413", "Y56", "YR00", "YR01", "YR03", "YR05", "YR06", "YR19", "YR214", "YR314", "YR45", "YR54", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E413", "E614", "E85", "R12", "R14", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV02", "RV04", "RV05", "RV07", "RV23", "RV32", "V08", "V016", "V22", "V29", "V34", "BV18", "BV28", "BV210", "BV35", "BV39", "BV312", "BV45", "BV515", "B03", "B04", "B05", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G48", "YG07", "YG215", "YG35", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120","0"],
   },
   {
     id: "honolulu_bundle_74",
@@ -1093,7 +1093,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Sanrio",
     version: "Version 1",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -1101,7 +1101,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y06", "Y19", "Y110", "Y212", "Y413", "Y56", "YR00", "YR01", "YR03", "YR05", "YR06", "YR19", "YR214", "YR314", "YR45", "YR54", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E413", "E614", "E85", "R12", "R14", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV02", "RV04", "RV05", "RV07", "RV23", "RV32", "V08", "V016", "V22", "V29", "V34", "BV18", "BV28", "BV210", "BV35", "BV39", "BV312", "BV45", "BV515", "B03", "B04", "B05", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G48", "YG07", "YG215", "YG35", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120"],
+    colors: ["Y00", "Y02", "Y06", "Y19", "Y110", "Y212", "Y413", "Y56", "YR00", "YR01", "YR03", "YR05", "YR06", "YR19", "YR214", "YR314", "YR45", "YR54", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E413", "E614", "E85", "R12", "R14", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV02", "RV04", "RV05", "RV07", "RV23", "RV32", "V08", "V016", "V22", "V29", "V34", "BV18", "BV28", "BV210", "BV35", "BV39", "BV312", "BV45", "BV515", "B03", "B04", "B05", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G48", "YG07", "YG215", "YG35", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120","0"],
   },
   {
     id: "honolulu_bundle_75",
@@ -1109,7 +1109,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Sanrio",
     version: null,
-    count: 120,
+    count: 121,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -1117,7 +1117,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_76",
@@ -1125,7 +1125,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Sanrio",
     version: null,
-    count: 120,
+    count: 121,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -1133,7 +1133,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_77",
@@ -1141,7 +1141,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Sanrio",
     version: "Version 2",
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -1149,7 +1149,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y03", "Y06", "Y07", "Y26", "Y42", "YR00", "YR03", "YR05", "YR07", "YR33", "YR45", "YR47", "YR56", "YR57", "YR58", "E22", "R25", "R50", "RV01", "RV23", "RV35", "V32", "V34", "V38", "BV26", "BV31", "BV38", "B02", "B06", "B310", "BG04", "BG09", "BG21", "G24", "G36", "G41", "G43", "G49", "YG06", "YG07", "YG66", "CG02", "BGY02", "YGY11", "WG10", "GG03", "GG10"],
+    colors: ["Y00", "Y03", "Y06", "Y07", "Y26", "Y42", "YR00", "YR03", "YR05", "YR07", "YR33", "YR45", "YR47", "YR56", "YR57", "YR58", "E22", "R25", "R50", "RV01", "RV23", "RV35", "V32", "V34", "V38", "BV26", "BV31", "BV38", "B02", "B06", "B310", "BG04", "BG09", "BG21", "G24", "G36", "G41", "G43", "G49", "YG06", "YG07", "YG66", "CG02", "BGY02", "YGY11", "WG10", "GG03", "GG10","0"],
   },
   {
     id: "honolulu_bundle_78",
@@ -1157,7 +1157,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Sanrio",
     version: "Version 2",
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -1165,7 +1165,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y03", "Y06", "Y07", "Y26", "Y42", "YR00", "YR03", "YR05", "YR07", "YR33", "YR45", "YR47", "YR56", "YR57", "YR58", "E22", "R25", "R50", "RV01", "RV23", "RV35", "V32", "V34", "V38", "BV26", "BV31", "BV38", "B02", "B06", "B310", "BG04", "BG09", "BG21", "G24", "G36", "G41", "G43", "G49", "YG06", "YG07", "YG66", "CG02", "BGY02", "YGY11", "WG10", "GG03", "GG10"],
+    colors: ["Y00", "Y03", "Y06", "Y07", "Y26", "Y42", "YR00", "YR03", "YR05", "YR07", "YR33", "YR45", "YR47", "YR56", "YR57", "YR58", "E22", "R25", "R50", "RV01", "RV23", "RV35", "V32", "V34", "V38", "BV26", "BV31", "BV38", "B02", "B06", "B310", "BG04", "BG09", "BG21", "G24", "G36", "G41", "G43", "G49", "YG06", "YG07", "YG66", "CG02", "BGY02", "YGY11", "WG10", "GG03", "GG10","0"],
   },
   {
     id: "honolulu_bundle_79",
@@ -1173,7 +1173,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Sanrio",
     version: "Version 2",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -1181,7 +1181,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y06", "Y19", "Y111", "Y29", "Y413", "Y55", "YR00", "YR03", "YR05", "YR06", "YR19", "YR34", "YR314", "YR43", "YR45", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E46", "E413", "E610", "E614", "E85", "R22", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV04", "RV05", "RV08", "RV23", "RV33", "V08", "V015", "V13", "V22", "V29", "V34", "BV26", "BV28", "BV210", "BV35", "BV310", "BV312", "BV315", "BV58", "B03", "B05", "B06", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G49", "YG07", "YG215", "YG36", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120"],
+    colors: ["Y00", "Y02", "Y06", "Y19", "Y111", "Y29", "Y413", "Y55", "YR00", "YR03", "YR05", "YR06", "YR19", "YR34", "YR314", "YR43", "YR45", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E46", "E413", "E610", "E614", "E85", "R22", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV04", "RV05", "RV08", "RV23", "RV33", "V08", "V015", "V13", "V22", "V29", "V34", "BV26", "BV28", "BV210", "BV35", "BV310", "BV312", "BV315", "BV58", "B03", "B05", "B06", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G49", "YG07", "YG215", "YG36", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120","0"],
   },
   {
     id: "honolulu_bundle_80",
@@ -1189,7 +1189,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Sanrio",
     version: "Version 2",
-    count: 80,
+    count: 81,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: null,
@@ -1197,7 +1197,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y00", "Y02", "Y06", "Y19", "Y111", "Y29", "Y413", "Y55", "YR00", "YR03", "YR05", "YR06", "YR19", "YR34", "YR314", "YR43", "YR45", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E46", "E413", "E610", "E614", "E85", "R22", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV04", "RV05", "RV08", "RV23", "RV33", "V08", "V015", "V13", "V22", "V29", "V34", "BV26", "BV28", "BV210", "BV35", "BV310", "BV312", "BV315", "BV58", "B03", "B05", "B06", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G49", "YG07", "YG215", "YG36", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120"],
+    colors: ["Y00", "Y02", "Y06", "Y19", "Y111", "Y29", "Y413", "Y55", "YR00", "YR03", "YR05", "YR06", "YR19", "YR34", "YR314", "YR43", "YR45", "YR55", "YR56", "YR58", "YR59", "YR513", "E05", "E44", "E46", "E413", "E610", "E614", "E85", "R22", "R25", "R26", "R212", "R312", "R410", "R513", "RV01", "RV04", "RV05", "RV08", "RV23", "RV33", "V08", "V015", "V13", "V22", "V29", "V34", "BV26", "BV28", "BV210", "BV35", "BV310", "BV312", "BV315", "BV58", "B03", "B05", "B06", "B09", "B112", "BG21", "BG211", "BG310", "G24", "G210", "G34", "G41", "G47", "G49", "YG07", "YG215", "YG36", "YG312", "YG66", "CG01", "CG02", "CG24", "CG28", "120","0"],
   },
   {
     id: "honolulu_bundle_81",
@@ -1205,7 +1205,7 @@ export const honoluluSets = [
     series: "Honolulu B",
     edition: "Bobbie Goods",
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/products/ohuhu-x-bobbie-goods-honolulu-b-48-colors-dual-tips-alcohol-art-markers",
@@ -1213,7 +1213,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y02", "Y06", "Y19", "Y27", "Y34", "Y410", "Y413", "Y55", "Y59", "Y515", "YR111", "YR511", "YR513", "E47", "E58", "E511", "E69", "E914", "R015", "R112", "R22", "R28", "R48", "RV23", "RV33", "RV57", "V14", "V22", "V412", "BV08", "BV32", "BV35", "BV58", "BV514", "B02", "B06", "BG310", "G310", "G49", "G410", "YG07", "YG012", "YG113", "YG413", "YG414", "YGY11", "YGY17", "GG15"],
+    colors: ["Y02", "Y06", "Y19", "Y27", "Y34", "Y410", "Y413", "Y55", "Y59", "Y515", "YR111", "YR511", "YR513", "E47", "E58", "E511", "E69", "E914", "R015", "R112", "R22", "R28", "R48", "RV23", "RV33", "RV57", "V14", "V22", "V412", "BV08", "BV32", "BV35", "BV58", "BV514", "B02", "B06", "BG310", "G310", "G49", "G410", "YG07", "YG012", "YG113", "YG413", "YG414", "YGY11", "YGY17", "GG15","0"],
   },
   {
     id: "honolulu_bundle_82",
@@ -1221,7 +1221,7 @@ export const honoluluSets = [
     series: "Honolulu",
     edition: "Jazza Color Quest",
     version: null,
-    count: 47,
+    count: 48,
     tipType1: "Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: null,
@@ -1229,7 +1229,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y02", "Y27", "Y29", "Y213", "Y69", "YR17", "YR33", "YR312", "YR513", "YR515", "E311", "E313", "E415", "E515", "E69", "E614", "R014", "R016", "R15", "R28", "R57", "R513", "V13", "V18", "V112", "V29", "V414", "BV315", "B115", "B21", "B315", "BG05", "BG114", "G012", "G34", "G410", "YG06", "YG012", "YG212", "YG215", "YG415", "CG17", "BGY00", "BGY18", "YGY05", "WG08", "120"],
+    colors: ["Y02", "Y27", "Y29", "Y213", "Y69", "YR17", "YR33", "YR312", "YR513", "YR515", "E311", "E313", "E415", "E515", "E69", "E614", "R014", "R016", "R15", "R28", "R57", "R513", "V13", "V18", "V112", "V29", "V414", "BV315", "B115", "B21", "B315", "BG05", "BG114", "G012", "G34", "G410", "YG06", "YG012", "YG212", "YG215", "YG415", "CG17", "BGY00", "BGY18", "YGY05", "WG08", "120","0"],
   },
   {
     id: "honolulu_bundle_83",
@@ -1237,7 +1237,7 @@ export const honoluluSets = [
     series: "Honolulu Plus",
     edition: null,
     version: null,
-    count: 24,
+    count: 25,
     tipType1: "Supreme Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/products/ohuhu-honolulu-plus-series-supreme-rubber-brush-tip-markers?variant=50528063652127",
@@ -1245,7 +1245,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Supreme-Brush/dp/B0DK3F7WPC/?th=1",
     },
-    colors: ["Y03", "Y09", "YR03", "YR05", "YR314", "YR57", "YR513", "E614", "R15", "R410", "RV04", "V34", "BV26", "BV35", "BV312", "B03", "BG011", "BG21", "BG310", "G311", "YG07", "YG66", "BGY00", "BGY38"],
+    colors: ["Y03", "Y09", "YR03", "YR05", "YR314", "YR57", "YR513", "E614", "R15", "R410", "RV04", "V34", "BV26", "BV35", "BV312", "B03", "BG011", "BG21", "BG310", "G311", "YG07", "YG66", "BGY00", "BGY38","0"],
   },
   {
     id: "honolulu_bundle_84",
@@ -1253,7 +1253,7 @@ export const honoluluSets = [
     series: "Honolulu Plus",
     edition: null,
     version: null,
-    count: 36,
+    count: 37,
     tipType1: "Supreme Brush",  tipType2: "Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/products/ohuhu-honolulu-plus-series-supreme-rubber-brush-tip-markers?variant=50528063881503",
@@ -1261,7 +1261,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Supreme-Brush/dp/B0DK3HC85Q/?th=1",
     },
-    colors: ["Y02", "Y06", "Y19", "Y29", "YR19", "YR215", "YR34", "E05", "E47", "E614", "R013", "R22", "R312", "RV315", "BV35", "BV312", "BV315", "BV414", "B09", "B112", "G210", "G310", "YG07", "YG414", "CG01", "BGY00", "BGY24", "BGY38", "YGY13", "YGY17", "YGY18", "WG10", "WG27", "GG12", "GG16", "120"],
+    colors: ["Y02", "Y06", "Y19", "Y29", "YR19", "YR215", "YR34", "E05", "E47", "E614", "R013", "R22", "R312", "RV315", "BV35", "BV312", "BV315", "BV414", "B09", "B112", "G210", "G310", "YG07", "YG414", "CG01", "BGY00", "BGY24", "BGY38", "YGY13", "YGY17", "YGY18", "WG10", "WG27", "GG12", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_85",
@@ -1269,7 +1269,7 @@ export const honoluluSets = [
     series: "Honolulu S",
     edition: null,
     version: null,
-    count: 24,
+    count: 25,
     tipType1: "Brush",  tipType2: "Soft Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-s-series/products/ohuhu-honolulu-s-24-skin-tone-colors-dual-soft-tips-alcohol-art-markers-brush-soft-chisel",
@@ -1277,7 +1277,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Skin-Tone-Ohuhu-Alcohol-based-Coloring-Illustration/dp/B0F8Q3FM16/?th=1",
     },
-    colors: ["Y43", "Y413", "YR02", "YR03", "YR04", "YR33", "YR37", "YR38", "YR313", "YR47", "YR52", "YR55", "YR515", "E46", "E49", "E511", "E66", "E69", "E610", "E614", "E81", "E914", "R22", "R69"],
+    colors: ["Y43", "Y413", "YR02", "YR03", "YR04", "YR33", "YR37", "YR38", "YR313", "YR47", "YR52", "YR55", "YR515", "E46", "E49", "E511", "E66", "E69", "E610", "E614", "E81", "E914", "R22", "R69","0"],
   },
   {
     id: "honolulu_bundle_86",
@@ -1285,7 +1285,7 @@ export const honoluluSets = [
     series: "Honolulu S",
     edition: null,
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush",  tipType2: "Soft Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-s-series/products/ohuhu-honolulu-s-series-dual-soft-tips-alcohol-art-markers-brush-soft-chisel",
@@ -1293,7 +1293,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Beginners-Illustration/dp/B0F8PZ65VW?th=1",
     },
-    colors: ["Y07", "Y111", "Y26", "Y213", "Y216", "YR07", "YR19", "YR112", "YR39", "YR313", "YR52", "E415", "R014", "R28", "R210", "R215", "R412", "R514", "RV04", "RV08", "RV23", "RV212", "RV311", "RV314", "V010", "V013", "V13", "V416", "BV310", "B03", "B08", "B111", "B115", "BG114", "BG311", "BG314", "G36", "G310", "G312", "G315", "G49", "G410", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y213", "Y216", "YR07", "YR19", "YR112", "YR39", "YR313", "YR52", "E415", "R014", "R28", "R210", "R215", "R412", "R514", "RV04", "RV08", "RV23", "RV212", "RV311", "RV314", "V010", "V013", "V13", "V416", "BV310", "B03", "B08", "B111", "B115", "BG114", "BG311", "BG314", "G36", "G310", "G312", "G315", "G49", "G410", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120","0"],
   },
   {
     id: "honolulu_bundle_87",
@@ -1301,7 +1301,7 @@ export const honoluluSets = [
     series: "Honolulu S",
     edition: null,
     version: null,
-    count: 60,
+    count: 61,
     tipType1: "Brush",  tipType2: "Soft Chisel",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-s-series/products/ohuhu-honolulu-s-60-illustration-tones-colors-dual-soft-tips-alcohol-art-markers-brush-soft-chisel",
@@ -1309,7 +1309,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: "https://www.amazon.com/Ohuhu-Alcohol-Markers-Illustration-color-Illustration/dp/B0F8Q1XP2Y/",
     },
-    colors: ["Y02", "Y28", "Y213", "Y216", "Y315", "Y43", "Y48", "Y416", "Y69", "YR02", "YR29", "YR313", "YR47", "YR59", "YR513", "E313", "E49", "E514", "E66", "E612", "E713", "E81", "R015", "R28", "R210", "R213", "R215", "R38", "RV212", "RV311", "RV314", "RV57", "V010", "V14", "V32", "V38", "BV315", "BV58", "B08", "B111", "B115", "B315", "B415", "BG311", "G310", "G313", "G315", "YG212", "YG510", "CG01", "CG25", "BGY15", "BGY24", "YGY02", "YGY11", "WG10", "WG38", "GG05", "GG11", "120"],
+    colors: ["Y02", "Y28", "Y213", "Y216", "Y315", "Y43", "Y48", "Y416", "Y69", "YR02", "YR29", "YR313", "YR47", "YR59", "YR513", "E313", "E49", "E514", "E66", "E612", "E713", "E81", "R015", "R28", "R210", "R213", "R215", "R38", "RV212", "RV311", "RV314", "RV57", "V010", "V14", "V32", "V38", "BV315", "BV58", "B08", "B111", "B115", "B315", "B415", "BG311", "G310", "G313", "G315", "YG212", "YG510", "CG01", "CG25", "BGY15", "BGY24", "YGY02", "YGY11", "WG10", "WG38", "GG05", "GG11", "120","0"],
   },
   {
     id: "honolulu_bundle_88",
@@ -1317,7 +1317,7 @@ export const honoluluSets = [
     series: "Honolulu²",
     edition: null,
     version: null,
-    count: 24,
+    count: 25,
     tipType1: "Brush²",  tipType2: "Chisel²",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-gen-2-series/products/ohuhu-honolulu-gen-2-24-basic-colors-dual-tips-alcohol-art-markers?variant=51584477200671",
@@ -1325,7 +1325,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y111", "Y26", "Y216", "YR313", "R014", "R210", "R413", "RV08", "RV311", "V010", "V18", "V416", "BV310", "B08", "B111", "BG114", "BG311", "G36", "G310", "G312", "G410", "CG18", "BGY24", "120"],
+    colors: ["Y111", "Y26", "Y216", "YR313", "R014", "R210", "R413", "RV08", "RV311", "V010", "V18", "V416", "BV310", "B08", "B111", "BG114", "BG311", "G36", "G310", "G312", "G410", "CG18", "BGY24", "120","0"],
   },
   {
     id: "honolulu_bundle_89",
@@ -1333,7 +1333,7 @@ export const honoluluSets = [
     series: "Honolulu² B",
     edition: null,
     version: null,
-    count: 24,
+    count: 25,
     tipType1: "Brush²",  tipType2: "Fine²",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-gen-2-series/products/ohuhu-honolulu-gen-2-24-basic-colors-dual-tips-alcohol-art-markers?variant=51584478773535",
@@ -1341,7 +1341,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y111", "Y26", "Y216", "YR313", "R014", "R210", "R413", "RV08", "RV311", "V010", "V18", "V416", "BV310", "B08", "B111", "BG114", "BG311", "G36", "G310", "G312", "G410", "CG18", "BGY24", "120"],
+    colors: ["Y111", "Y26", "Y216", "YR313", "R014", "R210", "R413", "RV08", "RV311", "V010", "V18", "V416", "BV310", "B08", "B111", "BG114", "BG311", "G36", "G310", "G312", "G410", "CG18", "BGY24", "120","0"],
   },
   {
     id: "honolulu_bundle_90",
@@ -1349,7 +1349,7 @@ export const honoluluSets = [
     series: "Honolulu²",
     edition: null,
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush²",  tipType2: "Chisel²",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-gen-2-series/products/ohuhu-honolulu-gen-2-48-basic-colors-dual-tips-alcohol-art-markers?variant=51584494960927",
@@ -1357,7 +1357,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y07", "Y111", "Y26", "Y213", "Y216", "YR07", "YR112", "YR39", "YR313", "YR515", "E415", "R014", "R28", "R210", "R215", "R412", "R413", "R514", "RV08", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "BG114", "BG311", "G114", "G36", "G310", "G312", "G315", "G49", "G410", "YG012", "YG211", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y213", "Y216", "YR07", "YR112", "YR39", "YR313", "YR515", "E415", "R014", "R28", "R210", "R215", "R412", "R413", "R514", "RV08", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "BG114", "BG311", "G114", "G36", "G310", "G312", "G315", "G49", "G410", "YG012", "YG211", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120","0"],
   },
   {
     id: "honolulu_bundle_91",
@@ -1365,7 +1365,7 @@ export const honoluluSets = [
     series: "Honolulu² B",
     edition: null,
     version: null,
-    count: 48,
+    count: 49,
     tipType1: "Brush²",  tipType2: "Fine²",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-gen-2-series/products/ohuhu-honolulu-gen-2-48-basic-colors-dual-tips-alcohol-art-markers?variant=51584495059231",
@@ -1373,7 +1373,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y07", "Y111", "Y26", "Y213", "Y216", "YR07", "YR112", "YR39", "YR313", "YR515", "E415", "R014", "R28", "R210", "R215", "R412", "R413", "R514", "RV08", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "BG114", "BG311", "G114", "G36", "G310", "G312", "G315", "G49", "G410", "YG012", "YG211", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y213", "Y216", "YR07", "YR112", "YR39", "YR313", "YR515", "E415", "R014", "R28", "R210", "R215", "R412", "R413", "R514", "RV08", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV38", "BV310", "B08", "B111", "B115", "BG114", "BG311", "G114", "G36", "G310", "G312", "G315", "G49", "G410", "YG012", "YG211", "YG510", "CG18", "BGY24", "YGY11", "WG10", "120","0"],
   },
   {
     id: "honolulu_bundle_92",
@@ -1381,7 +1381,7 @@ export const honoluluSets = [
     series: "Honolulu²",
     edition: null,
     version: null,
-    count: 72,
+    count: 73,
     tipType1: "Brush²",  tipType2: "Chisel²",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-gen-2-series/products/ohuhu-honolulu-gen-2-72-colors-dual-tips-alcohol-art-markers?variant=51618306359583",
@@ -1389,7 +1389,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y07", "Y111", "Y26", "Y29", "Y213", "Y216", "YR07", "YR17", "YR112", "YR39", "YR313", "YR515", "E22", "E415", "R013", "R014", "R28", "R210", "R215", "R46", "R412", "R413", "R514", "RV08", "RV111", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV29", "BV31", "BV38", "BV310", "B02", "B08", "B111", "B114", "B115", "BG114", "BG212", "BG311", "G013", "G112", "G113", "G114", "G36", "G310", "G312", "G315", "G43", "G49", "G410", "YG06", "YG012", "YG211", "YG212", "YG510", "CG17", "CG18", "BGY15", "BGY24", "YGY11", "WG10", "WG26", "WG27", "GG03", "GG05", "GG10", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y29", "Y213", "Y216", "YR07", "YR17", "YR112", "YR39", "YR313", "YR515", "E22", "E415", "R013", "R014", "R28", "R210", "R215", "R46", "R412", "R413", "R514", "RV08", "RV111", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV29", "BV31", "BV38", "BV310", "B02", "B08", "B111", "B114", "B115", "BG114", "BG212", "BG311", "G013", "G112", "G113", "G114", "G36", "G310", "G312", "G315", "G43", "G49", "G410", "YG06", "YG012", "YG211", "YG212", "YG510", "CG17", "CG18", "BGY15", "BGY24", "YGY11", "WG10", "WG26", "WG27", "GG03", "GG05", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_93",
@@ -1397,7 +1397,7 @@ export const honoluluSets = [
     series: "Honolulu² B",
     edition: null,
     version: null,
-    count: 72,
+    count: 73,
     tipType1: "Brush²",  tipType2: "Fine²",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-gen-2-series/products/ohuhu-honolulu-gen-2-72-colors-dual-tips-alcohol-art-markers?variant=51618306457887",
@@ -1405,7 +1405,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y07", "Y111", "Y26", "Y29", "Y213", "Y216", "YR07", "YR17", "YR112", "YR39", "YR313", "YR515", "E22", "E415", "R013", "R014", "R28", "R210", "R215", "R46", "R412", "R413", "R514", "RV08", "RV111", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV29", "BV31", "BV38", "BV310", "B02", "B08", "B111", "B114", "B115", "BG114", "BG212", "BG311", "G013", "G112", "G113", "G114", "G36", "G310", "G312", "G315", "G43", "G49", "G410", "YG06", "YG012", "YG211", "YG212", "YG510", "CG17", "CG18", "BGY15", "BGY24", "YGY11", "WG10", "WG26", "WG27", "GG03", "GG05", "GG10", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y29", "Y213", "Y216", "YR07", "YR17", "YR112", "YR39", "YR313", "YR515", "E22", "E415", "R013", "R014", "R28", "R210", "R215", "R46", "R412", "R413", "R514", "RV08", "RV111", "RV212", "RV311", "RV314", "V010", "V13", "V18", "V416", "BV29", "BV31", "BV38", "BV310", "B02", "B08", "B111", "B114", "B115", "BG114", "BG212", "BG311", "G013", "G112", "G113", "G114", "G36", "G310", "G312", "G315", "G43", "G49", "G410", "YG06", "YG012", "YG211", "YG212", "YG510", "CG17", "CG18", "BGY15", "BGY24", "YGY11", "WG10", "WG26", "WG27", "GG03", "GG05", "GG10", "120","0"],
   },
   {
     id: "honolulu_bundle_94",
@@ -1413,7 +1413,7 @@ export const honoluluSets = [
     series: "Honolulu²",
     edition: null,
     version: null,
-    count: 120,
+    count: 121,
     tipType1: "Brush²",  tipType2: "Chisel²",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-gen-2-series/products/ohuhu-honolulu-gen-2-120-colors-dual-tips-alcohol-art-markers?variant=51721260040479",
@@ -1421,7 +1421,7 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120","0"],
   },
   {
     id: "honolulu_bundle_95",
@@ -1429,7 +1429,7 @@ export const honoluluSets = [
     series: "Honolulu² B",
     edition: null,
     version: null,
-    count: 120,
+    count: 121,
     tipType1: "Brush²",  tipType2: "Fine²",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-gen-2-series/products/ohuhu-honolulu-gen-2-120-colors-dual-tips-alcohol-art-markers?variant=51721260138783",
@@ -1437,6 +1437,6 @@ export const honoluluSets = [
       walmart: null,
       amazon: null,
     },
-    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120"],
+    colors: ["Y07", "Y111", "Y26", "Y27", "Y28", "Y29", "Y213", "Y216", "Y315", "Y415", "Y611", "YR04", "YR07", "YR17", "YR111", "YR112", "YR33", "YR34", "YR39", "YR313", "YR515", "E22", "E212", "E415", "E511", "E515", "R013", "R014", "R015", "R16", "R28", "R210", "R213", "R215", "R38", "R46", "R412", "R413", "R514", "RV08", "RV17", "RV18", "RV19", "RV111", "RV212", "RV311", "RV314", "RV316", "V010", "V13", "V18", "V216", "V38", "V416", "BV26", "BV29", "BV31", "BV38", "BV310", "BV314", "BV315", "BV514", "B02", "B08", "B111", "B114", "B115", "B310", "B315", "B411", "B415", "BG05", "BG114", "BG212", "BG215", "BG311", "BG314", "BG315", "G013", "G112", "G113", "G114", "G36", "G310", "G311", "G312", "G315", "G316", "G43", "G49", "G410", "YG06", "YG012", "YG015", "YG211", "YG212", "YG414", "YG415", "YG510", "CG17", "CG18", "CG25", "BGY02", "BGY15", "BGY18", "BGY24", "BGY25", "BGY35", "BGY38", "YGY11", "WG10", "WG26", "WG27", "WG37", "GG03", "GG05", "GG10", "GG15", "GG16", "120","0"],
   },
 ];
