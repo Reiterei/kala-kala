@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { getLegacyList, getSeriesForColor } from '../utils/colorUtils';
 import { allSets } from '../data/all-sets';
@@ -17,8 +17,28 @@ function getDistinctSeries() {
   return [...seen.entries()].map(([series, { tipType1, tipType2 }]) => ({ series, tipType1, tipType2 }));
 }
 
-export function ColorDetailModal({ color, ownership, onSetStatus, onClose, settings }) {
+export function ColorDetailModal({ color, ownership, onSetStatus, onClose, settings, colorList, onNavigate }) {
   const [foundOpen, setFoundOpen] = useState({});
+
+  const navIndex = color && colorList ? colorList.findIndex(c => c.code === color.code) : -1;
+  const hasNav = color && colorList && colorList.length > 1 && navIndex !== -1;
+  const goPrev = () => { if (hasNav) onNavigate(colorList[(navIndex - 1 + colorList.length) % colorList.length]); };
+  const goNext = () => { if (hasNav) onNavigate(colorList[(navIndex + 1) % colorList.length]); };
+
+  useEffect(() => {
+    setFoundOpen({});
+  }, [color?.code]);
+
+  useEffect(() => {
+    if (!color) return;
+    const onKey = (e) => {
+      if (e.key === 'ArrowLeft') goPrev();
+      if (e.key === 'ArrowRight') goNext();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [color, navIndex, colorList]);
+
   if (!color) return null;
 
   const legacyList = getLegacyList(color).filter(l => l.code !== color.code || l.name !== color.name);
@@ -62,6 +82,28 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
       >
         {/* Header */}
         <div style={{ background: bg, padding: '20px 20px 16px', position: 'relative', flexShrink: 0 }}>
+          {hasNav && (
+            <button
+              onClick={goPrev}
+              style={{
+                position: 'absolute', top: 14, right: 76,
+                background: 'rgba(255,255,255,0.3)', border: 'none', borderRadius: '50%',
+                width: 28, height: 28, cursor: 'pointer', fontSize: 16,
+                color: textCol, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >‹</button>
+          )}
+          {hasNav && (
+            <button
+              onClick={goNext}
+              style={{
+                position: 'absolute', top: 14, right: 44,
+                background: 'rgba(255,255,255,0.3)', border: 'none', borderRadius: '50%',
+                width: 28, height: 28, cursor: 'pointer', fontSize: 16,
+                color: textCol, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >›</button>
+          )}
           <button
             onClick={onClose}
             style={{
