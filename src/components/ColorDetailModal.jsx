@@ -210,6 +210,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
             )}
           </div>
         </div>
+        </div>
         {hasNav && (
           <button
             onClick={goNext}
