@@ -101,6 +101,22 @@ export function getTipIcon(tipType) {
   return TIP_TYPE_MAP[tipType] ?? 'brush';
 }
 
+// Display label overrides — internal tipType strings stay distinct (e.g. for
+// Honolulu² data integrity), but render identically to their base variant.
+const TIP_LABEL_MAP = {
+  'Brush²': 'Brush',
+  'Chisel²': 'Chisel',
+  'Fine²': 'Fine',
+};
+
+/**
+ * Returns the display label for a tipType string.
+ * Falls back to the raw tipType if no override exists.
+ */
+export function getTipLabel(tipType) {
+  return TIP_LABEL_MAP[tipType] ?? tipType;
+}
+
 /**
  * Renders a tip SVG icon.
  * @param {string}  type   - icon key (e.g. 'brush', 'chisel', 'fine')
