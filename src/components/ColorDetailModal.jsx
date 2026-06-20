@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getLegacyList, getSeriesForColor } from '../utils/colorUtils';
 import { allSets } from '../data/all-sets';
-import { TipIcon, getTipIcon } from '../assets/TipIcons';
+import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { isUnavailableSet } from '../hooks/useSettings';
 import { C, FONT, RADIUS, SHADOW, statusOwned, statusOwnedOff, statusWish, statusWishOff } from '../styles/theme';
 
@@ -100,7 +100,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                     </div>
                     <div style={{ flex: 1, marginLeft: 10 }}>
                       <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{series}</div>
-                      <div style={{ fontSize: 11, color: C.textMuted }}>{tipType2 ? `${tipType1} / ${tipType2}` : tipType1}</div>
+                      <div style={{ fontSize: 11, color: C.textMuted }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</div>
                     </div>
                     <div style={{ display: 'flex', gap: 6 }}>
                       <button
