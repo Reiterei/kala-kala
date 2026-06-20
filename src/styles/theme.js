@@ -180,4 +180,5 @@ export const iconBtn = {
 export const scrollPage = {
   flex: 1, overflowY: 'scroll',
   WebkitOverflowScrolling: 'touch', overscrollBehaviorY: 'contain',
+  touchAction: 'pan-y',
 };
