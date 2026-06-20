@@ -91,7 +91,6 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Remove all colors from &lsquo;Owned&rsquo;</div>
-                <div style={{ fontSize: 11, color: C.tealDim, marginTop: 2 }}>Permanently clear your owned list</div>
               </div>
               <button
                 onClick={handleClearRequest}
@@ -125,7 +124,6 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Remove all colors from &lsquo;Wishlist&rsquo;</div>
-                <div style={{ fontSize: 11, color: C.tealDim, marginTop: 2 }}>Permanently clear your wishlist</div>
               </div>
               <button
                 onClick={() => setConfirmingWishlist(true)}
