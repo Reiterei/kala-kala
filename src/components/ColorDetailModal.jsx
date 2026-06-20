@@ -41,7 +41,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
 
   if (!color) return null;
 
-  const legacyList = getLegacyList(color).filter(l => l.code !== color.code || l.name !== color.name);
+  const legacyList = getLegacyList(color).filter(l => l.set !== 'original' && (l.code !== color.code || l.name !== color.name));
   const legacyDisplayLabel = (l) => l.set === 'original' ? 'Original Sets' : `${l.label} (Old)`;
   const seriesInColor = getSeriesForColor(color.code, ALL_SETS);
   const allSeries = getDistinctSeries();

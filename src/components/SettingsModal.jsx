@@ -53,8 +53,9 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
             <button
               onClick={() => { onSignOut(); onClose(); }}
               style={{
-                background: 'none', border: 'none',
-                padding: '4px 10px',
+                background: 'none',
+                padding: '6px 14px', borderRadius: RADIUS.pill,
+                border: `1.5px solid ${C.teal}`,
                 color: C.teal, fontSize: 11, fontWeight: 700,
                 cursor: 'pointer', fontFamily: FONT, flexShrink: 0,
               }}
