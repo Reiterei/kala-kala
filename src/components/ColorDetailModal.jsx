@@ -148,7 +148,7 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
                             return (
                               <div key={s.id} style={{
                                 display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                                padding: '8px 10px', borderRadius: RADIUS.sm, background: C.white,
+                                padding: '8px 10px', borderRadius: RADIUS.sm, background: cc.track,
                               }}>
                                 <span style={{ fontSize: 12, fontWeight: 600, color: C.text, lineHeight: 1.3 }}>{s.name}</span>
                                 {parts && (
