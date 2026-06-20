@@ -106,13 +106,14 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               background: 'rgba(255,255,255,0.3)', border: 'none', borderRadius: '50%',
               width: 28, height: 28, cursor: 'pointer', fontSize: 18, fontWeight: 700,
               color: textCol, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
             }}
           >×</button>
-          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: textCol }}>
+          <h2 style={{ margin: '0 36px 0 0', fontSize: 20, fontWeight: 700, color: textCol, wordBreak: 'break-word' }}>
             {color.code} - {color.name}
           </h2>
           {legacyList.length > 0 && (
-            <p style={{ margin: '4px 0 0', fontSize: 12, color: textColSub }}>
+            <p style={{ margin: '4px 36px 0 0', fontSize: 12, color: textColSub, wordBreak: 'break-word' }}>
               {legacyList.map((l, i) => (
                 <span key={l.set}>
                   {i > 0 && <br />}
@@ -146,16 +147,16 @@ export function ColorDetailModal({ color, ownership, onSetStatus, onClose, setti
               const seriesSets = retailSets.filter(s => s.series === series).sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
               return (
                 <div key={series} style={{ background: cc.cardBg, borderRadius: RADIUS.lg, border: `1.5px solid ${cc.accentSoft}`, overflow: 'hidden' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', padding: '10px 16px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', padding: '10px 16px', flexWrap: 'wrap', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 2, flexShrink: 0 }}>
                       <TipIcon type={getTipIcon(tipType1)} size={22} color={cc.accent} />
                       {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} color={cc.accent} />}
                     </div>
-                    <div style={{ flex: 1, marginLeft: 10 }}>
+                    <div style={{ flex: '1 1 120px', marginLeft: 4, minWidth: 0 }}>
                       <div style={{ fontSize: 14, fontWeight: 600, color: cc.accent }}>{series}</div>
                       <div style={{ fontSize: 11, color: cc.accentSoft }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</div>
                     </div>
-                    <div style={{ display: 'flex', gap: 6 }}>
+                    <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
                       <button
                         onClick={() => onSetStatus(color.code, series, isOwned ? null : 'owned')}
                         style={ownBtn}
