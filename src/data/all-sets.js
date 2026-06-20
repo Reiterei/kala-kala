@@ -1,6 +1,7 @@
 import { honoluluSets } from './honolulu-sets';
 import { kaalaSets } from './kaala-sets';
 import { molokaiSets } from './molokai-sets';
+import { naluSets } from './nalu-sets';
 
 // Add new series imports above and append below to register them everywhere.
 export const allSets = [...honoluluSets, ...kaalaSets, ...molokaiSets];
