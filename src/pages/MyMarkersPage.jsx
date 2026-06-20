@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { allSets, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
-import { TipIcon, getTipIcon } from '../assets/TipIcons';
+import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
@@ -136,7 +136,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, tab, h
             <TipIcon type={getTipIcon(tipType1)} size={22} color={cc.accent} />
             {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} color={cc.accent} />}
           </div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{tipType2 ? `${tipType1} / ${tipType2}` : tipType1}</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</span>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>

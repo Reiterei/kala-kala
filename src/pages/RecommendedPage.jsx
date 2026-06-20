@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { allSets, SERIES_ORDER, SERIES_SHORT, getSeriesBadgeColors, getSeriesCardColors } from '../data/all-sets';
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
-import { TipIcon, getTipIcon } from '../assets/TipIcons';
+import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import ohuhuLogo from '../assets/ohuhu-logo.png';
 import michaelsLogo from '../assets/michaels-logo.png';
@@ -115,7 +115,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
               <TipIcon type={getTipIcon(set.tipType1)} size={22} color={cc.accent} />
               {set.tipType2 && <TipIcon type={getTipIcon(set.tipType2)} size={22} color={cc.accent} />}
             </div>
-            <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{set.tipType2 ? `${set.tipType1} / ${set.tipType2}` : set.tipType1}</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{set.tipType2 ? `${getTipLabel(set.tipType1)} / ${getTipLabel(set.tipType2)}` : getTipLabel(set.tipType1)}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
