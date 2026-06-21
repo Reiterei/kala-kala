@@ -210,8 +210,6 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
           >{atMax ? 'Limit Reached' : 'Save Palette'}</button>
         </div>
 
-        <div style={{ borderTop: `1px solid ${C.border}`, margin: '26px 0 18px' }} />
-
         <div style={{ fontSize: 15, fontWeight: 800, color: C.text, marginBottom: 10 }}>
           Saved Palettes <span style={{ color: C.textMuted, fontWeight: 600, fontSize: 12 }}>({palettes.length}/25)</span>
         </div>
