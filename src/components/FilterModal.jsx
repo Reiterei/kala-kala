@@ -100,6 +100,20 @@ export function FilterToggleRow({ label, value, onChange }) {
   );
 }
 
+export function FilterSegmentToggle({ options, value, onChange }) {
+  return (
+    <div style={{ display: 'flex', borderRadius: RADIUS.sm, overflow: 'hidden', border: `1.5px solid ${C.tealMid}` }}>
+      {options.map(opt => (
+        <button
+          key={opt}
+          onClick={() => onChange(opt)}
+          style={{ ...(value === opt ? segmentActive : segmentInactive), flex: 1 }}
+        >{opt}</button>
+      ))}
+    </div>
+  );
+}
+
 export function SeriesFilterTree({ groups, selected, onChange, getColors }) {
   const [rootOpen, setRootOpen] = useState(false);
   const [expanded, setExpanded] = useState(() => new Set());
