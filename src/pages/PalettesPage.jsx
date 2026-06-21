@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { colors } from '../data/colors';
+import { ColorDetailModal } from '../components/ColorDetailModal';
 import { C, FONT, RADIUS, SHADOW, scrollPage } from '../styles/theme';
 
 function getOwnedCodes(ownership) {
@@ -46,21 +47,24 @@ function TrashIcon() {
   );
 }
 
-function Swatch({ color, locked, onToggleLock }) {
+function Swatch({ color, locked, onToggleLock, onClick }) {
   const bg = `#${color.hex}`;
   const text = textColorFor(color.hex);
   return (
-    <div style={{
-      position: 'relative', flex: 1, minWidth: 0,
-      background: bg, borderRadius: RADIUS.lg,
-      aspectRatio: '1 / 1.15',
-      display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      boxShadow: SHADOW.sm, padding: 8, boxSizing: 'border-box',
-      transition: 'background 0.2s',
-    }}>
+    <div
+      onClick={onClick}
+      style={{
+        position: 'relative', flex: 1, minWidth: 0,
+        background: bg, borderRadius: RADIUS.lg,
+        aspectRatio: '1 / 1.15', cursor: 'pointer',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        boxShadow: SHADOW.sm, padding: 8, boxSizing: 'border-box',
+        transition: 'background 0.2s',
+      }}
+    >
       <button
-        onClick={onToggleLock}
+        onClick={(e) => { e.stopPropagation(); onToggleLock(); }}
         style={{
           position: 'absolute', top: 6, right: 6,
           width: 24, height: 24, borderRadius: '50%',
@@ -83,13 +87,33 @@ function Swatch({ color, locked, onToggleLock }) {
   );
 }
 
+function SavedSwatch({ color, onClick }) {
+  const text = textColorFor(color.hex);
+  return (
+    <div
+      onClick={onClick}
+      title={`${color.code} ${color.name}`}
+      style={{
+        flex: 1, height: 34, minWidth: 0, borderRadius: RADIUS.sm,
+        background: `#${color.hex}`, cursor: 'pointer',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        overflow: 'hidden',
+      }}
+    >
+      <span style={{ color: text, fontWeight: 800, fontSize: 9.5, letterSpacing: 0.2, padding: '0 2px' }}>
+        {color.code}
+      </span>
+    </div>
+  );
+}
+
 const actionBtn = {
   flex: 1, padding: '10px 0', borderRadius: RADIUS.pill,
   fontSize: 12, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase',
   cursor: 'pointer', fontFamily: FONT, border: 'none',
 };
 
-export function PalettesPage({ ownership, user, palettes, onSavePalette, onDeletePalette }) {
+export function PalettesPage({ ownership, onSetStatus, settings, user, palettes, onSavePalette, onDeletePalette }) {
   const ownedColors = useMemo(() => getOwnedCodes(ownership), [ownership]);
 
   const [active, setActive] = useState(() => {
@@ -119,15 +143,16 @@ export function PalettesPage({ ownership, user, palettes, onSavePalette, onDelet
 
   const noOwned = ownedColors.length === 0;
 
+  const [modal, setModal] = useState(null); // { color, list }
+  const openModal = (color, list) => setModal({ color, list });
+  const navigateModal = (color) => setModal(m => ({ ...m, color }));
+
   return (
     <div style={scrollPage}>
       <div style={{ padding: '16px 16px 100px', maxWidth: 760, margin: '0 auto' }}>
 
         <div style={{ marginBottom: 14 }}>
           <div style={{ fontSize: 18, fontWeight: 800, color: C.text }}>Active Palette</div>
-          <div style={{ fontSize: 12, color: C.textMuted, marginTop: 2 }}>
-            Lock swatches to keep them, then randomize the rest.
-          </div>
         </div>
 
         {noOwned ? (
@@ -140,7 +165,13 @@ export function PalettesPage({ ownership, user, palettes, onSavePalette, onDelet
         ) : (
           <div style={{ display: 'flex', gap: 8 }}>
             {active.map((color, i) => color && (
-              <Swatch key={i} color={color} locked={locked[i]} onToggleLock={() => toggleLock(i)} />
+              <Swatch
+                key={i}
+                color={color}
+                locked={locked[i]}
+                onToggleLock={() => toggleLock(i)}
+                onClick={() => openModal(color, active.filter(Boolean))}
+              />
             ))}
           </div>
         )}
@@ -170,40 +201,48 @@ export function PalettesPage({ ownership, user, palettes, onSavePalette, onDelet
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {palettes.map(p => (
-              <div key={p.id} style={{
-                background: C.white, borderRadius: RADIUS.lg, border: `1.5px solid ${C.border}`,
-                padding: '10px 10px 10px 12px',
-                display: 'flex', alignItems: 'center', gap: 10,
-              }}>
-                <div style={{ display: 'flex', gap: 6, flex: 1, minWidth: 0 }}>
-                  {p.codes.map((code, i) => {
-                    const c = colors.find(x => x.code === code);
-                    if (!c) return null;
-                    return (
-                      <div key={i} title={`${c.code} ${c.name}`} style={{
-                        flex: 1, height: 34, minWidth: 0, borderRadius: RADIUS.sm,
-                        background: `#${c.hex}`,
-                      }} />
-                    );
-                  })}
+            {palettes.map(p => {
+              const paletteColors = p.codes.map(code => colors.find(x => x.code === code)).filter(Boolean);
+              return (
+                <div key={p.id} style={{
+                  background: C.white, borderRadius: RADIUS.lg, border: `1.5px solid ${C.border}`,
+                  padding: '10px 10px 10px 12px',
+                  display: 'flex', alignItems: 'center', gap: 10,
+                }}>
+                  <div style={{ display: 'flex', gap: 6, flex: 1, minWidth: 0 }}>
+                    {paletteColors.map((c, i) => (
+                      <SavedSwatch key={i} color={c} onClick={() => openModal(c, paletteColors)} />
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => onDeletePalette(p.id)}
+                    style={{
+                      width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+                      border: 'none', background: '#fdeee8', color: C.error,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+                    }}
+                    aria-label="Delete palette"
+                  >
+                    <TrashIcon />
+                  </button>
                 </div>
-                <button
-                  onClick={() => onDeletePalette(p.id)}
-                  style={{
-                    width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
-                    border: 'none', background: '#fdeee8', color: C.error,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                  }}
-                  aria-label="Delete palette"
-                >
-                  <TrashIcon />
-                </button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
+
+      {modal && (
+        <ColorDetailModal
+          color={modal.color}
+          ownership={ownership}
+          onSetStatus={onSetStatus}
+          onClose={() => setModal(null)}
+          settings={settings}
+          colorList={modal.list}
+          onNavigate={navigateModal}
+        />
+      )}
     </div>
   );
 }
