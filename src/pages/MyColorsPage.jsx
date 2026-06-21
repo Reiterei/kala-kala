@@ -5,7 +5,7 @@ import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
 import { FilterModal, FilterSection, FilterToggleRow, SeriesFilterTree } from '../components/FilterModal';
-import { getLegacyDisplay } from '../utils/colorUtils';
+import { getLegacyDisplay, matchesSearchTokens } from '../utils/colorUtils';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
@@ -88,15 +88,18 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       }
       if (tokens.length) {
         const legacy = getLegacyDisplay(c);
-        const haystack = [
-          c.name, c.code, legacy?.name, legacy?.code,
-          c.legacy?.honolulu?.name, c.legacy?.honolulu?.code,
-          c.legacy?.oahu?.name, c.legacy?.oahu?.code,
-          c.legacy?.kaala?.name, c.legacy?.kaala?.code,
-          c.legacy?.original?.name, c.legacy?.original?.code,
+        const codes = [
+          c.code, legacy?.code,
+          c.legacy?.honolulu?.code, c.legacy?.oahu?.code,
+          c.legacy?.kaala?.code, c.legacy?.original?.code,
+        ];
+        const text = [
+          c.name, legacy?.name,
+          c.legacy?.honolulu?.name, c.legacy?.oahu?.name,
+          c.legacy?.kaala?.name, c.legacy?.original?.name,
           ...(codeToSetText.get(c.code) || []),
-        ].filter(Boolean).join(' ').toLowerCase();
-        if (!tokens.every(t => haystack.includes(t))) return false;
+        ].filter(Boolean).join(' ');
+        if (!matchesSearchTokens(tokens, codes, text)) return false;
       }
       const entries = Object.values(ownership[c.code] || {});
       const owned = entries.includes('owned');

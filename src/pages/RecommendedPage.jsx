@@ -12,6 +12,7 @@ import michaelsLogo from '../assets/michaels-logo.png';
 import walmartLogo from '../assets/walmart-logo.png';
 import amazonLogo from '../assets/amazon-logo.png';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE, isUnavailableSet } from '../hooks/useSettings';
+import { matchesSearchTokens } from '../utils/colorUtils';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, SHADOW, scrollPage, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
@@ -244,12 +245,12 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
       const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
       sets = sets.filter(s => {
         const colorNames = s.colors.map(c => colorMap[c]?.name).filter(Boolean);
-        const haystack = [
+        const text = [
           s.name, s.edition, s.tipType1, s.tipType2,
           getTipLabel(s.tipType1), getTipLabel(s.tipType2),
-          ...s.colors, ...colorNames,
-        ].filter(Boolean).join(' ').toLowerCase();
-        return tokens.every(t => haystack.includes(t));
+          ...colorNames,
+        ].filter(Boolean).join(' ');
+        return matchesSearchTokens(tokens, s.colors, text);
       });
     }
     sets = sets.map(s => {
