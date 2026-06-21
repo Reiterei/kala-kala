@@ -151,10 +151,6 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
     <div style={scrollPage}>
       <div style={{ padding: '16px 16px 100px', maxWidth: 760, margin: '0 auto' }}>
 
-        <div style={{ marginBottom: 14 }}>
-          <div style={{ fontSize: 18, fontWeight: 800, color: C.text }}>Active Palette</div>
-        </div>
-
         {noOwned ? (
           <div style={{
             background: C.bgCard, border: `1.5px dashed ${C.tealMid}`, borderRadius: RADIUS.lg,
