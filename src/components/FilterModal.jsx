@@ -87,6 +87,48 @@ export function FilterPillRow({ options, value, onChange }) {
   );
 }
 
+export function FilterDropdown({ options, value, onChange }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ position: 'relative' }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          width: '100%', padding: '10px 12px', borderRadius: RADIUS.md,
+          border: `1.5px solid ${C.tealMid}`, background: C.white, cursor: 'pointer',
+          fontSize: 13, fontWeight: 600, color: C.text,
+        }}
+      >
+        {value}
+        <span style={{ fontSize: 10, color: C.textMuted }}>{open ? '▲' : '▼'}</span>
+      </button>
+
+      {open && (
+        <div style={{
+          position: 'absolute', top: 'calc(100% + 4px)', left: 0, right: 0, zIndex: 10,
+          background: C.white, border: `1.5px solid ${C.tealMid}`, borderRadius: RADIUS.md,
+          boxShadow: SHADOW.lg, overflow: 'hidden',
+        }}>
+          {options.map(opt => (
+            <button
+              key={opt}
+              onClick={() => { onChange(opt); setOpen(false); }}
+              style={{
+                display: 'block', width: '100%', textAlign: 'left',
+                padding: '9px 12px', border: 'none', cursor: 'pointer',
+                background: value === opt ? C.tealLight : C.white,
+                color: value === opt ? C.teal : C.textSub,
+                fontSize: 13, fontWeight: value === opt ? 700 : 500,
+              }}
+            >{opt}</button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function FilterToggleRow({ label, value, onChange }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '7px 0' }}>
