@@ -98,16 +98,16 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
         <div style={{ padding: '14px 16px 0' }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
             <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: getSeriesBadgeColors(set.series).text, background: getSeriesBadgeColors(set.series).bg, borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4, flexWrap: 'nowrap', minWidth: 0 }}>
+                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: getSeriesBadgeColors(set.series).text, background: getSeriesBadgeColors(set.series).bg, borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   {SERIES_SHORT[set.series] || set.series}
                 </span>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '2px 8px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', color: cc.accent }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '2px 8px', whiteSpace: 'nowrap', flexShrink: 1, minWidth: 0, overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', color: cc.accent, flexShrink: 0 }}>
                     <TipIcon type={getTipIcon(set.tipType1)} size={16} color={cc.accent} />
                     {set.tipType2 && <TipIcon type={getTipIcon(set.tipType2)} size={16} color={cc.accent} />}
                   </div>
-                  <span style={{ fontSize: 10, fontWeight: 600, color: cc.accent }}>{set.tipType2 ? `${getTipLabel(set.tipType1)} / ${getTipLabel(set.tipType2)}` : getTipLabel(set.tipType1)}</span>
+                  <span style={{ fontSize: 10, fontWeight: 600, color: cc.accent, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{set.tipType2 ? `${getTipLabel(set.tipType1)} / ${getTipLabel(set.tipType2)}` : getTipLabel(set.tipType1)}</span>
                 </div>
               </div>
               <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{set.name}</div>
@@ -138,14 +138,14 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           <button onClick={() => setConfirming(true)} style={{ padding: '8px 16px', background: 'none', border: 'none', borderRight: `1px solid ${cc.border}`, cursor: 'pointer', fontSize: 12, fontWeight: 700, color: cc.accent, lineHeight: 1.4, whiteSpace: 'nowrap' }}>+ Add All</button>
           <button onClick={toggleExpanded} style={{ flex: 1, background: cc.cardBg, border: 'none', padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', textAlign: 'left' }}>
             <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accent, textTransform: 'uppercase', lineHeight: 1.6 }}>
-              <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
+              <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Colors
             </span>
             <span style={{ fontSize: 10, color: cc.accentSoft }}>({total})</span>
           </button>
           {set.urls && Object.values(set.urls).some(Boolean) && (
             <button onClick={toggleBuyOpen} style={{ background: cc.cardBg, border: 'none', borderLeft: `1px solid ${cc.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', whiteSpace: 'nowrap' }}>
               <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accentSoft, textTransform: 'uppercase' }}>
-                <span style={{ fontSize: 13 }}>{buyOpen ? '▾' : '▸'}</span> Where to Buy
+                <span style={{ fontSize: 13 }}>{buyOpen ? '▾' : '▸'}</span> Retailers
               </span>
             </button>
           )}

@@ -279,7 +279,7 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
             onClick={randomize}
             disabled={noOwned}
             style={{ ...actionBtn, background: C.teal, color: C.white, opacity: noOwned ? 0.5 : 1 }}
-          >Randomize Colors</button>
+          >Randomize</button>
           <button
             onClick={save}
             disabled={noOwned || atMax}

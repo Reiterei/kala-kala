@@ -121,17 +121,17 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, showUn
       <div style={{ padding: '14px 16px 0' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div style={{ flex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4, flexWrap: 'nowrap', minWidth: 0 }}>
               <span style={{
                 fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: getSeriesBadgeColors(series).text,
-                background: getSeriesBadgeColors(series).bg, borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase',
+                background: getSeriesBadgeColors(series).bg, borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0,
               }}>{SERIES_SHORT[series] || series}</span>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '2px 8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '2px 8px', whiteSpace: 'nowrap', flexShrink: 1, minWidth: 0, overflow: 'hidden' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent, flexShrink: 0 }}>
                   <TipIcon type={getTipIcon(tipType1)} size={16} color={cc.accent} />
                   {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={16} color={cc.accent} />}
                 </div>
-                <span style={{ fontSize: 10, fontWeight: 600, color: cc.accent }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</span>
+                <span style={{ fontSize: 10, fontWeight: 600, color: cc.accent, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</span>
               </div>
             </div>
             <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{series}</div>
@@ -143,7 +143,8 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, showUn
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
-          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, color: cc.accent, textTransform: 'uppercase', lineHeight: 1.6 }}>Markers Owned</span>
+          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1, color: C.textMuted, textTransform: 'uppercase', lineHeight: 1.6 }}>
+          </span>
           <div style={{ display: 'flex', gap: 10 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: cc.accent, lineHeight: 1.4 }}>{owned} Owned</span>
             {wishCodes.length > 0 && <span style={{ fontSize: 11, fontWeight: 700, color: C.wish, lineHeight: 1.4 }}>{wishCodes.length} Wishlist</span>}
@@ -166,7 +167,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, showUn
           }}
         >
           <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accent, textTransform: 'uppercase', lineHeight: 1.6 }}>
-            <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Included Colors
+            <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Colors
           </span>
           <span style={{ fontSize: 10, color: cc.accentSoft }}>({displayColors.length})</span>
         </button>
