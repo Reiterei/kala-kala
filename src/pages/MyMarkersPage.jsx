@@ -121,11 +121,18 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, showUn
       <div style={{ padding: '14px 16px 0' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div style={{ flex: 1 }}>
-            <div style={{ marginBottom: 4 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
               <span style={{
                 fontSize: 9, fontWeight: 700, letterSpacing: 1, lineHeight: 1.6, color: getSeriesBadgeColors(series).text,
                 background: getSeriesBadgeColors(series).bg, borderRadius: 4, padding: '2px 6px', textTransform: 'uppercase',
               }}>{SERIES_SHORT[series] || series}</span>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '2px 8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent }}>
+                  <TipIcon type={getTipIcon(tipType1)} size={16} color={cc.accent} />
+                  {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={16} color={cc.accent} />}
+                </div>
+                <span style={{ fontSize: 10, fontWeight: 600, color: cc.accent }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</span>
+              </div>
             </div>
             <div style={{ fontSize: 15, fontWeight: 700, color: C.text, lineHeight: 1.35 }}>{series}</div>
           </div>
@@ -133,14 +140,6 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, showUn
             <div style={{ fontSize: 22, fontWeight: 700, color: cc.accent, lineHeight: 1.2 }}>{pct}%</div>
             <div style={{ fontSize: 9, fontWeight: 700, color: cc.accentSoft, textTransform: 'uppercase', letterSpacing: 0.5, lineHeight: 1.6 }}>Complete</div>
           </div>
-        </div>
-
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: cc.track, borderRadius: RADIUS.sm, padding: '4px 10px', marginTop: 6 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 2, color: cc.accent }}>
-            <TipIcon type={getTipIcon(tipType1)} size={22} color={cc.accent} />
-            {tipType2 && <TipIcon type={getTipIcon(tipType2)} size={22} color={cc.accent} />}
-          </div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: cc.accent }}>{tipType2 ? `${getTipLabel(tipType1)} / ${getTipLabel(tipType2)}` : getTipLabel(tipType1)}</span>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 4 }}>
