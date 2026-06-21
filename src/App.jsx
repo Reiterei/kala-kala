@@ -67,7 +67,7 @@ export default function App() {
   const windowWidth = useWindowWidth();
   const stacked = windowWidth < 480;
   const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership(user);
-  const { settings, setSetting } = useSettings(user);
+  const { settings, setSetting } = useSettings();
 
   const pageIdxRef = useRef(0);
   pageIdxRef.current = pageIdx;
