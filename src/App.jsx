@@ -203,13 +203,13 @@ export default function App() {
         <nav style={{
           background: C.headerBg, borderBottom: `1px solid ${C.border}`,
           padding: '0 10px 10px', display: 'flex', gap: 6,
-          justifyContent: 'center', flexWrap: 'nowrap',
+          justifyContent: 'center', flexWrap: 'nowrap', minWidth: 0,
           flexShrink: 0, zIndex: 100, boxShadow: SHADOW.header,
         }}>
           {NAV.map((n, i) => {
             const active = pageIdx === i;
             return (
-              <button key={n.id} onClick={() => goTo(i)} style={{ ...(active ? navPillActive : navPillInactive), flex: 1, justifyContent: 'center' }}>
+              <button key={n.id} onClick={() => goTo(i)} style={{ ...(active ? navPillActive : navPillInactive), flex: '1 1 0', minWidth: 0, justifyContent: 'center', padding: '8px 4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {n.label}
               </button>
             );
