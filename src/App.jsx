@@ -76,7 +76,6 @@ export default function App() {
   const [pageIdx, setPageIdx] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [authOpen, setAuthOpen] = useState(false);
   const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
   const windowWidth = useWindowWidth();
   const stacked = windowWidth < 480;
@@ -247,12 +246,12 @@ export default function App() {
       </div>
     </div>
 
-    {authOpen && (
+    {!user && (
       <AuthModal
         onSignIn={signIn}
         onSignUp={signUp}
         onResetPassword={resetPassword}
-        onClose={() => setAuthOpen(false)}
+        required
       />
     )}
 
@@ -265,7 +264,6 @@ export default function App() {
         onClearAllWishlist={clearAllWishlist}
         user={user}
         onSignOut={signOut}
-        onOpenAuth={() => { setSettingsOpen(false); setAuthOpen(true); }}
       />
     )}
     </>
