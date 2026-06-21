@@ -149,7 +149,7 @@ export default function App() {
     <MyColorsPage key="colors" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
     <MyMarkersPage key="markers" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
     <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
-    <PalettesPage key="palettes" ownership={ownership} user={user} palettes={palettes} onSavePalette={savePalette} onDeletePalette={deletePalette} />,
+    <PalettesPage key="palettes" ownership={ownership} onSetStatus={setStatus} settings={settings} user={user} palettes={palettes} onSavePalette={savePalette} onDeletePalette={deletePalette} />,
   ];
 
   if (loading) return null;
