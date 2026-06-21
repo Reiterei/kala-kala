@@ -79,6 +79,7 @@ export default function App() {
   const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
   const windowWidth = useWindowWidth();
   const stacked = windowWidth < 480;
+  const navOnSecondRow = windowWidth < 600;
   const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership(user);
   const { palettes, savePalette, deletePalette } = usePalettes(user);
   const { settings, setSetting } = useSettings();
@@ -162,10 +163,10 @@ export default function App() {
       maxWidth: 1000, margin: '0 auto', overflow: 'hidden',
     }}>
       <header style={{
-        background: C.headerBg, borderBottom: stacked ? 'none' : `1px solid ${C.border}`,
+        background: C.headerBg, borderBottom: navOnSecondRow ? 'none' : `1px solid ${C.border}`,
         padding: '10px 16px',
         display: 'flex', alignItems: 'center', gap: 10,
-        flexShrink: 0, zIndex: 100, boxShadow: stacked ? 'none' : SHADOW.header,
+        flexShrink: 0, zIndex: 100, boxShadow: navOnSecondRow ? 'none' : SHADOW.header,
       }}>
         {/* Logo + name */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
@@ -174,7 +175,7 @@ export default function App() {
         </div>
 
         {/* Nav — centered, fills remaining space (wide screens only) */}
-        {!stacked && (
+        {!navOnSecondRow && (
           <nav style={{ display: 'flex', gap: 4, flex: 1, justifyContent: 'center', flexWrap: 'nowrap' }}>
             {NAV.map((n, i) => {
               const active = pageIdx === i;
@@ -187,7 +188,7 @@ export default function App() {
           </nav>
         )}
 
-        {stacked && <div style={{ flex: 1 }} />}
+        {navOnSecondRow && <div style={{ flex: 1 }} />}
 
         {/* Settings gear */}
         <button onClick={() => setSettingsOpen(true)} style={{ ...iconBtn, flexShrink: 0 }}>
@@ -198,7 +199,7 @@ export default function App() {
         </button>
       </header>
 
-      {stacked && (
+      {navOnSecondRow && (
         <nav style={{
           background: C.headerBg, borderBottom: `1px solid ${C.border}`,
           padding: '0 10px 10px', display: 'flex', gap: 6,
