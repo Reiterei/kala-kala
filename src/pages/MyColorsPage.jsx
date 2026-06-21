@@ -91,9 +91,15 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       const entries = Object.values(ownership[c.code] || {});
       const owned = entries.includes('owned');
       const wish = entries.includes('wishlist');
-      if (owned && showOwned === 'hide') return false;
-      if (wish && !owned && showWishlist === 'hide') return false;
-      if (!owned && !wish && showUnowned === 'hide') return false;
+      if (owned && wish) {
+        if (showOwned === 'hide' && showWishlist === 'hide') return false;
+      } else if (owned) {
+        if (showOwned === 'hide') return false;
+      } else if (wish) {
+        if (showWishlist === 'hide') return false;
+      } else if (showUnowned === 'hide') {
+        return false;
+      }
       return true;
     });
   }, [search, ownership, settings, seriesFilter, codeToSeries, showUnowned, showOwned, showWishlist]);
