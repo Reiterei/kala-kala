@@ -8,7 +8,6 @@ import { FilterModal, FilterSection, FilterToggleRow, SeriesFilterTree } from '.
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
-import { matchesSearchTokens } from '../utils/colorUtils';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, scrollPage, chipBase, chipUnowned, chipWish } from '../styles/theme';
 
@@ -218,10 +217,8 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   const seriesSearchText = useMemo(() => {
     const map = new Map();
     for (const { series, tipType1, tipType2 } of seriesGroups) {
-      const codes = getColorsForSeries(series);
-      const names = codes.map(c => colorMap[c]?.name).filter(Boolean);
-      const text = [series, tipType1, tipType2, getTipLabel(tipType1), getTipLabel(tipType2), ...names].filter(Boolean).join(' ');
-      map.set(series, { codes, text });
+      const text = [series, tipType1, tipType2, getTipLabel(tipType1), getTipLabel(tipType2)].filter(Boolean).join(' ').toLowerCase();
+      map.set(series, text);
     }
     return map;
   }, [seriesGroups]);
@@ -243,8 +240,8 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
     if (search.trim()) {
       const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
       groups = groups.filter(({ series }) => {
-        const entry = seriesSearchText.get(series);
-        return matchesSearchTokens(tokens, entry?.codes || [], entry?.text || '');
+        const text = seriesSearchText.get(series) || '';
+        return tokens.every(t => text.includes(t));
       });
     }
     return groups;

@@ -78,32 +78,37 @@ function Swatch({ color, locked, onToggleLock, onClick, isWide }) {
       >
         <LockIcon size={isWide ? 16 : 13} locked={locked} />
       </button>
-      <span style={{ color: text, fontWeight: 800, fontSize: isWide ? 22 : 13, lineHeight: 1.3, textAlign: 'center' }}>
+      <span style={{ color: text, fontWeight: 800, fontSize: isWide ? 28 : 15, lineHeight: 1.3, textAlign: 'center' }}>
         {color.code}
       </span>
-      <span style={{ color: text, fontWeight: 600, fontSize: isWide ? 14 : 10.5, lineHeight: 1.3, textAlign: 'center', opacity: 0.9 }}>
+      <span style={{ color: text, fontWeight: 600, fontSize: isWide ? 17 : 11, lineHeight: 1.3, textAlign: 'center', opacity: 0.9 }}>
         {color.name}
       </span>
     </div>
   );
 }
 
-function SavedSwatch({ color, onClick }) {
+function SavedSwatch({ color, onClick, isWide }) {
   const text = textColorFor(color.hex);
   return (
     <div
       onClick={onClick}
       title={`${color.code} ${color.name}`}
       style={{
-        flex: 1, height: 34, minWidth: 0, borderRadius: RADIUS.sm,
+        flex: 1, height: isWide ? 64 : 40, minWidth: 0, borderRadius: RADIUS.sm,
         background: `#${color.hex}`, cursor: 'pointer',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        overflow: 'hidden',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        overflow: 'hidden', padding: '2px 4px', boxSizing: 'border-box',
       }}
     >
-      <span style={{ color: text, fontWeight: 800, fontSize: 9.5, letterSpacing: 0.2, padding: '0 2px' }}>
+      <span style={{ color: text, fontWeight: 800, fontSize: isWide ? 15 : 10.5, letterSpacing: 0.2, lineHeight: 1.3 }}>
         {color.code}
       </span>
+      {isWide && (
+        <span style={{ color: text, fontWeight: 600, fontSize: 11, opacity: 0.9, lineHeight: 1.3, textAlign: 'center' }}>
+          {color.name}
+        </span>
+      )}
     </div>
   );
 }
@@ -116,7 +121,7 @@ const actionBtn = {
 
 export function PalettesPage({ ownership, onSetStatus, settings, user, palettes, onSavePalette, onDeletePalette }) {
   const windowWidth = useWindowWidth();
-  const isWide = windowWidth >= 900;
+  const isWide = windowWidth >= 700;
   const ownedColors = useMemo(() => getOwnedCodes(ownership), [ownership]);
 
   const [active, setActive] = useState(() => {
@@ -231,7 +236,7 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
                     <>
                       <div style={{ display: 'flex', gap: 6, flex: 1, minWidth: 0 }}>
                         {paletteColors.map((c, i) => (
-                          <SavedSwatch key={i} color={c} onClick={() => openModal(c, paletteColors)} />
+                          <SavedSwatch key={i} color={c} onClick={() => openModal(c, paletteColors)} isWide={isWide} />
                         ))}
                       </div>
                       <button
