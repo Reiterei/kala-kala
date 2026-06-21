@@ -32,3 +32,14 @@ export function getSeriesForColor(colorCode, allSets) {
   }
   return found;
 }
+
+// Search matching: a token matches if it's a prefix of any given code (case-insensitive),
+// or a substring of the free-text haystack. Every token must match something.
+export function matchesSearchTokens(tokens, codes, text) {
+  if (!tokens.length) return true;
+  const lowerCodes = codes.filter(Boolean).map(c => c.toLowerCase());
+  const haystack = (text || '').toLowerCase();
+  return tokens.every(t =>
+    lowerCodes.some(code => code.startsWith(t)) || haystack.includes(t)
+  );
+}
