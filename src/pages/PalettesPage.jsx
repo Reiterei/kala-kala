@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { colors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { useWindowWidth } from '../hooks/useWindowWidth';
@@ -65,6 +65,45 @@ function TrashIcon() {
   );
 }
 
+const NAME_BREAKS = {
+  Pomegranate: 'Pome-granate',
+  Bougainvillaea: 'Bougain-villaea',
+  Coralessence: 'Coral-essence',
+  Horseradish: 'Horse-radish',
+  Hearthstone: 'Hearth-stone',
+  Ultramarine: 'Ultra-marine',
+  Aquamarine: 'Aqua-marine',
+  Bluebonnet: 'Blue-bonnet',
+  Cantaloupe: 'Cant-aloupe',
+  Cappuccino: 'Cappu-ccino',
+  Chartreuse: 'Char-treuse',
+  Cornflower: 'Corn-flower',
+  Cyberspace: 'Cyber-space',
+  Grapefruit: 'Grape-fruit',
+  Mignonette: 'Mignon-ette',
+  Peppermint: 'Pepper-mint',
+  Periwinkle: 'Peri-winkle',
+  Sandalwood: 'Sandal-wood',
+  Terracotta: 'Terra-cotta',
+  Tumbleweed: 'Tumble-weed',
+  Vermillion: 'Ver-million',
+};
+let _measureCanvas = null;
+function textWidth(text, font) {
+  if (!_measureCanvas) _measureCanvas = document.createElement('canvas');
+  const ctx = _measureCanvas.getContext('2d');
+  ctx.font = font;
+  return ctx.measureText(text).width;
+}
+
+// Returns the plain name if it fits in maxWidth at the given font, else the dashed version.
+function fitName(name, fontSize, fontWeight, maxWidth) {
+  const broken = NAME_BREAKS[name];
+  if (!broken) return name;
+  const font = `${fontWeight} ${fontSize}px ${FONT}`;
+  return textWidth(name, font) <= maxWidth ? name : broken;
+}
+
 function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
   const bg = `#${color.hex}`;
   const text = textColorFor(color.hex);
@@ -75,6 +114,14 @@ function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
   const lockBtn = 24 + (30 - 24) * scale;
   const lockIcon = 13 + (16 - 13) * scale;
   const lockOffset = 6 + (10 - 6) * scale;
+  const nameRef = useRef(null);
+  const [shownName, setShownName] = useState(color.name);
+  useEffect(() => {
+    const el = nameRef.current;
+    if (!el) return;
+    const maxWidth = el.parentElement.clientWidth - pad * 2;
+    setShownName(fitName(color.name, nameSize, 600, maxWidth));
+  }, [color.name, nameSize, pad, windowWidth]);
   return (
     <div
       onClick={onClick}
@@ -105,8 +152,8 @@ function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
       <span style={{ color: text, fontWeight: 800, fontSize: codeSize, lineHeight: 1.3, textAlign: 'center' }}>
         {color.code}
       </span>
-      <span style={{ color: text, fontWeight: 600, fontSize: nameSize, lineHeight: 1.3, textAlign: 'center', opacity: 0.9 }}>
-        {color.name}
+      <span ref={nameRef} style={{ color: text, fontWeight: 600, fontSize: nameSize, lineHeight: 1.15, textAlign: 'center', opacity: 0.9, maxWidth: '100%' }}>
+        {shownName}
       </span>
     </div>
   );
@@ -119,6 +166,14 @@ function SavedSwatch({ color, onClick, windowWidth }) {
   const nameSize = 11;
   const height = 40 + (64 - 40) * scale;
   const showName = scale > 0.4;
+  const nameRef = useRef(null);
+  const [shownName, setShownName] = useState(color.name);
+  useEffect(() => {
+    const el = nameRef.current;
+    if (!el || !showName) return;
+    const maxWidth = el.parentElement.clientWidth - 8;
+    setShownName(fitName(color.name, nameSize, 600, maxWidth));
+  }, [color.name, nameSize, showName, windowWidth]);
   return (
     <div
       onClick={onClick}
@@ -134,8 +189,8 @@ function SavedSwatch({ color, onClick, windowWidth }) {
         {color.code}
       </span>
       {showName && (
-        <span style={{ color: text, fontWeight: 600, fontSize: nameSize, opacity: 0.9, lineHeight: 1.3, textAlign: 'center' }}>
-          {color.name}
+        <span ref={nameRef} style={{ color: text, fontWeight: 600, fontSize: nameSize, opacity: 0.9, lineHeight: 1.15, textAlign: 'center', maxWidth: '100%' }}>
+          {shownName}
         </span>
       )}
     </div>
