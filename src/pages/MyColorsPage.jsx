@@ -4,12 +4,12 @@ import { allSets, SERIES_GROUPS, getSeriesBadgeColors } from '../data/all-sets';
 import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
-import { FilterModal, FilterSection, FilterToggleRow, SeriesFilterTree } from '../components/FilterModal';
+import { FilterModal, FilterSection, SeriesFilterTree } from '../components/FilterModal';
 import { getLegacyDisplay, matchesSearchTokens } from '../utils/colorUtils';
 import { swipeConsumed } from '../App';
 import { JAPANESE_EXCLUSIVE_CODES, DISCONTINUED_CODES, COLORLESS_BLENDER_CODE } from '../hooks/useSettings';
 import { useWindowWidth } from '../hooks/useWindowWidth';
-import { C, RADIUS, scrollPage } from '../styles/theme';
+import { C, RADIUS, scrollPage, navPillActive, navPillInactive } from '../styles/theme';
 
 const BADGE = {
   owned:    { color: C.teal,    border: `1.5px solid ${C.teal}`,    label: 'OWNED'    },
@@ -30,9 +30,7 @@ function Badge({ type }) {
 
 export function MyColorsPage({ ownership, onSetStatus, settings }) {
   const [search, setSearch] = useState('');
-  const [showUnowned, setShowUnowned] = useState(() => localStorage.getItem('kk-mycolors-showUnowned') ?? 'show');
-  const [showOwned, setShowOwned] = useState(() => localStorage.getItem('kk-mycolors-showOwned') ?? 'show');
-  const [showWishlist, setShowWishlist] = useState(() => localStorage.getItem('kk-mycolors-showWishlist') ?? 'show');
+  const [statusFilter, setStatusFilter] = useState(() => localStorage.getItem('kk-mycolors-statusFilter') ?? 'all');
   const [selected, setSelected] = useState(null);
   const [filterOpen, setFilterOpen] = useState(false);
   const [seriesFilter, setSeriesFilter] = useState(() => {
@@ -47,9 +45,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
     setSeriesFilter(next);
     localStorage.setItem('kk-mycolors-series', JSON.stringify([...next]));
   };
-  const setShowUnownedAndSave = (v) => { setShowUnowned(v); localStorage.setItem('kk-mycolors-showUnowned', v); };
-  const setShowOwnedAndSave = (v) => { setShowOwned(v); localStorage.setItem('kk-mycolors-showOwned', v); };
-  const setShowWishlistAndSave = (v) => { setShowWishlist(v); localStorage.setItem('kk-mycolors-showWishlist', v); };
+  const setStatusFilterAndSave = (v) => { setStatusFilter(v); localStorage.setItem('kk-mycolors-statusFilter', v); };
 
   const codeToSeries = useMemo(() => {
     const map = new Map();
@@ -62,7 +58,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
     return map;
   }, []);
 
-  const filterActive = seriesFilter.size > 0 || showUnowned === 'hide' || showOwned === 'hide' || showWishlist === 'hide';
+  const filterActive = seriesFilter.size > 0 || statusFilter !== 'all';
 
   const filtered = useMemo(() => {
     const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
@@ -91,18 +87,12 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       const entries = Object.values(ownership[c.code] || {});
       const owned = entries.includes('owned');
       const wish = entries.includes('wishlist');
-      if (owned && wish) {
-        if (showOwned === 'hide' && showWishlist === 'hide') return false;
-      } else if (owned) {
-        if (showOwned === 'hide') return false;
-      } else if (wish) {
-        if (showWishlist === 'hide') return false;
-      } else if (showUnowned === 'hide') {
-        return false;
-      }
+      if (statusFilter === 'owned' && !owned) return false;
+      if (statusFilter === 'wishlist' && !wish) return false;
+      if (statusFilter === 'unowned' && (owned || wish)) return false;
       return true;
     });
-  }, [search, ownership, settings, seriesFilter, codeToSeries, showUnowned, showOwned, showWishlist]);
+  }, [search, ownership, settings, seriesFilter, codeToSeries, statusFilter]);
 
   return (
     <div style={scrollPage}>
@@ -157,12 +147,26 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
         <FilterModal
           title="Filter Colors"
           onClose={() => setFilterOpen(false)}
-          onReset={() => { setShowUnownedAndSave('show'); setShowOwnedAndSave('show'); setShowWishlistAndSave('show'); setSeriesAndSave(new Set()); }}
+          onReset={() => { setStatusFilterAndSave('all'); setSeriesAndSave(new Set()); }}
         >
           <FilterSection label="Status">
-            <FilterToggleRow label="Unowned Colors" value={showUnowned} onChange={setShowUnownedAndSave} />
-            <FilterToggleRow label="Owned Colors" value={showOwned} onChange={setShowOwnedAndSave} />
-            <FilterToggleRow label="Wishlist Colors" value={showWishlist} onChange={setShowWishlistAndSave} />
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[
+                { id: 'all', label: 'All' },
+                { id: 'owned', label: 'Owned' },
+                { id: 'unowned', label: 'Unowned' },
+                { id: 'wishlist', label: 'Wishlist' },
+              ].map(opt => (
+                <button
+                  key={opt.id}
+                  onClick={() => setStatusFilterAndSave(opt.id)}
+                  style={{
+                    ...(statusFilter === opt.id ? navPillActive : navPillInactive),
+                    flex: 1, justifyContent: 'center',
+                  }}
+                >{opt.label}</button>
+              ))}
+            </div>
           </FilterSection>
 
           <FilterSection label="Series">
