@@ -100,7 +100,7 @@ export function FilterToggleRow({ label, value, onChange }) {
   );
 }
 
-export function SeriesFilterTree({ groups, selected, onChange }) {
+export function SeriesFilterTree({ groups, selected, onChange, getColors }) {
   const [rootOpen, setRootOpen] = useState(false);
   const [expanded, setExpanded] = useState(() => new Set());
 
@@ -151,6 +151,7 @@ export function SeriesFilterTree({ groups, selected, onChange }) {
             const allChecked = seriesList.every(s => selected.has(s));
             const someChecked = seriesList.some(s => selected.has(s));
             const isOpen = expanded.has(groupLabel);
+            const groupColors = getColors ? getColors(seriesList[0]) : null;
             return (
               <div key={groupLabel}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 0', cursor: 'pointer' }}>
@@ -163,8 +164,15 @@ export function SeriesFilterTree({ groups, selected, onChange }) {
                   />
                   <span
                     onClick={() => seriesList.length > 1 && toggleExpanded(groupLabel)}
-                    style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1, fontSize: 13, color: C.textSub, cursor: seriesList.length > 1 ? 'pointer' : 'default' }}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 6, flex: 1, fontSize: 13, fontWeight: 600,
+                      color: groupColors?.text ?? C.textSub,
+                      cursor: seriesList.length > 1 ? 'pointer' : 'default',
+                    }}
                   >
+                    {groupColors && (
+                      <span style={{ width: 10, height: 10, borderRadius: 3, background: groupColors.bg, flexShrink: 0 }} />
+                    )}
                     {groupLabel} Series
                     {seriesList.length > 1 && (
                       <span style={{ marginLeft: 'auto', fontSize: 10, color: C.textMuted }}>{isOpen ? '▲' : '▼'}</span>
@@ -173,11 +181,16 @@ export function SeriesFilterTree({ groups, selected, onChange }) {
                 </div>
                 {seriesList.length > 1 && isOpen && (
                   <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: 26 }}>
-                    {seriesList.map(s => (
-                      <FilterCheckRow key={s} checked={selected.has(s)} onChange={() => toggleOne(s)}>
-                        {s}
-                      </FilterCheckRow>
-                    ))}
+                    {seriesList.map(s => {
+                      const sc = getColors ? getColors(s) : null;
+                      return (
+                        <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 0', cursor: 'pointer', fontSize: 13, fontWeight: 600, color: sc?.text ?? C.textSub }}>
+                          <input type="checkbox" checked={selected.has(s)} onChange={() => toggleOne(s)} style={{ accentColor: C.teal, width: 16, height: 16 }} />
+                          {sc && <span style={{ width: 10, height: 10, borderRadius: 3, background: sc.bg, flexShrink: 0 }} />}
+                          {s}
+                        </label>
+                      );
+                    })}
                   </div>
                 )}
               </div>
