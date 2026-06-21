@@ -1,74 +1,57 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 
-const GUEST_ID = 'guest';
-
-function rowsToTimestamped(rows) {
-  const map = {};
+function rowsToOwnership(rows) {
+  const ownership = {};
   for (const row of rows) {
-    if (!map[row.color_code]) map[row.color_code] = {};
-    map[row.color_code][row.series_name] = { status: row.status, updatedAt: row.updated_at };
+    if (!ownership[row.color_code]) ownership[row.color_code] = {};
+    ownership[row.color_code][row.series_name] = row.status;
   }
-  return map;
+  return ownership;
 }
 
-function stripTimestamps(timestamped) {
-  const plain = {};
-  for (const [code, series] of Object.entries(timestamped)) {
-    plain[code] = {};
-    for (const [s, entry] of Object.entries(series)) plain[code][s] = entry.status;
-  }
-  return plain;
+function cacheKey(userId) {
+  return `kk-ownership-${userId}`;
 }
 
-function cacheKey(id) {
-  return `kk-ownership-${id}`;
+function queueKey(userId) {
+  return `kk-ownership-queue-${userId}`;
 }
 
-function queueKey(id) {
-  return `kk-ownership-queue-${id}`;
-}
-
-// Cache stores { [code]: { [series]: { status, updatedAt } } } so guest
-// data and cloud data can be compared and merged by recency.
-function loadCache(id) {
+function loadCache(userId) {
   try {
-    const raw = localStorage.getItem(cacheKey(id));
-    return raw ? JSON.parse(raw) : {};
+    const raw = localStorage.getItem(cacheKey(userId));
+    return raw ? JSON.parse(raw) : null;
   } catch {
-    return {};
+    return null;
   }
 }
 
-function saveCache(id, timestamped) {
-  try { localStorage.setItem(cacheKey(id), JSON.stringify(timestamped)); } catch {}
+function saveCache(userId, ownership) {
+  try { localStorage.setItem(cacheKey(userId), JSON.stringify(ownership)); } catch {}
 }
 
-function clearCache(id) {
-  try { localStorage.removeItem(cacheKey(id)); } catch {}
-}
-
-function loadQueue(id) {
+function loadQueue(userId) {
   try {
-    const raw = localStorage.getItem(queueKey(id));
+    const raw = localStorage.getItem(queueKey(userId));
     return raw ? JSON.parse(raw) : [];
   } catch {
     return [];
   }
 }
 
-function saveQueue(id, queue) {
-  try { localStorage.setItem(queueKey(id), JSON.stringify(queue)); } catch {}
+function saveQueue(userId, queue) {
+  try { localStorage.setItem(queueKey(userId), JSON.stringify(queue)); } catch {}
 }
 
-// Apply queued mutations on top of timestamped server rows, latest write per (color, series) wins.
-function applyQueue(timestamped, queue) {
-  let next = { ...timestamped };
+// Apply queued mutations on top of server rows, latest write per (color, series) wins.
+function applyQueue(ownership, queue) {
+  let next = { ...ownership };
   for (const m of queue) {
     if (m.type === 'bulk_delete') {
       const filtered = {};
       for (const [code, series] of Object.entries(next)) {
-        const f = Object.fromEntries(Object.entries(series).filter(([, v]) => v.status !== m.status));
+        const f = Object.fromEntries(Object.entries(series).filter(([, v]) => v !== m.status));
         if (Object.keys(f).length > 0) filtered[code] = f;
       }
       next = filtered;
@@ -77,7 +60,7 @@ function applyQueue(timestamped, queue) {
     if (!next[m.colorCode]) next[m.colorCode] = {};
     next[m.colorCode] = { ...next[m.colorCode] };
     if (m.status === null) delete next[m.colorCode][m.seriesName];
-    else next[m.colorCode][m.seriesName] = { status: m.status, updatedAt: m.updatedAt };
+    else next[m.colorCode][m.seriesName] = m.status;
   }
   return next;
 }
@@ -109,117 +92,60 @@ async function sendMutation(m) {
     }, { onConflict: 'user_id,color_code,series_name' });
 }
 
-// One-time merge of guest localStorage data into a newly logged-in account.
-// Most-recently-updated entry wins per (color, series).
-async function mergeGuestIntoCloud(userId) {
-  const guestTimestamped = loadCache(GUEST_ID);
-  const guestEntries = Object.entries(guestTimestamped).flatMap(([code, series]) =>
-    Object.entries(series).map(([seriesName, entry]) => ({ code, seriesName, ...entry }))
-  );
-  if (guestEntries.length === 0) return;
-
-  const { data, error } = await supabase
-    .from('ownership')
-    .select('color_code, series_name, status, updated_at');
-  if (error) { console.error('Merge fetch error:', error); return; }
-
-  const cloudTimestamped = rowsToTimestamped(data || []);
-
-  const upserts = [];
-  for (const g of guestEntries) {
-    const cloudEntry = cloudTimestamped[g.code]?.[g.seriesName];
-    if (!cloudEntry || new Date(g.updatedAt) > new Date(cloudEntry.updatedAt)) {
-      upserts.push({
-        user_id: userId,
-        color_code: g.code,
-        series_name: g.seriesName,
-        status: g.status,
-        updated_at: g.updatedAt,
-      });
-    }
-  }
-
-  if (upserts.length > 0) {
-    const { error: upsertError } = await supabase
-      .from('ownership')
-      .upsert(upserts, { onConflict: 'user_id,color_code,series_name' });
-    if (upsertError) console.error('Merge upsert error:', upsertError);
-  }
-
-  clearCache(GUEST_ID);
-  try { localStorage.removeItem(queueKey(GUEST_ID)); } catch {}
-}
-
 export function useOwnership(user) {
   const [ownership, setOwnership] = useState({});
   const [syncing, setSyncing] = useState(false);
   const userRef = useRef(user);
   userRef.current = user;
-  const prevUserIdRef = useRef(undefined);
 
-  const flushQueue = useCallback(async (id) => {
-    const queue = loadQueue(id);
+  const flushQueue = useCallback(async (userId) => {
+    let queue = loadQueue(userId);
     if (queue.length === 0) return;
     const remaining = [];
     for (const m of queue) {
       const { error } = await sendMutation(m);
       if (error) remaining.push(m);
     }
-    saveQueue(id, remaining);
+    saveQueue(userId, remaining);
   }, []);
 
   useEffect(() => {
-    const justLoggedIn = !prevUserIdRef.current && user?.id;
-    prevUserIdRef.current = user?.id;
-
     if (!user) {
-      const cached = loadCache(GUEST_ID);
-      setOwnership(stripTimestamps(cached));
+      setOwnership({});
       return;
     }
-
     const userId = user.id;
+    const cached = loadCache(userId);
+    const queued = loadQueue(userId);
+    if (cached) setOwnership(applyQueue(cached, queued));
 
-    const loadFromCloud = () => {
-      const queued = loadQueue(userId);
-      const cached = applyQueue(loadCache(userId), queued);
-      setOwnership(stripTimestamps(cached));
-
-      setSyncing(true);
-      flushQueue(userId).then(() =>
-        supabase
-          .from('ownership')
-          .select('color_code, series_name, status, updated_at')
-          .then(({ data, error }) => {
-            setSyncing(false);
-            if (error) { console.error('Fetch ownership error:', error); return; }
-            const serverTimestamped = rowsToTimestamped(data || []);
-            const stillQueued = loadQueue(userId);
-            const next = applyQueue(serverTimestamped, stillQueued);
-            setOwnership(stripTimestamps(next));
-            saveCache(userId, next);
-          })
-      );
-    };
-
-    if (justLoggedIn) {
-      setSyncing(true);
-      mergeGuestIntoCloud(userId).then(loadFromCloud);
-    } else {
-      loadFromCloud();
-    }
+    setSyncing(true);
+    flushQueue(userId).then(() =>
+      supabase
+        .from('ownership')
+        .select('color_code, series_name, status')
+        .then(({ data, error }) => {
+          setSyncing(false);
+          if (error) { console.error('Fetch ownership error:', error); return; }
+          const serverOwnership = rowsToOwnership(data || []);
+          const stillQueued = loadQueue(userId);
+          const next = applyQueue(serverOwnership, stillQueued);
+          setOwnership(next);
+          saveCache(userId, next);
+        })
+    );
 
     const onOnline = () => {
       flushQueue(userId).then(() => {
         supabase
           .from('ownership')
-          .select('color_code, series_name, status, updated_at')
+          .select('color_code, series_name, status')
           .then(({ data, error }) => {
             if (error) { console.error('Fetch ownership error:', error); return; }
-            const serverTimestamped = rowsToTimestamped(data || []);
+            const serverOwnership = rowsToOwnership(data || []);
             const stillQueued = loadQueue(userId);
-            const next = applyQueue(serverTimestamped, stillQueued);
-            setOwnership(stripTimestamps(next));
+            const next = applyQueue(serverOwnership, stillQueued);
+            setOwnership(next);
             saveCache(userId, next);
           });
       });
@@ -229,9 +155,14 @@ export function useOwnership(user) {
   }, [user?.id, flushQueue]);
 
   const setStatus = useCallback((colorCode, seriesName, status) => {
+    if (!userRef.current) return;
+    const userId = userRef.current.id;
     const normalizedStatus = status === undefined ? null : status;
-    const updatedAt = new Date().toISOString();
-    const id = userRef.current ? userRef.current.id : GUEST_ID;
+    const mutation = {
+      userId, colorCode, seriesName,
+      status: normalizedStatus,
+      updatedAt: new Date().toISOString(),
+    };
 
     setOwnership(prev => {
       const next = { ...prev };
@@ -241,32 +172,22 @@ export function useOwnership(user) {
       } else {
         next[colorCode] = { ...next[colorCode], [seriesName]: normalizedStatus };
       }
-
-      const cached = loadCache(id);
-      if (!cached[colorCode]) cached[colorCode] = {};
-      if (normalizedStatus === null) delete cached[colorCode][seriesName];
-      else cached[colorCode] = { ...cached[colorCode], [seriesName]: { status: normalizedStatus, updatedAt } };
-      saveCache(id, cached);
-
+      saveCache(userId, next);
       return next;
     });
 
-    if (!userRef.current) return; // guest: cache write above is the only persistence
-
-    const mutation = { userId: id, colorCode, seriesName, status: normalizedStatus, updatedAt };
-
-    const queue = loadQueue(id).filter(
+    const queue = loadQueue(userId).filter(
       m => !(m.colorCode === colorCode && m.seriesName === seriesName)
     );
     queue.push(mutation);
-    saveQueue(id, queue);
+    saveQueue(userId, queue);
 
     sendMutation(mutation).then(({ error }) => {
       if (error) return; // stays queued, flushed on next mount/online
-      const remaining = loadQueue(id).filter(
+      const remaining = loadQueue(userId).filter(
         m => !(m.colorCode === colorCode && m.seriesName === seriesName && m.updatedAt === mutation.updatedAt)
       );
-      saveQueue(id, remaining);
+      saveQueue(userId, remaining);
     });
   }, []);
 
@@ -289,64 +210,44 @@ export function useOwnership(user) {
   }, [ownership]);
 
   const clearAllWishlist = useCallback(() => {
-    const id = userRef.current ? userRef.current.id : GUEST_ID;
+    if (!userRef.current) return;
+    const userId = userRef.current.id;
     setOwnership(prev => {
       const next = {};
       for (const [code, series] of Object.entries(prev)) {
         const filtered = Object.fromEntries(Object.entries(series).filter(([, v]) => v !== 'wishlist'));
         if (Object.keys(filtered).length > 0) next[code] = filtered;
       }
-
-      const cached = loadCache(id);
-      const filteredCache = {};
-      for (const [code, series] of Object.entries(cached)) {
-        const f = Object.fromEntries(Object.entries(series).filter(([, v]) => v.status !== 'wishlist'));
-        if (Object.keys(f).length > 0) filteredCache[code] = f;
-      }
-      saveCache(id, filteredCache);
-
+      saveCache(userId, next);
       return next;
     });
-
-    if (!userRef.current) return;
-
-    const queue = loadQueue(id).filter(m => m.status !== 'wishlist');
-    queue.push({ type: 'bulk_delete', userId: id, status: 'wishlist' });
-    saveQueue(id, queue);
-    sendMutation({ type: 'bulk_delete', userId: id, status: 'wishlist' }).then(({ error }) => {
+    const queue = loadQueue(userId).filter(m => m.status !== 'wishlist');
+    queue.push({ type: 'bulk_delete', userId, status: 'wishlist' });
+    saveQueue(userId, queue);
+    sendMutation({ type: 'bulk_delete', userId, status: 'wishlist' }).then(({ error }) => {
       if (error) return;
-      saveQueue(id, loadQueue(id).filter(m => !(m.type === 'bulk_delete' && m.status === 'wishlist')));
+      saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'bulk_delete' && m.status === 'wishlist')));
     });
   }, []);
 
   const clearAllOwned = useCallback(() => {
-    const id = userRef.current ? userRef.current.id : GUEST_ID;
+    if (!userRef.current) return;
+    const userId = userRef.current.id;
     setOwnership(prev => {
       const next = {};
       for (const [code, series] of Object.entries(prev)) {
         const filtered = Object.fromEntries(Object.entries(series).filter(([, v]) => v !== 'owned'));
         if (Object.keys(filtered).length > 0) next[code] = filtered;
       }
-
-      const cached = loadCache(id);
-      const filteredCache = {};
-      for (const [code, series] of Object.entries(cached)) {
-        const f = Object.fromEntries(Object.entries(series).filter(([, v]) => v.status !== 'owned'));
-        if (Object.keys(f).length > 0) filteredCache[code] = f;
-      }
-      saveCache(id, filteredCache);
-
+      saveCache(userId, next);
       return next;
     });
-
-    if (!userRef.current) return;
-
-    const queue = loadQueue(id).filter(m => m.status !== 'owned');
-    queue.push({ type: 'bulk_delete', userId: id, status: 'owned' });
-    saveQueue(id, queue);
-    sendMutation({ type: 'bulk_delete', userId: id, status: 'owned' }).then(({ error }) => {
+    const queue = loadQueue(userId).filter(m => m.status !== 'owned');
+    queue.push({ type: 'bulk_delete', userId, status: 'owned' });
+    saveQueue(userId, queue);
+    sendMutation({ type: 'bulk_delete', userId, status: 'owned' }).then(({ error }) => {
       if (error) return;
-      saveQueue(id, loadQueue(id).filter(m => !(m.type === 'bulk_delete' && m.status === 'owned')));
+      saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'bulk_delete' && m.status === 'owned')));
     });
   }, []);
 

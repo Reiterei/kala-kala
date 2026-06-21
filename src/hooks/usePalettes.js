@@ -1,44 +1,38 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 
-const GUEST_ID = 'guest';
-
-function cacheKey(id) {
-  return `kk-palettes-${id}`;
+function cacheKey(userId) {
+  return `kk-palettes-${userId}`;
 }
 
-function queueKey(id) {
-  return `kk-palettes-queue-${id}`;
+function queueKey(userId) {
+  return `kk-palettes-queue-${userId}`;
 }
 
-function loadCache(id) {
+function loadCache(userId) {
   try {
-    const raw = localStorage.getItem(cacheKey(id));
+    const raw = localStorage.getItem(cacheKey(userId));
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveCache(userId, palettes) {
+  try { localStorage.setItem(cacheKey(userId), JSON.stringify(palettes)); } catch {}
+}
+
+function loadQueue(userId) {
+  try {
+    const raw = localStorage.getItem(queueKey(userId));
     return raw ? JSON.parse(raw) : [];
   } catch {
     return [];
   }
 }
 
-function saveCache(id, palettes) {
-  try { localStorage.setItem(cacheKey(id), JSON.stringify(palettes)); } catch {}
-}
-
-function clearCache(id) {
-  try { localStorage.removeItem(cacheKey(id)); } catch {}
-}
-
-function loadQueue(id) {
-  try {
-    const raw = localStorage.getItem(queueKey(id));
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveQueue(id, queue) {
-  try { localStorage.setItem(queueKey(id), JSON.stringify(queue)); } catch {}
+function saveQueue(userId, queue) {
+  try { localStorage.setItem(queueKey(userId), JSON.stringify(queue)); } catch {}
 }
 
 // Apply queued mutations on top of server rows. Inserts still pending real
@@ -67,36 +61,17 @@ async function sendMutation(m, userId) {
   return supabase.from('palettes').delete().eq('id', m.id);
 }
 
-// Palettes are independent snapshots with no natural conflict key, so guest
-// palettes merge additively into the cloud as new inserts, preserving
-// their original created_at.
-async function mergeGuestIntoCloud(userId) {
-  const guestPalettes = loadCache(GUEST_ID);
-  if (guestPalettes.length === 0) return;
-
-  for (const p of guestPalettes) {
-    const { error } = await supabase
-      .from('palettes')
-      .insert({ user_id: userId, codes: p.codes, created_at: p.created_at });
-    if (error) console.error('Merge insert error:', error);
-  }
-
-  clearCache(GUEST_ID);
-  try { localStorage.removeItem(queueKey(GUEST_ID)); } catch {}
-}
-
 export function usePalettes(user) {
   const [palettes, setPalettes] = useState([]);
   const userRef = useRef(user);
   userRef.current = user;
-  const prevUserIdRef = useRef(undefined);
 
   // tempId -> real id, once an insert resolves, so later deletes against
   // the tempId can be redirected/cancelled correctly.
   const idMapRef = useRef({});
 
-  const flushQueue = useCallback(async (id) => {
-    const queue = loadQueue(id);
+  const flushQueue = useCallback(async (userId) => {
+    const queue = loadQueue(userId);
     if (queue.length === 0) return;
     const remaining = [];
     for (const m of queue) {
@@ -104,34 +79,24 @@ export function usePalettes(user) {
         // Real id never arrived (insert still queued or cancelled elsewhere) — skip.
         continue;
       }
-      const { data, error } = await sendMutation(m, id);
+      const { data, error } = await sendMutation(m, userId);
       if (error) { remaining.push(m); continue; }
       if (m.type === 'insert' && data) {
         idMapRef.current[m.tempId] = data.id;
         setPalettes(prev => prev.map(p => p.id === m.tempId ? data : p));
       }
     }
-    saveQueue(id, remaining);
+    saveQueue(userId, remaining);
   }, []);
 
   useEffect(() => {
-    const justLoggedIn = !prevUserIdRef.current && user?.id;
-    prevUserIdRef.current = user?.id;
-
-    if (!user) {
-      const cached = loadCache(GUEST_ID);
-      const queued = loadQueue(GUEST_ID);
-      setPalettes(applyQueue(cached, queued));
-      return;
-    }
-
+    if (!user) { setPalettes([]); return; }
     const userId = user.id;
+    const cached = loadCache(userId);
+    const queued = loadQueue(userId);
+    if (cached) setPalettes(applyQueue(cached, queued));
 
-    const loadFromCloud = () => {
-      const cached = loadCache(userId);
-      const queued = loadQueue(userId);
-      setPalettes(applyQueue(cached, queued));
-
+    const sync = () => {
       flushQueue(userId).then(() =>
         supabase
           .from('palettes')
@@ -146,37 +111,31 @@ export function usePalettes(user) {
           })
       );
     };
+    sync();
 
-    if (justLoggedIn) {
-      mergeGuestIntoCloud(userId).then(loadFromCloud);
-    } else {
-      loadFromCloud();
-    }
-
-    window.addEventListener('online', loadFromCloud);
-    return () => window.removeEventListener('online', loadFromCloud);
+    window.addEventListener('online', sync);
+    return () => window.removeEventListener('online', sync);
   }, [user?.id, flushQueue]);
 
   const savePalette = useCallback((codes) => {
-    const id = userRef.current ? userRef.current.id : GUEST_ID;
+    if (!userRef.current) return;
+    const userId = userRef.current.id;
     const tempId = `temp-${Date.now()}`;
     const createdAt = new Date().toISOString();
 
     setPalettes(prev => {
       const next = [{ id: tempId, codes, created_at: createdAt }, ...prev];
-      saveCache(id, next);
+      saveCache(userId, next);
       return next;
     });
 
-    if (!userRef.current) return; // guest: cache write above is the only persistence
-
-    const queue = loadQueue(id);
+    const queue = loadQueue(userId);
     queue.push({ type: 'insert', tempId, codes, createdAt });
-    saveQueue(id, queue);
+    saveQueue(userId, queue);
 
     supabase
       .from('palettes')
-      .insert({ user_id: id, codes })
+      .insert({ user_id: userId, codes })
       .select('id, codes, created_at')
       .single()
       .then(({ data, error }) => {
@@ -184,41 +143,40 @@ export function usePalettes(user) {
         idMapRef.current[tempId] = data.id;
         setPalettes(prev => {
           const next = prev.map(p => p.id === tempId ? data : p);
-          saveCache(id, next);
+          saveCache(userId, next);
           return next;
         });
-        saveQueue(id, loadQueue(id).filter(m => !(m.type === 'insert' && m.tempId === tempId)));
+        saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'insert' && m.tempId === tempId)));
       });
   }, []);
 
-  const deletePalette = useCallback((paletteId) => {
-    const id = userRef.current ? userRef.current.id : GUEST_ID;
+  const deletePalette = useCallback((id) => {
+    if (!userRef.current) return;
+    const userId = userRef.current.id;
 
     setPalettes(prev => {
-      const next = prev.filter(p => p.id !== paletteId);
-      saveCache(id, next);
+      const next = prev.filter(p => p.id !== id);
+      saveCache(userId, next);
       return next;
     });
 
-    if (!userRef.current) return; // guest: cache write above is the only persistence
-
-    if (String(paletteId).startsWith('temp-')) {
+    if (String(id).startsWith('temp-')) {
       // Cancel the queued insert outright — nothing was ever sent to the server.
-      saveQueue(id, loadQueue(id).filter(m => !(m.type === 'insert' && m.tempId === paletteId)));
+      saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'insert' && m.tempId === id)));
       return;
     }
 
-    const queue = loadQueue(id);
-    queue.push({ type: 'delete', id: paletteId });
-    saveQueue(id, queue);
+    const queue = loadQueue(userId);
+    queue.push({ type: 'delete', id });
+    saveQueue(userId, queue);
 
     supabase
       .from('palettes')
       .delete()
-      .eq('id', paletteId)
+      .eq('id', id)
       .then(({ error }) => {
         if (error) return; // stays queued, flushed on next mount/online
-        saveQueue(id, loadQueue(id).filter(m => !(m.type === 'delete' && m.id === paletteId)));
+        saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'delete' && m.id === id)));
       });
   }, []);
 
