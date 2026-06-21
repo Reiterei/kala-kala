@@ -497,11 +497,11 @@ export const honoluluSets = [
   },
   {
     id: "honolulu_bundle_31",
-    name: "Honolulu B 321",
+    name: "Honolulu B 320",
     series: "Honolulu B",
     edition: null,
     version: null,
-    count: 320,
+    count: 321,
     tipType1: "Brush",  tipType2: "Fine",
     urls: {
       ohuhu: "https://ohuhu.com/collections/honolulu-series/products/ohuhu-honolulu-320-colors-dual-tips-alcohol-art-markers?variant=44686973468959",
