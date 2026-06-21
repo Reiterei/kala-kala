@@ -180,7 +180,6 @@ export default function App() {
               const active = pageIdx === i;
               return (
                 <button key={n.id} onClick={() => goTo(i)} style={active ? navPillActive : navPillInactive}>
-                  {n.icon(active)}
                   {n.label}
                 </button>
               );
@@ -210,7 +209,6 @@ export default function App() {
             const active = pageIdx === i;
             return (
               <button key={n.id} onClick={() => goTo(i)} style={{ ...(active ? navPillActive : navPillInactive), flex: 1, justifyContent: 'center' }}>
-                {n.icon(active)}
                 {n.label}
               </button>
             );
