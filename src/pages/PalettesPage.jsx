@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { colors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, SHADOW, scrollPage } from '../styles/theme';
 
 function getOwnedCodes(ownership) {
@@ -22,14 +23,14 @@ function randomOwnedColor(ownedColors, excludeCode) {
   return useFrom[Math.floor(Math.random() * useFrom.length)];
 }
 
-function LockIcon({ locked }) {
+function LockIcon({ locked, size = 13 }) {
   return locked ? (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
       <rect x="5" y="11" width="14" height="10" rx="2"/>
       <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
     </svg>
   ) : (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
       <rect x="5" y="11" width="14" height="10" rx="2"/>
       <path d="M8 11V7a4 4 0 0 1 7.6-1.8"/>
     </svg>
@@ -47,7 +48,7 @@ function TrashIcon() {
   );
 }
 
-function Swatch({ color, locked, onToggleLock, onClick }) {
+function Swatch({ color, locked, onToggleLock, onClick, isWide }) {
   const bg = `#${color.hex}`;
   const text = textColorFor(color.hex);
   return (
@@ -59,15 +60,15 @@ function Swatch({ color, locked, onToggleLock, onClick }) {
         aspectRatio: '1 / 1.15', cursor: 'pointer',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
-        boxShadow: SHADOW.sm, padding: 8, boxSizing: 'border-box',
+        boxShadow: SHADOW.sm, padding: isWide ? 14 : 8, boxSizing: 'border-box',
         transition: 'background 0.2s',
       }}
     >
       <button
         onClick={(e) => { e.stopPropagation(); onToggleLock(); }}
         style={{
-          position: 'absolute', top: 6, right: 6,
-          width: 24, height: 24, borderRadius: '50%',
+          position: 'absolute', top: isWide ? 10 : 6, right: isWide ? 10 : 6,
+          width: isWide ? 30 : 24, height: isWide ? 30 : 24, borderRadius: '50%',
           border: 'none', cursor: 'pointer',
           background: locked ? text : 'rgba(255,255,255,0.35)',
           color: locked ? bg : text,
@@ -75,12 +76,12 @@ function Swatch({ color, locked, onToggleLock, onClick }) {
         }}
         aria-label={locked ? 'Unlock color' : 'Lock color'}
       >
-        <LockIcon locked={locked} />
+        <LockIcon size={isWide ? 16 : 13} locked={locked} />
       </button>
-      <span style={{ color: text, fontWeight: 800, fontSize: 13, lineHeight: 1.3, textAlign: 'center' }}>
+      <span style={{ color: text, fontWeight: 800, fontSize: isWide ? 22 : 13, lineHeight: 1.3, textAlign: 'center' }}>
         {color.code}
       </span>
-      <span style={{ color: text, fontWeight: 600, fontSize: 10.5, lineHeight: 1.3, textAlign: 'center', opacity: 0.9 }}>
+      <span style={{ color: text, fontWeight: 600, fontSize: isWide ? 14 : 10.5, lineHeight: 1.3, textAlign: 'center', opacity: 0.9 }}>
         {color.name}
       </span>
     </div>
@@ -114,6 +115,8 @@ const actionBtn = {
 };
 
 export function PalettesPage({ ownership, onSetStatus, settings, user, palettes, onSavePalette, onDeletePalette }) {
+  const windowWidth = useWindowWidth();
+  const isWide = windowWidth >= 900;
   const ownedColors = useMemo(() => getOwnedCodes(ownership), [ownership]);
 
   const [active, setActive] = useState(() => {
@@ -172,6 +175,7 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
                 locked={locked[i]}
                 onToggleLock={() => toggleLock(i)}
                 onClick={() => openModal(color, active.filter(Boolean))}
+                isWide={isWide}
               />
             ))}
           </div>
