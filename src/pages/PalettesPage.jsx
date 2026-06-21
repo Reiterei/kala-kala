@@ -212,7 +212,7 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
 
         <div style={{ margin: '26px 0 18px' }} />
 
-        <div style={{ fontSize: 15, fontWeight: 800, color: C.text, marginBottom: 10 }}>
+        <div style={{ fontSize: 15, fontWeight: 800, color: C.text, marginBottom: 10, marginLeft: 10 }}>
           Saved Palettes <span style={{ color: C.textMuted, fontWeight: 600, fontSize: 12 }}>({palettes.length}/25)</span>
         </div>
 
