@@ -213,6 +213,16 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
   const [search, setSearch] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
   const seriesGroups = useMemo(() => getSeriesGroups(), []);
+
+  const seriesSearchText = useMemo(() => {
+    const map = new Map();
+    for (const { series, tipType1, tipType2 } of seriesGroups) {
+      const codes = getColorsForSeries(series);
+      const names = codes.map(c => colorMap[c]?.name).filter(Boolean);
+      map.set(series, [series, tipType1, tipType2, getTipLabel(tipType1), getTipLabel(tipType2), ...codes, ...names].filter(Boolean).join(' ').toLowerCase());
+    }
+    return map;
+  }, [seriesGroups]);
   const windowWidth = useWindowWidth();
   const isWide = windowWidth >= 900;
   const px = isWide ? 20 : 16;
@@ -230,10 +240,10 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
     }
     if (search.trim()) {
       const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
-      groups = groups.filter(({ series }) => tokens.every(t => series.toLowerCase().includes(t)));
+      groups = groups.filter(({ series }) => tokens.every(t => (seriesSearchText.get(series) || '').includes(t)));
     }
     return groups;
-  }, [seriesGroups, search, seriesFilter]);
+  }, [seriesGroups, search, seriesFilter, seriesSearchText]);
 
   return (
     <div style={scrollPage}>
@@ -241,7 +251,7 @@ export function MyMarkersPage({ ownership, onSetStatus, settings }) {
         <SearchBar
           value={search}
           onChange={setSearch}
-          placeholder="Search series..."
+          placeholder=""
           onFilterClick={() => setFilterOpen(true)}
           filterActive={filterActive}
         />
