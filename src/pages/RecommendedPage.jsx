@@ -294,7 +294,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
           </FilterSection>
 
           <FilterSection label="Series">
-            <SeriesFilterTree groups={SERIES_GROUPS} selected={seriesFilter} onChange={setSeriesAndSave} />
+            <SeriesFilterTree groups={SERIES_GROUPS} selected={seriesFilter} onChange={setSeriesAndSave} getColors={getSeriesBadgeColors} />
           </FilterSection>
         </FilterModal>
       )}

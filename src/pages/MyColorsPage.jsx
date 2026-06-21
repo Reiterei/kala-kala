@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { colors } from '../data/colors';
-import { allSets, SERIES_GROUPS } from '../data/all-sets';
+import { allSets, SERIES_GROUPS, getSeriesBadgeColors } from '../data/all-sets';
 import { ColorSwatch } from '../components/ColorSwatch';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
@@ -157,7 +157,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           </FilterSection>
 
           <FilterSection label="Series">
-            <SeriesFilterTree groups={SERIES_GROUPS} selected={seriesFilter} onChange={setSeriesAndSave} />
+            <SeriesFilterTree groups={SERIES_GROUPS} selected={seriesFilter} onChange={setSeriesAndSave} getColors={getSeriesBadgeColors} />
           </FilterSection>
         </FilterModal>
       )}
