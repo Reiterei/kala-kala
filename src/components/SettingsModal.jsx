@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { C, FONT, RADIUS, SHADOW, overlayStyle, segmentActive, segmentInactive } from '../styles/theme';
 
-export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned, onClearAllWishlist, user, onSignOut }) {
+export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned, onClearAllWishlist, user, onSignOut, onOpenAuth }) {
   const [confirming, setConfirming] = useState(false);
   const [confirmingWishlist, setConfirmingWishlist] = useState(false);
 
@@ -41,7 +41,7 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
           </button>
         </div>
 
-        {user && (
+        {user ? (
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             padding: '12px 20px', borderBottom: `1px solid ${C.border}`,
@@ -60,6 +60,26 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
                 cursor: 'pointer', fontFamily: FONT, flexShrink: 0,
               }}
             >Sign out</button>
+          </div>
+        ) : (
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '12px 20px', borderBottom: `1px solid ${C.border}`,
+            background: C.white, gap: 12,
+          }}>
+            <div style={{ fontSize: 12, color: C.textMuted, fontWeight: 600 }}>
+              Saved on this device only
+            </div>
+            <button
+              onClick={onOpenAuth}
+              style={{
+                background: C.teal,
+                padding: '6px 14px', borderRadius: RADIUS.pill,
+                border: 'none',
+                color: C.white, fontSize: 11, fontWeight: 700,
+                cursor: 'pointer', fontFamily: FONT, flexShrink: 0,
+              }}
+            >Log In / Create Account</button>
           </div>
         )}
 
