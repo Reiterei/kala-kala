@@ -90,7 +90,7 @@ export function FilterPillRow({ options, value, onChange }) {
 export function FilterDropdown({ options, value, onChange }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ position: 'relative' }}>
+    <div>
       <button
         onClick={() => setOpen(o => !o)}
         style={{
@@ -106,9 +106,9 @@ export function FilterDropdown({ options, value, onChange }) {
 
       {open && (
         <div style={{
-          position: 'absolute', top: 'calc(100% + 4px)', left: 0, right: 0, zIndex: 10,
+          marginTop: 4,
           background: C.white, border: `1.5px solid ${C.tealMid}`, borderRadius: RADIUS.md,
-          boxShadow: SHADOW.lg, overflow: 'hidden',
+          overflow: 'hidden',
         }}>
           {options.map(opt => (
             <button
