@@ -174,7 +174,7 @@ function SeriesCard({ series, tipType1, tipType2, ownership, onSetStatus, showUn
       </div>
 
       {expanded && (
-        <div style={{ padding: '12px 16px 16px', display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+        <div style={{ padding: '12px 16px 16px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, 44px)', justifyContent: 'center', gap: 6 }}>
           {displayColors.length === 0
             ? <span style={{ fontSize: 12, color: cc.accentSoft }}>None to show.</span>
             : displayColors.map(code => (

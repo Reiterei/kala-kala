@@ -205,7 +205,7 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
             Mark some colors as &lsquo;Owned&rsquo; to build a palette.
           </div>
         ) : (
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
             {active.map((color, i) => color && (
               <Swatch
                 key={i}

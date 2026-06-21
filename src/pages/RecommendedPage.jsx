@@ -172,7 +172,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
         )}
 
         {expanded && (
-          <div style={{ padding: '12px 16px 16px', display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          <div style={{ padding: '12px 16px 16px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, 44px)', justifyContent: 'center', gap: 6 }}>
             {set.colors.map(code => (
               <ColorChip key={code} colorCode={code} status={getStatus(code)} cc={cc}
                 onClick={() => { if (swipeConsumed) return; setSelectedColor(colorMap[code] || null); }} />
