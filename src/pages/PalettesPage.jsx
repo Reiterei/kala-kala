@@ -18,11 +18,26 @@ function textColorFor(hex) {
   return lum > 0.55 ? '#3a2410' : '#ffffff';
 }
 
-function randomOwnedColor(ownedColors, excludeCode) {
-  const pool = excludeCode ? ownedColors.filter(c => c.code !== excludeCode) : ownedColors;
-  const useFrom = pool.length ? pool : ownedColors;
-  if (!useFrom.length) return null;
-  return useFrom[Math.floor(Math.random() * useFrom.length)];
+// Fills `slots` (array of current colors or null) from ownedColors, keeping
+// entries where keep[i] is true, replacing the rest with unique random picks
+// (no duplicate codes among the final result, including kept ones).
+function fillUniquePalette(slots, ownedColors, keep) {
+  const used = new Set(slots.filter((c, i) => keep[i] && c).map(c => c.code));
+  const result = slots.map((c, i) => (keep[i] && c) ? c : null);
+  const shuffled = [...ownedColors].sort(() => Math.random() - 0.5);
+  let pos = 0;
+  for (let i = 0; i < result.length; i++) {
+    if (result[i]) continue;
+    while (pos < shuffled.length && used.has(shuffled[pos].code)) pos++;
+    if (pos < shuffled.length) {
+      result[i] = shuffled[pos];
+      used.add(shuffled[pos].code);
+      pos++;
+    } else {
+      result[i] = null;
+    }
+  }
+  return result;
 }
 
 function LockIcon({ locked, size = 13 }) {
@@ -138,23 +153,28 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
   const ownedColors = useMemo(() => getOwnedCodes(ownership), [ownership]);
 
   const [active, setActive] = useState(() => {
-    const initial = [];
-    for (let i = 0; i < 5; i++) initial.push(randomOwnedColor(ownedColors));
-    return initial;
+    const initial = new Array(Math.min(5, ownedColors.length) || 5).fill(null);
+    return fillUniquePalette(initial, ownedColors, initial.map(() => false));
   });
   const [locked, setLocked] = useState([false, false, false, false, false]);
 
-  // If owned colors change (e.g. first load resolves), fill any empty slots.
+  // If owned colors change (e.g. first load resolves, or owned count shrinks/grows), resync slots.
   useEffect(() => {
     if (!ownedColors.length) return;
-    setActive(prev => prev.map(c => c || randomOwnedColor(ownedColors)));
+    const count = Math.min(5, ownedColors.length);
+    setActive(prev => {
+      const trimmed = prev.slice(0, count);
+      while (trimmed.length < count) trimmed.push(null);
+      const keep = trimmed.map((c, i) => locked[i] && !!c);
+      return fillUniquePalette(trimmed, ownedColors, keep);
+    });
   }, [ownedColors.length]);
 
   const toggleLock = (i) => setLocked(prev => prev.map((v, idx) => idx === i ? !v : v));
 
   const randomize = () => {
     if (!ownedColors.length) return;
-    setActive(prev => prev.map((c, i) => locked[i] ? c : randomOwnedColor(ownedColors, c?.code)));
+    setActive(prev => fillUniquePalette(prev, ownedColors, locked.slice(0, prev.length)));
   };
 
   const save = () => {
