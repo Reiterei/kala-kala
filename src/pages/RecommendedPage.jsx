@@ -242,7 +242,15 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
     let sets = seriesFilter.size === 0 ? retailSets : retailSets.filter(s => seriesFilter.has(s.series));
     if (search.trim()) {
       const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
-      sets = sets.filter(s => tokens.every(t => [s.name, s.edition].filter(Boolean).join(' ').toLowerCase().includes(t)));
+      sets = sets.filter(s => {
+        const colorNames = s.colors.map(c => colorMap[c]?.name).filter(Boolean);
+        const haystack = [
+          s.name, s.edition, s.tipType1, s.tipType2,
+          getTipLabel(s.tipType1), getTipLabel(s.tipType2),
+          ...s.colors, ...colorNames,
+        ].filter(Boolean).join(' ').toLowerCase();
+        return tokens.every(t => haystack.includes(t));
+      });
     }
     sets = sets.map(s => {
       const owned    = colorMode === 'exact' ? s.colors.filter(c => ownership[c]?.[s.series] === 'owned').length    : s.colors.filter(c => Object.values(ownership[c] || {}).includes('owned')).length;
@@ -264,7 +272,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
         <SearchBar
           value={search}
           onChange={setSearch}
-          placeholder="Search sets..."
+          placeholder=""
           onFilterClick={() => setFilterOpen(true)}
           filterActive={filterActive}
         />
