@@ -4,8 +4,10 @@ import { ColorDetailModal } from '../components/ColorDetailModal';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { C, FONT, RADIUS, SHADOW, scrollPage } from '../styles/theme';
 
+const EXCLUDED_PALETTE_CODES = new Set(['120', '0']);
+
 function getOwnedCodes(ownership) {
-  return colors.filter(c => Object.values(ownership[c.code] || {}).includes('owned'));
+  return colors.filter(c => !EXCLUDED_PALETTE_CODES.has(c.code) && Object.values(ownership[c.code] || {}).includes('owned'));
 }
 
 function textColorFor(hex) {
