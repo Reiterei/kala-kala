@@ -79,7 +79,7 @@ function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
     <div
       onClick={onClick}
       style={{
-        position: 'relative', flex: 1, minWidth: 0,
+        position: 'relative', flex: '0 1 calc((100% - 32px) / 5)', minWidth: 0,
         background: bg, borderRadius: RADIUS.lg,
         aspectRatio: '1 / 1.15', cursor: 'pointer',
         display: 'flex', flexDirection: 'column',
