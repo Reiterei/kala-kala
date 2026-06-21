@@ -62,6 +62,18 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
     return map;
   }, []);
 
+  const codeToSetText = useMemo(() => {
+    const map = new Map();
+    for (const set of allSets) {
+      const text = [set.name, set.series, set.edition, set.version].filter(Boolean).join(' ').toLowerCase();
+      for (const code of set.colors) {
+        if (!map.has(code)) map.set(code, []);
+        map.get(code).push(text);
+      }
+    }
+    return map;
+  }, []);
+
   const filterActive = seriesFilter.size > 0 || showUnowned === 'hide' || showOwned === 'hide' || showWishlist === 'hide';
 
   const filtered = useMemo(() => {
@@ -82,6 +94,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           c.legacy?.oahu?.name, c.legacy?.oahu?.code,
           c.legacy?.kaala?.name, c.legacy?.kaala?.code,
           c.legacy?.original?.name, c.legacy?.original?.code,
+          ...(codeToSetText.get(c.code) || []),
         ].filter(Boolean).join(' ').toLowerCase();
         if (!tokens.every(t => haystack.includes(t))) return false;
       }
@@ -93,7 +106,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       if (!owned && !wish && showUnowned === 'hide') return false;
       return true;
     });
-  }, [search, ownership, settings, seriesFilter, codeToSeries, showUnowned, showOwned, showWishlist]);
+  }, [search, ownership, settings, seriesFilter, codeToSeries, codeToSetText, showUnowned, showOwned, showWishlist]);
 
   return (
     <div style={scrollPage}>
@@ -102,7 +115,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
         <SearchBar
           value={search}
           onChange={setSearch}
-          placeholder="Search colors, codes..."
+          placeholder=""
           onFilterClick={() => setFilterOpen(true)}
           filterActive={filterActive}
         />
