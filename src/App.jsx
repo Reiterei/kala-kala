@@ -2,7 +2,9 @@ import { useState, useRef, useCallback } from 'react';
 import { MyColorsPage } from './pages/MyColorsPage';
 import { MyMarkersPage } from './pages/MyMarkersPage';
 import { RecommendedPage } from './pages/RecommendedPage';
+import { PalettesPage } from './pages/PalettesPage';
 import { useOwnership } from './hooks/useOwnership';
+import { usePalettes } from './hooks/usePalettes';
 import { useSettings } from './hooks/useSettings';
 import { useAuth } from './hooks/useAuth';
 import { useWindowWidth } from './hooks/useWindowWidth';
@@ -39,6 +41,17 @@ const NAV = [
       </svg>
     ),
   },
+  {
+    id: 'palettes', label: 'Palettes',
+    icon: (active) => (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="8" height="8" rx="1.5"/>
+        <rect x="13" y="3" width="8" height="8" rx="1.5"/>
+        <rect x="3" y="13" width="8" height="8" rx="1.5"/>
+        <rect x="13" y="13" width="8" height="8" rx="1.5"/>
+      </svg>
+    ),
+  },
 ];
 
 const PAGE_COUNT = NAV.length;
@@ -67,6 +80,7 @@ export default function App() {
   const windowWidth = useWindowWidth();
   const stacked = windowWidth < 480;
   const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership(user);
+  const { palettes, savePalette, deletePalette } = usePalettes(user);
   const { settings, setSetting } = useSettings();
 
   const pageIdxRef = useRef(0);
@@ -135,6 +149,7 @@ export default function App() {
     <MyColorsPage key="colors" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
     <MyMarkersPage key="markers" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
     <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
+    <PalettesPage key="palettes" ownership={ownership} user={user} palettes={palettes} onSavePalette={savePalette} onDeletePalette={deletePalette} />,
   ];
 
   if (loading) return null;
