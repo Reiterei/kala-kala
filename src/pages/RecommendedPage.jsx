@@ -4,7 +4,7 @@ import { allSets, SERIES_GROUPS, SERIES_SHORT, getSeriesBadgeColors, getSeriesCa
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
-import { FilterModal, FilterSection, FilterPillRow, FilterSegmentToggle, SeriesFilterTree } from '../components/FilterModal';
+import { FilterModal, FilterSection, FilterDropdown, FilterSegmentToggle, SeriesFilterTree } from '../components/FilterModal';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import ohuhuLogo from '../assets/ohuhu-logo.png';
@@ -299,7 +299,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
           </FilterSection>
 
           <FilterSection label="Sort">
-            <FilterPillRow options={SORT_OPTIONS} value={sortBy} onChange={setSortByAndSave} />
+            <FilterDropdown options={SORT_OPTIONS} value={sortBy} onChange={setSortByAndSave} />
           </FilterSection>
 
           <FilterSection label="Series">
