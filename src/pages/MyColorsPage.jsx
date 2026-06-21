@@ -89,7 +89,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
       const wish = entries.includes('wishlist');
       if (statusFilter === 'owned' && !owned) return false;
       if (statusFilter === 'wishlist' && !wish) return false;
-      if (statusFilter === 'unowned' && (owned || wish)) return false;
+      if (statusFilter === 'unowned' && owned) return false;
       return true;
     });
   }, [search, ownership, settings, seriesFilter, codeToSeries, statusFilter]);
