@@ -53,7 +53,7 @@ function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
   const text = textColorFor(color.hex);
   const scale = Math.max(0, Math.min(1, (windowWidth - 360) / (900 - 360)));
   const codeSize = 15 + (28 - 15) * scale;
-  const nameSize = 11 + (17 - 11) * scale;
+  const nameSize = 9 + (13 - 9) * scale;
   const pad = 8 + (14 - 8) * scale;
   const lockBtn = 24 + (30 - 24) * scale;
   const lockIcon = 13 + (16 - 13) * scale;
