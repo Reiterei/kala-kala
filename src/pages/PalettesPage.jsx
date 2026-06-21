@@ -1,0 +1,209 @@
+import { useState, useEffect, useMemo } from 'react';
+import { colors } from '../data/colors';
+import { C, FONT, RADIUS, SHADOW, scrollPage } from '../styles/theme';
+
+function getOwnedCodes(ownership) {
+  return colors.filter(c => Object.values(ownership[c.code] || {}).includes('owned'));
+}
+
+function textColorFor(hex) {
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return lum > 0.55 ? '#3a2410' : '#ffffff';
+}
+
+function randomOwnedColor(ownedColors, excludeCode) {
+  const pool = excludeCode ? ownedColors.filter(c => c.code !== excludeCode) : ownedColors;
+  const useFrom = pool.length ? pool : ownedColors;
+  if (!useFrom.length) return null;
+  return useFrom[Math.floor(Math.random() * useFrom.length)];
+}
+
+function LockIcon({ locked }) {
+  return locked ? (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5" y="11" width="14" height="10" rx="2"/>
+      <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+    </svg>
+  ) : (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5" y="11" width="14" height="10" rx="2"/>
+      <path d="M8 11V7a4 4 0 0 1 7.6-1.8"/>
+    </svg>
+  );
+}
+
+function TrashIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="3 6 5 6 21 6"/>
+      <path d="M19 6l-1.5 14a2 2 0 0 1-2 2H8.5a2 2 0 0 1-2-2L5 6"/>
+      <path d="M10 11v6"/><path d="M14 11v6"/>
+      <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
+    </svg>
+  );
+}
+
+function Swatch({ color, locked, onToggleLock }) {
+  const bg = `#${color.hex}`;
+  const text = textColorFor(color.hex);
+  return (
+    <div style={{
+      position: 'relative', flex: 1, minWidth: 0,
+      background: bg, borderRadius: RADIUS.lg,
+      aspectRatio: '1 / 1.15',
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center',
+      boxShadow: SHADOW.sm, padding: 8, boxSizing: 'border-box',
+      transition: 'background 0.2s',
+    }}>
+      <button
+        onClick={onToggleLock}
+        style={{
+          position: 'absolute', top: 6, right: 6,
+          width: 24, height: 24, borderRadius: '50%',
+          border: 'none', cursor: 'pointer',
+          background: locked ? text : 'rgba(255,255,255,0.35)',
+          color: locked ? bg : text,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}
+        aria-label={locked ? 'Unlock color' : 'Lock color'}
+      >
+        <LockIcon locked={locked} />
+      </button>
+      <span style={{ color: text, fontWeight: 800, fontSize: 13, lineHeight: 1.3, textAlign: 'center' }}>
+        {color.code}
+      </span>
+      <span style={{ color: text, fontWeight: 600, fontSize: 10.5, lineHeight: 1.3, textAlign: 'center', opacity: 0.9 }}>
+        {color.name}
+      </span>
+    </div>
+  );
+}
+
+const actionBtn = {
+  flex: 1, padding: '10px 0', borderRadius: RADIUS.pill,
+  fontSize: 12, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase',
+  cursor: 'pointer', fontFamily: FONT, border: 'none',
+};
+
+export function PalettesPage({ ownership, user, palettes, onSavePalette, onDeletePalette }) {
+  const ownedColors = useMemo(() => getOwnedCodes(ownership), [ownership]);
+
+  const [active, setActive] = useState(() => {
+    const initial = [];
+    for (let i = 0; i < 5; i++) initial.push(randomOwnedColor(ownedColors));
+    return initial;
+  });
+  const [locked, setLocked] = useState([false, false, false, false, false]);
+
+  // If owned colors change (e.g. first load resolves), fill any empty slots.
+  useEffect(() => {
+    if (!ownedColors.length) return;
+    setActive(prev => prev.map(c => c || randomOwnedColor(ownedColors)));
+  }, [ownedColors.length]);
+
+  const toggleLock = (i) => setLocked(prev => prev.map((v, idx) => idx === i ? !v : v));
+
+  const randomize = () => {
+    if (!ownedColors.length) return;
+    setActive(prev => prev.map((c, i) => locked[i] ? c : randomOwnedColor(ownedColors, c?.code)));
+  };
+
+  const save = () => {
+    if (active.some(c => !c)) return;
+    onSavePalette(active.map(c => c.code));
+  };
+
+  const noOwned = ownedColors.length === 0;
+
+  return (
+    <div style={scrollPage}>
+      <div style={{ padding: '16px 16px 100px', maxWidth: 760, margin: '0 auto' }}>
+
+        <div style={{ marginBottom: 14 }}>
+          <div style={{ fontSize: 18, fontWeight: 800, color: C.text }}>Active Palette</div>
+          <div style={{ fontSize: 12, color: C.textMuted, marginTop: 2 }}>
+            Lock swatches to keep them, then randomize the rest.
+          </div>
+        </div>
+
+        {noOwned ? (
+          <div style={{
+            background: C.bgCard, border: `1.5px dashed ${C.tealMid}`, borderRadius: RADIUS.lg,
+            padding: '24px 16px', textAlign: 'center', color: C.textMuted, fontSize: 13, fontWeight: 600,
+          }}>
+            Mark some colors as &lsquo;Owned&rsquo; to build a palette.
+          </div>
+        ) : (
+          <div style={{ display: 'flex', gap: 8 }}>
+            {active.map((color, i) => color && (
+              <Swatch key={i} color={color} locked={locked[i]} onToggleLock={() => toggleLock(i)} />
+            ))}
+          </div>
+        )}
+
+        <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
+          <button
+            onClick={randomize}
+            disabled={noOwned}
+            style={{ ...actionBtn, background: C.teal, color: C.white, opacity: noOwned ? 0.5 : 1 }}
+          >Randomize Colors</button>
+          <button
+            onClick={save}
+            disabled={noOwned}
+            style={{ ...actionBtn, background: C.white, color: C.tealText, border: `1.5px solid ${C.teal}`, opacity: noOwned ? 0.5 : 1 }}
+          >Save Palette</button>
+        </div>
+
+        <div style={{ borderTop: `1px solid ${C.border}`, margin: '26px 0 18px' }} />
+
+        <div style={{ fontSize: 15, fontWeight: 800, color: C.text, marginBottom: 10 }}>
+          Saved Palettes
+        </div>
+
+        {palettes.length === 0 ? (
+          <div style={{ fontSize: 12, color: C.textMuted, fontWeight: 600 }}>
+            No saved palettes yet.
+          </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {palettes.map(p => (
+              <div key={p.id} style={{
+                background: C.white, borderRadius: RADIUS.lg, border: `1.5px solid ${C.border}`,
+                padding: '10px 10px 10px 12px',
+                display: 'flex', alignItems: 'center', gap: 10,
+              }}>
+                <div style={{ display: 'flex', gap: 6, flex: 1, minWidth: 0 }}>
+                  {p.codes.map((code, i) => {
+                    const c = colors.find(x => x.code === code);
+                    if (!c) return null;
+                    return (
+                      <div key={i} title={`${c.code} ${c.name}`} style={{
+                        flex: 1, height: 34, minWidth: 0, borderRadius: RADIUS.sm,
+                        background: `#${c.hex}`,
+                      }} />
+                    );
+                  })}
+                </div>
+                <button
+                  onClick={() => onDeletePalette(p.id)}
+                  style={{
+                    width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+                    border: 'none', background: '#fdeee8', color: C.error,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+                  }}
+                  aria-label="Delete palette"
+                >
+                  <TrashIcon />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
