@@ -138,14 +138,19 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
 
   const save = () => {
     if (active.some(c => !c)) return;
+    if (palettes.length >= 25) return;
     onSavePalette(active.map(c => c.code));
   };
+
+  const atMax = palettes.length >= 25;
 
   const noOwned = ownedColors.length === 0;
 
   const [modal, setModal] = useState(null); // { color, list }
   const openModal = (color, list) => setModal({ color, list });
   const navigateModal = (color) => setModal(m => ({ ...m, color }));
+
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
 
   return (
     <div style={scrollPage}>
@@ -180,15 +185,15 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
           >Randomize Colors</button>
           <button
             onClick={save}
-            disabled={noOwned}
-            style={{ ...actionBtn, background: C.white, color: C.tealText, border: `1.5px solid ${C.teal}`, opacity: noOwned ? 0.5 : 1 }}
-          >Save Palette</button>
+            disabled={noOwned || atMax}
+            style={{ ...actionBtn, background: C.white, color: C.tealText, border: `1.5px solid ${C.teal}`, opacity: (noOwned || atMax) ? 0.5 : 1 }}
+          >{atMax ? 'Limit Reached' : 'Save Palette'}</button>
         </div>
 
         <div style={{ borderTop: `1px solid ${C.border}`, margin: '26px 0 18px' }} />
 
         <div style={{ fontSize: 15, fontWeight: 800, color: C.text, marginBottom: 10 }}>
-          Saved Palettes
+          Saved Palettes <span style={{ color: C.textMuted, fontWeight: 600, fontSize: 12 }}>({palettes.length}/25)</span>
         </div>
 
         {palettes.length === 0 ? (
@@ -199,28 +204,45 @@ export function PalettesPage({ ownership, onSetStatus, settings, user, palettes,
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {palettes.map(p => {
               const paletteColors = p.codes.map(code => colors.find(x => x.code === code)).filter(Boolean);
+              const confirming = confirmDeleteId === p.id;
               return (
                 <div key={p.id} style={{
-                  background: C.white, borderRadius: RADIUS.lg, border: `1.5px solid ${C.border}`,
+                  background: C.white, borderRadius: RADIUS.lg, border: `1.5px solid ${confirming ? C.error : C.border}`,
                   padding: '10px 10px 10px 12px',
                   display: 'flex', alignItems: 'center', gap: 10,
                 }}>
-                  <div style={{ display: 'flex', gap: 6, flex: 1, minWidth: 0 }}>
-                    {paletteColors.map((c, i) => (
-                      <SavedSwatch key={i} color={c} onClick={() => openModal(c, paletteColors)} />
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => onDeletePalette(p.id)}
-                    style={{
-                      width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
-                      border: 'none', background: '#fdeee8', color: C.error,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                    }}
-                    aria-label="Delete palette"
-                  >
-                    <TrashIcon />
-                  </button>
+                  {confirming ? (
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <span style={{ flex: 1, fontSize: 12, fontWeight: 700, color: C.error }}>Delete this palette?</span>
+                      <button
+                        onClick={() => { onDeletePalette(p.id); setConfirmDeleteId(null); }}
+                        style={{ padding: '6px 14px', borderRadius: RADIUS.sm, border: 'none', background: C.error, color: C.white, fontSize: 11, fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.6, fontFamily: FONT }}
+                      >Delete</button>
+                      <button
+                        onClick={() => setConfirmDeleteId(null)}
+                        style={{ padding: '6px 14px', borderRadius: RADIUS.sm, border: `1.5px solid ${C.tealMid}`, background: C.white, color: C.tealText, fontSize: 11, fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.6, fontFamily: FONT }}
+                      >Cancel</button>
+                    </div>
+                  ) : (
+                    <>
+                      <div style={{ display: 'flex', gap: 6, flex: 1, minWidth: 0 }}>
+                        {paletteColors.map((c, i) => (
+                          <SavedSwatch key={i} color={c} onClick={() => openModal(c, paletteColors)} />
+                        ))}
+                      </div>
+                      <button
+                        onClick={() => setConfirmDeleteId(p.id)}
+                        style={{
+                          width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+                          border: 'none', background: '#fdeee8', color: C.error,
+                          display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+                        }}
+                        aria-label="Delete palette"
+                      >
+                        <TrashIcon />
+                      </button>
+                    </>
+                  )}
                 </div>
               );
             })}
