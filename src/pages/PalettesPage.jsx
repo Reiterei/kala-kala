@@ -67,14 +67,14 @@ function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
         aspectRatio: '1 / 1.15', cursor: 'pointer',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
-        boxShadow: SHADOW.sm, padding: pad, boxSizing: 'border-box',
+        boxShadow: SHADOW.sm, padding: pad, paddingBottom: pad + lockBtn + 4, boxSizing: 'border-box',
         transition: 'background 0.2s',
       }}
     >
       <button
         onClick={(e) => { e.stopPropagation(); onToggleLock(); }}
         style={{
-          position: 'absolute', top: lockOffset, right: lockOffset,
+          position: 'absolute', bottom: lockOffset, left: '50%', transform: 'translateX(-50%)',
           width: lockBtn, height: lockBtn, borderRadius: '50%',
           border: 'none', cursor: 'pointer',
           background: locked ? text : 'rgba(255,255,255,0.35)',
