@@ -150,7 +150,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
           onReset={() => { setStatusFilterAndSave('all'); setSeriesAndSave(new Set()); }}
         >
           <FilterSection label="Status">
-            <div style={{ display: 'flex', gap: 6, minWidth: 0 }}>
+            <div style={{ display: 'flex', flexWrap: isWide ? 'nowrap' : 'wrap', gap: 6, minWidth: 0 }}>
               {[
                 { id: 'all', label: 'All' },
                 { id: 'owned', label: 'Owned' },
@@ -162,7 +162,7 @@ export function MyColorsPage({ ownership, onSetStatus, settings }) {
                   onClick={() => setStatusFilterAndSave(opt.id)}
                   style={{
                     ...(statusFilter === opt.id ? navPillActive : navPillInactive),
-                    flex: '1 1 0', minWidth: 0, justifyContent: 'center',
+                    flex: isWide ? 1 : '1 1 calc(50% - 3px)', minWidth: 0, justifyContent: 'center',
                     padding: '8px 4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                   }}
                 >{opt.label}</button>
