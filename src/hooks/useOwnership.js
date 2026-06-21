@@ -10,60 +10,184 @@ function rowsToOwnership(rows) {
   return ownership;
 }
 
+function cacheKey(userId) {
+  return `kk-ownership-${userId}`;
+}
+
+function queueKey(userId) {
+  return `kk-ownership-queue-${userId}`;
+}
+
+function loadCache(userId) {
+  try {
+    const raw = localStorage.getItem(cacheKey(userId));
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveCache(userId, ownership) {
+  try { localStorage.setItem(cacheKey(userId), JSON.stringify(ownership)); } catch {}
+}
+
+function loadQueue(userId) {
+  try {
+    const raw = localStorage.getItem(queueKey(userId));
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveQueue(userId, queue) {
+  try { localStorage.setItem(queueKey(userId), JSON.stringify(queue)); } catch {}
+}
+
+// Apply queued mutations on top of server rows, latest write per (color, series) wins.
+function applyQueue(ownership, queue) {
+  let next = { ...ownership };
+  for (const m of queue) {
+    if (m.type === 'bulk_delete') {
+      const filtered = {};
+      for (const [code, series] of Object.entries(next)) {
+        const f = Object.fromEntries(Object.entries(series).filter(([, v]) => v !== m.status));
+        if (Object.keys(f).length > 0) filtered[code] = f;
+      }
+      next = filtered;
+      continue;
+    }
+    if (!next[m.colorCode]) next[m.colorCode] = {};
+    next[m.colorCode] = { ...next[m.colorCode] };
+    if (m.status === null) delete next[m.colorCode][m.seriesName];
+    else next[m.colorCode][m.seriesName] = m.status;
+  }
+  return next;
+}
+
+async function sendMutation(m) {
+  if (m.type === 'bulk_delete') {
+    return supabase
+      .from('ownership')
+      .delete()
+      .eq('user_id', m.userId)
+      .eq('status', m.status);
+  }
+  if (m.status === null) {
+    return supabase
+      .from('ownership')
+      .delete()
+      .eq('user_id', m.userId)
+      .eq('color_code', m.colorCode)
+      .eq('series_name', m.seriesName);
+  }
+  return supabase
+    .from('ownership')
+    .upsert({
+      user_id: m.userId,
+      color_code: m.colorCode,
+      series_name: m.seriesName,
+      status: m.status,
+      updated_at: m.updatedAt,
+    }, { onConflict: 'user_id,color_code,series_name' });
+}
+
 export function useOwnership(user) {
   const [ownership, setOwnership] = useState({});
   const [syncing, setSyncing] = useState(false);
   const userRef = useRef(user);
   userRef.current = user;
 
+  const flushQueue = useCallback(async (userId) => {
+    let queue = loadQueue(userId);
+    if (queue.length === 0) return;
+    const remaining = [];
+    for (const m of queue) {
+      const { error } = await sendMutation(m);
+      if (error) remaining.push(m);
+    }
+    saveQueue(userId, remaining);
+  }, []);
+
   useEffect(() => {
     if (!user) {
       setOwnership({});
       return;
     }
+    const userId = user.id;
+    const cached = loadCache(userId);
+    const queued = loadQueue(userId);
+    if (cached) setOwnership(applyQueue(cached, queued));
+
     setSyncing(true);
-    supabase
-      .from('ownership')
-      .select('color_code, series_name, status')
-      .then(({ data, error }) => {
-        setSyncing(false);
-        if (error) { console.error('Fetch ownership error:', error); return; }
-        setOwnership(rowsToOwnership(data || []));
+    flushQueue(userId).then(() =>
+      supabase
+        .from('ownership')
+        .select('color_code, series_name, status')
+        .then(({ data, error }) => {
+          setSyncing(false);
+          if (error) { console.error('Fetch ownership error:', error); return; }
+          const serverOwnership = rowsToOwnership(data || []);
+          const stillQueued = loadQueue(userId);
+          const next = applyQueue(serverOwnership, stillQueued);
+          setOwnership(next);
+          saveCache(userId, next);
+        })
+    );
+
+    const onOnline = () => {
+      flushQueue(userId).then(() => {
+        supabase
+          .from('ownership')
+          .select('color_code, series_name, status')
+          .then(({ data, error }) => {
+            if (error) { console.error('Fetch ownership error:', error); return; }
+            const serverOwnership = rowsToOwnership(data || []);
+            const stillQueued = loadQueue(userId);
+            const next = applyQueue(serverOwnership, stillQueued);
+            setOwnership(next);
+            saveCache(userId, next);
+          });
       });
-  }, [user?.id]);
+    };
+    window.addEventListener('online', onOnline);
+    return () => window.removeEventListener('online', onOnline);
+  }, [user?.id, flushQueue]);
 
   const setStatus = useCallback((colorCode, seriesName, status) => {
     if (!userRef.current) return;
+    const userId = userRef.current.id;
+    const normalizedStatus = status === undefined ? null : status;
+    const mutation = {
+      userId, colorCode, seriesName,
+      status: normalizedStatus,
+      updatedAt: new Date().toISOString(),
+    };
+
     setOwnership(prev => {
       const next = { ...prev };
       if (!next[colorCode]) next[colorCode] = {};
-      if (status === null || status === undefined) {
+      if (normalizedStatus === null) {
         delete next[colorCode][seriesName];
       } else {
-        next[colorCode] = { ...next[colorCode], [seriesName]: status };
+        next[colorCode] = { ...next[colorCode], [seriesName]: normalizedStatus };
       }
-
-      if (status === null || status === undefined) {
-        supabase
-          .from('ownership')
-          .delete()
-          .eq('color_code', colorCode)
-          .eq('series_name', seriesName)
-          .then(({ error }) => { if (error) console.error('Delete error:', error); });
-      } else {
-        supabase
-          .from('ownership')
-          .upsert({
-            user_id: userRef.current.id,
-            color_code: colorCode,
-            series_name: seriesName,
-            status,
-            updated_at: new Date().toISOString(),
-          }, { onConflict: 'user_id,color_code,series_name' })
-          .then(({ error }) => { if (error) console.error('Upsert error:', error); });
-      }
-
+      saveCache(userId, next);
       return next;
+    });
+
+    const queue = loadQueue(userId).filter(
+      m => !(m.colorCode === colorCode && m.seriesName === seriesName)
+    );
+    queue.push(mutation);
+    saveQueue(userId, queue);
+
+    sendMutation(mutation).then(({ error }) => {
+      if (error) return; // stays queued, flushed on next mount/online
+      const remaining = loadQueue(userId).filter(
+        m => !(m.colorCode === colorCode && m.seriesName === seriesName && m.updatedAt === mutation.updatedAt)
+      );
+      saveQueue(userId, remaining);
     });
   }, []);
 
@@ -87,37 +211,43 @@ export function useOwnership(user) {
 
   const clearAllWishlist = useCallback(() => {
     if (!userRef.current) return;
+    const userId = userRef.current.id;
     setOwnership(prev => {
       const next = {};
       for (const [code, series] of Object.entries(prev)) {
         const filtered = Object.fromEntries(Object.entries(series).filter(([, v]) => v !== 'wishlist'));
         if (Object.keys(filtered).length > 0) next[code] = filtered;
       }
-      supabase
-        .from('ownership')
-        .delete()
-        .eq('user_id', userRef.current.id)
-        .eq('status', 'wishlist')
-        .then(({ error }) => { if (error) console.error('Clear wishlist error:', error); });
+      saveCache(userId, next);
       return next;
+    });
+    const queue = loadQueue(userId).filter(m => m.status !== 'wishlist');
+    queue.push({ type: 'bulk_delete', userId, status: 'wishlist' });
+    saveQueue(userId, queue);
+    sendMutation({ type: 'bulk_delete', userId, status: 'wishlist' }).then(({ error }) => {
+      if (error) return;
+      saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'bulk_delete' && m.status === 'wishlist')));
     });
   }, []);
 
   const clearAllOwned = useCallback(() => {
     if (!userRef.current) return;
+    const userId = userRef.current.id;
     setOwnership(prev => {
       const next = {};
       for (const [code, series] of Object.entries(prev)) {
         const filtered = Object.fromEntries(Object.entries(series).filter(([, v]) => v !== 'owned'));
         if (Object.keys(filtered).length > 0) next[code] = filtered;
       }
-      supabase
-        .from('ownership')
-        .delete()
-        .eq('user_id', userRef.current.id)
-        .eq('status', 'owned')
-        .then(({ error }) => { if (error) console.error('Clear owned error:', error); });
+      saveCache(userId, next);
       return next;
+    });
+    const queue = loadQueue(userId).filter(m => m.status !== 'owned');
+    queue.push({ type: 'bulk_delete', userId, status: 'owned' });
+    saveQueue(userId, queue);
+    sendMutation({ type: 'bulk_delete', userId, status: 'owned' }).then(({ error }) => {
+      if (error) return;
+      saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'bulk_delete' && m.status === 'owned')));
     });
   }, []);
 
