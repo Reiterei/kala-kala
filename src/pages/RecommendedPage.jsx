@@ -4,7 +4,7 @@ import { allSets, SERIES_GROUPS, SERIES_SHORT, getSeriesBadgeColors, getSeriesCa
 import { colors as allColors } from '../data/colors';
 import { ColorDetailModal } from '../components/ColorDetailModal';
 import { SearchBar } from '../components/SearchBar';
-import { FilterModal, FilterSection, FilterPillRow, SeriesFilterTree } from '../components/FilterModal';
+import { FilterModal, FilterSection, FilterPillRow, FilterSegmentToggle, SeriesFilterTree } from '../components/FilterModal';
 import { TipIcon, getTipIcon, getTipLabel } from '../assets/TipIcons';
 import { swipeConsumed } from '../App';
 import ohuhuLogo from '../assets/ohuhu-logo.png';
@@ -196,7 +196,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
   );
 }
 
-const SORT_OPTIONS = ['Most New', '% New', 'Most Wishlist', 'Largest', 'Smallest'];
+const SORT_OPTIONS = ['Most New', '% New', 'Largest', 'Smallest', 'Most Wishlist', '% Wishlist'];
 const COLOR_MODE_OPTIONS = ['Exact Markers', 'Colors Only'];
 const COLOR_MODE_TO_VALUE = { 'Exact Markers': 'exact', 'Colors Only': 'colors' };
 const VALUE_TO_COLOR_MODE = { exact: 'Exact Markers', colors: 'Colors Only' };
@@ -252,6 +252,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
     if (sortBy === 'Most New')       sets = [...sets].sort((a, b) => b._missing - a._missing);
     else if (sortBy === '% New')     sets = [...sets].sort((a, b) => { const d = (b._missing / b.colors.length) - (a._missing / a.colors.length); return d !== 0 ? d : b._missing - a._missing; });
     else if (sortBy === 'Most Wishlist') sets = [...sets].sort((a, b) => b._wishlist - a._wishlist);
+    else if (sortBy === '% Wishlist') sets = [...sets].sort((a, b) => { const d = (b._wishlist / b.colors.length) - (a._wishlist / a.colors.length); return d !== 0 ? d : b._wishlist - a._wishlist; });
     else if (sortBy === 'Largest')   sets = [...sets].sort((a, b) => b.count - a.count);
     else if (sortBy === 'Smallest')  sets = [...sets].sort((a, b) => a.count - b.count);
     return sets;
@@ -282,7 +283,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
           onReset={() => { setColorModeAndSave('exact'); setSeriesAndSave(new Set()); setSortByAndSave('Most New'); }}
         >
           <FilterSection label="Color Mode">
-            <FilterPillRow
+            <FilterSegmentToggle
               options={COLOR_MODE_OPTIONS}
               value={VALUE_TO_COLOR_MODE[colorMode]}
               onChange={opt => setColorModeAndSave(COLOR_MODE_TO_VALUE[opt])}
