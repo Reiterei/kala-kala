@@ -265,7 +265,7 @@ export function RecommendedPage({ ownership, onSetStatus, settings }) {
 
   return (
     <div style={{ ...scrollPage, background: C.bg }}>
-      <div style={{ padding: `16px ${px}px 12px`, borderBottom: `1px solid ${C.border}` }}>
+      <div style={{ padding: `16px ${px}px 12px`}}>
         <SearchBar
           value={search}
           onChange={setSearch}
