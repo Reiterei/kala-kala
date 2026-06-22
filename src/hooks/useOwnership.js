@@ -18,6 +18,18 @@ function queueKey(userId) {
   return `kk-ownership-queue-${userId}`;
 }
 
+function syncMetaKey(userId) {
+  return `kk-ownership-synced-${userId}`;
+}
+
+function loadSyncedAt(userId) {
+  try { return localStorage.getItem(syncMetaKey(userId)) || null; } catch { return null; }
+}
+
+function saveSyncedAt(userId, iso) {
+  try { localStorage.setItem(syncMetaKey(userId), iso); } catch {}
+}
+
 function loadCache(userId) {
   try {
     const raw = localStorage.getItem(cacheKey(userId));
@@ -100,13 +112,14 @@ export function useOwnership(user) {
 
   const flushQueue = useCallback(async (userId) => {
     let queue = loadQueue(userId);
-    if (queue.length === 0) return;
+    if (queue.length === 0) return false;
     const remaining = [];
     for (const m of queue) {
       const { error } = await sendMutation(m);
       if (error) remaining.push(m);
     }
     saveQueue(userId, remaining);
+    return true;
   }, []);
 
   useEffect(() => {
@@ -120,38 +133,64 @@ export function useOwnership(user) {
     if (cached) setOwnership(applyQueue(cached, queued));
 
     setSyncing(true);
-    flushQueue(userId).then(() =>
-      supabase
-        .from('ownership')
-        .select('color_code, series_name, status')
-        .then(({ data, error }) => {
-          setSyncing(false);
-          if (error) { console.error('Fetch ownership error:', error); return; }
-          const serverOwnership = rowsToOwnership(data || []);
-          const stillQueued = loadQueue(userId);
-          const next = applyQueue(serverOwnership, stillQueued);
-          setOwnership(next);
-          saveCache(userId, next);
-        })
-    );
+    flushQueue(userId).then(async () => {
+      const syncedAt = loadSyncedAt(userId);
+      const now = new Date().toISOString();
 
-    const onOnline = () => {
-      flushQueue(userId).then(() => {
-        supabase
+      if (!cached || !syncedAt) {
+        // No usable local snapshot — full fetch.
+        const { data, error } = await supabase
           .from('ownership')
-          .select('color_code, series_name, status')
-          .then(({ data, error }) => {
-            if (error) { console.error('Fetch ownership error:', error); return; }
-            const serverOwnership = rowsToOwnership(data || []);
-            const stillQueued = loadQueue(userId);
-            const next = applyQueue(serverOwnership, stillQueued);
-            setOwnership(next);
-            saveCache(userId, next);
-          });
-      });
-    };
-    window.addEventListener('online', onOnline);
-    return () => window.removeEventListener('online', onOnline);
+          .select('color_code, series_name, status');
+        setSyncing(false);
+        if (error) { console.error('Fetch ownership error:', error); return; }
+        const next = applyQueue(rowsToOwnership(data || []), loadQueue(userId));
+        setOwnership(next);
+        saveCache(userId, next);
+        saveSyncedAt(userId, now);
+        return;
+      }
+
+      // Cheap check: row count only, no data transferred.
+      const { count, error: countError } = await supabase
+        .from('ownership')
+        .select('*', { count: 'exact', head: true });
+      if (countError) { console.error('Count ownership error:', countError); setSyncing(false); return; }
+
+      const localCount = Object.values(cached).reduce((n, s) => n + Object.keys(s).length, 0);
+
+      if (count === localCount) {
+        // Same row count — fetch only what changed since last sync (covers edits, not deletes).
+        const { data, error } = await supabase
+          .from('ownership')
+          .select('color_code, series_name, status, updated_at')
+          .gt('updated_at', syncedAt);
+        setSyncing(false);
+        if (error) { console.error('Delta fetch ownership error:', error); return; }
+        if (!data || data.length === 0) { saveSyncedAt(userId, now); return; }
+        const merged = { ...cached };
+        for (const row of data) {
+          if (!merged[row.color_code]) merged[row.color_code] = {};
+          merged[row.color_code] = { ...merged[row.color_code], [row.series_name]: row.status };
+        }
+        const next = applyQueue(merged, loadQueue(userId));
+        setOwnership(next);
+        saveCache(userId, next);
+        saveSyncedAt(userId, now);
+        return;
+      }
+
+      // Count mismatch implies a deletion happened elsewhere — full fetch to stay correct.
+      const { data, error } = await supabase
+        .from('ownership')
+        .select('color_code, series_name, status');
+      setSyncing(false);
+      if (error) { console.error('Fetch ownership error:', error); return; }
+      const next = applyQueue(rowsToOwnership(data || []), loadQueue(userId));
+      setOwnership(next);
+      saveCache(userId, next);
+      saveSyncedAt(userId, now);
+    });
   }, [user?.id, flushQueue]);
 
   const setStatus = useCallback((colorCode, seriesName, status) => {
@@ -181,14 +220,6 @@ export function useOwnership(user) {
     );
     queue.push(mutation);
     saveQueue(userId, queue);
-
-    sendMutation(mutation).then(({ error }) => {
-      if (error) return; // stays queued, flushed on next mount/online
-      const remaining = loadQueue(userId).filter(
-        m => !(m.colorCode === colorCode && m.seriesName === seriesName && m.updatedAt === mutation.updatedAt)
-      );
-      saveQueue(userId, remaining);
-    });
   }, []);
 
   const getStatus = useCallback((colorCode, seriesName) => {
@@ -224,10 +255,6 @@ export function useOwnership(user) {
     const queue = loadQueue(userId).filter(m => m.status !== 'wishlist');
     queue.push({ type: 'bulk_delete', userId, status: 'wishlist' });
     saveQueue(userId, queue);
-    sendMutation({ type: 'bulk_delete', userId, status: 'wishlist' }).then(({ error }) => {
-      if (error) return;
-      saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'bulk_delete' && m.status === 'wishlist')));
-    });
   }, []);
 
   const clearAllOwned = useCallback(() => {
@@ -245,10 +272,6 @@ export function useOwnership(user) {
     const queue = loadQueue(userId).filter(m => m.status !== 'owned');
     queue.push({ type: 'bulk_delete', userId, status: 'owned' });
     saveQueue(userId, queue);
-    sendMutation({ type: 'bulk_delete', userId, status: 'owned' }).then(({ error }) => {
-      if (error) return;
-      saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'bulk_delete' && m.status === 'owned')));
-    });
   }, []);
 
   return { ownership, setStatus, getStatus, isOwned, isWishlist, syncing, clearAllWishlist, clearAllOwned };

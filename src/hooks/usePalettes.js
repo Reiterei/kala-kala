@@ -9,6 +9,18 @@ function queueKey(userId) {
   return `kk-palettes-queue-${userId}`;
 }
 
+function syncMetaKey(userId) {
+  return `kk-palettes-synced-${userId}`;
+}
+
+function loadSyncedAt(userId) {
+  try { return localStorage.getItem(syncMetaKey(userId)) || null; } catch { return null; }
+}
+
+function saveSyncedAt(userId, iso) {
+  try { localStorage.setItem(syncMetaKey(userId), iso); } catch {}
+}
+
 function loadCache(userId) {
   try {
     const raw = localStorage.getItem(cacheKey(userId));
@@ -72,7 +84,7 @@ export function usePalettes(user) {
 
   const flushQueue = useCallback(async (userId) => {
     const queue = loadQueue(userId);
-    if (queue.length === 0) return;
+    if (queue.length === 0) return false;
     const remaining = [];
     for (const m of queue) {
       if (m.type === 'delete' && String(m.id).startsWith('temp-')) {
@@ -87,6 +99,7 @@ export function usePalettes(user) {
       }
     }
     saveQueue(userId, remaining);
+    return true;
   }, []);
 
   useEffect(() => {
@@ -96,25 +109,64 @@ export function usePalettes(user) {
     const queued = loadQueue(userId);
     if (cached) setPalettes(applyQueue(cached, queued));
 
-    const sync = () => {
-      flushQueue(userId).then(() =>
-        supabase
+    flushQueue(userId).then(async () => {
+      const syncedAt = loadSyncedAt(userId);
+      const now = new Date().toISOString();
+
+      if (!cached || !syncedAt) {
+        const { data, error } = await supabase
           .from('palettes')
           .select('id, codes, created_at')
-          .order('created_at', { ascending: false })
-          .then(({ data, error }) => {
-            if (error) { console.error('Fetch palettes error:', error); return; }
-            const stillQueued = loadQueue(userId);
-            const next = applyQueue(data || [], stillQueued);
-            setPalettes(next);
-            saveCache(userId, next);
-          })
-      );
-    };
-    sync();
+          .order('created_at', { ascending: false });
+        if (error) { console.error('Fetch palettes error:', error); return; }
+        const next = applyQueue(data || [], loadQueue(userId));
+        setPalettes(next);
+        saveCache(userId, next);
+        saveSyncedAt(userId, now);
+        return;
+      }
 
-    window.addEventListener('online', sync);
-    return () => window.removeEventListener('online', sync);
+      // Cheap check: row count only, no data transferred.
+      const { count, error: countError } = await supabase
+        .from('palettes')
+        .select('*', { count: 'exact', head: true });
+      if (countError) { console.error('Count palettes error:', countError); return; }
+
+      if (count === cached.length) {
+        // Nothing added or removed elsewhere since last sync.
+        saveSyncedAt(userId, now);
+        return;
+      }
+
+      if (count > cached.length) {
+        // Likely just new palettes added elsewhere — fetch only those created since last sync.
+        const { data, error } = await supabase
+          .from('palettes')
+          .select('id, codes, created_at')
+          .gt('created_at', syncedAt)
+          .order('created_at', { ascending: false });
+        if (error) { console.error('Delta fetch palettes error:', error); return; }
+        if (data && data.length === count - cached.length) {
+          const merged = applyQueue([...data, ...cached], loadQueue(userId));
+          setPalettes(merged);
+          saveCache(userId, merged);
+          saveSyncedAt(userId, now);
+          return;
+        }
+        // Counts didn't reconcile cleanly (a delete happened too) — fall through to full fetch.
+      }
+
+      // Deletion happened elsewhere, or delta didn't reconcile — full fetch to stay correct.
+      const { data, error } = await supabase
+        .from('palettes')
+        .select('id, codes, created_at')
+        .order('created_at', { ascending: false });
+      if (error) { console.error('Fetch palettes error:', error); return; }
+      const next = applyQueue(data || [], loadQueue(userId));
+      setPalettes(next);
+      saveCache(userId, next);
+      saveSyncedAt(userId, now);
+    });
   }, [user?.id, flushQueue]);
 
   const savePalette = useCallback((codes) => {
@@ -132,22 +184,6 @@ export function usePalettes(user) {
     const queue = loadQueue(userId);
     queue.push({ type: 'insert', tempId, codes, createdAt });
     saveQueue(userId, queue);
-
-    supabase
-      .from('palettes')
-      .insert({ user_id: userId, codes })
-      .select('id, codes, created_at')
-      .single()
-      .then(({ data, error }) => {
-        if (error) return; // stays queued, flushed on next mount/online
-        idMapRef.current[tempId] = data.id;
-        setPalettes(prev => {
-          const next = prev.map(p => p.id === tempId ? data : p);
-          saveCache(userId, next);
-          return next;
-        });
-        saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'insert' && m.tempId === tempId)));
-      });
   }, []);
 
   const deletePalette = useCallback((id) => {
@@ -169,15 +205,6 @@ export function usePalettes(user) {
     const queue = loadQueue(userId);
     queue.push({ type: 'delete', id });
     saveQueue(userId, queue);
-
-    supabase
-      .from('palettes')
-      .delete()
-      .eq('id', id)
-      .then(({ error }) => {
-        if (error) return; // stays queued, flushed on next mount/online
-        saveQueue(userId, loadQueue(userId).filter(m => !(m.type === 'delete' && m.id === id)));
-      });
   }, []);
 
   return { palettes, savePalette, deletePalette };
