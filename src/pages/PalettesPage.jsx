@@ -209,12 +209,22 @@ function textWidth(text, font) {
   return ctx.measureText(text).width;
 }
 
-// Returns the plain name if it fits in maxWidth at the given font, else the dashed version.
-function fitName(name, fontSize, fontWeight, maxWidth) {
-  const broken = NAME_BREAKS[name];
-  if (!broken) return name;
+// Returns an array of lines for the name: whole name if it fits, one word per
+// line if each word fits but the full name doesn't, or the dashed version
+// split into lines as a last resort.
+function getNameLines(name, fontSize, fontWeight, maxWidth) {
   const font = `${fontWeight} ${fontSize}px ${FONT}`;
-  return textWidth(name, font) <= maxWidth ? name : broken;
+  if (textWidth(name, font) <= maxWidth) return [name];
+
+  const words = name.split(' ');
+  if (words.length > 1 && words.every(w => textWidth(w, font) <= maxWidth)) {
+    return words;
+  }
+
+  const broken = NAME_BREAKS[name];
+  if (broken) return broken.split(' ');
+
+  return [name];
 }
 
 function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
@@ -228,12 +238,12 @@ function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
   const lockIcon = 13 + (16 - 13) * scale;
   const lockOffset = 6 + (10 - 6) * scale;
   const nameRef = useRef(null);
-  const [shownName, setShownName] = useState(color.name);
+  const [shownLines, setShownLines] = useState([color.name]);
   useEffect(() => {
     const el = nameRef.current;
     if (!el) return;
     const maxWidth = el.parentElement.clientWidth - pad * 2;
-    setShownName(fitName(color.name, nameSize, 600, maxWidth));
+    setShownLines(getNameLines(color.name, nameSize, 600, maxWidth));
   }, [color.name, nameSize, pad, windowWidth]);
   return (
     <div
@@ -266,7 +276,7 @@ function Swatch({ color, locked, onToggleLock, onClick, windowWidth }) {
         {color.code}
       </span>
       <span ref={nameRef} style={{ color: text, fontWeight: 600, fontSize: nameSize, lineHeight: 1.15, textAlign: 'center', opacity: 0.9, maxWidth: '100%' }}>
-        {shownName}
+        {shownLines.map((line, i) => <span key={i}>{i > 0 && <br />}{line}</span>)}
       </span>
     </div>
   );
@@ -280,12 +290,12 @@ function SavedSwatch({ color, onClick, windowWidth }) {
   const height = 40 + (64 - 40) * scale;
   const showName = scale > 0.4;
   const nameRef = useRef(null);
-  const [shownName, setShownName] = useState(color.name);
+  const [shownLines, setShownLines] = useState([color.name]);
   useEffect(() => {
     const el = nameRef.current;
     if (!el || !showName) return;
     const maxWidth = el.parentElement.clientWidth - 8;
-    setShownName(fitName(color.name, nameSize, 600, maxWidth));
+    setShownLines(getNameLines(color.name, nameSize, 600, maxWidth));
   }, [color.name, nameSize, showName, windowWidth]);
   return (
     <div
@@ -303,7 +313,7 @@ function SavedSwatch({ color, onClick, windowWidth }) {
       </span>
       {showName && (
         <span ref={nameRef} style={{ color: text, fontWeight: 600, fontSize: nameSize, opacity: 0.9, lineHeight: 1.15, textAlign: 'center', maxWidth: '100%' }}>
-          {shownName}
+          {shownLines.map((line, i) => <span key={i}>{i > 0 && <br />}{line}</span>)}
         </span>
       )}
     </div>
