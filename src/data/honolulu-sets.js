@@ -656,6 +656,22 @@ export const honoluluSets = [
     colors: ["YR02", "E14", "E19", "E111", "B21", "B310", "B311", "B411", "B415", "CG01", "CG02", "CG17", "CG18", "CG25", "CG28", "BGY00", "BGY13", "BGY15", "BGY18", "BGY24", "BGY35", "BGY38", "YGY02", "YGY11", "YGY13", "WG01", "WG04", "WG06", "WG10", "WG27", "WG37", "GG03", "GG05", "GG10", "GG12", "GG24","0"],
   },
   {
+    id: "honolulu_bundle_42",
+    name: "Honolulu B 48 - Coloring Set",
+    series: "Honolulu B",
+    edition: null,
+    version: null,
+    count: 48,
+    tipType1: "Brush",  tipType2: "Fine",
+    urls: {
+      ohuhu: "https://ohuhu.com/products/ohuhu-honolulu-b-48-colors-alcohol-markers-with-coloring-book",
+      michaels: null,
+      walmart: null,
+      amazon: null,
+    },
+    colors: ["Y19", "Y26", "Y29", "Y42", "Y415", "YR04", "YR19", "YR112", "YR213", "YR33", "YR39", "E46", "R014", "R016", "R26", "R210", "R410", "RV04", "RV08", "RV29", "RV35", "RV57", "V013", "V22", "V46", "V412", "BV35", "BV311", "BV58", "B05", "B08", "B111", "BG310", "BG311", "G311", "G313", "G315", "G47", "YG06", "YG012", "YG212", "CG02", "CG24", "CG28", "YGY13", "YGY17", "YGY18", "120"],
+  },
+  {
     id: "honolulu_bundle_43",
     name: "Honolulu 48 - Mid-Tones",
     series: "Honolulu",
