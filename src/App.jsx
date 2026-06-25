@@ -6,10 +6,8 @@ import { PalettesPage } from './pages/PalettesPage';
 import { useOwnership } from './hooks/useOwnership';
 import { usePalettes } from './hooks/usePalettes';
 import { useSettings } from './hooks/useSettings';
-import { useAuth } from './hooks/useAuth';
 import { useWindowWidth } from './hooks/useWindowWidth';
 import { SettingsModal } from './components/SettingsModal';
-import { AuthModal } from './components/AuthModal';
 import { C, FONT, SHADOW, navPillActive, navPillInactive, iconBtn } from './styles/theme';
 
 const NAV = [
@@ -76,12 +74,11 @@ export default function App() {
   const [pageIdx, setPageIdx] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const { user, loading, signIn, signUp, signOut, resetPassword } = useAuth();
   const windowWidth = useWindowWidth();
   const stacked = windowWidth < 480;
   const navOnSecondRow = windowWidth < 600;
-  const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership(user);
-  const { palettes, savePalette, deletePalette } = usePalettes(user);
+  const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership();
+  const { palettes, savePalette, deletePalette } = usePalettes();
   const { settings, setSetting } = useSettings();
 
   const pageIdxRef = useRef(0);
@@ -150,10 +147,8 @@ export default function App() {
     <MyColorsPage key="colors" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
     <MyMarkersPage key="markers" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
     <RecommendedPage key="recommended" ownership={ownership} onSetStatus={setStatus} settings={settings} />,
-    <PalettesPage key="palettes" ownership={ownership} onSetStatus={setStatus} settings={settings} user={user} palettes={palettes} onSavePalette={savePalette} onDeletePalette={deletePalette} />,
+    <PalettesPage key="palettes" ownership={ownership} onSetStatus={setStatus} settings={settings} palettes={palettes} onSavePalette={savePalette} onDeletePalette={deletePalette} />,
   ];
-
-  if (loading) return null;
 
   return (
     <>
@@ -246,15 +241,6 @@ export default function App() {
       </div>
     </div>
 
-    {!user && (
-      <AuthModal
-        onSignIn={signIn}
-        onSignUp={signUp}
-        onResetPassword={resetPassword}
-        required
-      />
-    )}
-
     {settingsOpen && (
       <SettingsModal
         onClose={() => setSettingsOpen(false)}
@@ -262,8 +248,6 @@ export default function App() {
         onSetSetting={setSetting}
         onClearAllOwned={clearAllOwned}
         onClearAllWishlist={clearAllWishlist}
-        user={user}
-        onSignOut={signOut}
       />
     )}
     </>
