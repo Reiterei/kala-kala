@@ -326,7 +326,7 @@ const actionBtn = {
   cursor: 'pointer', fontFamily: FONT, border: 'none',
 };
 
-export function PalettesPage({ ownership, onSetStatus, settings, user, palettes, onSavePalette, onDeletePalette }) {
+export function PalettesPage({ ownership, onSetStatus, settings, palettes, onSavePalette, onDeletePalette }) {
   const windowWidth = useWindowWidth();
   const ownedColors = useMemo(() => getOwnedCodes(ownership), [ownership]);
 
