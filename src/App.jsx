@@ -9,6 +9,7 @@ import { useSettings } from './hooks/useSettings';
 import { useWindowWidth } from './hooks/useWindowWidth';
 import { SettingsModal } from './components/SettingsModal';
 import { C, FONT, SHADOW, navPillActive, navPillInactive, iconBtn } from './styles/theme';
+import kalaKalaIcon from './assets/kala-kala-icon-tsp.png';
 
 const NAV = [
   {
@@ -58,13 +59,11 @@ const MIN_SWIPE_PX = 50;
 
 function Logo() {
   return (
-    <div style={{
-      width: 32, height: 32, borderRadius: '50%',
-      background: C.teal, flexShrink: 0,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-    }}>
-      <span style={{ fontFamily: FONT, fontSize: 16, fontWeight: 800, color: C.white, lineHeight: 1, userSelect: 'none' }}>K</span>
-    </div>
+    <img
+      src={kalaKalaIcon}
+      alt="Kala Kala"
+      style={{ width: 32, height: 32, flexShrink: 0, objectFit: 'contain' }}
+    />
   );
 }
 
