@@ -9,7 +9,7 @@ import { useSettings } from './hooks/useSettings';
 import { useWindowWidth } from './hooks/useWindowWidth';
 import { SettingsModal } from './components/SettingsModal';
 import { C, FONT, SHADOW, navPillActive, navPillInactive, iconBtn } from './styles/theme';
-import kalaKalaIcon from './assets/kala-kala-icon-tsp.png';
+import kalaKalaIcon from './assets/kala-kala-icon.png';
 
 const NAV = [
   {
