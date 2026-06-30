@@ -1,13 +1,48 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { C, FONT, RADIUS, SHADOW, overlayStyle, segmentActive, segmentInactive } from '../styles/theme';
 
-export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned, onClearAllWishlist }) {
+export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned, onClearAllWishlist, ownership, onImportOwnership }) {
   const [confirming, setConfirming] = useState(false);
   const [confirmingWishlist, setConfirmingWishlist] = useState(false);
+  const [importMsg, setImportMsg] = useState(null);
+  const fileInputRef = useRef(null);
 
   function handleClearRequest() { setConfirming(true); }
   function handleConfirm() { onClearAllOwned(); setConfirming(false); onClose(); }
   function handleCancel() { setConfirming(false); }
+
+  function handleExport() {
+    const payload = { app: 'kala-kala', type: 'ownership', version: 1, exportedAt: new Date().toISOString(), ownership };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `kala-kala-colors-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function handleImportClick() { fileInputRef.current?.click(); }
+
+  function handleFileChange(e) {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        const data = parsed && parsed.ownership ? parsed.ownership : parsed;
+        onImportOwnership(data, 'merge');
+        setImportMsg({ ok: true, text: 'Import complete.' });
+      } catch {
+        setImportMsg({ ok: false, text: 'Could not read that file.' });
+      }
+    };
+    reader.readAsText(file);
+  }
 
   return (
     <div onClick={onClose} style={overlayStyle}>
@@ -131,6 +166,20 @@ export function SettingsModal({ onClose, settings, onSetSetting, onClearAllOwned
               </div>
             </div>
           )}
+          <div style={{ borderTop: `1px solid ${C.border}`, margin: '12px 0' }} />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Backup colors to file</div>
+            <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
+              <button onClick={handleImportClick} style={{ padding: '6px 14px', borderRadius: RADIUS.pill, border: `1.5px solid ${C.tealMid}`, background: C.white, color: C.tealText, fontSize: 11, fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT }}>Import</button>
+              <button onClick={handleExport} style={{ padding: '6px 14px', borderRadius: RADIUS.pill, border: `1.5px solid ${C.tealMid}`, background: C.white, color: C.tealText, fontSize: 11, fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: 0.8, fontFamily: FONT }}>Export</button>
+            </div>
+          </div>
+          {importMsg && (
+            <div style={{ marginTop: 8, fontSize: 11, fontWeight: 700, color: importMsg.ok ? C.tealText : C.error }}>
+              {importMsg.text}
+            </div>
+          )}
+          <input ref={fileInputRef} type="file" accept="application/json" onChange={handleFileChange} style={{ display: 'none' }} />
         </div>
 
         <div style={{
