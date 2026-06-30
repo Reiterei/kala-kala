@@ -76,7 +76,7 @@ export default function App() {
   const windowWidth = useWindowWidth();
   const stacked = windowWidth < 480;
   const navOnSecondRow = windowWidth < 600;
-  const { ownership, setStatus, clearAllWishlist, clearAllOwned } = useOwnership();
+  const { ownership, setStatus, clearAllWishlist, clearAllOwned, importOwnership } = useOwnership();
   const { palettes, savePalette, deletePalette } = usePalettes();
   const { settings, setSetting } = useSettings();
 
@@ -247,6 +247,8 @@ export default function App() {
         onSetSetting={setSetting}
         onClearAllOwned={clearAllOwned}
         onClearAllWishlist={clearAllWishlist}
+        ownership={ownership}
+        onImportOwnership={importOwnership}
       />
     )}
     </>
