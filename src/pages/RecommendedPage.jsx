@@ -159,7 +159,6 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); setRevealColor(r => !r); }}
-            title={revealColor ? 'Show ownership status' : 'Reveal true colors'}
             style={{ background: cc.cardBg, border: 'none', borderLeft: `1px solid ${cc.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
           >
             <EyeIcon off={!revealColor} size={14} color={cc.accentSoft} />
