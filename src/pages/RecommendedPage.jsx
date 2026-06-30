@@ -40,11 +40,26 @@ function ColorChip({ colorCode, status, onClick, cc }) {
   );
 }
 
+function EyeIcon({ off, size = 14, color }) {
+  return off ? (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17.94 17.94A10.94 10.94 0 0112 19c-7 0-10-7-10-7a18.45 18.45 0 014.06-5.94M9.9 4.24A10.94 10.94 0 0112 5c7 0 10 7 10 7a18.5 18.5 0 01-2.18 3.19M14.12 14.12a3 3 0 11-4.24-4.24"/>
+      <line x1="1" y1="1" x2="23" y2="23"/>
+    </svg>
+  ) : (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  );
+}
+
 function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
   const [expanded, setExpanded] = useState(false);
   const [buyOpen, setBuyOpen] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [hideUnowned, setHideUnowned] = useState(false);
 
   const toggleExpanded = () => { setExpanded(e => !e); setBuyOpen(false); };
   const toggleBuyOpen  = () => { setBuyOpen(o => !o); setExpanded(false); };
@@ -64,6 +79,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
   const pct = total > 0 ? Math.round((owned / total) * 100) : 0;
   const meta = getMeta(set);
   const cc = getSeriesCardColors(set.series);
+  const displayColors = useMemo(() => hideUnowned ? set.colors.filter(c => getStatus(c) !== null) : set.colors, [set.colors, hideUnowned, ownership, colorMode]);
 
   const handleAddAll = (status) => {
     set.colors.forEach(code => {
@@ -140,7 +156,14 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
             <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accent, textTransform: 'uppercase', lineHeight: 1.6 }}>
               <span style={{ fontSize: 13 }}>{expanded ? '▾' : '▸'}</span> Colors
             </span>
-            <span style={{ fontSize: 10, color: cc.accentSoft }}>({total})</span>
+            <span style={{ fontSize: 10, color: cc.accentSoft }}>({hideUnowned ? displayColors.length : total})</span>
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); setHideUnowned(h => !h); }}
+            title={hideUnowned ? 'Show all colors' : 'Hide unowned colors'}
+            style={{ background: cc.cardBg, border: 'none', borderLeft: `1px solid ${cc.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          >
+            <EyeIcon off={hideUnowned} size={14} color={cc.accentSoft} />
           </button>
           {set.urls && Object.values(set.urls).some(Boolean) && (
             <button onClick={toggleBuyOpen} style={{ background: cc.cardBg, border: 'none', borderLeft: `1px solid ${cc.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', whiteSpace: 'nowrap' }}>
@@ -172,10 +195,13 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
 
         {expanded && (
           <div style={{ padding: '12px 16px 16px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, 44px)', justifyContent: 'center', gap: 6 }}>
-            {set.colors.map(code => (
-              <ColorChip key={code} colorCode={code} status={getStatus(code)} cc={cc}
-                onClick={() => { if (swipeConsumed) return; setSelectedColor(colorMap[code] || null); }} />
-            ))}
+            {displayColors.length === 0
+              ? <span style={{ fontSize: 12, color: cc.accentSoft }}>None to show.</span>
+              : displayColors.map(code => (
+                  <ColorChip key={code} colorCode={code} status={getStatus(code)} cc={cc}
+                    onClick={() => { if (swipeConsumed) return; setSelectedColor(colorMap[code] || null); }} />
+                ))
+            }
           </div>
         )}
       </div>
@@ -187,7 +213,7 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
           onSetStatus={onSetStatus}
           onClose={() => setSelectedColor(null)}
           settings={settings}
-          colorList={set.colors.map(code => colorMap[code]).filter(Boolean)}
+          colorList={displayColors.map(code => colorMap[code]).filter(Boolean)}
           onNavigate={setSelectedColor}
         />
       )}
