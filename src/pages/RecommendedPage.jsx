@@ -157,12 +157,14 @@ function SetCard({ set, ownership, colorMode, onSetStatus, settings }) {
             </span>
             <span style={{ fontSize: 10, color: cc.accentSoft }}>({total})</span>
           </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); setRevealColor(r => !r); }}
-            style={{ background: cc.cardBg, border: 'none', borderLeft: `1px solid ${cc.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-          >
-            <EyeIcon off={!revealColor} size={14} color={cc.accentSoft} />
-          </button>
+          {expanded && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setRevealColor(r => !r); }}
+              style={{ background: cc.cardBg, border: 'none', borderLeft: `1px solid ${cc.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+            >
+              <EyeIcon off={!revealColor} size={14} color={cc.accentSoft} />
+            </button>
+          )}
           {set.urls && Object.values(set.urls).some(Boolean) && (
             <button onClick={toggleBuyOpen} style={{ background: cc.cardBg, border: 'none', borderLeft: `1px solid ${cc.border}`, padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', whiteSpace: 'nowrap' }}>
               <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: cc.accentSoft, textTransform: 'uppercase' }}>
